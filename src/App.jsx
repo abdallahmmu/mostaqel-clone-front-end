@@ -6,9 +6,7 @@ function App() {
   return (
     <RootLayout>
       <Navigationbar />
-      <div className="container">
         <Outlet />
-      </div>
     </RootLayout>
   );
 }
