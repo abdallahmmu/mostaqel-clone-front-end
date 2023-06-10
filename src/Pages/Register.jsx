@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import FreelancerRegister from "../components/AuthComponents/FreelancerRegister";
 
 function Register() {
   const [client, setClient] = useState(null);
+
+
+  useEffect(()=>{
+    document.title = 'Mostaqel-Clone | Register'
+  },[])
   return (
     <>
       {/* Choose Type */}
@@ -27,7 +33,7 @@ function Register() {
       )}
 
       {/* Freelancer Form */}
-     {client === 'freelancer' && <div>Freelancer Form</div>}
+     {client === 'freelancer' && <FreelancerRegister/>}
       {/* Client Form */}
       {client === 'client' && <div>Client Form</div>}
     </>

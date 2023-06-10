@@ -7,7 +7,7 @@ import AuthNavigation from "./components/Navigation/AuthNavigation";
 function App() {
   return (
     <RootLayout>
-{/*       <AuthNavigation/> */}
+      {/*       <AuthNavigation/> */}
       <Navigationbar />
       <Outlet />
       <Footer />
