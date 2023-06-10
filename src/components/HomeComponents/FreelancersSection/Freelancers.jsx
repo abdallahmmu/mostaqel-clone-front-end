@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 function Freelancers() {
   return (
-    <section id="freelancers">
+    <section id="freelancers"
+    data-aos="fade-left"
+    data-aos-anchor-placement="top-center"
+    data-aos-duration="400">
       <div className="container">
         <h1 className="fw-bold fs-3 text-center mb-3 text-primary">
           Find Freelancers ?

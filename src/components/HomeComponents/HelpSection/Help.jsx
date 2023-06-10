@@ -2,7 +2,14 @@ import React from "react";
 
 function Help() {
   return (
-    <section id="help">
+    <section
+      id="help"
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-center"
+      data-aos-delay="20"
+      data-aos-duration="500"
+      data-aos-easing="ease-in-out"
+    >
       <div className="container">
         <h1 className="fw-bold fs-3 text-center mb-5 text-primary">
           How Freelancers Helps You ?

@@ -2,7 +2,9 @@ import React from 'react'
 
 function MostaqelHelp() {
   return (
-<section id="mostaqel-help">
+<section id="mostaqel-help"
+data-aos="fade-right"
+data-aos-delay="20">
   <div className="container">
     <h1 className="fw-bold fs-3 text-center mb-5 text-primary">Rights And The Quality Of Your Business ?</h1>
     <div className="row">

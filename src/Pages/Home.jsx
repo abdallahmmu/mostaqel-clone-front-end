@@ -10,6 +10,7 @@ import Ask from "../components/HomeComponents/AskSection/Ask";
 function Home() {
   useEffect(() => {
     document.title = "Mostaqel-Clone | Home";
+    AOS.init();
   }, []);
   return (
     <>

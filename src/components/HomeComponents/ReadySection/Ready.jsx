@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 
 function Ready() {
   return (
-<section id="ready">
+<section id="ready"
+      data-aos="zoom-in-up"
+      data-aos-anchor-placement="top-center"
+      data-aos-duration="400">
   <div className="container">
     <h1 className="fw-bold fs-3 text-white text-center mb-5">Are You Ready ?</h1>
     <div className="d-flex justify-content-center mt-5">

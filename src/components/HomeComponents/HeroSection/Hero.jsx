@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <section id="hero">
+    <section id="hero"
+
+    >
       {/* OverLay */}
       <div className="overlay" />
       <div className="container">

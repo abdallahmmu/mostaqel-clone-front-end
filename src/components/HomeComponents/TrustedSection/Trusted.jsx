@@ -2,7 +2,12 @@ import React from "react";
 
 function Trusted() {
   return (
-    <section id="trusted">
+    <section
+      id="trusted"
+      data-aos="fade-down"
+      data-aos-anchor-placement="top-center"
+      data-aos-duration="400"
+    >
       <div className="container">
         {/*Start Trusted Container*/}
         <h1 className="fw-bold fs-3 text-center mb-5">Trusted By</h1>
