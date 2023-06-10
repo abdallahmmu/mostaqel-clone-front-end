@@ -12,7 +12,7 @@ function Login() {
         style={{ borderRadius: 40, boxShadow: "0px 0px 5px 0px #2386" }}
       >
         <div className="row p-5">
-          <img src="/images/regitser.jpeg" alt className="col-lg-6 col-md-12" />
+          <img src="/images/regitser.jpeg"  className="col-lg-6 col-md-12" />
           <form className="row g-3 col-lg-6 col-md-12">
             <div className=" col-md-12">
               <label htmlFor="inputEmail4" className="form-label">
