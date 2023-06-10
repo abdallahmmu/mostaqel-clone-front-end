@@ -1,0 +1,37 @@
+import React, { useState } from "react";
+
+function Register() {
+  const [client, setClient] = useState(null);
+  return (
+    <>
+      {/* Choose Type */}
+      {!client && (
+        <div
+          className="d-flex flex-column  align-items-center justify-content-center"
+          style={{ height: "80vh" }}
+        >
+          <h1>Please Choose Type of Registeration</h1>
+          <button
+            onClick={() => setClient("client")}
+            className="btn btn-danger p-3 mb-2"
+          >
+            Do You Want To be A Client
+          </button>
+          <button
+            onClick={() => setClient("freelancer")}
+            className="btn btn-dark p-3"
+          >
+            Do You Want To be A Freelancer
+          </button>
+        </div>
+      )}
+
+      {/* Freelancer Form */}
+     {client === 'freelancer' && <div>Freelancer Form</div>}
+      {/* Client Form */}
+      {client === 'client' && <div>Client Form</div>}
+    </>
+  );
+}
+
+export default Register;

@@ -5,6 +5,7 @@ import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
+const RegisterPage = React.lazy(() => import("../Pages/Register"));
 import App from "../App";
 
 export const router = createBrowserRouter([
@@ -25,6 +26,14 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <LoginPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <RegisterPage />
           </React.Suspense>
         ),
       },
