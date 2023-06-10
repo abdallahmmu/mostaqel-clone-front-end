@@ -1,6 +1,6 @@
 import React from "react";
 
-function Trusted() {
+export default function Trusted() {
   return (
     <section
       id="trusted"
@@ -174,4 +174,4 @@ function Trusted() {
   );
 }
 
-export default Trusted;
+
