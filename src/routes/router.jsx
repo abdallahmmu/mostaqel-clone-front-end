@@ -1,12 +1,12 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
+import App from "../App";
 
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
 const RegisterPage = React.lazy(() => import("../Pages/Register"));
-import App from "../App";
 
 export const router = createBrowserRouter([
   {
