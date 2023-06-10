@@ -1,5 +1,9 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Pages/Home";
+import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
+
+//LAZY
+const Home = React.lazy(()=>import('../Pages/Home'))
 import App from "../App";
 
 export const router = createBrowserRouter([
@@ -9,7 +13,9 @@ export const router = createBrowserRouter([
     children:[
         {
             index:true,
-            element:<Home/>
+            element:<React.Suspense fallback={<LoadingSpinner/>}>
+                <Home/>
+            </React.Suspense>
         }
     ]
     }
