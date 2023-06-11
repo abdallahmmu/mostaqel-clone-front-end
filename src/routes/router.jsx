@@ -7,7 +7,7 @@ import App from "../App";
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
 const RegisterPage = React.lazy(() => import("../Pages/Register"));
-const ProfilePage = React.lazy(()=>import('../Pages/Profile'))
+const ProfileStatistics = React.lazy(()=>import('../Pages/ProfileStatistics'))
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       {
         path:'profile/statistics/:profileId',
         element:<React.Suspense fallback={<LoadingSpinner/>}>
-          <ProfilePage/>
+          <ProfileStatistics/>
         </React.Suspense>
       }
     ],
