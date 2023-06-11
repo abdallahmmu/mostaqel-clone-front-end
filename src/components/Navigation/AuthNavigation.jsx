@@ -158,9 +158,9 @@ function AuthNavigation() {
       {/* Main Navigation */}
       <nav className="navbar navbar-expand-lg bg-primary" id="nav">
         <div className="container">
-          <a className="navbar-brand text-white" href="index.html">
+          <Link className="navbar-brand text-white" to="profile/statistics/1">
             Mostaqel
-          </a>
+          </Link>
           {/*Desktop Navigation*/}
           <div className="navigation d-flex align-items-center">
             <div className="justify-content-end d-lg-flex w-100 d-none">
