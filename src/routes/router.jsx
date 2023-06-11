@@ -7,6 +7,7 @@ import App from "../App";
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
 const RegisterPage = React.lazy(() => import("../Pages/Register"));
+const ProfilePage = React.lazy(()=>import('../Pages/Profile'))
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,12 @@ export const router = createBrowserRouter([
           </React.Suspense>
         ),
       },
+      {
+        path:'profile/:profileId',
+        element:<React.Suspense fallback={<LoadingSpinner/>}>
+          <ProfilePage/>
+        </React.Suspense>
+      }
     ],
   },
 ]);
