@@ -136,7 +136,7 @@ button {
 
 /***START HERO SECTION ***/
 #hero {
-    background-image: url('./../images/Hero-Bg.jpg');
+    background-image: url('images/Hero-Bg.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

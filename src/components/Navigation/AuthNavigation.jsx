@@ -223,7 +223,7 @@ function AuthNavigation() {
                       />
                       <circle cx="6.5" cy="6.5" r="1.5" fill="currentColor" />
                     </svg>
-                    My Offers
+                      Find Freelancers
                   </Link>
                 </li>
               </ul>

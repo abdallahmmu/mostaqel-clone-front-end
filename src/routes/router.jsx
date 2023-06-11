@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { Link, createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
 
@@ -12,6 +12,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<div>Can not found this route <Link to="/">Go Home</Link></div>,
     children: [
       {
         index: true,
