@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path:'profile/:profileId',
+        path:'profile/statistics/:profileId',
         element:<React.Suspense fallback={<LoadingSpinner/>}>
           <ProfilePage/>
         </React.Suspense>
