@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FreelancerRegister from "../components/AuthComponents/FreelancerRegister";
 
 function Register() {
-  const [client, setClient] = useState(null);
+  const [client, setClient] = useState('');
 
 
   useEffect(()=>{
