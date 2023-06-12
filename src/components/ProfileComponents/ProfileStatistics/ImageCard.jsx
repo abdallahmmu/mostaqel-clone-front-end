@@ -11,7 +11,7 @@ function ImageCard() {
         <img src="https://avatars.hsoubcdn.com/d1651fcfe3cfdfeed676eb5a5271b958?s=128" className="rounded-circle mb-3" width={84} height={84} alt="Profile Pic" />
         <p><Link to="/" className="text-dark">Abdallah Muhammed</Link></p>
         <hr />
-        <p><Link to="/" className="text-dark">Edit Profile</Link></p>
+        <p><Link to="/profile/edit/3" className="text-dark">Edit Profile</Link></p>
       </div>
     </div>
   </div>
