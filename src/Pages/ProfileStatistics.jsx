@@ -5,7 +5,6 @@ import MessagesCard from '../components/ProfileComponents/ProfileStatistics/Mess
 import OffersCard from '../components/ProfileComponents/ProfileStatistics/OffersCard'
 import PortfolioCard from '../components/ProfileComponents/ProfileStatistics/PortfolioCard'
 import LatestProjectsCard from '../components/ProfileComponents/ProfileStatistics/LatestProjectsCard'
-
 function ProfileStatistics() {
   return (
 <section id="control-pannel">
