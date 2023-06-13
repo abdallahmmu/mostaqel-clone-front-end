@@ -33,10 +33,12 @@ function FreelancerRegister() {
           Register As A Freelancer
         </h3>
         <div className="row p-5">
-          <img
-            src="images/regitser.jpeg"
-            className="col-lg-6 col-md-12 fluid"
-          />
+          <div className="col-md-6 col-12">
+            <div className="d-flex h-100 w-100 align-items-start justify-content-center">
+              <img src="images/register.jpg" className=" img-fluid" />
+            </div>
+          </div>
+
           <Formik
             initialValues={feilds}
             validationSchema={freelancerSchemaValidation}
