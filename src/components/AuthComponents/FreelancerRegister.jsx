@@ -33,7 +33,7 @@ function FreelancerRegister() {
           Register As A Freelancer
         </h3>
         <div className="row p-5">
-          <div className="col-md-6 col-12">
+          <div className="col-lg-6 col-md-12 d-none d-sm-block">
             <div className="d-flex h-100 w-100 align-items-start justify-content-center">
               <img src="images/register.jpg" className=" img-fluid" />
             </div>
