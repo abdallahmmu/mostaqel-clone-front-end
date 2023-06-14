@@ -17,6 +17,10 @@ const ContactUsPage = React.lazy(() => import("../Pages/ContactUs"));
 const ProjectDetails = React.lazy(() =>
   import("../components/ProjectDetails/ProjectDetails.jsx")
 );
+const ChatsPage = React.lazy(() => import("../components/Chats/ChatsPage.jsx"));
+const ChatDetails = React.lazy(() =>
+  import("../components/ChatDetails/ChatDetails.jsx")
+);
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 
@@ -92,6 +96,22 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <ProjectDetails />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "chats",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ChatsPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "chats/:chatId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ChatDetails />
           </React.Suspense>
         ),
       },

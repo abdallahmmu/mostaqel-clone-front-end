@@ -11,7 +11,7 @@ const ProjectOffers = () => {
               <div className="row g-0">
                 <div className="col-sm-2 pe-3">
                   <img
-                    src="images/me.jpg"
+                    src="https://placehold.co/400x400"
                     className="img-fluid rounded-circle w-100"
                     alt="..."
                   />
@@ -46,7 +46,7 @@ const ProjectOffers = () => {
               <div className="row g-0">
                 <div className="col-sm-2 pe-3">
                   <img
-                    src="images/me.jpg"
+                    src="https://placehold.co/400x400"
                     className="img-fluid rounded-circle w-100"
                     alt="..."
                   />
