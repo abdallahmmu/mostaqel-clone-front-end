@@ -26,9 +26,7 @@ import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegister
 console.log("Loading");
 console.log("Loading");
 console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
+
 console.log("Loading");
 console.log("Loading");
 console.log("Loading");
