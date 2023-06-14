@@ -20,10 +20,10 @@ function Navigationbar() {
           <NavLink className="nav-link text-white py-2 px-3" aria-current="page" to="projects.html">Find Project</NavLink>
         </li>
         <li className="nav-item px-1">
-          <NavLink className="nav-link text-white py-2 px-3" aria-current="page" to="contact.html">Contact Us</NavLink>
+          <NavLink className="nav-link text-white py-2 px-3" aria-current="page" to="contact">Contact Us</NavLink>
         </li>
         <li className="nav-item px-1">
-          <NavLink className="nav-link text-white py-2 px-3" aria-current="page" to="about.html">About Us</NavLink>
+          <NavLink className="nav-link text-white py-2 px-3" aria-current="page" to="about">About Us</NavLink>
         </li>
         <li className="nav-item px-1">
           <NavLink className="nav-link text-white border border-1 py-2 px-3" aria-current="page" to="login">

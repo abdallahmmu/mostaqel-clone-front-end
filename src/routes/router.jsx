@@ -13,7 +13,10 @@ const ProfileStatistics = React.lazy(() =>
 const EditPage = React.lazy(() => import("../Pages/EditProfile"));
 const AboutPage = React.lazy(() => import("../Pages/About"));
 const ContactUsPage = React.lazy(() => import("../Pages/ContactUs"));
-
+//Project Details Page
+const ProjectDetails = React.lazy(() =>
+  import("../components/ProjectDetails/ProjectDetails.jsx")
+);
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 
@@ -81,6 +84,14 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <EditPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "projects/:projectId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ProjectDetails />
           </React.Suspense>
         ),
       },
