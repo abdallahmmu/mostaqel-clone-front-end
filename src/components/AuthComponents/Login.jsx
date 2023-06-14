@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { loginSchema } from "../../Schemas/LoginSchema";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+
+const fields = {
+  email: "",
+  password: "",
+  freelancer: "",
+  loginType: "",
+};
 
 function Login() {
+  const handelLoginSubmit = (values) => {
+    if (values.loginType === "freelancer") {
+      console.log("login as Freelancer");
+    } else {
+      console.log("login as Client");
+    }
+  };
+
   return (
     <div
       id="form__container"
@@ -12,37 +29,105 @@ function Login() {
         style={{ borderRadius: 40, boxShadow: "0px 0px 5px 0px #2386" }}
       >
         <div className="row p-5">
-        <div className="col-lg-6 col-md-12 d-none d-sm-block">
+          <div className="col-lg-6 col-md-12 d-none d-sm-block">
             <div className="d-flex h-100 w-100 align-items-start justify-content-center">
               <img src="images/register.jpg" className=" img-fluid" />
             </div>
           </div>
-          <form className="col-lg-6 col-md-12">
-            <div className=" col-md-12">
-              <label htmlFor="inputEmail4" className="form-label">
-                Email
-              </label>
-              <input type="email" className="form-control mb-3" id="inputEmail4" />
-            </div>
-            <div className="col-md-12">
-              <label htmlFor="inputPassword4" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control mb-3"
-                id="inputPassword4"
-              />
-            </div>
-            <div className="col-12  mx-auto">
-              <button type="submit" className="btn btn-primary text-white mb-3">
-                Login
-              </button>
-            </div>
-            <span>
-              Haven't you account <Link to="/register">Sign Up</Link>
-            </span>
-          </form>
+          <div className="col-lg-6 col-md-12">
+            <Formik
+              initialValues={fields}
+              onSubmit={handelLoginSubmit}
+              validationSchema={loginSchema}
+            >
+              {() => (
+                <Form>
+                  <div className=" col-md-12">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <Field
+                      type="email"
+                      className="form-control mb-3"
+                      id="email"
+                      name="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      className="text-danger"
+                      component="div"
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <Field
+                      type="password"
+                      className="form-control mb-3"
+                      id="password"
+                      name="password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      className="text-danger"
+                      component="div"
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <>
+                      <label>* Please Choose Login As :-</label>
+                      <div className="form-check">
+                        <Field
+                          className="form-check-input"
+                          type="radio"
+                          id="freelancer"
+                          name="loginType"
+                          value="freelancer"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="freelancer"
+                        >
+                          Freelancer
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <Field
+                          className="form-check-input"
+                          type="radio"
+                          name="loginType"
+                          id="client"
+                          value="client"
+                        />
+                        <label className="form-check-label" htmlFor="client">
+                          Client
+                        </label>
+                        <ErrorMessage
+                          name="loginType"
+                          className="text-danger"
+                          component="div"
+                        />
+                      </div>
+                    </>
+                  </div>
+
+                  <div className="col-12  mx-auto">
+                    <button
+                      type="submit"
+                      className="btn btn-primary text-white mb-3"
+                    >
+                      Login
+                    </button>
+                  </div>
+
+                  <span>
+                    Haven't you account <Link to="/register">Sign Up</Link>
+                  </span>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
     </div>
