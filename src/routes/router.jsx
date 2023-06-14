@@ -24,6 +24,18 @@ const ChatDetails = React.lazy(() =>
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -118,5 +130,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-console.log("Loading");
