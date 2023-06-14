@@ -23,7 +23,9 @@ const ChatDetails = React.lazy(() =>
 );
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
-
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
 console.log("Loading");
 console.log("Loading");
 console.log("Loading");
