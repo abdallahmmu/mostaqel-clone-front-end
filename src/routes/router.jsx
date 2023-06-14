@@ -10,6 +10,13 @@ const RegisterPage = React.lazy(() => import("../Pages/Register"));
 const ProfileStatistics = React.lazy(()=>import('../Pages/ProfileStatistics'))
 const EditPage = React.lazy(()=>import('../Pages/EditProfile'))
 
+
+
+
+//LOADERS
+import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +46,7 @@ export const router = createBrowserRouter([
             <RegisterPage />
           </React.Suspense>
         ),
+        loader:httpRegisterFreelancerLoader,
       },
       {
         path:'profile/statistics/:userId',

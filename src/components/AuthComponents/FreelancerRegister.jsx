@@ -2,8 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { freelancerSchemaValidation } from "../../Schemas/FreelancerRegisterationSchema";
+import { useLoaderData } from "react-router-dom";
+import { LoadingIndecator } from "../UI_Helpers/LoadingIndecator";
 
-const feilds = {
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { registerNewUser } from "../../store/AuthSlice/authSlice";
+
+const fields = {
   firstName: "",
   lastName: "",
   username: "",
@@ -16,9 +22,16 @@ const feilds = {
 };
 
 function FreelancerRegister() {
+  const { isLoading,errors } = useSelector((state) => state.authSlice);
+  const dispatch = useDispatch();
+  const categories = useLoaderData();
+
   const handelRegisterSubmit = (values, { resetForm }) => {
-    console.log("Done!!");
-    resetForm();
+    const newUser = {
+      ...values,
+    };
+    dispatch(registerNewUser(newUser));
+    //resetForm();
   };
   return (
     <div
@@ -40,11 +53,11 @@ function FreelancerRegister() {
           </div>
 
           <Formik
-            initialValues={feilds}
+            initialValues={fields}
             validationSchema={freelancerSchemaValidation}
             onSubmit={handelRegisterSubmit}
           >
-            {({ values, touched, isSubmitting }) => (
+            {({ values, touched }) => (
               <Form className="row g-3 col-lg-6 col-md-12">
                 <div className=" col-md-6">
                   <label htmlFor="firstName" className="form-label">
@@ -62,6 +75,7 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
+                  {errors.firstName && <span className="text-danger">{errors.firstName}</span>}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="lastName" className="form-label">
@@ -79,6 +93,7 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
+                  {errors.lastName && <span className="text-danger">{errors.lastName}</span>}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="username" className="form-label">
@@ -96,6 +111,7 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
+                  {errors.username && <span className="text-danger">{errors.username}</span>}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="jobTitle" className="form-label">
@@ -130,6 +146,7 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
+                  {errors.email && <span className="text-danger">{errors.email}</span>}
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="phoneNumber" className="form-label">
@@ -147,6 +164,7 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
+                  {errors.phoneNumber && <span className="text-danger">{errors.phoneNumber}</span>}
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword4" className="form-label">
@@ -191,20 +209,24 @@ function FreelancerRegister() {
                     name="categoryId"
                     as="select"
                   >
-                    <option>Choose Category</option>
-                    <option value={1}>One</option>
-                    <option value={2}>Two</option>
-                    <option value={3}>Three</option>
+                    <option>Choose</option>
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.title}
+                      </option>
+                    ))}
                   </Field>
                   <ErrorMessage
                     name="categoryId"
                     component="div"
                     className="text-danger"
                   />
+                  {errors.categoryId && <span className="text-danger">{errors.categoryId}</span>}
                 </div>
                 <div className="col-12  mx-auto">
                   <button type="submit" className="btn btn-primary">
-                    {isSubmitting ? "Loading ..." : "Submit"}
+                    {isLoading && <LoadingIndecator/>}
+                    {!isLoading && <span>Submit</span>}
                   </button>
                 </div>
                 <span>
