@@ -12,26 +12,17 @@ const ProfileStatistics = React.lazy(() =>
 );
 const EditPage = React.lazy(() => import("../Pages/EditProfile"));
 const AboutPage = React.lazy(() => import("../Pages/About"));
-const ContactUsPage = React.lazy(()=>import('../Pages/ContactUs'))
+const ContactUsPage = React.lazy(() => import("../Pages/ContactUs"));
+//Project Details Page
+const ProjectDetails = React.lazy(() =>
+  import("../components/ProjectDetails/ProjectDetails.jsx")
+);
+const ChatsPage = React.lazy(() => import("../components/Chats/ChatsPage.jsx"));
+const ChatDetails = React.lazy(() =>
+  import("../components/ChatDetails/ChatDetails.jsx")
+);
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
-console.log("Loading");
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -51,14 +42,6 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "login",
-        element: (
-          <React.Suspense fallback={<LoadingSpinner />}>
-            <LoginPage />
-          </React.Suspense>
-        ),
-      },
-      {
         path: "about",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
@@ -67,10 +50,20 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path:'contact',
-        element:<React.Suspense fallback={<LoadingSpinner/>}>
-          <ContactUsPage/>
-        </React.Suspense>
+        path: "contact",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ContactUsPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <LoginPage />
+          </React.Suspense>
+        ),
       },
       {
         path: "register",
@@ -79,7 +72,7 @@ export const router = createBrowserRouter([
             <RegisterPage />
           </React.Suspense>
         ),
-        loader:httpRegisterFreelancerLoader
+        loader: httpRegisterFreelancerLoader,
       },
       {
         path: "profile/statistics/:userId",
@@ -94,6 +87,30 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <EditPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "projects/:projectId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ProjectDetails />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "chats",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ChatsPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "chats/:chatId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ChatDetails />
           </React.Suspense>
         ),
       },
