@@ -7,27 +7,38 @@ import App from "../App";
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
 const RegisterPage = React.lazy(() => import("../Pages/Register"));
-const ProfileStatistics = React.lazy(()=>import('../Pages/ProfileStatistics'))
-const EditPage = React.lazy(()=>import('../Pages/EditProfile'))
-
-
-
+const ProfileStatistics = React.lazy(() =>
+  import("../Pages/ProfileStatistics")
+);
+const EditPage = React.lazy(() => import("../Pages/EditProfile"));
+const AboutPage = React.lazy(() => import("../Pages/About"));
 
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
-
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement:<div>Can not found this route <Link to="/">Go Home</Link></div>,
+    errorElement: (
+      <div>
+        Can not found this route <Link to="/">Go Home</Link>
+      </div>
+    ),
     children: [
       {
         index: true,
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <HomePage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "about",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <AboutPage />
           </React.Suspense>
         ),
       },
@@ -46,20 +57,24 @@ export const router = createBrowserRouter([
             <RegisterPage />
           </React.Suspense>
         ),
-        loader:httpRegisterFreelancerLoader,
+        loader: httpRegisterFreelancerLoader,
       },
       {
-        path:'profile/statistics/:userId',
-        element:<React.Suspense fallback={<LoadingSpinner/>}>
-          <ProfileStatistics/>
-        </React.Suspense>
+        path: "profile/statistics/:userId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <ProfileStatistics />
+          </React.Suspense>
+        ),
       },
       {
-        path:'profile/edit/:userId',
-        element:<React.Suspense fallback={<LoadingSpinner/>}>
-          <EditPage/>
-        </React.Suspense>
-      }
+        path: "profile/edit/:userId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <EditPage />
+          </React.Suspense>
+        ),
+      },
     ],
   },
 ]);

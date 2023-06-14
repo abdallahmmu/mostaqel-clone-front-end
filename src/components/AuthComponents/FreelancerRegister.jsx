@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { freelancerSchemaValidation } from "../../Schemas/FreelancerRegisterationSchema";
@@ -7,7 +7,7 @@ import { LoadingIndecator } from "../UI_Helpers/LoadingIndecator";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { registerNewUser } from "../../store/AuthSlice/authSlice";
+import { authActions, registerNewUser } from "../../store/AuthSlice/authSlice";
 
 const fields = {
   firstName: "",
@@ -26,13 +26,20 @@ function FreelancerRegister() {
   const dispatch = useDispatch();
   const categories = useLoaderData();
 
-  const handelRegisterSubmit = (values, { resetForm }) => {
+  const handelRegisterSubmit = (values) => {
     const newUser = {
       ...values,
     };
     dispatch(registerNewUser(newUser));
-    //resetForm();
+   
   };
+
+  useEffect(()=>{
+    //Cleaning
+    return () => {
+      dispatch(authActions.cleanUpRegister())
+    }
+  },[])
   return (
     <div
       id="form__container"
