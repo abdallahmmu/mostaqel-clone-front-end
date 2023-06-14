@@ -38,6 +38,10 @@ console.log("Loading");
 console.log("Loading");
 console.log("Loading");
 console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
+console.log("Loading");
 export const router = createBrowserRouter([
   {
     path: "/",
