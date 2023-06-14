@@ -118,3 +118,5 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+console.log("Loading");
