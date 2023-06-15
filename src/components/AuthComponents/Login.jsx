@@ -1,24 +1,29 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../../Schemas/LoginSchema";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
+import { useSelector,useDispatch } from "react-redux";
+import { authActions, loginToAccount } from "../../store/AuthSlice/authSlice";
+
 const fields = {
   email: "",
   password: "",
-  freelancer: "",
   loginType: "",
 };
 
 function Login() {
+
+  const dispatch = useDispatch()
   const handelLoginSubmit = (values) => {
-    if (values.loginType === "freelancer") {
-      console.log("login as Freelancer");
-    } else {
-      console.log("login as Client");
-    }
+    dispatch(loginToAccount(values))
   };
 
+  useEffect(()=>{
+    return ()=>{
+      dispatch(authActions.cleanUpRegister())
+    }
+  },[])
   return (
     <div
       id="form__container"

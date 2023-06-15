@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/AuthSlice/authSlice";
 function AuthNavigation() {
+  const dispatch = useDispatch()
+
+  const onLogoutHandler = useCallback(()=>{
+    dispatch(authActions.logoutHandler())
+  },[])
   return (
     <>
       {/* -Navigation Draw Mobile */}
@@ -134,7 +140,7 @@ function AuthNavigation() {
                 <button
                   className="nav-link d-block w-100 text-start py-2 px-3"
                   aria-current="page"
-                  to="#"
+                  onClick={onLogoutHandler}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
