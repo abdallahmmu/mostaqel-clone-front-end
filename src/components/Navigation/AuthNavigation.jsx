@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
+import ImageGeneration from "../UI_Helpers/ImageGeneration";
 function AuthNavigation() {
   const dispatch = useDispatch()
   const {userData} = useSelector((state)=>state.authSlice)
@@ -418,12 +419,7 @@ function AuthNavigation() {
                 data-bs-target="#offcanvasWithBothOptions"
                 aria-controls="offcanvasWithBothOptions"
               >
-                <img
-                  src="https://avatars.hsoubcdn.com/d1651fcfe3cfdfeed676eb5a5271b958?s=128"
-                  className="rounded-circle"
-                  width={36}
-                  height={36}
-                />
+                <span className="text-white fs-6">{userData.username}</span>
               </button>
             </div>
           </div>
