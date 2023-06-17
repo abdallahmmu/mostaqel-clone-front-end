@@ -1,34 +1,31 @@
 import axios from "axios";
 import swal from "sweetalert";
 export async function updateUserData(role, id, values, token) {
-  if (role === "freelancer") {
-    console.log("dasdas");
-    try {
-      const freelancerUpdated = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/freelancers/${id}`,
-        JSON.stringify(values),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      );
-
-      const confirm = await swal({
-        title: "Updated Done",
-        icon: "success",
-      });
-
-      if (confirm) {
-        window.location = `/profile/statistics/${id}`;
+  let type = role === "freelancer" ? "freelancers" : "clients";
+  try {
+    const freelancerUpdated = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/${type}/${id}`,
+      JSON.stringify(values),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
       }
-    } catch (error) {
-      swal({
-        title: "fild to update",
-        icon: "error",
-      });
+    );
+
+    const confirm = await swal({
+      title: "Updated Done",
+      icon: "success",
+    });
+
+    if (confirm) {
+      window.location = `/profile/statistics/${id}`;
     }
-  } else {
+  } catch (error) {
+    swal({
+      title: "fild to update",
+      icon: "error",
+    });
   }
 }

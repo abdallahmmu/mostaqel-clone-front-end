@@ -1,17 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
+import ImageGeneration from '../../UI_Helpers/ImageGeneration'
 
 function ImageCard() {
+  const {data} = useLoaderData()
   return (
 <div className="col-sm-12 col-md-4">
   {/*Start Card Profile*/}
   <div className="card border-0 mt-3">
     <div className="card-body">
       <div className="image text-center">
-        <img src="https://avatars.hsoubcdn.com/d1651fcfe3cfdfeed676eb5a5271b958?s=128" className="rounded-circle mb-3" width={84} height={84} alt="Profile Pic" />
+       {data.avatar &&  <ImageGeneration avatar={data.avatar} />}
+        {!data.avatar && <ImageGeneration firstName={data.firstName} LastName={data.LastName}/>}
         <p><Link to="/" className="text-dark">Abdallah Muhammed</Link></p>
         <hr />
-        <p><Link to="/profile/edit/3" className="text-dark">Edit Profile</Link></p>
+        <p><Link to={`/profile/edit/${data._id}`} className="text-dark">Edit Profile</Link></p>
       </div>
     </div>
   </div>
