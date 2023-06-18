@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FreelancerRegister from "../components/AuthComponents/FreelancerRegister";
+import ClientRegister from "../components/AuthComponents/ClientRegister";
+// import ClientRegister from "../components/AuthComponents/ClientRegister";
 
 function Register() {
   const [client, setClient] = useState('');
@@ -35,7 +37,7 @@ function Register() {
       {/* Freelancer Form */}
      {client === 'freelancer' && <FreelancerRegister/>}
       {/* Client Form */}
-      {client === 'client' && <div>Client Form</div>}
+      {client === 'client' && <ClientRegister/>}
     </>
   );
 }
