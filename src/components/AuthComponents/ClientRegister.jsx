@@ -128,8 +128,8 @@ function ClientRegister() {
                     type="text"
                     className="form-control"
                     id="address"
-                    placeholder="ex - Web Developer"
-                    name="jobTitle"
+                    placeholder=""
+                    name="address"
                   />
                   <ErrorMessage
                     name="address"
