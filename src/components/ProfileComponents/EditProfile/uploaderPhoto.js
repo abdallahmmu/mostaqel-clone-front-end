@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export async function uploaderPhoto(avatar, userId, token) {
+export async function uploaderPhoto(avatar, userId, token,role) {
+  let type = role === 'freelancer' ? 'freelancers' : 'clients'
   try {
     const uploaded = await axios.post(
-      `${import.meta.env.VITE_API_URL}/freelancers/upload-avatar/${userId}`,
+      `${import.meta.env.VITE_API_URL}/${type}/upload-avatar/${userId}`,
       avatar,
       {
         headers: {

@@ -13,7 +13,6 @@ function EditForm() {
   const [profilePic, setProfilePic] = useState(null);
   const { userData } = useSelector((state) => state.authSlice);
   const [isLoading, setIsLoading] = useState();
-  console.log(data)
   const fields = {
     firstName: data ? data.firstName : "",
     lastName: data ? data.lastName : "",
@@ -53,7 +52,7 @@ function EditForm() {
     } else {
       setIsLoading(true);
       Promise.all([
-        uploaderPhoto(photoData, data._id, token),
+        uploaderPhoto(photoData, data._id, token , role),
         updateUserData(role, id, values, token),
       ]).then((responses) => {
         setIsLoading(false);
