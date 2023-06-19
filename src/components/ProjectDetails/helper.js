@@ -54,6 +54,17 @@ export const updateOffer = async (data, token, offerId) => {
   });
 };
 
+export const hireFreelancer = async (token, offerId) => {
+  await axios.patch(
+    `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
+    {
+      offerId,
+    },
+    {
+      headers: { "Content-Type": "application/json", Authorization: token },
+    }
+  );
+};
 // export const fetchMyOffer = async (id, setMyOffer, projectId) => {
 //   freelancerId = id;
 //   const response = await axios.get(

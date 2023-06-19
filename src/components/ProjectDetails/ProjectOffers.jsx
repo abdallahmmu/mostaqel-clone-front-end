@@ -3,7 +3,7 @@ import { fetchOffers } from "./helper.js";
 import moment from "moment";
 import dateFormat from "dateformat";
 import Paper from "@mui/material/Paper";
-
+import FreelancerOffer from "./FreelancerOffer";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 const ProjectOffers = (props) => {
@@ -18,44 +18,13 @@ const ProjectOffers = (props) => {
       <div className="bg-gray  mt-2">
         <h4 className=" w-100 p-4">Applicant Offers</h4>
 
-        {offers.map(({ _id, freelancerId, updatedAt, description }) => {
+        {offers.map((offer) => {
           return (
-            <div key={_id}>
-              <Stack
-                direction="row"
-                spacing={1}
-                className="bg-white mb-2 p-5"
-                component={Paper}
-              >
-                {freelancerId.avatar ? (
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={freelancerId.avatar}
-                    lg={{ width: 100, height: 100 }}
-                    md={{ width: 50, height: 50 }}
-                  />
-                ) : (
-                  <Avatar
-                    lg={{ width: 1000, height: 1000 }}
-                    md={{ width: 50, height: 50 }}
-                  >
-                    {freelancerId.firstName.slice(0, 1)}
-                  </Avatar>
-                )}
-
-                <div className="mt-1">
-                  <h4>
-                    {freelancerId.firstName} {freelancerId.lastName}
-                  </h4>
-                  <p className="  opacity-50 ">
-                    {freelancerId.jobTitle} || Last updated{" "}
-                    {moment(new Date(updatedAt)).fromNow()}
-                  </p>
-
-                  <div className="p-2 mt-1">{description.slice(0, 100)}...</div>
-                </div>
-              </Stack>
-            </div>
+            <FreelancerOffer
+              offer={offer}
+              key={offer.createdAt}
+              isOwner={isOwner}
+            />
           );
         })}
       </div>
