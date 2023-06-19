@@ -38,26 +38,27 @@ export const registerNewUser = createAsyncThunk(
   }
 );
 
-
 //Register New User Client
-export const registerNewUserClient = createAsyncThunk('authSlice/registerNewUserClient', async (data)=>{
-  try {
-    const registeredClient = await axios.post(
-      `${import.meta.env.VITE_API_URL}/clients`,
-      JSON.stringify(data),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+export const registerNewUserClient = createAsyncThunk(
+  "authSlice/registerNewUserClient",
+  async (data) => {
+    try {
+      const registeredClient = await axios.post(
+        `${import.meta.env.VITE_API_URL}/clients`,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    return registeredClient.data;
-  } catch (error) {
- 
-    return error.response.data
+      return registeredClient.data;
+    } catch (error) {
+      return error.response.data;
+    }
   }
-})
+);
 
 //Login To Account
 export const loginToAccount = createAsyncThunk(
@@ -165,30 +166,30 @@ const authSlice = createSlice({
     });
 
     //RegisterNewAccountClient
-    builder.addCase(registerNewUserClient.pending, (state)=>{
-      state.isLoading = true
-    })
-    builder.addCase(registerNewUserClient.fulfilled,(state,{payload})=>{
-      state.isLoading = false
-      if(payload.error){
-        state.errors = payload.error
+    builder.addCase(registerNewUserClient.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(registerNewUserClient.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      if (payload.error) {
+        state.errors = payload.error;
         swal({
           title: "faild to register",
-          text:payload.error,
+          text: payload.error,
           icon: "error",
         });
-      }else{
+      } else {
         swal({
-          text:'success',
-          title:'you have been registered account',
-          icon:'success',
-        }).then(value => {
-          if(value){
-            window.location = '/login'
+          text: "success",
+          title: "you have been registered account",
+          icon: "success",
+        }).then((value) => {
+          if (value) {
+            window.location = "/login";
           }
-        })
+        });
       }
-    })
+    });
 
     //LoginToAccount
     builder.addCase(loginToAccount.pending, (state) => {
@@ -212,7 +213,6 @@ const authSlice = createSlice({
 
         //save information to localStorage
         const localStorageData = {
-<<<<<<< HEAD
           id: decodedToken.freelancerId || decodedToken.clientId,
           username: decodedToken.username || decodedToken.clientName,
           role: decodedToken.role || "client",
@@ -220,15 +220,6 @@ const authSlice = createSlice({
           exp: decodedToken.exp,
         };
         localStorage.setItem("isAuth", JSON.stringify(localStorageData));
-=======
-          id:decodedToken.freelancerId || decodedToken.clientId,
-          username:decodedToken.username || decodedToken.clientName,
-          role:decodedToken.role || 'client',
-          token:payload.token,
-          exp:decodedToken.exp,
-        }
-        localStorage.setItem('isAuth',JSON.stringify(localStorageData))
->>>>>>> f1f4345a72ddad7c81c46f988768217188fdefc1
         swal({
           title: "Success",
           text: payload.message || "You Have Been Login Successfully",
