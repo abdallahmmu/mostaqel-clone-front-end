@@ -4,7 +4,6 @@ import ImageGeneration from '../../UI_Helpers/ImageGeneration'
 
 function ImageCard() {
   const {data} = useLoaderData()
-  console.log(data)
   return (
 <div className="col-sm-12 col-md-4">
   {/*Start Card Profile*/}
