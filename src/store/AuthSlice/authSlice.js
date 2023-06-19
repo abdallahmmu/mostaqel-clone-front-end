@@ -38,26 +38,27 @@ export const registerNewUser = createAsyncThunk(
   }
 );
 
-
 //Register New User Client
-export const registerNewUserClient = createAsyncThunk('authSlice/registerNewUserClient', async (data)=>{
-  try {
-    const registeredClient = await axios.post(
-      `${import.meta.env.VITE_API_URL}/clients`,
-      JSON.stringify(data),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+export const registerNewUserClient = createAsyncThunk(
+  "authSlice/registerNewUserClient",
+  async (data) => {
+    try {
+      const registeredClient = await axios.post(
+        `${import.meta.env.VITE_API_URL}/clients`,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    return registeredClient.data;
-  } catch (error) {
- 
-    return error.response.data
+      return registeredClient.data;
+    } catch (error) {
+      return error.response.data;
+    }
   }
-})
+);
 
 //Login To Account
 export const loginToAccount = createAsyncThunk(
@@ -108,7 +109,7 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     isAuth: false,
-    userData:{},
+    userData: {},
     isLoading: false,
     errors: {},
   },
@@ -116,28 +117,27 @@ const authSlice = createSlice({
     cleanUpRegister(state) {
       (state.isLoading = false), (state.errors = {});
     },
-    checkUserToken(state){
-      const getToken = JSON.parse(localStorage.getItem('isAuth'))
-      if(getToken){
+    checkUserToken(state) {
+      const getToken = JSON.parse(localStorage.getItem("isAuth"));
+      if (getToken) {
         //1) check if the token is valid or no
-          if((Date.now() / 1000) < getToken.exp){
-            //valid token
-            state.isAuth = true
-            state.userData = getToken
-          }else{
-            //not valid
-            state.isAuth = false,
-            state.userData = {}
-            localStorage.removeItem('isAuth')
-          }
+        if (Date.now() / 1000 < getToken.exp) {
+          //valid token
+          state.isAuth = true;
+          state.userData = getToken;
+        } else {
+          //not valid
+          (state.isAuth = false), (state.userData = {});
+          localStorage.removeItem("isAuth");
+        }
       }
     },
-    logoutHandler(state){
-      state.isAuth = false
-      state.userData = {}
-      localStorage.removeItem('isAuth')
-      window.location = '/'
-    }
+    logoutHandler(state) {
+      state.isAuth = false;
+      state.userData = {};
+      localStorage.removeItem("isAuth");
+      window.location = "/";
+    },
   },
   extraReducers: (builder) => {
     //RegisterNewUserFreelancer
@@ -163,34 +163,33 @@ const authSlice = createSlice({
     });
     builder.addCase(registerNewUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      console.log("rejected", payload);
     });
 
     //RegisterNewAccountClient
-    builder.addCase(registerNewUserClient.pending, (state)=>{
-      state.isLoading = true
-    })
-    builder.addCase(registerNewUserClient.fulfilled,(state,{payload})=>{
-      state.isLoading = false
-      if(payload.error){
-        state.errors = payload.error
+    builder.addCase(registerNewUserClient.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(registerNewUserClient.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      if (payload.error) {
+        state.errors = payload.error;
         swal({
           title: "faild to register",
-          text:payload.error,
+          text: payload.error,
           icon: "error",
         });
-      }else{
+      } else {
         swal({
-          text:'success',
-          title:'you have been registered account',
-          icon:'success',
-        }).then(value => {
-          if(value){
-            window.location = '/login'
+          text: "success",
+          title: "you have been registered account",
+          icon: "success",
+        }).then((value) => {
+          if (value) {
+            window.location = "/login";
           }
-        })
+        });
       }
-    })
+    });
 
     //LoginToAccount
     builder.addCase(loginToAccount.pending, (state) => {
@@ -205,26 +204,25 @@ const authSlice = createSlice({
           icon: "error",
         });
       } else {
-        const token = payload.token.split('.')[1]
+        const token = payload.token.split(".")[1];
 
         //decoded the token
-        const decodedToken = JSON.parse(atob(token))
+        const decodedToken = JSON.parse(atob(token));
 
-        state.userData = decodedToken
+        state.userData = decodedToken;
 
-        console.log(decodedToken)
         //save information to localStorage
         const localStorageData = {
-          id:decodedToken.freelancerId || decodedToken.clientId,
-          username:decodedToken.username || decodedToken.clientName,
-          role:decodedToken.role || 'client',
-          token:payload.token,
-          exp:decodedToken.exp,
-        }
-        localStorage.setItem('isAuth',JSON.stringify(localStorageData))
+          id: decodedToken.freelancerId || decodedToken.clientId,
+          username: decodedToken.username || decodedToken.clientName,
+          role: decodedToken.role || "client",
+          token: payload.token,
+          exp: decodedToken.exp,
+        };
+        localStorage.setItem("isAuth", JSON.stringify(localStorageData));
         swal({
           title: "Success",
-          text: payload.message || 'You Have Been Login Successfully',
+          text: payload.message || "You Have Been Login Successfully",
           icon: "success",
         }).then((value) => {
           if (value) {
