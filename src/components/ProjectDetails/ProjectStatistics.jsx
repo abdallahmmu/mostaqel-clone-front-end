@@ -1,23 +1,55 @@
 import React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import moment from "moment";
 
-const ProjectStatistics = () => {
+const ProjectStatistics = ({ details }) => {
+  let rows = [
+    {
+      name: "Project Status",
+      value: details.status,
+    },
+    {
+      name: "Publish Date",
+      value: moment(new Date(details.createdAt)).fromNow(),
+    },
+    {
+      name: "Budget",
+      value: `${details.range} $`,
+    },
+  ];
   return (
     <>
-      <div className="col-md-3">
-        <div className="project-card bg-white d-flex flex-wrap p-4 ">
-          <div className="title mb-3 w-100 h5"> Project Card</div>
-          <div className="project-status mt-3 w-50">project status</div>
-          <div className="project-status mt-3 w-50 bg-success p-1 text-center text-white">
-            Active
-          </div>
-          <div className="project-date mt-3 w-50">Publish Date</div>
-          <div className="project-date mt-3 w-50">20-05-2023</div>
-          <div className="project-budget mt-3 w-50">Budget</div>
-          <div className="project-budget mt-3 w-50">20$ - 100$</div>
-          <div className="project-time mt-3 w-50">project Time</div>
-          <div className="project-offers mt-3 w-50">Offers Counter</div>
-          <div className="project-offers mt-3 w-50">50</div>
-        </div>
+      <div className="col-lg-3 d-lg-block d-md-none">
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell colSpan={6}>
+                  <h5> Project Card</h5>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.value}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </>
   );

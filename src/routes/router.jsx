@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
             <EditPage />
           </React.Suspense>
         ),
-        loader:getUserByIdLoader
+        loader: getUserByIdLoader,
       },
       {
         path: "projects/:projectId",

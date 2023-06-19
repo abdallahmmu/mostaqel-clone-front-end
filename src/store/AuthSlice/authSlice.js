@@ -87,7 +87,7 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     isAuth: false,
-    userData:{},
+    userData: {},
     isLoading: false,
     errors: {},
   },
@@ -95,28 +95,27 @@ const authSlice = createSlice({
     cleanUpRegister(state) {
       (state.isLoading = false), (state.errors = {});
     },
-    checkUserToken(state){
-      const getToken = JSON.parse(localStorage.getItem('isAuth'))
-      if(getToken){
+    checkUserToken(state) {
+      const getToken = JSON.parse(localStorage.getItem("isAuth"));
+      if (getToken) {
         //1) check if the token is valid or no
-          if((Date.now() / 1000) < getToken.exp){
-            //valid token
-            state.isAuth = true
-            state.userData = getToken
-          }else{
-            //not valid
-            state.isAuth = false,
-            state.userData = {}
-            localStorage.removeItem('isAuth')
-          }
+        if (Date.now() / 1000 < getToken.exp) {
+          //valid token
+          state.isAuth = true;
+          state.userData = getToken;
+        } else {
+          //not valid
+          (state.isAuth = false), (state.userData = {});
+          localStorage.removeItem("isAuth");
+        }
       }
     },
-    logoutHandler(state){
-      state.isAuth = false
-      state.userData = {}
-      localStorage.removeItem('isAuth')
-      window.location = '/'
-    }
+    logoutHandler(state) {
+      state.isAuth = false;
+      state.userData = {};
+      localStorage.removeItem("isAuth");
+      window.location = "/";
+    },
   },
   extraReducers: (builder) => {
     //RegisterNewUser
@@ -142,7 +141,6 @@ const authSlice = createSlice({
     });
     builder.addCase(registerNewUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      console.log("rejected", payload);
     });
 
     //LoginToAccount
@@ -158,27 +156,25 @@ const authSlice = createSlice({
           icon: "error",
         });
       } else {
-        const token = payload.token.split('.')[1]
+        const token = payload.token.split(".")[1];
 
         //decoded the token
-        const decodedToken = JSON.parse(atob(token))
+        const decodedToken = JSON.parse(atob(token));
 
-        state.userData = decodedToken
+        state.userData = decodedToken;
 
-        console.log(decodedToken)
         //save information to localStorage
         const localStorageData = {
-          id:decodedToken.freelancerId || decodedToken.clientId,
-          username:decodedToken.username || decodedToken.clientName,
-          role:decodedToken.role || 'client',
-          token:payload.token,
-          exp:decodedToken.exp
-          
-        }
-        localStorage.setItem('isAuth',JSON.stringify(localStorageData))
+          id: decodedToken.freelancerId || decodedToken.clientId,
+          username: decodedToken.username || decodedToken.clientName,
+          role: decodedToken.role || "client",
+          token: payload.token,
+          exp: decodedToken.exp,
+        };
+        localStorage.setItem("isAuth", JSON.stringify(localStorageData));
         swal({
           title: "Success",
-          text: payload.message || 'You Have Been Login Successfully',
+          text: payload.message || "You Have Been Login Successfully",
           icon: "success",
         }).then((value) => {
           if (value) {

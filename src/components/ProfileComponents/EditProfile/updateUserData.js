@@ -2,7 +2,6 @@ import axios from "axios";
 import swal from "sweetalert";
 export async function updateUserData(role, id, values, token) {
   if (role === "freelancer") {
-    console.log("dasdas");
     try {
       const freelancerUpdated = await axios.patch(
         `${import.meta.env.VITE_API_URL}/freelancers/${id}`,
