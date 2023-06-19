@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
+import ImageGeneration from "../UI_Helpers/ImageGeneration";
 function AuthNavigation() {
   const dispatch = useDispatch()
-
+  const {userData} = useSelector((state)=>state.authSlice)
   const onLogoutHandler = useCallback(()=>{
     dispatch(authActions.logoutHandler())
   },[])
@@ -120,7 +121,7 @@ function AuthNavigation() {
                 <Link
                   className="nav-link text-start py-2 px-3"
                   aria-current="page"
-                  to="profile"
+                  to={{pathname:`/profile/statistics/${userData.id}`}}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +165,7 @@ function AuthNavigation() {
       {/* Main Navigation */}
       <nav className="navbar navbar-expand-lg bg-primary" id="nav">
         <div className="container">
-          <Link className="navbar-brand text-white" to="profile/statistics/1">
+          <Link className="navbar-brand text-white" to={`profile/statistics/${userData.id}`}>
             Mostaqel
           </Link>
           {/*Desktop Navigation*/}
@@ -418,12 +419,7 @@ function AuthNavigation() {
                 data-bs-target="#offcanvasWithBothOptions"
                 aria-controls="offcanvasWithBothOptions"
               >
-                <img
-                  src="https://avatars.hsoubcdn.com/d1651fcfe3cfdfeed676eb5a5271b958?s=128"
-                  className="rounded-circle"
-                  width={36}
-                  height={36}
-                />
+                <span className="text-white fs-6">{userData.username}</span>
               </button>
             </div>
           </div>

@@ -82,6 +82,7 @@ export const router = createBrowserRouter([
             <ProfileStatistics />
           </React.Suspense>
         ),
+        loader:getUserByIdLoader
       },
       {
         path: "profile/edit/:userId",

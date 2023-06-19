@@ -9,11 +9,11 @@ import ImageGeneration from "../../UI_Helpers/ImageGeneration";
 import { useSelector } from "react-redux";
 
 function EditForm() {
-  const { data } = useLoaderData();
+  const  {data} = useLoaderData();
   const [profilePic, setProfilePic] = useState(null);
   const { userData } = useSelector((state) => state.authSlice);
   const [isLoading, setIsLoading] = useState();
-
+  console.log(data)
   const fields = {
     firstName: data ? data.firstName : "",
     lastName: data ? data.lastName : "",
@@ -74,18 +74,18 @@ function EditForm() {
               className="d-flex mt-2 align-items-center justify-content-center"
               onClick={onHandelAvatarUrl}
             >
-              {!profilePic && !data.avatar && (
+              {!profilePic && !data?.avatar && (
                 <ImageGeneration
-                  firstName={data.firstName}
-                  LastName={data.lastName}
+                  firstName={data?.firstName}
+                  LastName={data?.lastName}
                   role="button"
                 />
               )}
               {profilePic && (
                 <ImageGeneration avatarUrl={profilePic.avatarUrl} />
               )}
-              {data.avatar && !profilePic && (
-                <ImageGeneration avatar={data.avatar} />
+              {data?.avatar && !profilePic && (
+                <ImageGeneration avatar={data?.avatar} />
               )}
               <input
                 onChange={changeProfilePicHandler}
@@ -149,7 +149,7 @@ function EditForm() {
                         component="div"
                       />
                     </div>
-                    <div className="col-12 mt-4">
+{               userData.role === 'freelancer'&&    <div className="col-12 mt-4">
                       <label htmlFor="jobTitle" className="form-label">
                         Job Title <span className="text-danger">*</span>
                       </label>
@@ -160,13 +160,7 @@ function EditForm() {
                         placeholder="ex - Front-end Developer"
                         name="jobTitle"
                       />
-                      <ErrorMessage
-                        name="jobTitle"
-                        className="text-danger"
-                        component="div"
-                      />
-                    </div>
-                    {data.role !== "client" && (
+                    </div>}
                       <div className="col-12 mt-4">
                         <label htmlFor="description" className="form-label">
                           Description <span className="text-danger">*</span>
@@ -178,13 +172,7 @@ function EditForm() {
                           placeholder="description"
                           name="description"
                         />
-                        <ErrorMessage
-                          name="description"
-                          className="text-danger"
-                          component="div"
-                        />
                       </div>
-                    )}
                     <div className="d-flex align-items-center justify-content-end mt-4">
                       <button
                         className="btn btn-primary text-center"
