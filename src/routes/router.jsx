@@ -14,9 +14,12 @@ const EditPage = React.lazy(() => import("../Pages/EditProfile"));
 const AboutPage = React.lazy(() => import("../Pages/About"));
 const ContactUsPage = React.lazy(() => import("../Pages/ContactUs"));
 //Project Details Page
+const AllProject = React.lazy(() => import("../Pages/ProjectsList"))
+const AddProject = React.lazy(() => import("../Pages/addProject"))
 const ProjectDetails = React.lazy(() =>
   import("../components/ProjectDetails/ProjectDetails.jsx")
 );
+
 const ChatsPage = React.lazy(() => import("../components/Chats/ChatsPage.jsx"));
 const ChatDetails = React.lazy(() =>
   import("../components/ChatDetails/ChatDetails.jsx")
@@ -92,6 +95,22 @@ export const router = createBrowserRouter([
           </React.Suspense>
         ),
         loader: getUserByIdLoader,
+      },
+      {
+        path: "projects",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <AllProject />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "projects/add",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <AddProject />
+          </React.Suspense>
+        ),
       },
       {
         path: "projects/:projectId",
