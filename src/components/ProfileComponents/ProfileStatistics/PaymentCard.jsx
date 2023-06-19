@@ -4,7 +4,6 @@ import FreelancerOffer from "../../ReusableComponents/FreelancerOffer";
 function PaymentCard() {
   return (
     <div className="col-sm-12 col-md-8">
-      <FreelancerOffer/>
       <div className="card border-0 mt-3">
         <div className="card-body  ">
           <div className="row justify-content-center text-center">
