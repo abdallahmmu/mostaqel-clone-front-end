@@ -2,44 +2,43 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { clientSchemaValidation } from "../../Schemas/ClientRegisterationSchema";
-import { useLoaderData } from "react-router-dom";
+
 import { LoadingIndecator } from "../UI_Helpers/LoadingIndecator";
 
 import { useSelector, useDispatch } from "react-redux";
-import { authActions, registerNewUser } from "../../store/AuthSlice/authSlice";
+import { authActions, registerNewUserClient } from "../../store/AuthSlice/authSlice";
 
 const fields = {
   firstName: "",
   lastName: "",
-  username: "",
+  userName: "",
   address: "",
-//   jobTitle: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   confirmPassword: "",
-//   categoryId: "",
+ 
 };
 
 function ClientRegister() {
-  const { isLoading,errors } = useSelector((state) => state.authSlice);
+  const { isLoading, errors } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-//   const categories = useLoaderData();
+  //   const categories = useLoaderData();
 
   const handelRegisterSubmit = (values) => {
     const newUser = {
       ...values,
     };
-    dispatch(registerNewUser(newUser));
-   
+    console.log(newUser)
+    dispatch(registerNewUserClient(newUser));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     //Cleaning
     return () => {
-      dispatch(authActions.cleanUpRegister())
-    }
-  },[])
+      dispatch(authActions.cleanUpRegister());
+    };
+  }, []);
   return (
     <div
       id="form__container"
@@ -49,9 +48,7 @@ function ClientRegister() {
         className="container bg-white"
         style={{ borderRadius: 40, boxShadow: "0px 0px 5px 0px #2386" }}
       >
-        <h3 className="text-center pt-4 fw-semibold">
-          Register As A Client
-        </h3>
+        <h3 className="text-center pt-4 fw-semibold">Register As A Client</h3>
         <div className="row p-5">
           <div className="col-lg-6 col-md-12 d-none d-sm-block">
             <div className="d-flex h-100 w-100 align-items-start justify-content-center">
@@ -82,7 +79,6 @@ function ClientRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.firstName && <span className="text-danger">{errors.firstName}</span>}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="lastName" className="form-label">
@@ -100,29 +96,27 @@ function ClientRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.lastName && <span className="text-danger">{errors.lastName}</span>}
                 </div>
                 <div className=" col-md-6">
-                  <label htmlFor="username" className="form-label">
+                  <label htmlFor="userName" className="form-label">
                     username <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
                     className="form-control"
-                    id="username"
-                    placeholder="username"
-                    name="username"
+                    id="userName"
+                    placeholder="userName"
+                    name="userName"
                   />
                   <ErrorMessage
-                    name="username"
+                    name="userName"
                     component="div"
                     className="text-danger"
                   />
-                  {errors.username && <span className="text-danger">{errors.username}</span>}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="address" className="form-label">
-                  address <span className="text-danger">*</span>
+                    address <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -153,25 +147,23 @@ function ClientRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.email && <span className="text-danger">{errors.email}</span>}
                 </div>
                 <div className=" col-md-12">
-                  <label htmlFor="phoneNumber" className="form-label">
+                  <label htmlFor="phone" className="form-label">
                     Phone Number <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
                     className="form-control"
-                    id="phoneNumber"
-                    placeholder="PhoneNumber"
-                    name="phoneNumber"
+                    id="phone"
+                    placeholder="phone"
+                    name="phone"
                   />
                   <ErrorMessage
-                    name="phoneNumber"
+                    name="phone"
                     component="div"
                     className="text-danger"
                   />
-                  {errors.phoneNumber && <span className="text-danger">{errors.phoneNumber}</span>}
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword4" className="form-label">
@@ -206,10 +198,10 @@ function ClientRegister() {
                       <p className="text-danger mt-2">Not Matched Password</p>
                     )}
                 </div>
-                
+
                 <div className="col-12  mx-auto">
                   <button type="submit" className="btn btn-primary">
-                    {isLoading && <LoadingIndecator/>}
+                    {isLoading && <LoadingIndecator />}
                     {!isLoading && <span>Submit</span>}
                   </button>
                 </div>
@@ -225,4 +217,4 @@ function ClientRegister() {
   );
 }
 
-export default ClientRegister
+export default ClientRegister;

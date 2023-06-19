@@ -14,7 +14,7 @@ export async function getUserByIdLoader({params}){
     }else{
         try {
             const clientData = await axios.get(`${import.meta.env.VITE_API_URL}/clients/${userId}`)
-            return clientData.data
+            return clientData
         } catch (error) {
             return redirect('/')
         }

@@ -3,7 +3,7 @@ import { redirect } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
-//Register New User
+//Register New User Freelancer
 export const registerNewUser = createAsyncThunk(
   "authSlice/registerNewUser",
   async (data) => {
@@ -37,6 +37,27 @@ export const registerNewUser = createAsyncThunk(
     }
   }
 );
+
+
+//Register New User Client
+export const registerNewUserClient = createAsyncThunk('authSlice/registerNewUserClient', async (data)=>{
+  try {
+    const registeredClient = await axios.post(
+      `${import.meta.env.VITE_API_URL}/clients`,
+      JSON.stringify(data),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return registeredClient.data;
+  } catch (error) {
+ 
+    return error.response.data
+  }
+})
 
 //Login To Account
 export const loginToAccount = createAsyncThunk(
@@ -119,7 +140,7 @@ const authSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    //RegisterNewUser
+    //RegisterNewUserFreelancer
     builder.addCase(registerNewUser.pending, (state) => {
       state.isLoading = true;
     });
@@ -144,6 +165,32 @@ const authSlice = createSlice({
       state.isLoading = false;
       console.log("rejected", payload);
     });
+
+    //RegisterNewAccountClient
+    builder.addCase(registerNewUserClient.pending, (state)=>{
+      state.isLoading = true
+    })
+    builder.addCase(registerNewUserClient.fulfilled,(state,{payload})=>{
+      state.isLoading = false
+      if(payload.error){
+        state.errors = payload.error
+        swal({
+          title: "faild to register",
+          text:payload.error,
+          icon: "error",
+        });
+      }else{
+        swal({
+          text:'success',
+          title:'you have been registered account',
+          icon:'success',
+        }).then(value => {
+          if(value){
+            window.location = '/login'
+          }
+        })
+      }
+    })
 
     //LoginToAccount
     builder.addCase(loginToAccount.pending, (state) => {
@@ -172,8 +219,7 @@ const authSlice = createSlice({
           username:decodedToken.username || decodedToken.clientName,
           role:decodedToken.role || 'client',
           token:payload.token,
-          exp:decodedToken.exp
-          
+          exp:decodedToken.exp,
         }
         localStorage.setItem('isAuth',JSON.stringify(localStorageData))
         swal({
