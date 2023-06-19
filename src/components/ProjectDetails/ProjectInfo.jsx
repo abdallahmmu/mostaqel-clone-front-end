@@ -13,7 +13,10 @@ const ProjectInfo = ({ details }) => {
         <div className="skills d-flex flex-wrap gap-1">
           {skills.map((skill) => {
             return (
-              <div className="skill bg-secondary text-white py-1 px-2">
+              <div
+                className="skill bg-secondary text-white py-1 px-2"
+                key={skill}
+              >
                 {skill}
               </div>
             );
