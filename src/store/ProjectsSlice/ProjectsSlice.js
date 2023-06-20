@@ -10,7 +10,6 @@ export const getAllProjects = createAsyncThunk(
         
             const response = await axios.get(`${import.meta.env.VITE_BASE_URL}projects`);
 
-            // console.log(response)
             return response.data
         } catch (error) {
             console.log(error)
