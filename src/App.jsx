@@ -6,9 +6,8 @@ import { authActions } from "./store/AuthSlice/authSlice";
 
 
 import RootLayout from "./components/Layout/RootLayout";
-import AuthNavigation from "./components/Navigation/AuthNavigation";
-import Navigationbar from "./components/Navigation/Navigationbar";
 import Footer from "./components/Footer/Footer";
+import NavigationMUI from "./components/Navigation/NavigationMUI";
 function App() {
   const { isAuth } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch()
@@ -17,8 +16,7 @@ function App() {
   },[])
   return (
     <RootLayout>
-      {isAuth && <AuthNavigation />}
-      {!isAuth && <Navigationbar />}
+      <NavigationMUI/>
       <Outlet />
       <Footer />
     </RootLayout>
