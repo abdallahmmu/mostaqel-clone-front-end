@@ -1,5 +1,4 @@
 import React from "react";
-import FreelancerOffer from "../../ReusableComponents/FreelancerOffer";
 
 function PaymentCard() {
   return (
