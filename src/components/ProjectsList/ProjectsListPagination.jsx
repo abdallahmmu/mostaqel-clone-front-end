@@ -7,10 +7,10 @@ const ProjectsListPagination = ({ paginationData }) => {
     const dispatch = useDispatch();
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage  )
     
-    useEffect(() => {
-        console.log(paginationData.numOfPages)
-        console.log(page)
-    },[page ])
+    // useEffect(() => {
+        // console.log(paginationData.numOfPages)
+        // console.log(page)
+    // },[page ])
 
     const retrievePagedProjcts = (ind) => {
         let page = ++ind

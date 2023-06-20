@@ -8,7 +8,7 @@ const ProjectsListSingleProject = ({ project }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(params)
+        // console.log(params)
         dispatch(getAllProjects())
     },[params])
     

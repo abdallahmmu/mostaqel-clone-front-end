@@ -14,9 +14,9 @@ const ProjectsList = () => {
     const dispatch = useDispatch()
 
     const [params]  = useSearchParams()
-    console.log(projects)
+    // console.log(projects)
     useEffect(() => {  
-        // console.log(projects)
+        console.log(projects)
         params.get('page')
         dispatch(getAllProjects())
     
@@ -32,7 +32,7 @@ const ProjectsList = () => {
                     </div>
                     <div className="col-md-9">
                         <ProjectsListPagination paginationData={paginationData} />
-                        {(projects.length > 0) ?? projects.map(project => (
+                        {projects.map(project => (
 
                             <ProjectsItemsList key={project._id} 
                             project={project}

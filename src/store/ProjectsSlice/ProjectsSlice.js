@@ -10,7 +10,7 @@ export const getAllProjects = createAsyncThunk(
         
             const response = await axios.get(`${import.meta.env.VITE_BASE_URL}projects`);
 
-            console.log(response)
+            // console.log(response)
             return response.data
         } catch (error) {
             console.log(error)
@@ -46,7 +46,7 @@ const ProjectsSlice = createSlice({
                 state.isLoading = false
                 state.projects = action.payload.resultProjects;
                 state.paginationData = action.payload.pagination;
-                console.log(action)
+                // console.log(action)
                
             })
 
