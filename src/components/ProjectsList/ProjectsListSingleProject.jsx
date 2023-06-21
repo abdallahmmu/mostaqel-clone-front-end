@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
-import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice'
 
 const ProjectsListSingleProject = ({ project }) => {
     const params  = useSearchParams()
@@ -23,11 +22,11 @@ const ProjectsListSingleProject = ({ project }) => {
                     </div>
                     <div className="project-info ">
 
-                        <span className="client-name">{project.range}</span>
+                        <span className="client-name">{project.clientId.firstName}</span>
 
                         <span className="prject-date">{project.createdAt}</span>
 
-                        <span className="project-offers">2</span>
+                        <span className="project-offers">{project.categoryId.title}</span>
                     </div>
                     <div className="project-excerpt mt-3">
                         {project.description}

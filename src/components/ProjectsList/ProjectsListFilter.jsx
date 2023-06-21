@@ -1,10 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
+import axios from 'axios';
 const ProjectsListFilter = () => {
     const fundMin = useRef();
     const dispatch = useDispatch()
+    const [cats, setCats] = useState([])
     const handleProjectsSearch = (e) => {
         console.log(e.target.value)
         dispatch(getAllProjects({ keyword: e.target.value }))
@@ -12,8 +14,22 @@ const ProjectsListFilter = () => {
 
     const handleFundSlider = (e) => {
         fundMin.current.innerHTML = e.target.value
-        dispatch(getAllProjects({ select: e.target.value }))
+        dispatch(getAllProjects({ range: e.target.value }))
     }
+    const handleCategory = (e) => {
+        if(e.target.checked){
+            dispatch(getAllProjects({ categoryId: e.target.value }))
+        }else{
+            dispatch(getAllProjects({ }))
+
+        }
+    }
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
+            setCats(d.data.categories)
+        })
+        
+   }, [])
     return (
         <div className="filter-side">
             <div className="search">
@@ -25,14 +41,16 @@ const ProjectsListFilter = () => {
             <div className="category">
                 <div className="category-title my-2 h5">Category</div>
                 <ul className="list-unstyled">
-                    <li className="cat">
-                        <input type="checkbox" name="" id="" />
-                        web developement
-                    </li>
-                    <li className="cat"><input type="checkbox" name="" id="" /> mobile app</li>
-                    <li className="cat"><input type="checkbox" name="" id="" /> graphic design</li>
-                    <li className="cat"><input type="checkbox" name="" id="" /> AI</li>
-                    <li className="cat"><input type="checkbox" name="" id="" /> Copy Writing</li>
+                   
+                    {cats && cats.map(cat => (
+
+                    <li   key={cat._id} className="cat">
+                        <input type="checkbox" name="categoryId" 
+                        onClick={handleCategory} id="cat" value={cat._id} /> {cat.title}
+                        
+                        </li>
+                    ))}
+                    
                 </ul>
             </div>
             <div className="skills">

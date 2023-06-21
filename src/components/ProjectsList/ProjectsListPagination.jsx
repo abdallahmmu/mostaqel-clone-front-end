@@ -5,20 +5,18 @@ import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 
 const ProjectsListPagination = ({ paginationData }) => {
     const dispatch = useDispatch();
-    const state = useSelector(state => state)
-    const {page1} = useParams()
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage)
     const [limit, setLimt] = useState(5)
+
+
     const handleLimit = (e) => {
-        dispatch(getAllProjects({ page1 , limit: e.target.value}))
+        dispatch(getAllProjects({ page , limit: e.target.value}))
         setLimt(e.target.value)
     }
 
     const retrievePagedProjcts = (ind) => {
         let page = ++ind
-        console.log('index', page)
         dispatch(getAllProjects({ page, limit }))
-        console.log(state)
     }
     const retrievePrevPagedProjcts = (prev) => {
         dispatch(getAllProjects({ page: prev }))

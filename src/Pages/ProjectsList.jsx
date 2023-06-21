@@ -8,18 +8,17 @@ import "../components/ProjectsList/ProjectList.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProjects } from '../store/ProjectsSlice/ProjectsSlice'
 import { useParams, useSearchParams } from 'react-router-dom'
+import LoadingSpinner from '../components/UI_Helpers/LoadingSpinner'
 const ProjectsList = () => {
 
-    const {projects, paginationData} = useSelector(state => state.ProjectsSlice)
+    const {projects, paginationData, isLoading} = useSelector(state => state.ProjectsSlice)
     const dispatch = useDispatch()
 
     const [params]  = useSearchParams()
-    // console.log(projects)
+
     useEffect(() => {  
         console.log(projects)
-        params.get('page')
         dispatch(getAllProjects({page: params.get('page') }))
-    
     },[dispatch])
 
     return (
@@ -32,13 +31,13 @@ const ProjectsList = () => {
                     </div>
                     <div className="col-md-9">
                         <ProjectsListPagination paginationData={paginationData} />
-                        {projects.map(project => (
+                        {!isLoading ? projects.map(project => (
 
                             <ProjectsItemsList key={project._id} 
                             project={project}
                              />
-                         ))} 
-
+                         )) : <LoadingSpinner />
+                        }
                         
                     </div>
                 </div>
