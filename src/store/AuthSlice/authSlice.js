@@ -67,6 +67,7 @@ export const loginToAccount = createAsyncThunk(
     //freelancer request
     if (data.loginType === "freelancer") {
       try {
+        console.log(data)
         const userData = await axios.post(
           `${import.meta.env.VITE_API_URL}/freelancers/login`,
           JSON.stringify({ email: data.email, password: data.password }),
@@ -172,6 +173,7 @@ const authSlice = createSlice({
     builder.addCase(registerNewUserClient.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (payload.error) {
+        
         state.errors = payload.error;
         swal({
           title: "faild to register",
@@ -198,6 +200,7 @@ const authSlice = createSlice({
     builder.addCase(loginToAccount.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (payload.error) {
+        console.log(payload.error)
         swal({
           title: "faild to login",
           text: "invalid username or password",

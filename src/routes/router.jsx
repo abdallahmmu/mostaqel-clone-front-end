@@ -105,7 +105,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "projects/add",
+        path: "add-projects",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <AddProject />

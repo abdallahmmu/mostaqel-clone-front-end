@@ -18,7 +18,7 @@ const ProjectsList = () => {
     useEffect(() => {  
         console.log(projects)
         params.get('page')
-        dispatch(getAllProjects())
+        dispatch(getAllProjects({page: params.get('page') }))
     
     },[dispatch])
 

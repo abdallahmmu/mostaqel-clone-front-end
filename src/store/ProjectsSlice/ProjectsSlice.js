@@ -1,14 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { store } from "../store";
 
 
 export const getAllProjects = createAsyncThunk(
     'projectFullData/getProjects',
-    // async ({sort, page, limit, keyword, select}) => {
-        async () => {
+    async ({sort, page, limit, keyword, select}) => {
+        // async () => {
         try {
         
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}projects`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/projects`, {
+                params: {
+                    page,
+                    sort,
+                    limit,
+                    keyword,
+                    select
+                }
+            });
 
             return response.data
         } catch (error) {
@@ -16,12 +25,24 @@ export const getAllProjects = createAsyncThunk(
         }
     })
 
-export const addProject = createAsyncThunk(
+export const addingNewProject = createAsyncThunk(
     'projectFullData/addProject', 
     async (Data) => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}projects`, Data)
-            console.log(response)
+            let {authSlice} = store.getState()
+            
+            console.log({...Data,  clientId: authSlice.userData.id,})
+
+            // console.log(`${import.meta.env.VITE_API_URL}/projects`)
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/projects`, 
+            JSON.stringify({...Data,  clientId: authSlice.userData.id}),{
+                headers: {
+                    Authorization: JSON.parse(localStorage.getItem('isAuth')).token,
+                    'Content-Type': 'application/json'
+                    
+                }
+            })
+            
         } catch (error) {
             console.log(error)
         }
