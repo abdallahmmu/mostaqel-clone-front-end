@@ -226,7 +226,7 @@ const authSlice = createSlice({
           icon: "success",
         }).then((value) => {
           if (value) {
-            window.location = `/profile/edit/${localStorageData.id}`;
+            window.location = `/profile/statistics/${localStorageData.id}`;
           }
         });
       }
