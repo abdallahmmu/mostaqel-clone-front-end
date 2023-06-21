@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
   Hidden,
+  Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
@@ -46,155 +47,162 @@ export default function NavigationMUI() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed" open={open}>
-        <CssBaseline />
-        <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-            Mostaqel Clone
-          </Typography>
-          <Hidden mdDown>
-            <Box
+      <AppBar position="sticky" open={open}>
+        <Container maxWidth="lg">
+          <CssBaseline />
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{ flexGrow: 1 }}
               component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "10ox",
-                marginRight: "10px",
-              }}
             >
+              Mostaqel Clone
+            </Typography>
+            <Hidden mdDown>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "10ox",
+                  marginRight: "10px",
+                }}
+              >
+                {!isAuth && (
+                  <NavLink to="/">
+                    <Typography
+                      sx={{
+                        padding: "5px",
+                        color: "white",
+                        fontWeight: "semibold",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          transition: ".2s ease-in-out",
+                        },
+                      }}
+                    >
+                      Home
+                    </Typography>
+                  </NavLink>
+                )}
+                {isAuth && (
+                  <NavLink to="/add-projects">
+                    <Typography
+                      sx={{
+                        padding: "5px",
+                        color: "white",
+                        fontWeight: "semibold",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          transition: ".2s ease-in-out",
+                        },
+                      }}
+                    >
+                      <AddIcon />
+                      Add Project
+                    </Typography>
+                  </NavLink>
+                )}
+                <NavLink to="/projects">
+                  <Typography
+                    sx={{
+                      padding: "5px",
+                      color: "white",
+                      fontWeight: "semibold",
+                      "&:hover": {
+                        backgroundColor: "rgba(255,255,255,0.1)",
+                        transition: ".2s ease-in-out",
+                      },
+                    }}
+                  >
+                    {isAuth && <TroubleshootIcon />}
+                    Find Project
+                  </Typography>
+                </NavLink>
+                {isAuth && (
+                  <NavLink to={`/profile/statistics/${userData.id}`}>
+                    <Typography
+                      sx={{
+                        padding: "5px",
+                        color: "white",
+                        fontWeight: "semibold",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          transition: ".2s ease-in-out",
+                        },
+                      }}
+                    >
+                      <Person2Icon />
+                      {userData.username || userData.userName}
+                    </Typography>
+                  </NavLink>
+                )}
+                {!isAuth && (
+                  <NavLink to="/contact">
+                    <Typography
+                      sx={{
+                        padding: "5px",
+                        color: "white",
+                        fontWeight: "semibold",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          transition: ".2s ease-in-out",
+                        },
+                      }}
+                    >
+                      Contact Us
+                    </Typography>
+                  </NavLink>
+                )}
+                {!isAuth && (
+                  <NavLink to="/about">
+                    <Typography
+                      sx={{
+                        padding: "5px",
+                        color: "white",
+                        fontWeight: "semibold",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          transition: ".2s ease-in-out",
+                        },
+                      }}
+                    >
+                      About
+                    </Typography>
+                  </NavLink>
+                )}
+              </Box>
               {!isAuth && (
-                <NavLink to="/">
-                  <Typography
+                <NavLink to="/login">
+                  <IconButton
+                    color="inherit"
                     sx={{
-                      padding: "5px",
-                      color: "white",
-                      fontWeight: "semibold",
-                      "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        transition: ".2s ease-in-out",
-                      },
+                      border: "1px solid white",
+                      borderRadius: "0px",
+                      marginRight: "10px",
+                      color: "#fff",
                     }}
                   >
-                    Home
-                  </Typography>
+                    <Typography sx={{ padding: "0px 5px" }}>Login</Typography>
+                    <LogoutIcon />
+                  </IconButton>
                 </NavLink>
               )}
-              {isAuth && (
-                <NavLink to="/add-projects">
-                  <Typography
-                    sx={{
-                      padding: "5px",
-                      color: "white",
-                      fontWeight: "semibold",
-                      "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        transition: ".2s ease-in-out",
-                      },
-                    }}
-                  >
-                    <AddIcon />
-                    Add Project
-                  </Typography>
-                </NavLink>
-              )}
-              <NavLink to="/projects">
-                <Typography
-                  sx={{
-                    padding: "5px",
-                    color: "white",
-                    fontWeight: "semibold",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.1)",
-                      transition: ".2s ease-in-out",
-                    },
-                  }}
-                >
-                  {isAuth && <TroubleshootIcon />}
-                  Find Project
-                </Typography>
-              </NavLink>
-              {isAuth && (
-                <NavLink to={`/profile/statistics/${userData.id}`}>
-                  <Typography
-                    sx={{
-                      padding: "5px",
-                      color: "white",
-                      fontWeight: "semibold",
-                      "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        transition: ".2s ease-in-out",
-                      },
-                    }}
-                  >
-                    <Person2Icon />
-                    {userData.username || userData.userName}
-                  </Typography>
-                </NavLink>
-              )}
-              {!isAuth && (
-                <NavLink to="/contact">
-                  <Typography
-                    sx={{
-                      padding: "5px",
-                      color: "white",
-                      fontWeight: "semibold",
-                      "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        transition: ".2s ease-in-out",
-                      },
-                    }}
-                  >
-                    Contact Us
-                  </Typography>
-                </NavLink>
-              )}
-              {!isAuth && (
-                <NavLink to="/about">
-                  <Typography
-                    sx={{
-                      padding: "5px",
-                      color: "white",
-                      fontWeight: "semibold",
-                      "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        transition: ".2s ease-in-out",
-                      },
-                    }}
-                  >
-                    About
-                  </Typography>
-                </NavLink>
-              )}
-            </Box>
-            {!isAuth && (
-              <NavLink to="/login">
-                <IconButton
-                  color="inherit"
-                  sx={{
-                    border: "1px solid white",
-                    borderRadius: "0px",
-                    marginRight: "10px",
-                    color: "#fff",
-                  }}
-                >
-                  <Typography sx={{ padding: "0px 5px" }}>Login</Typography>
-                  <LogoutIcon />
-                </IconButton>
-              </NavLink>
-            )}
-          </Hidden>
+            </Hidden>
 
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            size="medium"
-            edge="end"
-            onClick={handleDrawerOpen}
-            sx={{ ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              size="medium"
+              edge="end"
+              onClick={handleDrawerOpen}
+              sx={{ ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </Container>
       </AppBar>
       <Drawer
         sx={{
