@@ -11,7 +11,7 @@ const ProjectOffers = (props) => {
 
   let { id, isOwner } = props;
   useEffect(() => {
-    fetchOffers(id, setOffers);
+    fetchOffers(setOffers);
   }, []);
   return (
     <>

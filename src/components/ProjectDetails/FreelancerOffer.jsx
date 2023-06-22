@@ -1,20 +1,21 @@
 import React from "react";
 import { Box, Grid, Typography, Avatar, Rating } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
-import { hireFreelancer } from "./helper.js";
+import { hireFreelancer, sendMessage } from "./helper.js";
 
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 function FreelancerOffer({ offer, isOwner }) {
   const { _id, freelancerId, updatedAt, description, amount, duration } = offer;
+  const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
   return (
     <Grid
       sx={{
         backgroundColor: "white",
-
         marginTop: "16px",
         marginBottom: "16px",
         padding: "20px",
@@ -70,7 +71,12 @@ function FreelancerOffer({ offer, isOwner }) {
         <Box>
           {isOwner && (
             <div className="text-center mb-2">
-              <button className="btn">
+              <button
+                className="btn"
+                onClick={() => {
+                  sendMessage(token, freelancerId._id, navigate);
+                }}
+              >
                 <MessageIcon />
               </button>
               <button
