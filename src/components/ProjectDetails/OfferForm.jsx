@@ -43,7 +43,11 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
         })}
 
         <div className="form-group mb-3 text-center">
-          <button type="submit" className="btn btn-primary me-5">
+          <button
+            type="submit"
+            className="btn btn-primary me-5"
+            disabled={formik.values == formik.initialValues}
+          >
             Submit
           </button>
           {EditOffer && (
