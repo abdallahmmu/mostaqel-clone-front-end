@@ -1,7 +1,23 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 let projectId = 0;
 let freelancerId = 0;
 let allOffers = [];
+
+const alertFire = (title, icon) => {
+  Swal.mixin({
+    toast: true,
+    animation: false,
+    position: "top-right",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  }).fire({
+    title,
+    icon,
+  });
+};
+
 const fetchDetails = async (id, setDetails) => {
   const response = await axios.get(
     `${import.meta.env.VITE_API_URL}/projects/${id}`
@@ -48,12 +64,14 @@ export const sendMyOffer = async (data, token, setMyOffer) => {
     }
   );
 
+  alertFire("Successfully Added The Offer", "success");
   setMyOffer(response.data.results);
 };
 export const updateOffer = async (data, token, offerId) => {
   await axios.patch(`${import.meta.env.VITE_API_URL}/offers/${offerId}`, data, {
     headers: { "Content-Type": "application/json", Authorization: token },
   });
+  alertFire("Successfully Updated The Offer", "info");
 };
 
 export const hireFreelancer = async (token, offerId) => {
