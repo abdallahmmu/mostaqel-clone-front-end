@@ -11,8 +11,12 @@ const ChatDetails = () => {
           <div className="h3  mb-4">Chat Title</div>
         </div>
         <div className="row">
-          <div className="col-md-9 ltr">
+          <div className="col-md-9 d-flex justify-content flex-column">
             <ChatItem />
+            <input
+              className="form-control p-2 m-5 ml-0 w-50"
+              placeholder="Send Your Message"
+            />
           </div>
           <ChatInfo />
         </div>
