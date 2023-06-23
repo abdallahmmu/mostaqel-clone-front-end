@@ -13,11 +13,15 @@ const ProfileStatistics = React.lazy(() =>
 const EditPage = React.lazy(() => import("../Pages/EditProfile"));
 const AboutPage = React.lazy(() => import("../Pages/About"));
 const ContactUsPage = React.lazy(() => import("../Pages/ContactUs"));
+
+const AllProject = React.lazy(() => import("../Pages/ProjectsList"));
+const AddProject = React.lazy(() => import("../Pages/addProject"));
 //Project Details Page
-const AllProject = React.lazy(() => import("../Pages/ProjectsList"))
-const AddProject = React.lazy(() => import("../Pages/addProject"))
 const ProjectDetails = React.lazy(() =>
   import("../components/ProjectDetails/ProjectDetails.jsx")
+);
+const FreelancerOffers = React.lazy(() =>
+  import("../components/FreelancerOffers/FreelancerOffers.jsx")
 );
 
 const ChatsPage = React.lazy(() => import("../components/Chats/ChatsPage.jsx"));
@@ -85,7 +89,7 @@ export const router = createBrowserRouter([
             <ProfileStatistics />
           </React.Suspense>
         ),
-        loader:getUserByIdLoader
+        loader: getUserByIdLoader,
       },
       {
         path: "profile/edit/:userId",
@@ -117,6 +121,14 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <ProjectDetails />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "myoffers",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <FreelancerOffers />
           </React.Suspense>
         ),
       },
