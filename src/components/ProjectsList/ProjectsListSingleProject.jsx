@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams, Link } from "react-router-dom";
@@ -13,6 +14,7 @@ const ProjectsListSingleProject = ({ project }) => {
 
   return (
     <div className="project">
+      
       <div className="row">
         <div className="col-sm-10">
           <div className="project-title mt-3">
@@ -21,8 +23,11 @@ const ProjectsListSingleProject = ({ project }) => {
           <div className="project-info ">
             <span className="client-name">{project.clientId.firstName}</span>
 
-            <span className="prject-date">{project.createdAt}</span>
+            <span className="prject-date">{moment(project.createdAt).fromNow()}</span>
 
+            {project.skillsIds.map(sid => (
+              <span className="skill badge bg-primary p-2"  key={sid._id}>{sid.name}</span>
+            ))}
             <span className="project-offers">{project.categoryId.title}</span>
           </div>
           <div className="project-excerpt mt-3">{project.description}</div>

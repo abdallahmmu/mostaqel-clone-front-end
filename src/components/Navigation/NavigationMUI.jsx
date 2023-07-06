@@ -86,7 +86,7 @@ export default function NavigationMUI() {
                     </Typography>
                   </NavLink>
                 )}
-                {isAuth && (
+                {(isAuth && userData.role === 'client')   && (
                   <NavLink to="/add-projects">
                     <Typography
                       sx={{

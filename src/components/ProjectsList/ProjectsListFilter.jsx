@@ -7,6 +7,7 @@ const ProjectsListFilter = () => {
     const fundMin = useRef();
     const dispatch = useDispatch()
     const [cats, setCats] = useState([])
+    const [skills, setSkills] = useState([])
     const handleProjectsSearch = (e) => {
         console.log(e.target.value)
         dispatch(getAllProjects({ keyword: e.target.value }))
@@ -24,9 +25,16 @@ const ProjectsListFilter = () => {
 
         }
     }
+    const handleSkills = (e) => {
+        console.log(e.target)
+    }
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
             setCats(d.data.categories)
+        })
+        axios.get(`${import.meta.env.VITE_API_URL}/skills`).then(d =>{
+            console.log(d)
+            setSkills(d.data.results)
         })
         
    }, [])
@@ -58,9 +66,14 @@ const ProjectsListFilter = () => {
                 <div className="form-group">
 
                     <Select isMulti
+                    onChange={handleSkills}
                         options={
-                            [{ value: 'html', label: 'Html' },
-                            { value: 'css', label: 'Css' }, { value: 'js', label: 'JavaScript' },]} />
+
+                            skills.map(skill => (
+                                { value: skill.name, label: skill.name }
+                            ))
+                            // [{ value: 'html', label: 'Html' }, { value: 'css', label: 'Css' }, { value: 'js', label: 'JavaScript' },]
+                            } />
                 </div>
             </div>
             <div className="fund">
