@@ -73,7 +73,7 @@ export default function NavigationMUI() {
                   <NavLink to="/">
                     <Typography
                       sx={{
-                        padding: "5px",
+                        padding: "10px",
                         color: "white",
                         fontWeight: "semibold",
                         "&:hover": {
@@ -90,7 +90,7 @@ export default function NavigationMUI() {
                   <NavLink to="/add-projects">
                     <Typography
                       sx={{
-                        padding: "5px",
+                        padding: "10px",
                         color: "white",
                         fontWeight: "semibold",
                         "&:hover": {
@@ -107,7 +107,7 @@ export default function NavigationMUI() {
                 <NavLink to="/projects">
                   <Typography
                     sx={{
-                      padding: "5px",
+                      padding: "10px",
                       color: "white",
                       fontWeight: "semibold",
                       "&:hover": {
@@ -124,7 +124,7 @@ export default function NavigationMUI() {
                   <NavLink to={`/profile/statistics/${userData.id}`}>
                     <Typography
                       sx={{
-                        padding: "5px",
+                        padding: "10px",
                         color: "white",
                         fontWeight: "semibold",
                         "&:hover": {
@@ -142,7 +142,7 @@ export default function NavigationMUI() {
                   <NavLink to="/contact">
                     <Typography
                       sx={{
-                        padding: "5px",
+                        padding: "10px",
                         color: "white",
                         fontWeight: "semibold",
                         "&:hover": {
@@ -159,7 +159,7 @@ export default function NavigationMUI() {
                   <NavLink to="/about">
                     <Typography
                       sx={{
-                        padding: "5px",
+                        padding: "10px",
                         color: "white",
                         fontWeight: "semibold",
                         "&:hover": {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 
@@ -7,8 +7,6 @@ const ProjectsListPagination = ({ paginationData }) => {
     const dispatch = useDispatch();
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage)
     const [limit, setLimt] = useState(5)
-
-
     const handleLimit = (e) => {
         dispatch(getAllProjects({ page , limit: e.target.value}))
         setLimt(e.target.value)
