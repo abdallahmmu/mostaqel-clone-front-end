@@ -4,26 +4,28 @@ import ProjectsItemsList from '../components/ProjectsList/ProjectsItemsList'
 import ProjectsListPagination from '../components/ProjectsList/ProjectsListPagination'
 import ProjectsListFilter from '../components/ProjectsList/ProjectsListFilter'
 import "../components/ProjectsList/ProjectList.css"
-
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProjects } from '../store/ProjectsSlice/ProjectsSlice'
 import { useParams, useSearchParams } from 'react-router-dom'
 import LoadingSpinner from '../components/UI_Helpers/LoadingSpinner'
 const ProjectsList = () => {
 
-    const {projects, paginationData, isLoading} = useSelector(state => state.ProjectsSlice)
+    const { projects, paginationData, isLoading } = useSelector(state => state.ProjectsSlice)
     const dispatch = useDispatch()
 
-    const [params]  = useSearchParams()
+    const [params] = useSearchParams()
 
-    useEffect(() => {  
-        console.log(projects)
-        dispatch(getAllProjects({page: params.get('page') }))
-    },[dispatch])
+    useEffect(() => {
+    
+        dispatch(getAllProjects({ page: params.get('page') }))
+        console.log(location.search)
+    }, [dispatch])
 
     return (
         <div className="projects-list">
             <div className="container">
+                
                 <ProjectsListTitle />
                 <div className="row">
                     <div className="col-md-3">
@@ -33,12 +35,12 @@ const ProjectsList = () => {
                         <ProjectsListPagination paginationData={paginationData} />
                         {!isLoading ? projects.map(project => (
 
-                            <ProjectsItemsList key={project._id} 
-                            project={project}
-                             />
-                         )) : <LoadingSpinner />
+                            <ProjectsItemsList key={project._id}
+                                project={project}
+                            />
+                        )) : <LoadingSpinner />
                         }
-                        
+
                     </div>
                 </div>
             </div>

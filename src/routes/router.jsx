@@ -115,6 +115,7 @@ export const router = createBrowserRouter([
             <AddProject />
           </React.Suspense>
         ),
+        loader: httpRegisterFreelancerLoader,
       },
       {
         path: "projects/:projectId",

@@ -13,7 +13,7 @@ const ProjectsListTitle = () => {
 
 
   const getLatestProjects = (sortBy) => {
-    setSort(sortBy)
+    setSort((sortBy == 'createdAt') ? 'Oldest': 'Latest')
     dispatch(getAllProjects({ sort:sortBy }))
   }
   return (
@@ -29,13 +29,13 @@ const ProjectsListTitle = () => {
           <li>
 
             <Link className="dropdown-item"
-              onClick={() => getLatestProjects('createdAt')} 
+              onClick={() => getLatestProjects('-createdAt')} 
                 >
               Latest</Link>
           </li>
 
           <li><Link className="dropdown-item"
-            onClick={() => getLatestProjects('-createdAt')}
+            onClick={() => getLatestProjects('createdAt')}
             >Oldest</Link></li>
 
           {/* <li><Link className="dropdown-item" 
