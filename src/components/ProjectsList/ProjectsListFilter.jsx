@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 import axios from 'axios';
+import { Slider } from '@mui/material';
 const ProjectsListFilter = () => {
     const fundMin = useRef();
     const dispatch = useDispatch()
@@ -30,17 +31,17 @@ const ProjectsListFilter = () => {
         if (e) {
 
             e.map((skill, ind) => {
-                if(ind == 0){
+                if (ind == 0) {
                     skillsIds += skill.value;
                     console.log(ind)
-                }else{
+                } else {
                     skillsIds += skill.value + ',';
                 }
-        
+
                 dispatch(getAllProjects({ skillsIds }))
             })
         }
-    
+
     }
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d => {
@@ -52,6 +53,12 @@ const ProjectsListFilter = () => {
         })
 
     }, [])
+    const [sliderValue, setSliderValue] = useState(50); // initial value is 50
+
+    const handleSlider = (event, newSliderValue) => {
+      setSliderValue(newSliderValue);
+      dispatch(getAllProjects({ range: newSliderValue }))
+    };
     return (
         <div className="filter-side">
             <div className="search">
@@ -91,13 +98,17 @@ const ProjectsListFilter = () => {
             </div>
             <div className="fund">
                 <div className="fund-title my-2 h5">Fund Slider</div>
-                <input
-                    type="range" className="form-range"
-                    onChange={handleFundSlider} id="fund-range" min="0" max="20" step="1" />
-                <div className="fund-minmax">
-                    <div className="min" id="fund-min" ref={fundMin}>0</div>
-                    <div className="max" id="fund-max">20</div>
-                </div>
+                
+                <Slider
+                    value={sliderValue}
+                    onChange={handleSlider}
+                    aria-label="slider"
+                    min={0}
+                    max={100}
+                    step={20}
+                />
+                <p>Range: {sliderValue}</p>
+
             </div>
         </div>
     )
