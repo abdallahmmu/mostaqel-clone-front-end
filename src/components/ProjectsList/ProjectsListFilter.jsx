@@ -26,7 +26,12 @@ const ProjectsListFilter = () => {
         }
     }
     const handleSkills = (e) => {
-        console.log(e.target)
+        let skillsIds = '';
+        e.map(skill => {
+            skillsIds += skill.value + ','; 
+            console.log(skillsIds)
+        })
+        // console.log(skills)
     }
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
@@ -70,9 +75,8 @@ const ProjectsListFilter = () => {
                         options={
 
                             skills.map(skill => (
-                                { value: skill.name, label: skill.name }
+                                { value: skill._id, label: skill.name }
                             ))
-                            // [{ value: 'html', label: 'Html' }, { value: 'css', label: 'Css' }, { value: 'js', label: 'JavaScript' },]
                             } />
                 </div>
             </div>

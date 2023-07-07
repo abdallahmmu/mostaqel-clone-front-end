@@ -11,6 +11,7 @@ a {
   .project-details-page .page-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   .projects-list .projects-filter .dropdown-toggle,
   .projects-list .projects-filter .dropdown-menu, .project-details-page .projects-filter .dropdown-toggle,

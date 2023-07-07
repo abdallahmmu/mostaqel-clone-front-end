@@ -1,14 +1,13 @@
-import React from 'react'
-import ProjectsListSingleProject from './ProjectsListSingleProject'
+import React from "react";
+import ProjectsListSingleProject from "./ProjectsListSingleProject";
+import { Box } from "@mui/material";
 
-const ProjectsItemsList = ({project}) => {
+const ProjectsItemsList = ({ project }) => {
   return (
-    
-        <div className="projects-list-side">
-            <ProjectsListSingleProject  project={project}/>
-        </div>
-    
-  )
-}
+    <Box component='div' className="projects-list-side">
+      <ProjectsListSingleProject project={project} />
+    </Box>
+  );
+};
 
-export default ProjectsItemsList
+export default ProjectsItemsList;

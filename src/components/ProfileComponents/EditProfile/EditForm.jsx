@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import Select from "react-select";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useLoaderData } from "react-router-dom";
 import { uploaderPhoto } from "./uploaderPhoto";
@@ -8,9 +9,17 @@ import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
 import ImageGeneration from "../../UI_Helpers/ImageGeneration";
 import { useSelector } from "react-redux";
 
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
 function EditForm() {
-  const  {data} = useLoaderData();
+  const { data, skills } = useLoaderData();
+  console.log(skills);
   const [profilePic, setProfilePic] = useState(null);
+  const [skill, setSkill] = useState([]);
   const { userData } = useSelector((state) => state.authSlice);
   const [isLoading, setIsLoading] = useState();
   const fields = {
@@ -19,7 +28,6 @@ function EditForm() {
     jobTitle: data ? data.jobTitle : "",
     description: data ? data.description : "",
   };
-
   const onHandelAvatarUrl = useCallback(() => {
     const avatarInput = document.getElementById("AvatarUrl");
     avatarInput.click();
@@ -44,21 +52,33 @@ function EditForm() {
     if (profilePic) {
       photoData.append("avatar", profilePic.avatar);
     }
+    let newValues;
+    if(skill.length > 0){
+      newValues = { ...values, skill };
+    }else{
+      newValues = {...values}
+    }
     if (!profilePic) {
       setIsLoading(true);
-      updateUserData(role, id, values, token).then((data) => {
+      updateUserData(role, id, newValues, token).then((data) => {
         setIsLoading(false);
       });
     } else {
       setIsLoading(true);
       Promise.all([
-        uploaderPhoto(photoData, data._id, token , role),
-        updateUserData(role, id, values, token),
+        uploaderPhoto(photoData, data._id, token, role),
+        updateUserData(role, id, newValues, token),
       ]).then((responses) => {
         setIsLoading(false);
       });
     }
   };
+
+  const getValues = useCallback((e) => {
+    const skillsUpdated = e.map((skill) => skill.lable);
+
+    setSkill(skillsUpdated);
+  }, []);
 
   return (
     <div className="container">
@@ -148,30 +168,62 @@ function EditForm() {
                         component="div"
                       />
                     </div>
-{               userData.role === 'freelancer'&&    <div className="col-12 mt-4">
-                      <label htmlFor="jobTitle" className="form-label">
-                        Job Title <span className="text-danger">*</span>
-                      </label>
-                      <Field
-                        type="text"
-                        className="form-control"
-                        id="jobTitle"
-                        placeholder="ex - Front-end Developer"
-                        name="jobTitle"
-                      />
-                    </div>}
+                    {userData.role === "freelancer" && (
                       <div className="col-12 mt-4">
-                        <label htmlFor="description" className="form-label">
-                          Description <span className="text-danger">*</span>
+                        <label htmlFor="jobTitle" className="form-label">
+                          Job Title <span className="text-danger">*</span>
                         </label>
                         <Field
-                          as="textarea"
+                          type="text"
                           className="form-control"
-                          id="description"
-                          placeholder="description"
-                          name="description"
+                          id="jobTitle"
+                          placeholder="ex - Front-end Developer"
+                          name="jobTitle"
                         />
                       </div>
+                    )}
+                    <div className="col-12 mt-4">
+                      <label htmlFor="description" className="form-label">
+                        Description <span className="text-danger">*</span>
+                      </label>
+                      <Field
+                        as="textarea"
+                        className="form-control"
+                        id="description"
+                        placeholder="description"
+                        name="description"
+                      />
+                    </div>
+                    {userData.role === "freelancer" && skills && (
+                      <div className="col-12 mt-4">
+                        <label htmlFor="description" className="form-label">
+                          Skills <span className="text-danger">*</span>
+                        </label>
+                        <Select
+                          getOptionLabel={(opntion) => opntion.lable}
+                          getOptionValue={(option) => option.value}
+                          options={skills}
+                          closeMenuOnSelect={false}
+                          isMulti
+                          onChange={getValues}
+                        />
+                      </div>
+                    )}
+
+                    {data.skill && data.skill.length > 0 && (
+                      <div className="col-12 mt-4">
+                        {data.skill.map((s) => {
+                          return (
+                            <span
+                              className="p-3 bg-dark rounded text-white mx-2"
+                              key={s}
+                            >
+                              {s}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
                     <div className="d-flex align-items-center justify-content-end mt-4">
                       <button
                         className="btn btn-primary text-center"
