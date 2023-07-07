@@ -5,7 +5,7 @@ import { store } from "../store";
 
 export const getAllProjects = createAsyncThunk(
     'projectFullData/getProjects',
-    async ({ sort, page, limit, keyword, select , categoryId, range}) => {
+    async ({ sort, page, limit, keyword, select , categoryId, range, skillsIds}) => {
         // async () => {
 
         try {
@@ -17,7 +17,8 @@ export const getAllProjects = createAsyncThunk(
                     keyword,
                     select,
                     range,
-                    categoryId
+                    categoryId,
+                    skillsIds
                 }
             });
 

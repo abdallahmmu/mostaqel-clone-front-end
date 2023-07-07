@@ -18,31 +18,40 @@ const ProjectsListFilter = () => {
         dispatch(getAllProjects({ range: e.target.value }))
     }
     const handleCategory = (e) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             dispatch(getAllProjects({ categoryId: e.target.value }))
-        }else{
-            dispatch(getAllProjects({ }))
+        } else {
+            dispatch(getAllProjects({}))
 
         }
     }
     const handleSkills = (e) => {
         let skillsIds = '';
-        e.map(skill => {
-            skillsIds += skill.value + ','; 
-            console.log(skillsIds)
-        })
-        // console.log(skills)
+        if (e) {
+
+            e.map((skill, ind) => {
+                if(ind == 0){
+                    skillsIds += skill.value;
+                    console.log(ind)
+                }else{
+                    skillsIds += skill.value + ',';
+                }
+        
+                dispatch(getAllProjects({ skillsIds }))
+            })
+        }
+    
     }
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
+        axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d => {
             setCats(d.data.categories)
         })
-        axios.get(`${import.meta.env.VITE_API_URL}/skills`).then(d =>{
+        axios.get(`${import.meta.env.VITE_API_URL}/skills`).then(d => {
             console.log(d)
             setSkills(d.data.results)
         })
-        
-   }, [])
+
+    }, [])
     return (
         <div className="filter-side">
             <div className="search">
@@ -54,16 +63,16 @@ const ProjectsListFilter = () => {
             <div className="category">
                 <div className="category-title my-2 h5">Category</div>
                 <ul className="list-unstyled">
-                   
+
                     {cats && cats.map(cat => (
 
-                    <li   key={cat._id} className="cat">
-                        <input type="checkbox" name="categoryId" 
-                        onClick={handleCategory} id="cat" value={cat._id} /> {cat.title}
-                        
+                        <li key={cat._id} className="cat">
+                            <input type="checkbox" name="categoryId"
+                                onClick={handleCategory} id="cat" value={cat._id} /> {cat.title}
+
                         </li>
                     ))}
-                    
+
                 </ul>
             </div>
             <div className="skills">
@@ -71,13 +80,13 @@ const ProjectsListFilter = () => {
                 <div className="form-group">
 
                     <Select isMulti
-                    onChange={handleSkills}
+                        onChange={handleSkills}
                         options={
 
                             skills.map(skill => (
                                 { value: skill._id, label: skill.name }
                             ))
-                            } />
+                        } />
                 </div>
             </div>
             <div className="fund">
