@@ -5,31 +5,38 @@ import { useDispatch } from 'react-redux';
 import { addingNewProject } from '../store/ProjectsSlice/ProjectsSlice';
 import axios from 'axios';
 import swal from 'sweetalert';
-import {  useNavigate } from 'react-router-dom';
-
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import CustomSelect from '../helpers/react-select';
 const addProject = () => {
 
-    const [cats, setCats] = useState([])
+    // const [cats, setCats] = useState([])
+    // const [skills, setSkills] = useState([])
 
-
+    const { categories, skills } = useLoaderData();
     const dispatch = useDispatch()
     const navigate = useNavigate()
-   useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
-            setCats(d.data.categories)
-        })
-        
-   }, [])
+    useEffect(() => {
+        // axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
+        //     setCats(d.data.categories)
+        // })
+        // axios.get(`${import.meta.env.VITE_API_URL}/skills`).then(d =>{
+        //     setSkills(d.data.results)
+        //     console.log(skills)
+        // })
+
+    }, [])
 
     const addNewProject = (values) => {
-        dispatch(addingNewProject(values))
-        swal({
-            title: "Success",
-            text: "projects added successfully",
-            icon: "success",
-          })
+        // dispatch(addingNewProject(values))
+        // swal({
+        //     title: "Success",
+        //     text: "projects added successfully",
+        //     icon: "success",
+        // })
 
-          navigate('/projects')
+        // navigate('/projects')
+        console.log(values)
     }
     return (
         <div className="add-project mt-5">
@@ -38,8 +45,10 @@ const addProject = () => {
                 <div>
                     <Formik
                         initialValues={{
-                        title: 'new title', description: 'new dessc',
-                        range: 50, categoryId: '6490b3f9bfaf60e0de89e55f' }}
+                            title: 'new title', description: 'new dessc',
+                            range: 50, categoryId: '6490b3f9bfaf60e0de89e55f',
+                            skillsIds: []
+                        }}
                         onSubmit={addNewProject}
                         validationSchema={AddProjectSchema} >
                         {() => (
@@ -48,12 +57,12 @@ const addProject = () => {
                                 <div className="mb-3">
                                     <label htmlFor="exampleInputEmail1" className="form-label">Title</label>
                                     <Field
-                                     
-                                        className="form-control" 
-                                        id="title" 
+
+                                        className="form-control"
+                                        id="title"
                                         type="text"
                                         name="title"
-                                        />
+                                    />
                                     <ErrorMessage
                                         name="title"
                                         className="text-danger"
@@ -65,9 +74,9 @@ const addProject = () => {
                                     <Field
                                         as="textarea"
                                         name="description"
-                                        className="form-control" 
+                                        className="form-control"
                                         id="description"></Field>
-                                    
+
                                 </div>
 
                                 <div className="mb-3">
@@ -83,11 +92,33 @@ const addProject = () => {
                                         as='select'
                                         name="categoryId"
                                         className="form-control" id="range"  >
-                                            {cats && cats.map(cat => (
+                                        {categories && categories.map(cat => (
 
-                                                <option key={cat._id} value={cat._id}>{cat.title}</option>
+                                            <option key={cat._id} value={cat._id}>{cat.title}</option>
+                                        ))}
+                                    </Field>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="range" className="form-label">skills</label>
+                                    <Field
+                                        as='select'
+                                        name="skillsIds"
+                                        multiple
+                                        className="form-control" id="range"  >
+                                            {skills && skills.map(skill => (
+
+                                                <option key={skill._id} value={skill._id}>{skill.name}</option>
                                             ))}
                                         </Field>
+                                    
+                                    {/* <Field
+                                        
+                                        name="skillsIds"
+                                        options={skills.map(skill => (
+                                            { value: skill._id, label: skill.name}
+                                        ))}
+                                        component={CustomSelect}
+                                    /> */}
                                 </div>
 
                                 <button className="btn btn-primary" type="submit">

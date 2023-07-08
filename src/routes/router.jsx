@@ -31,6 +31,7 @@ const ChatDetails = React.lazy(() =>
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
+import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -115,7 +116,7 @@ export const router = createBrowserRouter([
             <AddProject />
           </React.Suspense>
         ),
-        loader: httpRegisterFreelancerLoader,
+        loader: addProjectLoader,
       },
       {
         path: "projects/:projectId",
