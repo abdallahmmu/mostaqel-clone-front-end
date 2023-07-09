@@ -1,36 +1,42 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { AddProjectSchema } from '../Schemas/AddProjectSchema';
 import { useDispatch } from 'react-redux';
 import { addingNewProject } from '../store/ProjectsSlice/ProjectsSlice';
-import axios from 'axios';
-import swal from 'sweetalert';
-import {  useNavigate } from 'react-router-dom';
-
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import CustomSelect from '../helpers/react-select';
 const addProject = () => {
 
-    const [cats, setCats] = useState([])
-
+    const { categories, skills } = useLoaderData();
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-   useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d =>{
-            setCats(d.data.categories)
-        })
-        
-   }, [])
+    const [skillsIds, setSkillsIds] = useState([]);
 
     const addNewProject = (values) => {
-        dispatch(addingNewProject(values))
+        let sklsIds = [];
+        values.skillsIds.map(skill => {
+            sklsIds.push(skill.id);
+        })
+        
+        let newValues = {
+            ...values,
+            categoryId: values.categoryId.id,
+            skillsIds: sklsIds
+        }
+        // console.log(newValues)
+        dispatch(addingNewProject(newValues))
         swal({
             title: "Success",
             text: "projects added successfully",
             icon: "success",
-          })
+        })
 
-          navigate('/projects')
+        navigate('/projects')
     }
+    
+
     return (
         <div className="add-project mt-5">
             <div className="container">
@@ -38,22 +44,27 @@ const addProject = () => {
                 <div>
                     <Formik
                         initialValues={{
-                        title: 'new title', description: 'new dessc',
-                        range: 50, categoryId: '6490b3f9bfaf60e0de89e55f' }}
+                            title: 'title one',
+                            description: 'description one',
+                            range: 50,
+                            categoryId:"",
+                            skillsIds:[]
+                        }}
                         onSubmit={addNewProject}
-                        validationSchema={AddProjectSchema} >
+                        validationSchema={AddProjectSchema}
+                    >
                         {() => (
 
                             <Form>
                                 <div className="mb-3">
                                     <label htmlFor="exampleInputEmail1" className="form-label">Title</label>
                                     <Field
-                                     
-                                        className="form-control" 
-                                        id="title" 
+
+                                        className="form-control"
+                                        id="title"
                                         type="text"
                                         name="title"
-                                        />
+                                    />
                                     <ErrorMessage
                                         name="title"
                                         className="text-danger"
@@ -65,9 +76,13 @@ const addProject = () => {
                                     <Field
                                         as="textarea"
                                         name="description"
-                                        className="form-control" 
-                                        id="description"></Field>
-                                    
+                                        className="form-control"
+                                        id="description" />
+                                    <ErrorMessage
+                                        name="description"
+                                        className="text-danger"
+                                        component="div"
+                                    />
                                 </div>
 
                                 <div className="mb-3">
@@ -78,19 +93,30 @@ const addProject = () => {
                                         className="form-control" id="range" min={1} />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="range" className="form-label">category</label>
-                                    <Field
-                                        as='select'
+                                    <label htmlFor="categories" className="form-label">category</label>
+                                    
+                                    <CustomSelect 
                                         name="categoryId"
-                                        className="form-control" id="range"  >
-                                            {cats && cats.map(cat => (
+                                        options={categories}
+                                        getOptionLabel={(option) => option.label}
+                                        getOptionValue={(option) => option.value}
+                                        isMulti={false}
+                                        value="ahmed" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="skills" className="form-label">skills</label>
 
-                                                <option key={cat._id} value={cat._id}>{cat.title}</option>
-                                            ))}
-                                        </Field>
+                                   
+                                    <CustomSelect 
+                                        name="skillsIds"
+                                        options={skills}
+                                        getOptionLabel={(option) => option.label}
+                                        getOptionValue={(option) => option.value}
+                                        closeMenuOnSelect={false}
+                                        />
                                 </div>
 
-                                <button className="btn btn-primary" type="submit">
+                                <button className="btn btn-primary mb-5" type="submit">
                                     Add
                                 </button>
                             </Form>

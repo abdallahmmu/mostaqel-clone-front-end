@@ -5,10 +5,10 @@ import { store } from "../store";
 
 export const getAllProjects = createAsyncThunk(
     'projectFullData/getProjects',
-    async ({ sort, page, limit, keyword, select , categoryId, range}) => {
+    async ({ sort, page, limit, keyword, select , categoryId, range, skillsIds}) => {
         // async () => {
-        try {
 
+        try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/projects`, {
                 params: {
                     page,
@@ -17,10 +17,12 @@ export const getAllProjects = createAsyncThunk(
                     keyword,
                     select,
                     range,
-                    categoryId
+                    categoryId,
+                    skillsIds
                 }
             });
 
+            console.log(location.search)
             return response.data
         } catch (error) {
             console.log(error)

@@ -11,10 +11,9 @@ const ProjectsListTitle = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getLatestProjects = (sortBy) => {
-    setSort(sortBy);
-    setIsOpen((prev) => !prev);
-    dispatch(getAllProjects({ sort: sortBy }));
-  };
+    setSort(sortBy)
+    dispatch(getAllProjects({ sort:sortBy }))
+  }
   return (
     <div className="page-title">
       <Typography variant="h5" sx={{ margin: "4rem 0px" }}>

@@ -18,6 +18,7 @@ const ProjectsListSingleProject = ({ project }) => {
 
   return (
     <Box component='div' className="project">
+      
       <Grid container spacing={2}>
         <Grid item sm={10}>
           <Box
@@ -48,6 +49,20 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-excerpt"
           >
             {project.description}
+            {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
+          </Typography>
+          <Typography
+          variant="div"
+
+          >
+            {project.skillsIds.map(skill => (
+              <Typography 
+              variant="span"
+              fontSize={11}
+              className="bg-primary ms-2  text-white p-1 rounded">
+                {skill.name}
+              </Typography>
+            ))}
           </Typography>
         </Grid>
       </Grid>
