@@ -7,7 +7,7 @@ const CustomSelect = ({ options, ...props }) => {
     const [field, meta, helpers] = useField(props);
 
     const handleChange = (selectedOption) => {
-        helpers.setValue(selectedOption);
+            helpers.setValue(selectedOption);
     };
 
     const value = options.find((option) => option.value === field.value);
@@ -20,6 +20,7 @@ const CustomSelect = ({ options, ...props }) => {
                 {...field}
                 {...props}
                 value={value}
+                
                 onChange={handleChange}
             />
         

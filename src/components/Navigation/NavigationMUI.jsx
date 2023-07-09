@@ -263,7 +263,7 @@ export default function NavigationMUI() {
 
         {isAuth && (
           <List>
-            <NavLink to="add-project" onClick={handleDrawerClose}>
+            <NavLink to="add-projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemText

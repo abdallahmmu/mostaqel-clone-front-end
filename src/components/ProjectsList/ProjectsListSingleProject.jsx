@@ -56,7 +56,12 @@ const ProjectsListSingleProject = ({ project }) => {
 
           >
             {project.skillsIds.map(skill => (
-              <span className="bg-dark text-white p-1 rounded">{skill.name}</span>
+              <Typography 
+              variant="span"
+              fontSize={11}
+              className="bg-primary ms-2  text-white p-1 rounded">
+                {skill.name}
+              </Typography>
             ))}
           </Typography>
         </Grid>

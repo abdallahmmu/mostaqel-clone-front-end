@@ -199,14 +199,17 @@ function EditForm() {
                         <label htmlFor="description" className="form-label">
                           Skills <span className="text-danger">*</span>
                         </label>
-                        <Select
+                        {skills && (
+
+                          <Select
                           getOptionLabel={(opntion) => opntion.lable}
                           getOptionValue={(option) => option.value}
                           options={skills}
                           closeMenuOnSelect={false}
                           isMulti
                           onChange={getValues}
-                        />
+                          />
+                          )}
                       </div>
                     )}
 

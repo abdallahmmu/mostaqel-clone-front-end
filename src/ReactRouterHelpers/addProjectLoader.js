@@ -1,38 +1,37 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import swal from "sweetalert";
-export const addProjectLoader = async ({ request }) => {
-  const getAllCategories = await axios.get(
-    `${import.meta.env.VITE_API_URL}/category`
-  );
-  const getAllSkills = await axios.get(
-    `${import.meta.env.VITE_API_URL}/skills`
-  );
+export const addProjectLoader = async () => {
 
-  //catching error
+  try {
 
-  if (getAllCategories.data.error) {
-    const confirm = await swal({
-      title: "Fetching categories faild",
-      text: "Please Try again later",
-      icon: "error",
-    });
+    const [getAllCategories, getAllSkills] = await Promise.all([axios.get(`${import.meta.env.VITE_API_URL}/category`), axios.get(`${import.meta.env.VITE_API_URL}/skills`)])
 
-    if (confirm) {
-      return redirect("/");
-    }
+
+    let skills = getAllSkills.data.results.reduce((acc, currentItem) => {
+      acc.push({
+        value: currentItem.name,
+        label: currentItem.name,
+        id: currentItem._id,
+      })
+      return acc
+    }, [])
+
+    let categories = getAllCategories.data.categories.reduce((acc, currentItem) => {
+      acc.push({
+        value: currentItem.title,
+        label: currentItem.title,
+        id: currentItem._id,
+      })
+      return acc
+    }, [])
+
+    return {
+      categories,
+      skills
+    };
+
+  } catch (error) {
+    console.log(error)
   }
-  if (getAllSkills.data.error) {
-    const confirm = await swal({
-      title: "Fetching skills faild",
-      text: "Please Try again later",
-      icon: "error",
-    });
-
-    if (confirm) {
-      return redirect("/");
-    }
-  }
-
-  return {categories: getAllCategories.data.categories,skills: getAllSkills.data.results };
 };
