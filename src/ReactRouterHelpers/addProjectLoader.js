@@ -1,6 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
-import swal from "sweetalert";
 export const addProjectLoader = async () => {
 
   try {

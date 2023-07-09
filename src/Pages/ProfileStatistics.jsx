@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ImageCard from '../components/ProfileComponents/ProfileStatistics/ImageCard'
 import PaymentCard from '../components/ProfileComponents/ProfileStatistics/PaymentCard'
 import MessagesCard from '../components/ProfileComponents/ProfileStatistics/MessagesCard'

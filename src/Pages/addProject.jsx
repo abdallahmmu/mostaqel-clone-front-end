@@ -25,7 +25,6 @@ const addProject = () => {
             categoryId: values.categoryId.id,
             skillsIds: sklsIds
         }
-        // console.log(newValues)
         dispatch(addingNewProject(newValues))
         swal({
             title: "Success",

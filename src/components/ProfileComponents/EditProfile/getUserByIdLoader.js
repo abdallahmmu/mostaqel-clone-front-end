@@ -3,6 +3,7 @@ import { redirect } from "react-router-dom";
 export async function getUserByIdLoader({params}){
    const {userId} = params
     const userData = JSON.parse(localStorage.getItem('isAuth'))
+    if(!userData) return redirect('/')
     if(!userId) return redirect('/')
     if(userData.role === 'freelancer'){
         try {
