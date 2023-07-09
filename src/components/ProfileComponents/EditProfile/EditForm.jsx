@@ -17,7 +17,6 @@ const options = [
 
 function EditForm() {
   const { data, skills } = useLoaderData();
-  console.log(skills);
   const [profilePic, setProfilePic] = useState(null);
   const [skill, setSkill] = useState([]);
   const { userData } = useSelector((state) => state.authSlice);

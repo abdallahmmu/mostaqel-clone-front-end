@@ -22,7 +22,6 @@ export const getAllProjects = createAsyncThunk(
                 }
             });
 
-            console.log(location.search)
             return response.data
         } catch (error) {
             console.log(error)

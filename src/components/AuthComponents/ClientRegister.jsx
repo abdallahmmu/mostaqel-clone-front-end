@@ -29,7 +29,6 @@ function ClientRegister() {
     const newUser = {
       ...values,
     };
-    console.log(newUser)
     dispatch(registerNewUserClient(newUser));
   };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PaymentCard() {
   return (
@@ -7,12 +8,15 @@ function PaymentCard() {
         <div className="card-body  ">
           <div className="row justify-content-center text-center">
             <div className="col-4">
-              <p className="text-success fs-4">
-                {" "}
-                All Payment <br />
-                <span className="fw-bold">$0.00</span>
-              </p>
+              <Link to="/payment">
+                <p className="text-success fs-4">
+                  {" "}
+                  All Payment <br />
+                  <span className="fw-bold">$0.00</span>
+                </p>
+              </Link>
             </div>
+
             <div className="col-4">
               <p className="fs-4">
                 {" "}

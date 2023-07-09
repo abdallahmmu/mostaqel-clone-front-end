@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSearchParams, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
-import { Box, Card, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const ProjectsListSingleProject = ({ project }) => {
-  const params = useSearchParams();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // console.log(params)
-    // dispatch(getAllProjects())
-  }, [params]);
 
   return (
     <Box component='div' className="project">
@@ -39,7 +32,7 @@ const ProjectsListSingleProject = ({ project }) => {
             </Typography>
 
             <Typography variant="span" className="project-offers">
-              {project.categoryId.title}{" "}
+              {project.categoryId?.title}{" "}
               <BorderColorIcon sx={{ fontSize: 15 }} />
             </Typography>
           </Box>
@@ -57,6 +50,7 @@ const ProjectsListSingleProject = ({ project }) => {
           >
             {project.skillsIds.map(skill => (
               <Typography 
+              key={skill}
               variant="span"
               fontSize={11}
               className="bg-primary ms-2  text-white p-1 rounded">

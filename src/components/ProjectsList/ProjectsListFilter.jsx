@@ -10,7 +10,7 @@ const ProjectsListFilter = () => {
     const [cats, setCats] = useState([])
     const [skills, setSkills] = useState([])
     const handleProjectsSearch = (e) => {
-        console.log(e.target.value)
+
         dispatch(getAllProjects({ keyword: e.target.value }))
     }
 
@@ -33,7 +33,6 @@ const ProjectsListFilter = () => {
             e.map((skill, ind) => {
                 if (ind == 0) {
                     skillsIds += skill.value;
-                    console.log(ind)
                 } else {
                     skillsIds += skill.value + ',';
                 }
@@ -48,7 +47,6 @@ const ProjectsListFilter = () => {
             setCats(d.data.categories)
         })
         axios.get(`${import.meta.env.VITE_API_URL}/skills`).then(d => {
-            console.log(d)
             setSkills(d.data.results)
         })
 
