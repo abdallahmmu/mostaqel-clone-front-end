@@ -153,12 +153,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/payment",
+        path: "/payment/:userId",
         element: (
           <React.Suspense>
             <PaymentPage />
           </React.Suspense>
         ),
+        loader:getUserByIdLoader
       },
     ],
   },
