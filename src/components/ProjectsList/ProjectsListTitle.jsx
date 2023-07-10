@@ -25,7 +25,7 @@ const ProjectsListTitle = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           endIcon={<ArrowDropDownIcon />}
         >
-          {sort}
+          {(sort == 'createdAt') ? 'Oldeast' : "Latest"}
         </Button>
         {isOpen && (
           <Box

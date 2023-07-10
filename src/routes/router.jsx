@@ -127,7 +127,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <ProjectDetails />
           </React.Suspense>
-        ),
+        )
       },
       {
         path: "myoffers",

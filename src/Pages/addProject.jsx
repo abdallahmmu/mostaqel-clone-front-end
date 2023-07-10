@@ -43,9 +43,9 @@ const addProject = () => {
                 <div>
                     <Formik
                         initialValues={{
-                            title: 'title one',
-                            description: 'description one',
-                            range: 50,
+                            title: '',
+                            description: '',
+                            range: 1,
                             categoryId:"",
                             skillsIds:[]
                         }}
