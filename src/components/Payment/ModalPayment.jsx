@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Modal,
   Typography,
   Box,
   FormControl,
   InputLabel,
-  OutlinedInput,
   InputAdornment,
-  TextField,
   FilledInput,
-  FormHelperText,
   Button,
 } from "@mui/material";
+import { addPercent } from "../../helpers/taxs";
+import { depositeCredit } from "./depositPayment";
+import { useLoaderData } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -24,11 +24,38 @@ const style = {
   p: 4,
 };
 
-function ModalPayment({ open, closeModal, role }) {
+function ModalPayment({ open, closeModal, userData }) {
+  const [amount, setAmount] = useState('');
+  const [loading,setLoading] = useState(false)
+  const {data} = useLoaderData()
+  const handelAmountCalculation = useCallback((e) => {
+        setAmount(e.target.value)
+  }, []);
+
+  const onDepositCreditHandler = async ()=>{
+    if(amount === ''){
+      return
+    }
+    setLoading(true)
+   const session = await depositeCredit(amount,'deposit',userData.id)
+   if(session){
+    localStorage.setItem('sessionId',session.sessionId)
+    window.location.assign(session.url)
+   }
+   setLoading(false)
+   closeModal(false)
+   setAmount(0)
+
+  }
+
+const handelCloseModel = () => {
+  closeModal(false)
+  setAmount(0)
+}
   return (
     <Modal
       open={open}
-      onClose={() => closeModal(false)}
+      onClose={handelCloseModel}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -41,40 +68,6 @@ function ModalPayment({ open, closeModal, role }) {
           component="div"
           sx={{ display: "flex", flexDirection: "column", my: 3 }}
         >
-          <TextField sx={{ m: 1 }} label="Full Name" />
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "start",
-            }}
-          >
-            <FormControl sx={{ m: 1, flex: 1 }} variant="filled">
-              <FilledInput
-                id="filled-adornment-weight"
-                endAdornment={
-                  <InputAdornment position="end">Visa Card</InputAdornment>
-                }
-                aria-describedby="filled-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1 }} variant="filled">
-              <FilledInput
-                id="filled-adornment-weight"
-                endAdornment={
-                  <InputAdornment position="end">CCV</InputAdornment>
-                }
-                aria-describedby="filled-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
-          </Box>
           <FormControl fullWidth sx={{ m: 1 }} variant="filled">
             <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
             <FilledInput
@@ -82,17 +75,41 @@ function ModalPayment({ open, closeModal, role }) {
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
+              type="number"
+              onChange={handelAmountCalculation}
             />
           </FormControl>
         </Box>
-        <hr/>
-        <Box sx={{my:3}}>
-            <Typography variant="p" sx={{fontWeight:'bold', fontSize:14}}>Total Amount After Pay Will be (Amount * 2.5% tax)</Typography>
-            <Typography sx={{textAlign:'center' ,mt:5,color:'green',fontSize:24}}>$ 50</Typography>
+        <hr />
+        <Box sx={{ my: 3 }}>
+          <Typography variant="p" sx={{ fontWeight: "bold", fontSize: 14 }}>
+            Total Amount After Pay Will be (Amount * 2.5% tax)
+          </Typography>
+          <Typography
+            sx={{ textAlign: "center", mt: 5, color: "green", fontSize: 24 }}
+          >
+            $ {amount > 0 ? addPercent(+amount) : "0"}
+          </Typography>
         </Box>
-        <Box sx={{my:3,textAlign:'end'}}>
-     <Button variant="contained" sx={{mx:3}} color="success">Pay Now</Button>
-     <Button variant="contained" color="success">Withdraw</Button>
+        {userData.role === "freelancer" && data?.totalMoney > 50 && (
+          <Box sx={{ my: 3 }}>
+            <Typography
+              variant="p"
+              sx={{ fontWeight: "bold", fontSize: 14, color: "red" }}
+            >
+              You Can Not Withdrow Your Money unless it be greater than $50
+            </Typography>
+          </Box>
+        )}
+        <Box sx={{ my: 3, textAlign: "end" }}>
+          <Button  variant="contained" sx={{ mx: 3 }} color="success" onClick={onDepositCreditHandler}>
+            {loading ? 'Loading ...' : 'Pay Now'}
+          </Button>
+          {data?.totalMoney > 50 && (
+            <Button variant="contained" color="success">
+              Withdraw
+            </Button>
+          )}
         </Box>
       </Box>
     </Modal>

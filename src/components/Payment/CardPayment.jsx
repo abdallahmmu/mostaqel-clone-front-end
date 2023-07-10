@@ -18,7 +18,7 @@ function CardPayment({ userData }) {
               @{userData.username || userData.userName}
             </Typography>
             <br />
-            <Typography variant="span">$ 50</Typography>
+            <Typography variant="span">$ {userData?.totalMony || '0' }</Typography>
           </CardContent>
         </Card>
       </Box>
