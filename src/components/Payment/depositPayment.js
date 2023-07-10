@@ -16,7 +16,8 @@ export async function depositeCredit(amount,mode,userId){
         
         return {
             url:response.data.session.url,
-            sessionId:response.data.session.id
+            sessionId:response.data.session.id,
+            amount: response.data.amount
         }
     } catch (error) {
         Swal.fire({

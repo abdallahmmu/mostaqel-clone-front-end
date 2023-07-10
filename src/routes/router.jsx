@@ -30,6 +30,7 @@ const ChatDetails = React.lazy(() =>
 );
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
+const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
@@ -109,7 +110,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <AllProject />
           </React.Suspense>
-        ),
+        )
       },
       {
         path: "add-projects",
@@ -159,7 +160,16 @@ export const router = createBrowserRouter([
             <PaymentPage />
           </React.Suspense>
         ),
-        loader:getUserByIdLoader
+        loader: getUserByIdLoader
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
+          </React.Suspense>
+        ),
+        
       },
     ],
   },

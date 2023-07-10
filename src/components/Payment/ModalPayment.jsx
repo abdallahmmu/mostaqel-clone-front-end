@@ -40,6 +40,7 @@ function ModalPayment({ open, closeModal, userData }) {
    const session = await depositeCredit(amount,'deposit',userData.id)
    if(session){
     localStorage.setItem('sessionId',session.sessionId)
+    localStorage.setItem('amount', session.amount)
     window.location.assign(session.url)
    }
    setLoading(false)
@@ -76,6 +77,7 @@ const handelCloseModel = () => {
                 <InputAdornment position="start">$</InputAdornment>
               }
               type="number"
+              inputProps={{min:0}}
               onChange={handelAmountCalculation}
             />
           </FormControl>
