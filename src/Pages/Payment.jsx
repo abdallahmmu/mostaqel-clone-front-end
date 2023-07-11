@@ -10,8 +10,8 @@ function Payment() {
   const {data} = useLoaderData()
   return (
     <Box component="div" sx={{ background: "#f0f0f0" }}>
-      <Container maxWidth="lg" sx={{minHeight:'100vh' }}>
-        <Grid container sx={{ padding: "20px"}}>
+      <Container maxWidth="lg" sx={{ minHeight: "100vh" }}>
+        <Grid container sx={{ padding: "20px" }}>
           <UpperPaymenComponent userData={userData} />
           <CardPayment userData={userData} />
         </Grid>
@@ -19,5 +19,4 @@ function Payment() {
     </Box>
   );
 }
-
 export default Payment;

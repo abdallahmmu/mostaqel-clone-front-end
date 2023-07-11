@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import {
   CssBaseline,
   Box,
@@ -27,12 +27,15 @@ import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
+import { useTranslation } from "react-i18next";
+import { langContext } from "./../../contextAPI/context.jsx";
 
 export default function NavigationMUI() {
   const [open, setOpen] = React.useState(false);
   const { isAuth, userData } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-
+  const { lang, changeLang } = useContext(langContext);
+  const { t } = useTranslation();
   const handleDrawerOpen = useCallback(() => {
     setOpen(true);
   }, []);
@@ -57,7 +60,7 @@ export default function NavigationMUI() {
               sx={{ flexGrow: 1 }}
               component="div"
             >
-              Mostaqel Clone
+              {t("Mostaqel Clone")}
             </Typography>
             <Hidden mdDown>
               <Box
@@ -82,11 +85,11 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      Home
+                      {t("Home")}
                     </Typography>
                   </NavLink>
                 )}
-                {(isAuth && userData.role === 'client')   && (
+                {isAuth && userData.role === "client" && (
                   <NavLink to="/add-projects">
                     <Typography
                       sx={{
@@ -100,7 +103,7 @@ export default function NavigationMUI() {
                       }}
                     >
                       <AddIcon />
-                      Add Project
+                      {t("Add Project")}
                     </Typography>
                   </NavLink>
                 )}
@@ -117,7 +120,7 @@ export default function NavigationMUI() {
                     }}
                   >
                     {isAuth && <TroubleshootIcon />}
-                    Find Project
+                    {t("Find Project")}
                   </Typography>
                 </NavLink>
                 {isAuth && (
@@ -151,7 +154,7 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      Contact Us
+                      {t("Contact Us")}
                     </Typography>
                   </NavLink>
                 )}
@@ -168,7 +171,7 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      About
+                      {t("About")}
                     </Typography>
                   </NavLink>
                 )}
@@ -184,7 +187,9 @@ export default function NavigationMUI() {
                       color: "#fff",
                     }}
                   >
-                    <Typography sx={{ padding: "0px 5px" }}>Login</Typography>
+                    <Typography sx={{ padding: "0px 5px" }}>
+                      {t("Login")}
+                    </Typography>
                     <LogoutIcon />
                   </IconButton>
                 </NavLink>
@@ -213,7 +218,7 @@ export default function NavigationMUI() {
           },
         }}
         variant="persistent"
-        anchor="right"
+        anchor={lang == "en" ? "right" : "left"}
         open={open}
       >
         <Box sx={{ display: "flex", alignItems: "center", padding: "10px" }}>
@@ -222,7 +227,16 @@ export default function NavigationMUI() {
           </IconButton>
           <Typography variant="h6">Mostaqel-clone</Typography>
         </Box>
-
+        <ListItem
+          disablePadding
+          onClick={() => {
+            changeLang();
+          }}
+        >
+          <ListItemButton>
+            <ListItemIcon>{t("Change Lang")}</ListItemIcon>
+          </ListItemButton>
+        </ListItem>
         <Divider />
 
         {!isAuth && (
@@ -254,7 +268,10 @@ export default function NavigationMUI() {
             <NavLink to="about" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"About Us"} />
+                  <ListItemText
+                    sx={{ color: "#000" }}
+                    primary={t("About Us")}
+                  />
                 </ListItemButton>
               </ListItem>
             </NavLink>
@@ -295,7 +312,7 @@ export default function NavigationMUI() {
             >
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Profile"} />
+                  <ListItemText sx={{ color: "#000" }} primary={t("Profile")} />
                   <ListItemIcon>
                     <Person2Icon />
                   </ListItemIcon>
@@ -305,7 +322,7 @@ export default function NavigationMUI() {
 
             <ListItem disablePadding onClick={onLogoutHandler}>
               <ListItemButton>
-                <ListItemText primary={"Logout"} />
+                <ListItemText primary={t("Logout")} />
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

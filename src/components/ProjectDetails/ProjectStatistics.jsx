@@ -24,20 +24,6 @@ const ProjectStatistics = ({ details }) => {
     },
   ];
 
-  let accptedProject = [
-    {
-      name: "Client Name",
-      value: details.clientId.userName,
-    },
-    {
-      name: "Freelancer Name",
-      // value: details.offerId.freelancerId.
-    },
-    {
-      name: "Budget",
-      value: `${details.range} $`,
-    },
-  ]
   return (
     <>
       <div className="col-lg-3 d-lg-block d-md-none">
@@ -66,8 +52,7 @@ const ProjectStatistics = ({ details }) => {
           </Table>
         </TableContainer>
 
-        {(details.status === "pending") && (
-
+        {details.status === "pending" && (
           <>
             <hr />
             <TableContainer component={Paper}>

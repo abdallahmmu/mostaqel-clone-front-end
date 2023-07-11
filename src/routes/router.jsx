@@ -2,7 +2,8 @@ import React from "react";
 import { Link, createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
-
+//Portfolio Page
+const PortfolioPage = React.lazy(() => import("../Pages/Portfolio"));
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -154,6 +155,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/portfolio",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <PortfolioPage />
+          </React.Suspense>
+        ),
+      },
+      {
         path: "/payment/:userId",
         element: (
           <React.Suspense>
@@ -170,6 +179,22 @@ export const router = createBrowserRouter([
           </React.Suspense>
         ),
         
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
+          </React.Suspense>
+        ),
       },
     ],
   },
