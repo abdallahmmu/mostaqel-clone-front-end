@@ -178,23 +178,6 @@ export const router = createBrowserRouter([
             <ThankYou />
           </React.Suspense>
         ),
-        
-      },
-      {
-        path: "/payment/thankYou",
-        element: (
-          <React.Suspense>
-            <ThankYou />
-          </React.Suspense>
-        ),
-      },
-      {
-        path: "/payment/thankYou",
-        element: (
-          <React.Suspense>
-            <ThankYou />
-          </React.Suspense>
-        ),
       },
     ],
   },
