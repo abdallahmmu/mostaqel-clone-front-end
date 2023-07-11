@@ -7,11 +7,8 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const ProjectsListSingleProject = ({ project }) => {
-
-
   return (
     <Box component='div' className="project">
-      
       <Grid container spacing={2}>
         <Grid item sm={10}>
           <Box
@@ -38,16 +35,16 @@ const ProjectsListSingleProject = ({ project }) => {
           </Box>
 
           <Box
-            variant="p"
+            component="p"
             sx={{ marginTop: "20px" }}
             className="project-excerpt"
           >
-            {project.description}
+            <Typography variant="p">{project.description}</Typography>
             {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
           </Box>
 
           <Box
-          variant="div"
+          component="div"
 
           >
             {project.skillsIds.map(skill => (

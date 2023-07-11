@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../../Schemas/LoginSchema";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import { useTranslation } from "react-i18next";
 import { useSelector,useDispatch } from "react-redux";
 import { authActions, loginToAccount } from "../../store/AuthSlice/authSlice";
 
@@ -13,7 +13,7 @@ const fields = {
 };
 
 function Login() {
-
+const { t } = useTranslation();
   const dispatch = useDispatch()
   
   const handelLoginSubmit = (values) => {
@@ -50,7 +50,7 @@ function Login() {
                 <Form>
                   <div className=" col-md-12">
                     <label htmlFor="email" className="form-label">
-                      Email
+                      {t("Email")}
                     </label>
                     <Field
                       type="email"
@@ -66,7 +66,7 @@ function Login() {
                   </div>
                   <div className="col-md-12">
                     <label htmlFor="password" className="form-label">
-                      Password
+                      {t("Password")}
                     </label>
                     <Field
                       type="password"
@@ -82,7 +82,7 @@ function Login() {
                   </div>
                   <div className="col-md-12">
                     <>
-                      <label>* Please Choose Login As :-</label>
+                      <label>{t("Please Choose Login As")}</label>
                       <div className="form-check">
                         <Field
                           className="form-check-input"
@@ -95,7 +95,7 @@ function Login() {
                           className="form-check-label"
                           htmlFor="freelancer"
                         >
-                          Freelancer
+                          {t("Freelancer")}
                         </label>
                       </div>
                       <div className="form-check">
@@ -107,7 +107,7 @@ function Login() {
                           value="client"
                         />
                         <label className="form-check-label" htmlFor="client">
-                          Client
+                          {t("Client")}
                         </label>
                         <ErrorMessage
                           name="loginType"
@@ -123,12 +123,12 @@ function Login() {
                       type="submit"
                       className="btn btn-primary text-white mb-3"
                     >
-                      Login
+                      {t("Login")}
                     </button>
                   </div>
 
                   <span>
-                    Haven't you account <Link to="/register">Sign Up</Link>
+                    {t("Haven't you account")}<Link to="/register">{t("Sign Up")}</Link>
                   </span>
                 </Form>
               )}

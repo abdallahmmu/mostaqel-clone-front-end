@@ -11,7 +11,10 @@ import {
 } from "@mui/material";
 import { addPercent } from "../../helpers/taxs";
 import { depositeCredit } from "./depositPayment";
-import { useLoaderData } from "react-router-dom";
+import { withdrawFreelancer } from "./withdrawFreelancer";
+import { useNavigate, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import { ElevatorSharp } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -25,34 +28,66 @@ const style = {
 };
 
 function ModalPayment({ open, closeModal, userData }) {
-  const [amount, setAmount] = useState('');
-  const [loading,setLoading] = useState(false)
-  const {data} = useLoaderData()
+  const [amount, setAmount] = useState("");
+  const [withdraw, setWithDraw] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const { data } = useLoaderData();
+  const navigate = useNavigate();
   const handelAmountCalculation = useCallback((e) => {
-        setAmount(e.target.value)
+    setAmount(e.target.value);
   }, []);
 
-  const onDepositCreditHandler = async ()=>{
-    if(amount === ''){
-      return
+  const onDepositCreditHandler = async () => {
+    if (amount === "") {
+      return;
     }
-    setLoading(true)
-   const session = await depositeCredit(amount,'deposit',userData.id)
-   if(session){
-    localStorage.setItem('sessionId',session.sessionId)
-    localStorage.setItem('amount', session.amount)
-    window.location.assign(session.url)
-   }
-   setLoading(false)
-   closeModal(false)
-   setAmount(0)
+    setLoading(true);
+    const session = await depositeCredit(amount, "deposit", userData.id);
+    if (session) {
+      localStorage.setItem("sessionId", session.sessionId);
+      localStorage.setItem("amount", session.amount);
+      window.location.assign(session.url);
+    }
+    setLoading(false);
+    closeModal(false);
+    setAmount(0);
+  };
 
-  }
+  const handelCloseModel = () => {
+    closeModal(false);
+    setAmount(0);
+  };
 
-const handelCloseModel = () => {
-  closeModal(false)
-  setAmount(0)
-}
+  const handelWithdrawMony = (e) => {
+    setWithDraw(+e.target.value);
+  };
+
+  const onWithdrawMony = async () => {
+    setLoading(true);
+    const data = await withdrawFreelancer(withdraw, userData.id);
+    if (data.message) {
+      setLoading(false);
+      closeModal(false);
+      const done = await Swal.fire({
+        title: "Success",
+        text: "Your Withdraw is completed",
+        icon: "success",
+      });
+
+      if (done) {
+        navigate(`/profile/statistics/${userData.id}`);
+      }
+    } else {
+      setLoading(false);
+      closeModal(false);
+      Swal.fire({
+        title: "Faild",
+        text: data.error,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -65,35 +100,47 @@ const handelCloseModel = () => {
           Your Payment
         </Typography>
 
-        <Box
-          component="div"
-          sx={{ display: "flex", flexDirection: "column", my: 3 }}
-        >
-          <FormControl fullWidth sx={{ m: 1 }} variant="filled">
-            <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
-            <FilledInput
-              id="filled-adornment-amount"
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
-              type="number"
-              inputProps={{min:0}}
-              onChange={handelAmountCalculation}
-            />
-          </FormControl>
-        </Box>
-        <hr />
-        <Box sx={{ my: 3 }}>
-          <Typography variant="p" sx={{ fontWeight: "bold", fontSize: 14 }}>
-            Total Amount After Pay Will be (Amount * 2.5% tax)
-          </Typography>
-          <Typography
-            sx={{ textAlign: "center", mt: 5, color: "green", fontSize: 24 }}
-          >
-            $ {amount > 0 ? addPercent(+amount) : "0"}
-          </Typography>
-        </Box>
-        {userData.role === "freelancer" && data?.totalMoney > 50 && (
+        {userData.role === "client" && (
+          <>
+            {" "}
+            <Box
+              component="div"
+              sx={{ display: "flex", flexDirection: "column", my: 3 }}
+            >
+              <FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                <InputLabel htmlFor="filled-adornment-amount">
+                  Amount
+                </InputLabel>
+                <FilledInput
+                  id="filled-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
+                  type="number"
+                  inputProps={{ min: 0 }}
+                  onChange={handelAmountCalculation}
+                />
+              </FormControl>
+            </Box>
+            <hr />
+            <Box sx={{ my: 3 }}>
+              <Typography variant="p" sx={{ fontWeight: "bold", fontSize: 14 }}>
+                Total Amount After Pay Will be (Amount * 2.5% tax)
+              </Typography>
+              <Typography
+                sx={{
+                  textAlign: "center",
+                  mt: 5,
+                  color: "green",
+                  fontSize: 24,
+                }}
+              >
+                $ {amount > 0 ? addPercent(+amount) : "0"}
+              </Typography>
+            </Box>
+          </>
+        )}
+        {userData.role === "freelancer" && (
           <Box sx={{ my: 3 }}>
             <Typography
               variant="p"
@@ -104,13 +151,41 @@ const handelCloseModel = () => {
           </Box>
         )}
         <Box sx={{ my: 3, textAlign: "end" }}>
-          <Button  variant="contained" sx={{ mx: 3 }} color="success" onClick={onDepositCreditHandler}>
-            {loading ? 'Loading ...' : 'Pay Now'}
-          </Button>
-          {data?.totalMoney > 50 && (
-            <Button variant="contained" color="success">
-              Withdraw
+          {userData.role === "client" && (
+            <Button
+              variant="contained"
+              sx={{ mx: 3 }}
+              color="success"
+              onClick={onDepositCreditHandler}
+            >
+              {loading ? "Loading ..." : "Pay Now"}
             </Button>
+          )}
+          {data.totalMoney > 50 && (
+            <Box component="div">
+              <FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                <InputLabel htmlFor="filled-adornment-amount">
+                  Amount
+                </InputLabel>
+                <FilledInput
+                  id="filled-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
+                  type="number"
+                  min="0"
+                  inputProps={{ min: 0 }}
+                  onChange={handelWithdrawMony}
+                />
+              </FormControl>
+              <Button
+                onClick={onWithdrawMony}
+                variant="contained"
+                color="success"
+              >
+                {loading ? "Loading" : "Withdraw"}
+              </Button>
+            </Box>
           )}
         </Box>
       </Box>

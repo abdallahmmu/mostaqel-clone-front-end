@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 function PaymentCard() {
   const {userData} = useSelector((state)=>state.authSlice)
+  const {data} = useLoaderData()
   return (
     <div className="col-sm-12 col-md-8">
       <div className="card border-0 mt-3">
@@ -14,7 +15,7 @@ function PaymentCard() {
                 <p className="text-success fs-4">
                   {" "}
                   All Payment <br />
-                  <span className="fw-bold">$0.00</span>
+                  <span className="fw-bold">${data?.totalMoney || "0"}</span>
                 </p>
               </Link>
             </div>
@@ -31,7 +32,7 @@ function PaymentCard() {
 
           <div className="row justify-content-center text-center">
             <div className="col-4">
-              <p className="text-p fw-bold"> Availble $0.00</p>
+              <p className="text-p fw-bold"> Availble ${data?.totalMoney || 0}</p>
             </div>
             <div className="col-4">
               <p className="text-p fw-bold"> Pending $0.00</p>

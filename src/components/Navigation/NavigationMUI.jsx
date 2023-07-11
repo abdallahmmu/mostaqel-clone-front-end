@@ -184,6 +184,7 @@ export default function NavigationMUI() {
                       border: "1px solid white",
                       borderRadius: "0px",
                       marginRight: "10px",
+                      marginLeft: "10px",
                       color: "#fff",
                     }}
                   >
@@ -225,7 +226,7 @@ export default function NavigationMUI() {
           <IconButton onClick={handleDrawerClose}>
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6">Mostaqel-clone</Typography>
+          <Typography variant="h6">{t("Mostaqel-clone")}</Typography>
         </Box>
         <ListItem
           disablePadding
@@ -244,7 +245,7 @@ export default function NavigationMUI() {
             <NavLink to="/" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Home"} />
+                  <ListItemText sx={{ color: "#000" }} primary={t("Home")} />
                 </ListItemButton>
               </ListItem>
             </NavLink>
@@ -253,7 +254,7 @@ export default function NavigationMUI() {
                 <ListItemButton>
                   <ListItemText
                     sx={{ color: "#000" }}
-                    primary={"Find Project"}
+                    primary={t("Find Project")}
                   />
                 </ListItemButton>
               </ListItem>
@@ -261,7 +262,7 @@ export default function NavigationMUI() {
             <NavLink to="contact" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Contact Us"} />
+                  <ListItemText sx={{ color: "#000" }} primary={t("Contact Us")} />
                 </ListItemButton>
               </ListItem>
             </NavLink>
@@ -285,7 +286,7 @@ export default function NavigationMUI() {
                 <ListItemButton>
                   <ListItemText
                     sx={{ color: "#000" }}
-                    primary={"Add Project"}
+                    primary={t("Add Project")}
                   />
                   <ListItemIcon>
                     <AddIcon />
@@ -298,7 +299,7 @@ export default function NavigationMUI() {
                 <ListItemButton>
                   <ListItemText
                     sx={{ color: "#000" }}
-                    primary={"Find Project"}
+                    primary={t("Find Project")}
                   />
                   <ListItemIcon>
                     <SearchIcon />

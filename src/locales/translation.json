@@ -94,6 +94,8 @@
   "Common Questions": "اسئلة شائعة",
 
   "What is Mostaqel Clone": "ما هو مستقل",
+  "Mostaqel-clone":"مستقل",
+  "Mostaqel Clone":"مستقل",
 
   "Freelancer is an Arabic platform that allows project owners and companies to contract with professional freelancers to carry out their work, and at the same time provides professional freelancers a place to find projects to work on and earn through.": "مستقل هي منصة عربية تسمح لأصحاب المشاريع والشركات بالتعاقد مع مستقلين محترفين لأداء عملهم ، وفي الوقت نفسه يوفر للعاملين المستقلين المحترفين مكانًا للعثور على مشاريع للعمل عليها وكسب من خلالها",
 
@@ -144,6 +146,122 @@
   "Chicago Office": "مكتب شيكاغو",
 
   "Mailing Address": "العنوان البريدي",
+  
   "Change Lang": "تغير اللغة",
-  "Enter Your Project Here Name": "أدخل عنوان المشروع الذي تريد تنفيذه..."
+  
+  "Enter Your Project Here Name": "أدخل عنوان المشروع الذي تريد تنفيذه...",
+
+  "Email":"البريد الالكتروني",
+
+  "Password":"كلمة المرور",
+
+  "Please Choose Login As":"من فضلك اختار طريقة التسجيل ك",
+
+  "Freelancer":"مستقل",
+
+  "Client":"عميل",
+
+  "Haven't you account":"إذا كنت لا تمتلك حساب",
+
+  "Sign Up":"قم بانشاء حساب",
+
+  "Withdraw":"سحب",
+
+  "All Payment":"كل المدفوعات",
+
+  "Availble ":"متاح",
+
+  "Pending ":"قيد الانتظار",
+
+  "Main":"الرئيسية",
+
+  "Add Project":"اضف مشروع",
+
+  "Control Pannel":"لوحة التحكم",
+
+  "Profile":"الملف الشخصي",
+
+  "Logout":"تسجيل الخروج",
+
+  "Edit Profile":"تعديل الملف الشخصي",
+
+  "New Messages":"رسائل جديدة",
+
+  "Received":"استلم",
+
+  "Delivered":"تم التوصيل",
+
+  "My Portfolio":"أعمالي",
+
+  "add Work":"أضف عمل",
+
+  "My Offers":"عروضي",
+
+  "Waiting":"في الانتظار",
+
+  "in-progress":"قيد التنفيذ",
+  
+  "Done":"تم",
+  
+  "Rejected":"مرفوض",
+  
+  "Avilable Offers":"العروض المتاحة",
+  
+  "Offers Left":"العروض المتبقية",
+  
+  "Latest Projects":"آخر المشاريع",
+
+  "LATEST":"الأحدث",
+
+  "Latest":"الأحدث",
+
+  "Oldest":"الأقدم",
+
+  "Open Projects":"مشاريع مفتوحة",
+
+  "Search":"بحث",
+
+  "Category":"فئة",
+
+  "Skills":"مهارات",
+
+  "Fund Slider":"ميزانية",
+
+  "Range":"يتراوح",
+
+  "Please Choose Type of Registeration":"من فضلك اختار طريقة التسجيل",
+
+  "Do You Want To be A Client":"هل تريدان تكون عميل",
+
+  "Do You Want To be A Freelancer":"هل تريدان تكون مستقل",
+
+  "First Name":"الاسم الأول",
+
+  "Last Name":"الاسم الأخير",
+
+  "username":"اسم المستخدم",
+
+  "address":"العنوان",
+
+  "Phone Number":"رقم التليفون",
+
+  "Confirm Password":"تأكيد كلمة المرور",
+
+  "Submit":"تأكيد",
+
+  "Have you account":"اذا كنت تمتلك حساب",
+
+  "Log In":"تسجيل الدخول",
+
+  "Limit":"تحديد",
+
+  "Title":"عنوان",
+
+  "Description":"وصف",
+
+  "Add":"اضف",
+  
+  "About Us":"من نحن"
+
+
 }
