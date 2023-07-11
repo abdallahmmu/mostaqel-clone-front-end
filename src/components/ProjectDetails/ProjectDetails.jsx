@@ -10,7 +10,9 @@ import ProjectOffers from "./ProjectOffers.jsx";
 import SendOffer from "./SendOffer.jsx";
 import { useSelector } from "react-redux";
 import Skeleton from "@mui/material/Skeleton";
+
 const ProjectDetails = () => {
+
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const { token, role, id } = useSelector((state) => state.authSlice?.userData);
@@ -20,6 +22,7 @@ const ProjectDetails = () => {
 
   useEffect(() => {
     fetchData(projectId, setDetails, setLoading, navigate);
+
   }, []);
 
   return (
@@ -57,7 +60,7 @@ const ProjectDetails = () => {
               {!loading && (
                 <ProjectOffers
                   id={projectId}
-                  isOwner={details.clientId == id}
+                  isOwner={details.clientId._id == id}
                 />
               )}
             </div>

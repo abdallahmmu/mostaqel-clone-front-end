@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-function CardPayment({ userData }) {
+import { useLoaderData } from "react-router-dom";
+function CardPayment() {
+
+  let { data } = useLoaderData();
+
+
   return (
     <Grid item sm={12}>
       <Box
@@ -15,10 +20,10 @@ function CardPayment({ userData }) {
           <CardContent sx={{ textAlign: "center" }}>
             <Typography variant="h6">Toatal Payment Available</Typography>
             <Typography variant="body2">
-              @{userData.username || userData.userName}
+              @{data.username || data.userName}
             </Typography>
             <br />
-            <Typography variant="span">$ 50</Typography>
+            <Typography variant="span">$ {data?.totalMoney || '0' }</Typography>
           </CardContent>
         </Card>
       </Box>

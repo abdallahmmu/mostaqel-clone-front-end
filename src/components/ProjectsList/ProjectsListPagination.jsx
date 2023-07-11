@@ -8,13 +8,14 @@ const ProjectsListPagination = ({ paginationData }) => {
     const dispatch = useDispatch();
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage)
     const [limit, setLimt] = useState(5)
+    
     const handleLimit = (e) => {
         dispatch(getAllProjects({ page, limit: e.target.value }))
         setLimt(e.target.value)
     }
 
     const retrievePagedProjcts = (ind) => {
-        let page = ++ind
+        let page = ind
 
         dispatch(getAllProjects({ page, limit }))
     }

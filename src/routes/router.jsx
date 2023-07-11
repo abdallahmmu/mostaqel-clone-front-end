@@ -31,6 +31,7 @@ const ChatDetails = React.lazy(() =>
 );
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
+const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
@@ -162,10 +163,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/payment",
+        path: "/payment/:userId",
         element: (
           <React.Suspense>
             <PaymentPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
           </React.Suspense>
         ),
       },

@@ -75,7 +75,7 @@ const MyOffer = ({ offer, setMyOffer }) => {
             <TableHead>
               <TableRow>
                 <TableCell colSpan="2">
-                  <h5>You Offer</h5>
+                  <h5>Your Offer</h5>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -94,7 +94,7 @@ const MyOffer = ({ offer, setMyOffer }) => {
             </TableBody>
           </Table>
 
-          <Button variant="outlined bg-primary" onClick={handleClickOpen}>
+          <Button variant="outlined bg-primary text-white" onClick={handleClickOpen}>
             Edit Your Offer
           </Button>
         </TableContainer>

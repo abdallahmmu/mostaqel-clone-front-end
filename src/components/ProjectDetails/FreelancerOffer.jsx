@@ -4,6 +4,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import { hireFreelancer, sendMessage } from "./helper.js";
 
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import SwipeRightIcon from '@mui/icons-material/SwipeRight';
 import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
@@ -62,6 +63,7 @@ function FreelancerOffer({ offer, isOwner }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "start",
+                padding: "0 30px "
               }}
             >
               {description}
@@ -90,15 +92,19 @@ function FreelancerOffer({ offer, isOwner }) {
             </div>
           )}
           {isOwner && (
-            <h4 className="text-center mb-2">
-              {amount}
-              <AttachMoneyIcon /> Within {duration} days
-            </h4>
+            <>
+              <h4 className="text-center mb-2">
+                {amount}
+                <AttachMoneyIcon /> Within { duration } days
+              </h4>
+            </>
           )}
+
           <p className="  opacity-50 ">
             Last updated {moment(new Date(updatedAt)).fromNow()}
           </p>
         </Box>
+      
       </div>
     </Grid>
   );

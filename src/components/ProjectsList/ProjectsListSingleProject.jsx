@@ -36,28 +36,30 @@ const ProjectsListSingleProject = ({ project }) => {
               <BorderColorIcon sx={{ fontSize: 15 }} />
             </Typography>
           </Box>
-          <Typography
+
+          <Box
             variant="p"
             sx={{ marginTop: "20px" }}
             className="project-excerpt"
           >
             {project.description}
             {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
-          </Typography>
-          <Typography
+          </Box>
+
+          <Box
           variant="div"
 
           >
             {project.skillsIds.map(skill => (
               <Typography 
               key={skill}
-              variant="span"
+              variant="div"
               fontSize={11}
-              className="bg-primary ms-2  text-white p-1 rounded">
+              className="bg-primary me-2  text-white p-1 rounded">
                 {skill.name}
               </Typography>
             ))}
-          </Typography>
+          </Box>
         </Grid>
       </Grid>
       {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}

@@ -1,14 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function PaymentCard() {
+  const {userData} = useSelector((state)=>state.authSlice)
   return (
     <div className="col-sm-12 col-md-8">
       <div className="card border-0 mt-3">
         <div className="card-body  ">
           <div className="row justify-content-center text-center">
             <div className="col-4">
-              <Link to="/payment">
+              <Link to={`/payment/${userData.id}`}>
                 <p className="text-success fs-4">
                   {" "}
                   All Payment <br />

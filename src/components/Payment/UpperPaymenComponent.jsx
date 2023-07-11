@@ -4,7 +4,7 @@ import ModalPayment from "./ModalPayment";
 
 
 
-function UpperPaymenComponent({ userData }) {
+function  UpperPaymenComponent({ userData }) {
   const [open, setOpen] = useState(false);
   const handelClose = useCallback(()=>{
     setOpen(false)
@@ -33,12 +33,15 @@ function UpperPaymenComponent({ userData }) {
           </Button>
         )}
         {userData.role === "client" && (
-          <Button variant="outlined" color="success">
+          <Button
+          onClick={() => setOpen(true)}
+          variant="outlined"
+          color="success">
             Deposit
           </Button>
         )}
       </Box>
-        <ModalPayment role={userData.role} open={open} closeModal={handelClose}/>
+        <ModalPayment userData={userData} open={open} closeModal={handelClose}/>
     </Grid>
   );
 }
