@@ -23,6 +23,21 @@ const ProjectStatistics = ({ details }) => {
       value: `${details.range} $`,
     },
   ];
+
+  let accptedProject = [
+    {
+      name: "Client Name",
+      value: details.clientId.userName,
+    },
+    {
+      name: "Freelancer Name",
+      // value: details.offerId.freelancerId.
+    },
+    {
+      name: "Budget",
+      value: `${details.range} $`,
+    },
+  ]
   return (
     <>
       <div className="col-lg-3 d-lg-block d-md-none">
@@ -50,6 +65,37 @@ const ProjectStatistics = ({ details }) => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        {(details.status === "pending") && (
+
+          <>
+            <hr />
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell colSpan={6}>
+                      <h5> Project Stackholders</h5>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.value}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
       </div>
     </>
   );

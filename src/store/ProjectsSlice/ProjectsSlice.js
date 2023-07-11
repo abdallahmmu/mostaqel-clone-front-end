@@ -21,7 +21,7 @@ export const getAllProjects = createAsyncThunk(
                     skillsIds
                 }
             });
-
+            
             return response.data
         } catch (error) {
             console.log(error)

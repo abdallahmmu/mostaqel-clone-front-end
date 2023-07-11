@@ -25,12 +25,16 @@ const fetchDetails = async (id, setDetails) => {
   setDetails(response.data);
   document.title = response.data.title;
 };
+
+
 const fetchOffer = async (id) => {
   const response = await axios.get(
     `${import.meta.env.VITE_API_URL}/projects/${id}/offers`
   );
   allOffers = response.data.results;
 };
+
+
 export const fetchData = async (id, setDetails, setLoading, navigate) => {
   projectId = id;
   try {
@@ -85,6 +89,7 @@ export const hireFreelancer = async (token, offerId) => {
     }
   );
 };
+
 export const sendMessage = async (token, freelancerId, navigate) => {
   const response = await axios.post(
     `${import.meta.env.VITE_API_URL}/chats`,
