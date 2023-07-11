@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Trusted() {
+export default function Trusted({ t }) {
   return (
     <section
       id="trusted"
@@ -10,7 +10,7 @@ export default function Trusted() {
     >
       <div className="container">
         {/*Start Trusted Container*/}
-        <h1 className="fw-bold fs-3 text-center mb-5">Trusted By</h1>
+        <h1 className="fw-bold fs-3 text-center mb-5">{t("Trusted By")}</h1>
         <div className="row">
           <div className="col-sm-6 col-md-4 col-lg-3">
             <div className="text-center mb-4">
@@ -173,5 +173,3 @@ export default function Trusted() {
     </section>
   );
 }
-
-

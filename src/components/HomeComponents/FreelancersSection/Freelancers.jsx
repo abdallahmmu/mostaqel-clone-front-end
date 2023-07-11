@@ -1,17 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Freelancers() {
+function Freelancers({ t }) {
   return (
-    <section id="freelancers"
-    data-aos="fade-left"
-    data-aos-anchor-placement="top-center"
-    data-aos-duration="400">
+    <section
+      id="freelancers"
+      data-aos="fade-left"
+      data-aos-anchor-placement="top-center"
+      data-aos-duration="400"
+    >
       <div className="container">
         <h1 className="fw-bold fs-3 text-center mb-3 text-primary">
-          Find Freelancers ?
+          {t("Find Freelancers ?")}
         </h1>
-        <p className="fw-normal text-center fs-p2 text-p">Cover Your Needs</p>
+        <p className="fw-normal text-center fs-p2 text-p">
+          {t("Cover Your Needs")}
+        </p>
         <div className="row">
           <div className="col-sm-6 col-md-4">
             <Link to="projects" className="btn-project">
@@ -24,7 +28,7 @@ function Freelancers() {
                   />
                 </div>
                 <h3 className="fs-4">
-                  Consulting and management business and services
+                  {t("Consulting and management business and services")}
                 </h3>
               </div>
             </Link>
@@ -40,7 +44,7 @@ function Freelancers() {
                   />
                 </div>
                 <h3 className="fs-4">
-                  Development And Coding, Programmers, Apps
+                  {t("Development And Coding, Programmers, Apps")}
                 </h3>
               </div>
             </Link>
@@ -56,7 +60,7 @@ function Freelancers() {
                   />
                 </div>
                 <h3 className="fs-4">
-                  Engineering, architecture and interior design
+                  {t("Engineering, architecture and interior design")}
                 </h3>
               </div>
             </Link>
@@ -71,7 +75,7 @@ function Freelancers() {
                     alt="movies"
                   />
                 </div>
-                <h3 className="fs-4">Video Editing, Editor</h3>
+                <h3 className="fs-4">{t("Video Editing, Editor")}</h3>
               </div>
             </Link>
           </div>
@@ -85,7 +89,7 @@ function Freelancers() {
                     alt="line-graph"
                   />
                 </div>
-                <h3 className="fs-4">Marketing, And Selles</h3>
+                <h3 className="fs-4">{t("Marketing, And Selles")}</h3>
               </div>
             </Link>
           </div>
@@ -99,7 +103,7 @@ function Freelancers() {
                     alt="document"
                   />
                 </div>
-                <h3 className="fs-4">Write, Translate Languages</h3>
+                <h3 className="fs-4">{t("Write, Translate Languages")}</h3>
               </div>
             </Link>
           </div>
