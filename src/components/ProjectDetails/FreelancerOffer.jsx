@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography, Avatar, Rating } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
 import { hireFreelancer, sendMessage } from "./helper.js";
@@ -13,7 +13,18 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
   const { _id, freelancerId, updatedAt, description, amount, duration } = offer;
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
-  return (
+
+
+  const [hired, setHired] = useState(false);
+
+  useEffect(() => {
+    console.log("hired")
+  }, [hired])
+
+  const handleHired = () => {
+    setHired(true)
+  }
+   return (
     <Grid
       sx={{
         backgroundColor: "white",
@@ -88,6 +99,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
                   className="btn"
                   onClick={() => {
                     hireFreelancer(token, _id);
+                    handleHired()
                   }}
                 >
                   <PaymentsIcon />

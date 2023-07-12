@@ -25,20 +25,6 @@ const ProjectStatistics = ({ details, isOwner }) => {
     },
   ];
 
-  let accptedProject = [
-    // {
-    //   name: "Client Name",
-    //   value: details.clientId.userName,
-    // },
-    {
-      name: "Freelancer Name",
-      // value: details.offerId.freelancerId.
-    },
-    {
-      name: "Budget",
-      value: `${details.range} $`,
-    },
-  ]
   return (
     <>
       <div className="col-lg-3 d-lg-block d-md-none">
@@ -67,7 +53,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
           </Table>
         </TableContainer>
 
-        {details.offerId && (
+        {isOwner && details.offerId && details.status == "pending" && (
           <>
             <hr />
             <TableContainer component={Paper}>
@@ -100,28 +86,40 @@ const ProjectStatistics = ({ details, isOwner }) => {
                       {details.offerId.duration}
                     </TableCell>
                   </TableRow>
-                  {isOwner && details.status == "pending" && (
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell colSpan={6} className="text-center">
-                        <button
-                          className="btn btn-success"
-                          onClick={() => {
-                            releaseMoney(
-                              details.offerId.freelancerId?._id,
-                              details.clientId?._id,
-                              details.offerId?._id
-                            );
-                          }}
-                        >
-                          Release Money
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  )}
+
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      Freelancer Name
+                    </TableCell>
+                    <TableCell align="right">
+                      {details.offerId.freelancerId.username}
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                    }}
+                  >
+                    <TableCell colSpan={6} className="text-center">
+                      <button
+                        className="btn btn-success"
+                        onClick={() => {
+                          releaseMoney(
+                            details.offerId.freelancerId?._id,
+                            details.clientId?._id,
+                            details.offerId?._id
+                          );
+                        }}
+                      >
+                        Release Money
+                      </button>
+                    </TableCell>
+                  </TableRow>
+
+
                 </TableBody>
               </Table>
             </TableContainer>

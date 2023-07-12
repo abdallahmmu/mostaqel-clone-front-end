@@ -40,11 +40,11 @@ const addProject = () => {
         <div>
           <Formik
             initialValues={{
-              title: "",
-              description: "",
-              range: 1,
-              categoryId: "",
-              skillsIds: [],
+              title: "projec ttitle",
+              description: "projec tdscriprvdfv",
+              range: 200,
+              categoryId: "6490b3f9bfaf60e0de89e55f",
+              skillsIds: ['64a464c6a7b0bdc692e7b768', '64a464e6a7b0bdc692e7b76d', '64a464efa7b0bdc692e7b76f'],
             }}
             onSubmit={addNewProject}
             validationSchema={AddProjectSchema}

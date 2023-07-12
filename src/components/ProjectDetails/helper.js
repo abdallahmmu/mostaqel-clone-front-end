@@ -37,7 +37,6 @@ export const fetchData = async (id, setDetails, setLoading, navigate) => {
   projectId = id;
   try {
     await Promise.all([fetchDetails(id, setDetails), fetchOffer(id)]);
-    console.log(allOffers);
     setLoading(false);
   } catch (e) {
     navigate("/projects");
@@ -77,6 +76,7 @@ export const updateOffer = async (data, token, offerId) => {
 };
 
 export const hireFreelancer = async (token, offerId) => {
+
   await axios.patch(
     `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
     {
@@ -86,6 +86,8 @@ export const hireFreelancer = async (token, offerId) => {
       headers: { "Content-Type": "application/json", Authorization: token },
     }
   );
+
+ 
 };
 export const releaseMoney = async (freelancerId, clientId, offerId) => {
   console.log(freelancerId, clientId, offerId);
@@ -97,6 +99,10 @@ export const releaseMoney = async (freelancerId, clientId, offerId) => {
       offerId,
     }
   );
+
+  Swal.fire({
+    title: "the project has been completed successfully "
+  }).then(() => window.location.assign('/projects'))
 };
 
 export const sendMessage = async (token, freelancerId, navigate) => {
@@ -112,6 +118,18 @@ export const sendMessage = async (token, freelancerId, navigate) => {
   );
   navigate("/chats/" + response.data.results._id);
 };
+
+
+export const ProjectDeactivating = async (id, token ) => {
+  let result  = await axios.patch(`${import.meta.env.VITE_API_URL}/projects/${id}/deactivate`, {}, {
+    headers: { "Content-Type": "application/json", Authorization: token }
+  })
+  let data = JSON.parse(result.data.status)
+  return data;
+
+}
+
+
 // export const fetchMyOffer = async (id, setMyOffer, projectId) => {
 //   freelancerId = id;
 //   const response = await axios.get(

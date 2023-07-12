@@ -1,11 +1,11 @@
+import React, { useEffect } from 'react'
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import axios from 'axios'
-import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { Navigate, json, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 
-export const ThankYou = () => {
+ const ThankYou = () => {
   const { userData } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
 
@@ -41,8 +41,11 @@ export const ThankYou = () => {
     }
   };
 
+  useEffect(() => {
+    sendData()
+  }, [])
   const handleThank = () => {
-    sendData().then(() => Navigate('/'))
+    sendData().then(() => navigate('/'))
     navigate(`/payment/${userData.id}`)
     localStorage.removeItem('sessionId');
     localStorage.removeItem('amount');
@@ -68,3 +71,6 @@ export const ThankYou = () => {
 
   )
 }
+
+
+ export default ThankYou
