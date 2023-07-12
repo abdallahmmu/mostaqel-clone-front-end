@@ -161,7 +161,7 @@ function ModalPayment({ open, closeModal, userData }) {
               {loading ? "Loading ..." : "Pay Now"}
             </Button>
           )}
-          {data.totalMoney > 50 && (
+          {data.totalMoney > 50 && userData.role === 'freelancer' && (
             <Box component="div">
               <FormControl fullWidth sx={{ m: 1 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">

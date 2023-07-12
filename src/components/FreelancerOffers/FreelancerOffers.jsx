@@ -21,7 +21,7 @@ const FreelancerOffers = () => {
               <ul className="list-group">
                 {offers.map(({ amount, duration, projectId, updatedAt }) => {
                   return (
-                    <div className="list-group-item m-2">
+                    <div className="list-group-item m-2" key={projectId}>
                       <h3>
                         <Link to={`/projects/${projectId._id}`}>
                           {projectId.title}

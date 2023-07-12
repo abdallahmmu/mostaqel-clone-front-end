@@ -37,6 +37,7 @@ const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
 import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
+import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
             <ProfileStatistics />
           </React.Suspense>
         ),
-        loader: getUserByIdLoader,
+        loader: getUserStatisticsById,
       },
       {
         path: "profile/edit/:userId",

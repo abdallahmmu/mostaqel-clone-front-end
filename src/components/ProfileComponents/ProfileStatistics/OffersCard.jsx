@@ -1,78 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, useLoaderData } from 'react-router-dom'
 function OffersCard() {
+  const {freelancersOffers} = useLoaderData()
+  const {userData} = useSelector((state)=>state.authSlice)
   return (
 <div className="col-sm-12 col-md-8">
   <div className="card border-0 mt-3">
     <div className="card-body">
       <div className="row">
         {/*Offers Intro*/}
-        <div className="col-4">
-          <Link to="/myoffers" className="text-dark text-center">
-            <p className="fs-4">My Offers <br /><span>50</span></p>
+        <div className="col-12">
+          <Link to={userData.role === 'freelancer' ? '/myoffers': '/projects'} className="text-dark text-center">
+            <p className="fs-4">{userData.role === 'freelancer' ? 'My Offers' : 'My Projects'} <br /><span>{freelancersOffers.length || 'API CALL NEEDED'}</span></p>
           </Link>
-        </div>
-        {/*Progress 1*/}
-        <div className="col-4">
-          <div className="progress__bars">
-            <div className="progress__bar">
-              <div className="bids-progress fs-p1">
-                <div className="clearfix">
-                  <div className="pull-left">Waiting</div>
-                  <div className=" pull-right">3%</div>
-                </div>
-                <div className="progress progress--slim">
-                  <div className="progress-bar label-open" role="progressbar" aria-valuenow={3} aria-valuemin={0} aria-valuemax={100} style={{width: '3%'}}>
-                    <span className="sr-only" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="progress__bar">
-              <div className="bids-progress fs-p1">
-                <div className="clearfix">
-                  <div className="pull-left">Done</div>
-                  <div className=" pull-right">3%</div>
-                </div>
-                <div className="progress progress--slim">
-                  <div className="progress-bar label-completed" role="progressbar" aria-valuenow={3} aria-valuemin={0} aria-valuemax={100} style={{width: '3%'}}>
-                    <span className="sr-only" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/*Progress 2*/}
-        <div className="col-4">
-          <div className="progress__bars">
-            <div className="progress__bar">
-              <div className="bids-progress fs-p1">
-                <div className="clearfix">
-                  <div className="pull-left">in-progress</div>
-                  <div className=" pull-right">0%</div>
-                </div>
-                <div className="progress progress--slim">
-                  <div className="progress-bar label-in-progress" role="progressbar" aria-valuenow={3} aria-valuemin={0} aria-valuemax={100} style={{width: '0%'}}>
-                    <span className="sr-only" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="progress__bar">
-              <div className="bids-progress fs-p1">
-                <div className="clearfix">
-                  <div className="pull-left">Rejected</div>
-                  <div className=" pull-right">10%</div>
-                </div>
-                <div className="progress progress--slim">
-                  <div className="progress-bar label-rejected" role="progressbar" aria-valuenow={3} aria-valuemin={0} aria-valuemax={100} style={{width: '10%'}}>
-                    <span className="sr-only" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         {/*BreakLine*/}
         <hr />

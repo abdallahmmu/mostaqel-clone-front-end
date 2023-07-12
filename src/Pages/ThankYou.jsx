@@ -29,7 +29,6 @@ import Swal from 'sweetalert2';
             },
           }
         );
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
