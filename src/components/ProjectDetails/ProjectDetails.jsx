@@ -56,6 +56,7 @@ const ProjectDetails = () => {
         <div className="container">
           <Box>
             <Container >
+              
               <Grid mb={10} style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography  fontSize={30}>
                   {details.title}

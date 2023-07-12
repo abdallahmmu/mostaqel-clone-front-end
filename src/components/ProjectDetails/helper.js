@@ -90,19 +90,33 @@ export const hireFreelancer = async (token, offerId) => {
  
 };
 export const releaseMoney = async (freelancerId, clientId, offerId) => {
-  console.log(freelancerId, clientId, offerId);
-  await axios.patch(
-    `${import.meta.env.VITE_API_URL}/projects/${projectId}/complete`,
-    {
-      freelancerId,
-      clientId,
-      offerId,
-    }
-  );
 
   Swal.fire({
-    title: "the project has been completed successfully "
-  }).then(() => window.location.assign('/projects'))
+    title: 'Are you sure to complete this project?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, complete it!'
+  }).then( async (result) => {
+    if (result.isConfirmed) {
+
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/projects/${projectId}/complete`,
+        {
+          freelancerId,
+          clientId,
+          offerId,
+        }
+      );
+    
+      Swal.fire({
+        title: "the project has been completed successfully "
+      }).then(() => window.location.assign('/projects'))
+    }
+  })
+
+  
 };
 
 export const sendMessage = async (token, freelancerId, navigate) => {
