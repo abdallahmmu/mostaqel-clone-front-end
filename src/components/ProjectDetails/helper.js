@@ -26,14 +26,12 @@ const fetchDetails = async (id, setDetails) => {
   document.title = response.data.title;
 };
 
-
 const fetchOffer = async (id) => {
   const response = await axios.get(
     `${import.meta.env.VITE_API_URL}/projects/${id}/offers`
   );
   allOffers = response.data.results;
 };
-
 
 export const fetchData = async (id, setDetails, setLoading, navigate) => {
   projectId = id;
@@ -86,6 +84,17 @@ export const hireFreelancer = async (token, offerId) => {
     },
     {
       headers: { "Content-Type": "application/json", Authorization: token },
+    }
+  );
+};
+export const releaseMoney = async (freelancerId, clientId, offerId) => {
+  console.log(freelancerId, clientId, offerId);
+  await axios.patch(
+    `${import.meta.env.VITE_API_URL}/projects/${projectId}/complete`,
+    {
+      freelancerId,
+      clientId,
+      offerId,
     }
   );
 };

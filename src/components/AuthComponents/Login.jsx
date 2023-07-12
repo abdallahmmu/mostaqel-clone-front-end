@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { loginSchema } from "../../Schemas/LoginSchema";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useTranslation } from "react-i18next";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { authActions, loginToAccount } from "../../store/AuthSlice/authSlice";
 
 const fields = {
@@ -13,18 +13,18 @@ const fields = {
 };
 
 function Login() {
-const { t } = useTranslation();
-  const dispatch = useDispatch()
-  
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
   const handelLoginSubmit = (values) => {
-    dispatch(loginToAccount(values))
+    dispatch(loginToAccount(values));
   };
 
-  useEffect(()=>{
-    return ()=>{
-      dispatch(authActions.cleanUpRegister())
-    }
-  },[])
+  useEffect(() => {
+    return () => {
+      dispatch(authActions.cleanUpRegister());
+    };
+  }, []);
   return (
     <div
       id="form__container"
@@ -128,7 +128,8 @@ const { t } = useTranslation();
                   </div>
 
                   <span>
-                    {t("Haven't you account")}<Link to="/register">{t("Sign Up")}</Link>
+                    {t("Haven't you account")}
+                    <Link to="/register"> {t("Sign Up")}</Link>
                   </span>
                 </Form>
               )}

@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import FreelancerRegister from "../components/AuthComponents/FreelancerRegister";
 import ClientRegister from "../components/AuthComponents/ClientRegister";
 // import ClientRegister from "../components/AuthComponents/ClientRegister";
+import { useTranslation } from "react-i18next";
 
 function Register() {
-  const [client, setClient] = useState('');
+  const [client, setClient] = useState("");
+  const { t } = useTranslation();
 
-
-  useEffect(()=>{
-    document.title = 'Mostaqel-Clone | Register'
-  },[])
+  useEffect(() => {
+    document.title = "Mostaqel-Clone | Register";
+  }, []);
   return (
     <>
       {/* Choose Type */}
@@ -18,26 +19,26 @@ function Register() {
           className="d-flex flex-column  align-items-center justify-content-center"
           style={{ height: "80vh" }}
         >
-          <h1>Please Choose Type of Registeration</h1>
+          <h1>{t("Please Choose Type of Registeration")}</h1>
           <button
             onClick={() => setClient("client")}
             className="btn btn-danger p-3 mb-2"
           >
-            Do You Want To be A Client
+            {t("Do You Want To be A Client")}
           </button>
           <button
             onClick={() => setClient("freelancer")}
             className="btn btn-dark p-3"
           >
-            Do You Want To be A Freelancer
+            {t("Do You Want To be A Freelancer")}
           </button>
         </div>
       )}
 
       {/* Freelancer Form */}
-     {client === 'freelancer' && <FreelancerRegister/>}
+      {client === "freelancer" && <FreelancerRegister t={t} />}
       {/* Client Form */}
-      {client === 'client' && <ClientRegister/>}
+      {client === "client" && <ClientRegister t={t} />}
     </>
   );
 }

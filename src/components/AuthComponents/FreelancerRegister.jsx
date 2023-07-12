@@ -21,8 +21,8 @@ const fields = {
   categoryId: "",
 };
 
-function FreelancerRegister() {
-  const { isLoading,errors } = useSelector((state) => state.authSlice);
+function FreelancerRegister({ t }) {
+  const { isLoading, errors } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
   const categories = useLoaderData();
 
@@ -31,15 +31,14 @@ function FreelancerRegister() {
       ...values,
     };
     dispatch(registerNewUser(newUser));
-   
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     //Cleaning
     return () => {
-      dispatch(authActions.cleanUpRegister())
-    }
-  },[])
+      dispatch(authActions.cleanUpRegister());
+    };
+  }, []);
   return (
     <div
       id="form__container"
@@ -50,7 +49,7 @@ function FreelancerRegister() {
         style={{ borderRadius: 40, boxShadow: "0px 0px 5px 0px #2386" }}
       >
         <h3 className="text-center pt-4 fw-semibold">
-          Register As A Freelancer
+          {t("Register As A Freelancer")}
         </h3>
         <div className="row p-5">
           <div className="col-lg-6 col-md-12 d-none d-sm-block">
@@ -68,7 +67,7 @@ function FreelancerRegister() {
               <Form className="row g-3 col-lg-6 col-md-12">
                 <div className=" col-md-6">
                   <label htmlFor="firstName" className="form-label">
-                    First Name <span className="text-danger">*</span>
+                    {t("First Name")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -82,11 +81,13 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.firstName && <span className="text-danger">{errors.firstName}</span>}
+                  {errors.firstName && (
+                    <span className="text-danger">{errors.firstName}</span>
+                  )}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="lastName" className="form-label">
-                    Last Name <span className="text-danger">*</span>
+                    {t("Last Name")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -100,11 +101,13 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.lastName && <span className="text-danger">{errors.lastName}</span>}
+                  {errors.lastName && (
+                    <span className="text-danger">{errors.lastName}</span>
+                  )}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="username" className="form-label">
-                    username <span className="text-danger">*</span>
+                    {t("username")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -118,11 +121,13 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.username && <span className="text-danger">{errors.username}</span>}
+                  {errors.username && (
+                    <span className="text-danger">{errors.username}</span>
+                  )}
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="jobTitle" className="form-label">
-                    job Title <span className="text-danger">*</span>
+                    {t("job Title")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -139,7 +144,7 @@ function FreelancerRegister() {
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="inputEmail4" className="form-label">
-                    Email <span className="text-danger">*</span>
+                    {t("Email")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="email"
@@ -153,11 +158,13 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.email && <span className="text-danger">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="text-danger">{errors.email}</span>
+                  )}
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="phoneNumber" className="form-label">
-                    Phone Number <span className="text-danger">*</span>
+                    {t("Phone Number")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -171,11 +178,13 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.phoneNumber && <span className="text-danger">{errors.phoneNumber}</span>}
+                  {errors.phoneNumber && (
+                    <span className="text-danger">{errors.phoneNumber}</span>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword4" className="form-label">
-                    Password <span className="text-danger">*</span>
+                    {t("Password")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="password"
@@ -192,7 +201,8 @@ function FreelancerRegister() {
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword5" className="form-label">
-                    Confirm Password <span className="text-danger">*</span>
+                    {t("Confirm Password")}
+                    <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="password"
@@ -208,7 +218,7 @@ function FreelancerRegister() {
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="categoryId" className="form-label">
-                    Category <span className="text-danger">*</span>
+                    {t("Category")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     className="form-select"
@@ -228,16 +238,19 @@ function FreelancerRegister() {
                     component="div"
                     className="text-danger"
                   />
-                  {errors.categoryId && <span className="text-danger">{errors.categoryId}</span>}
+                  {errors.categoryId && (
+                    <span className="text-danger">{errors.categoryId}</span>
+                  )}
                 </div>
                 <div className="col-12  mx-auto">
                   <button type="submit" className="btn btn-primary">
-                    {isLoading && <LoadingIndecator/>}
+                    {isLoading && <LoadingIndecator />}
                     {!isLoading && <span>Submit</span>}
                   </button>
                 </div>
                 <span>
-                  Have you account <Link to="/login">Log In</Link>
+                  {t("Have you account")}
+                  <Link to="/login"> {t("Log In")}</Link>
                 </span>
               </Form>
             )}
