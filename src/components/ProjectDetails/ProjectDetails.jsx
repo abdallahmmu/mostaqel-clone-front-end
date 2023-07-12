@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import Skeleton from "@mui/material/Skeleton";
 
 const ProjectDetails = () => {
-
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const { token, role, id } = useSelector((state) => state.authSlice?.userData);
@@ -22,7 +21,6 @@ const ProjectDetails = () => {
 
   useEffect(() => {
     fetchData(projectId, setDetails, setLoading, navigate);
-
   }, []);
 
   return (
@@ -31,7 +29,10 @@ const ProjectDetails = () => {
         <div className="container">
           <h2 className="mb-4">{details.title}</h2>
           <div className="row">
-            <ProjectStatistics details={details} />
+            <ProjectStatistics
+              details={details}
+              isOwner={details.clientId?._id == id}
+            />
             <div className="col-lg-9 col-md-12">
               <ProjectInfo details={details} />
               {!loading &&
@@ -60,7 +61,9 @@ const ProjectDetails = () => {
               {!loading && (
                 <ProjectOffers
                   id={projectId}
+                  status={details.status}
                   isOwner={details.clientId._id == id}
+                  winningOffer={details.offerId?._id}
                 />
               )}
             </div>

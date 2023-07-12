@@ -262,7 +262,10 @@ export default function NavigationMUI() {
             <NavLink to="contact" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={t("Contact Us")} />
+                  <ListItemText
+                    sx={{ color: "#000" }}
+                    primary={t("Contact Us")}
+                  />
                 </ListItemButton>
               </ListItem>
             </NavLink>

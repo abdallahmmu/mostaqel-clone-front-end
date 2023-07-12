@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 const ProjectOffers = (props) => {
   const [offers, setOffers] = useState([]);
 
-  let { id, isOwner } = props;
+  let { id, isOwner, status, winningOffer } = props;
   useEffect(() => {
     fetchOffers(setOffers);
   }, []);
@@ -24,6 +24,8 @@ const ProjectOffers = (props) => {
               offer={offer}
               key={offer.createdAt}
               isOwner={isOwner}
+              status={status}
+              winningOffer={winningOffer}
             />
           );
         })}
