@@ -19,23 +19,12 @@ function PaymentCard() {
                 </p>
               </Link>
             </div>
-
-            <div className="col-4">
-              <p className="fs-4">
-                {" "}
-                <span className="text-dark">Withdraw</span> <br />
-                <span className="fw-bold text-p">$0.00</span>
-              </p>
-            </div>
           </div>
           <hr />
 
           <div className="row justify-content-center text-center">
             <div className="col-4">
               <p className="text-p fw-bold"> Availble ${data?.totalMoney || 0}</p>
-            </div>
-            <div className="col-4">
-              <p className="text-p fw-bold"> Pending $0.00</p>
             </div>
           </div>
         </div>
