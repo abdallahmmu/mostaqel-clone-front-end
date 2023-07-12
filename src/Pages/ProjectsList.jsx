@@ -32,7 +32,9 @@ const ProjectsList = () => {
           <div className="col-md-9">
             {!isLoading ? (
               projects.map((project) => (
+            
                 <ProjectsItemsList key={project._id} project={project} />
+            
               ))
             ) : (
               <LoadingSpinner />

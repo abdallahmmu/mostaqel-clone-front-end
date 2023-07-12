@@ -15,9 +15,8 @@ const ProjectsListPagination = ({ paginationData }) => {
     }
 
     const retrievePagedProjcts = (ind) => {
-        let page = ind
 
-        dispatch(getAllProjects({ page, limit }))
+        dispatch(getAllProjects({ page:ind, limit }))
     }
 
 

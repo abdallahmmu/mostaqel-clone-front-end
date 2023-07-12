@@ -31,7 +31,8 @@ const ChatDetails = React.lazy(() =>
 );
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
-const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+// const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+import { ThankYou } from "../Pages/ThankYou";
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";

@@ -101,7 +101,6 @@ export const sendMessage = async (token, freelancerId, navigate) => {
       headers: { "Content-Type": "application/json", Authorization: token },
     }
   );
-  console.log(response.data.results._id);
   navigate("/chats/" + response.data.results._id);
 };
 // export const fetchMyOffer = async (id, setMyOffer, projectId) => {
