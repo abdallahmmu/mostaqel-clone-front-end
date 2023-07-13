@@ -55,7 +55,8 @@ const ProjectsListFilter = () => {
 
     const handleSlider = (event, newSliderValue) => {
       setSliderValue(newSliderValue);
-      dispatch(getAllProjects({ range: newSliderValue }))
+      dispatch(getAllProjects({ range_gt: 0, range_lt: newSliderValue }))
+    // console.log(sliderValue)
     };
     return (
         <div className="filter-side">

@@ -4,11 +4,12 @@ import ProjectsItemsList from "../components/ProjectsList/ProjectsItemsList";
 import ProjectsListPagination from "../components/ProjectsList/ProjectsListPagination";
 import ProjectsListFilter from "../components/ProjectsList/ProjectsListFilter";
 import "../components/ProjectsList/ProjectList.css";
-
+import { SentimentVeryDissatisfied } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProjects } from "../store/ProjectsSlice/ProjectsSlice";
 import { useParams, useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
+import { Box, Typography } from "@mui/material";
 const ProjectsList = () => {
   const { projects, paginationData, isLoading } = useSelector(
     (state) => state.ProjectsSlice
@@ -30,15 +31,30 @@ const ProjectsList = () => {
             <ProjectsListFilter />
           </div>
           <div className="col-md-9">
-            {!isLoading ? (
-              projects.map((project) => (
-            
-                <ProjectsItemsList key={project._id} project={project} />
-            
-              ))
-            ) : (
-              <LoadingSpinner />
-            )}
+            {!isLoading ?
+              (projects.length ?
+
+                projects.map((project, index) => (
+
+
+                  <ProjectsItemsList key={index} project={project} />
+
+
+                ))
+                :
+                (
+                  <Box fontSize={30} style={{ textAlign: 'center' }}>
+                    <SentimentVeryDissatisfied  />
+                    <Typography fontSize={30} style={{ textAlign: 'center' }}>
+                      no projects fit your requests
+                    </Typography>
+                  </Box>
+                )
+              )
+              :
+              (
+                <LoadingSpinner />
+              )}
             <ProjectsListPagination paginationData={paginationData} />
           </div>
         </div>

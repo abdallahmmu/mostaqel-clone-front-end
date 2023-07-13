@@ -23,9 +23,11 @@ const ProjectsListSingleProject = ({ project }) => {
             style={{
               color: '#fff',
               padding: '5px 7px',
-              backgroundColor: (project.status == 'close') ? 'red':  'blue'}}
+              borderRadius: '7px',
+              backgroundColor: (project.status === 'close') ? '#d32f2f' : (project.status == 'complete')   ? '#2386C8': "green"}}
             >
               {project.status}
+             
             </Typography>
           </Box>
           <Box component="div" className="project-info ">
@@ -56,9 +58,9 @@ const ProjectsListSingleProject = ({ project }) => {
             component="div"
 
           >
-            {project.skillsIds.map(skill => (
+            {project.skillsIds.map((skill, index) => (
               <Typography
-                key={skill}
+                key={index}
                 variant="div"
                 fontSize={11}
                 style={{ padding: '8px' }}
