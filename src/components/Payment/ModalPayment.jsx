@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Modal,
   Typography,
   Box,
   FormControl,
   InputLabel,
-  OutlinedInput,
   InputAdornment,
-  TextField,
   FilledInput,
-  FormHelperText,
   Button,
 } from "@mui/material";
+import { addPercent } from "../../helpers/taxs";
+import { depositeCredit } from "./depositPayment";
+import { withdrawFreelancer } from "./withdrawFreelancer";
+import { useNavigate, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import { ElevatorSharp } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+
 
 const style = {
   position: "absolute",
@@ -24,75 +29,168 @@ const style = {
   p: 4,
 };
 
-function ModalPayment({ open, closeModal, role }) {
+function ModalPayment({ open, closeModal, userData }) {
+  const { t } = useTranslation();
+
+  const [amount, setAmount] = useState("");
+  const [withdraw, setWithDraw] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const { data } = useLoaderData();
+  const navigate = useNavigate();
+  const handelAmountCalculation = useCallback((e) => {
+    setAmount(e.target.value);
+  }, []);
+
+  const onDepositCreditHandler = async () => {
+    if (amount === "") {
+      return;
+    }
+    setLoading(true);
+    const session = await depositeCredit(amount, "deposit", userData.id);
+    if (session) {
+      localStorage.setItem("sessionId", session.sessionId);
+      localStorage.setItem("amount", amount);
+      window.location.assign(session.url);
+    }
+    setLoading(false);
+    closeModal(false);
+    setAmount(0);
+  };
+
+  const handelCloseModel = () => {
+    closeModal(false);
+    setAmount(0);
+  };
+
+  const handelWithdrawMony = (e) => {
+    setWithDraw(+e.target.value);
+  };
+
+  const onWithdrawMony = async () => {
+    setLoading(true);
+    const data = await withdrawFreelancer(withdraw, userData.id);
+    if (data.message) {
+      setLoading(false);
+      closeModal(false);
+      const done = await Swal.fire({
+        title: "Success",
+        text: "Your Withdraw is completed",
+        icon: "success",
+      });
+
+      if (done) {
+        navigate(`/profile/statistics/${userData.id}`);
+      }
+    } else {
+      setLoading(false);
+      closeModal(false);
+      Swal.fire({
+        title: "Faild",
+        text: data.error,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <Modal
       open={open}
-      onClose={() => closeModal(false)}
+      onClose={handelCloseModel}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Your Payment
+          {t("Your Payment")}
         </Typography>
 
-        <Box
-          component="div"
-          sx={{ display: "flex", flexDirection: "column", my: 3 }}
-        >
-          <TextField sx={{ m: 1 }} label="Full Name" />
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "start",
-            }}
-          >
-            <FormControl sx={{ m: 1, flex: 1 }} variant="filled">
-              <FilledInput
-                id="filled-adornment-weight"
-                endAdornment={
-                  <InputAdornment position="end">Visa Card</InputAdornment>
-                }
-                aria-describedby="filled-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
+        {userData.role === "client" && (
+          <>
+            {" "}
+            <Box
+              component="div"
+              sx={{ display: "flex", flexDirection: "column", my: 3 }}
+            >
+              <FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                <InputLabel htmlFor="filled-adornment-amount">
+                  {t("Amount")}
+                </InputLabel>
+                <FilledInput
+                  id="filled-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
+                  type="number"
+                  inputProps={{ min: 0 }}
+                  onChange={handelAmountCalculation}
+                />
+              </FormControl>
+            </Box>
+            <hr />
+            <Box sx={{ my: 3 }}>
+              <Typography variant="p" sx={{ fontWeight: "bold", fontSize: 14 }}>
+                {t("Total Amount After Pay Will be")} (Amount * 2.5% tax)
+              </Typography>
+              <Typography
+                sx={{
+                  textAlign: "center",
+                  mt: 5,
+                  color: "green",
+                  fontSize: 24,
                 }}
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1 }} variant="filled">
-              <FilledInput
-                id="filled-adornment-weight"
-                endAdornment={
-                  <InputAdornment position="end">CCV</InputAdornment>
-                }
-                aria-describedby="filled-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-            </FormControl>
+              >
+                $ {amount > 0 ? addPercent(+amount) : "0"}
+              </Typography>
+            </Box>
+          </>
+        )}
+        {userData.role === "freelancer" && (
+          <Box sx={{ my: 3 }}>
+            <Typography
+              variant="p"
+              sx={{ fontWeight: "bold", fontSize: 14, color: "red" }}
+            >
+              {t("You Can Not Withdrow Your Money unless it is greater than")} $50
+            </Typography>
           </Box>
-          <FormControl fullWidth sx={{ m: 1 }} variant="filled">
-            <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
-            <FilledInput
-              id="filled-adornment-amount"
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
-            />
-          </FormControl>
-        </Box>
-        <hr/>
-        <Box sx={{my:3}}>
-            <Typography variant="p" sx={{fontWeight:'bold', fontSize:14}}>Total Amount After Pay Will be (Amount * 2.5% tax)</Typography>
-            <Typography sx={{textAlign:'center' ,mt:5,color:'green',fontSize:24}}>$ 50</Typography>
-        </Box>
-        <Box sx={{my:3,textAlign:'end'}}>
-     <Button variant="contained" sx={{mx:3}} color="success">Pay Now</Button>
-     <Button variant="contained" color="success">Withdraw</Button>
+        )}
+        <Box sx={{ my: 3, textAlign: "end" }}>
+          {userData.role === "client" && (
+            <Button
+              variant="contained"
+              sx={{ mx: 3 }}
+              color="success"
+              onClick={onDepositCreditHandler}
+            >
+              {loading ? "Loading ..." : "Pay Now"}
+            </Button>
+          )}
+          {data.totalMoney > 50 && userData.role === 'freelancer' && (
+            <Box component="div">
+              <FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                <InputLabel htmlFor="filled-adornment-amount">
+                  {t("Amount")}
+                </InputLabel>
+                <FilledInput
+                  id="filled-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
+                  type="number"
+                  min="0"
+                  inputProps={{ min: 0 }}
+                  onChange={handelWithdrawMony}
+                />
+              </FormControl>
+              <Button
+                onClick={onWithdrawMony}
+                variant="contained"
+                color="success"
+              >
+                {loading ? "Loading" : "Withdraw"}
+              </Button>
+            </Box>
+          )}
         </Box>
       </Box>
     </Modal>

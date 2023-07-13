@@ -4,10 +4,15 @@ const FilterSlice = createSlice({
     name: "ProjectFilter",
     initialState: {
         page: 1,
-        limit: 5 
+        limit: 5,
+        keyword: '',
+        skillsIds: [],
+        categoryId: '',
+        range_lt: 0,
+        range_gt: 0
     },
     reducers: {
-        setFilteringObj: (state, payload) => {
+        setFilteringObj: (state, action) => {
             return state 
         }
     }

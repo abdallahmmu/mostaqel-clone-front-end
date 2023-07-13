@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Hero() {
+function Hero({ t }) {
   return (
-    <section id="hero"
-
-    >
+    <section id="hero">
       {/* OverLay */}
       <div className="overlay" />
       <div className="container">
@@ -14,18 +12,19 @@ function Hero() {
           {/* UpperContent */}
           <div className="hero-content__header text-center">
             <h3 className="fw-bold fs-1 fs-md-3">
-              Mostaqel to get your business done remotely
+              {t("Mostaqel to get your business done remotely")}
             </h3>
             <p>
-              Complete your projects easily and safely through the largest
-              freelancing platform in the Arab world
+              {t(
+                "Complete your projects easily and safely through the largest freelancing platform in the Arab world"
+              )}
             </p>
             {/* ForMobileOnly */}
             <a
               role="btn"
               className="btn p-3 d-sm-none rounded bg-primary text-white"
             >
-              Start Your Project Now
+              {t("Start Your Project Now")}
             </a>
           </div>
           {/* Search bar For Desktop */}
@@ -33,12 +32,12 @@ function Hero() {
             <form className="d-flex w-100">
               <input
                 className="form-control"
-                placeholder="Enter Your Project Here Name"
+                placeholder={t("Enter Project Here Name")}
                 name="title"
               />
-              <button type="submit" className="btn bg-primary text-white fs-6">
-                Start Your Project Now
-              </button>
+              <Link to='/projects' type="submit" className="btn bg-primary text-white fs-6">
+                {t("Find Your Project")}
+              </Link>
             </form>
           </div>
           {/* Botton Search For Job For Freelancers */}
@@ -47,12 +46,12 @@ function Hero() {
               to="projects"
               className="btn p-3  rounded bg-transperant border border-white "
             >
-              Find Job
+              {t("Find Job")}
             </Link>
           </div>
           {/*        Get More Info Button */}
           <div className="hero-content__more-info d-flex flex-column align-items-center justify-content-center mt-5 scale-up-center">
-            <span className="mb-3 fs-6">Show More</span>
+            <span className="mb-3 fs-6">{t("Show More")}</span>
             <a
               href="#trusted"
               className="btn  rounded bg-transperant border border-white text-white"

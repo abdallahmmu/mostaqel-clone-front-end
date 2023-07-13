@@ -1,6 +1,6 @@
 import React from "react";
 
-function Help() {
+function Help({ t }) {
   return (
     <section
       id="help"
@@ -12,7 +12,7 @@ function Help() {
     >
       <div className="container">
         <h1 className="fw-bold fs-3 text-center mb-5 text-primary">
-          How Freelancers Helps You ?
+          {t("How Freelancers Helps You ?")}
         </h1>
         <div className="row">
           <div className="col-sm-6 col-md-4">
@@ -24,10 +24,11 @@ function Help() {
                   alt="dollar-symbol"
                 />
               </div>
-              <h3 className="fs-4">Low Cost</h3>
+              <h3 className="fs-4">{t("Low Cost")}</h3>
               <p className="fw-normal fs-p2 text-p">
-                choose among the expert freelancers to work on achieving the
-                required
+                {t(
+                  "choose among the expert freelancers to work on achieving the required"
+                )}
               </p>
             </div>
           </div>
@@ -40,10 +41,11 @@ function Help() {
                   alt="like"
                 />
               </div>
-              <h3 className="fs-4">Good Freelancers</h3>
+              <h3 className="fs-4">{t("Good Freelancers")}</h3>
               <p className="fw-normal fs-p2 text-p ">
-                Browse the profiles of freelancers, see their skills, work and
-                Job Lorem, ipsum dolor.
+                {t(
+                  "Browse the profiles of freelancers, see their skills, work and Job Lorem, ipsum dolor."
+                )}
               </p>
             </div>
           </div>
@@ -56,10 +58,11 @@ function Help() {
                   alt="startup"
                 />
               </div>
-              <h3 className="fs-4">Get Your Job Done</h3>
+              <h3 className="fs-4">{t("Get Your Job Done")}</h3>
               <p className="fw-normal fs-p2 text-p ">
-                Publish your project and let the best professional freelancers
-                do the job
+                {t(
+                  "Publish your project and let the best professional freelancers do the job"
+                )}
               </p>
             </div>
           </div>
@@ -72,10 +75,11 @@ function Help() {
                   alt="handshake"
                 />
               </div>
-              <h3 className="fs-4">Guarantee your rights</h3>
+              <h3 className="fs-4">{t("Guarantee your rights")}</h3>
               <p className="fw-normal fs-p2 text-p ">
-                Fully preserve your rights, as an independent site plays the
-                role of mediator between you and the freelancer
+                {t(
+                  "Fully preserve your rights, as an independent site plays the role of mediator between you and the freelancer"
+                )}
               </p>
             </div>
           </div>
@@ -88,10 +92,11 @@ function Help() {
                   alt="teamwork"
                 />
               </div>
-              <h3 className="fs-4">Cover your skill needs</h3>
+              <h3 className="fs-4">{t("Cover your skill needs")}</h3>
               <p className="fw-normal fs-p2 text-p ">
-                Hire experts in different fields and from different countries to
-                implement the projects you need
+                {t(
+                  "Hire experts in different fields and from different countries to implement the projects you need"
+                )}
               </p>
             </div>
           </div>
@@ -104,10 +109,11 @@ function Help() {
                   alt="laptop"
                 />
               </div>
-              <h3 className="fs-4">Pay comfortably</h3>
+              <h3 className="fs-4">{t("Pay comfortably")}</h3>
               <p className="fw-normal fs-p2 text-p ">
-                Pay the value of the required work through secure payment
-                methods with full guarantee of your financial rights
+                {t(
+                  "Pay the value of the required work through secure payment methods with full guarantee of your financial rights"
+                )}
               </p>
             </div>
           </div>

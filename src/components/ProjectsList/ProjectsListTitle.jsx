@@ -4,8 +4,11 @@ import { getAllProjects } from "../../store/ProjectsSlice/ProjectsSlice";
 import { useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useTranslation } from "react-i18next";
+
 
 const ProjectsListTitle = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [sort, setSort] = useState("latest");
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +20,7 @@ const ProjectsListTitle = () => {
   return (
     <div className="page-title">
       <Typography variant="h5" sx={{ margin: "4rem 0px" }}>
-        Open Projects
+        {t("Open Projects")}
       </Typography>
       <Box component='div' className="projects-filter">
         <Button
@@ -25,7 +28,7 @@ const ProjectsListTitle = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           endIcon={<ArrowDropDownIcon />}
         >
-          {sort}
+          {(sort == 'createdAt') ? 'Oldeast' : "Latest"}
         </Button>
         {isOpen && (
           <Box
@@ -51,7 +54,8 @@ const ProjectsListTitle = () => {
               }}
               variant="p"
             >
-              Oldest
+              
+              {t("Oldest")}
             </Typography>
             <Typography
               onClick={() => getLatestProjects("-createdAt")}
@@ -62,7 +66,7 @@ const ProjectsListTitle = () => {
               }}
               variant="p"
             >
-              Latest
+              {t("Latest")}
             </Typography>
           </Box>
         )}

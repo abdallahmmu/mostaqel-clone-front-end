@@ -14,8 +14,12 @@ import { validate } from "./validate.js";
 import { updateOffer } from "./helper.js";
 import { useSelector } from "react-redux";
 import OfferForm from "./OfferForm.jsx";
+import { useTranslation } from "react-i18next";
+
 
 function EditOffer({ offer, open, onClose, onSubmit }) {
+  const { t } = useTranslation();
+
   const token = useSelector((state) => state.authSlice.userData.token);
 
   const formik = useFormik({
@@ -44,7 +48,7 @@ function EditOffer({ offer, open, onClose, onSubmit }) {
         },
       }}
     >
-      <DialogTitle>Edit Your Offer</DialogTitle>
+      <DialogTitle>{t("Edit Your Offer")}</DialogTitle>
       <div className="bg-white p-5 mt-2 ">
         <OfferForm formik={formik} handleClose={handleClose} EditOffer={true} />
       </div>
@@ -75,7 +79,7 @@ const MyOffer = ({ offer, setMyOffer }) => {
             <TableHead>
               <TableRow>
                 <TableCell colSpan="2">
-                  <h5>You Offer</h5>
+                  <h5>{t("Your Offer")}</h5>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -94,8 +98,8 @@ const MyOffer = ({ offer, setMyOffer }) => {
             </TableBody>
           </Table>
 
-          <Button variant="outlined bg-primary" onClick={handleClickOpen}>
-            Edit Your Offer
+          <Button variant="outlined bg-primary text-white" onClick={handleClickOpen}>
+            {t("Edit Your Offer")}
           </Button>
         </TableContainer>
       </div>

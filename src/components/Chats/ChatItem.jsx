@@ -1,11 +1,20 @@
 import React from "react";
-
-const ProjectInfo = () => {
+import moment from "moment";
+import { Link } from "react-router-dom";
+const ProjectInfo = ({ chat }) => {
+  const { projectId, freelancerId, clientId, createdAt, _id } = chat;
   return (
     <>
-      <div className="bg-white p-4">
-        <h1>I Want To Build webiste</h1>
-        <p>Last Update 4 days ago</p>
+      <div className="bg-white p-4 mb-2">
+        <h3>
+          <Link to={`/chats/${_id}`}>{projectId.title}</Link>
+        </h3>
+        <p>
+          {freelancerId.firstName} {freelancerId.lastName}{" "}
+          <span className="opacity-50">
+            {moment(new Date(createdAt)).fromNow()}
+          </span>
+        </p>
       </div>
     </>
   );

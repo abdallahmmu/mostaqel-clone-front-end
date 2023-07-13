@@ -4,7 +4,9 @@ import Select from 'react-select';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 import axios from 'axios';
 import { Slider } from '@mui/material';
+import { useTranslation } from "react-i18next";
 const ProjectsListFilter = () => {
+    const { t } = useTranslation();
     const fundMin = useRef();
     const dispatch = useDispatch()
     const [cats, setCats] = useState([])
@@ -55,18 +57,19 @@ const ProjectsListFilter = () => {
 
     const handleSlider = (event, newSliderValue) => {
       setSliderValue(newSliderValue);
-      dispatch(getAllProjects({ range: newSliderValue }))
+      dispatch(getAllProjects({ range_gt: 0, range_lt: newSliderValue }))
+    // console.log(sliderValue)
     };
     return (
         <div className="filter-side">
             <div className="search">
-                <div className="search-title mb-2 h5"> Search </div>
+                <div className="search-title mb-2 h5"> {t("Search")} </div>
                 <div className="form-group">
                     <input className="form-control" type="text" onChange={handleProjectsSearch} />
                 </div>
             </div>
             <div className="category">
-                <div className="category-title my-2 h5">Category</div>
+                <div className="category-title my-2 h5">{t("Category")}</div>
                 <ul className="list-unstyled">
 
                     {cats && cats.map(cat => (
@@ -81,7 +84,7 @@ const ProjectsListFilter = () => {
                 </ul>
             </div>
             <div className="skills">
-                <div className="skills-title my-2 h5">Skills</div>
+                <div className="skills-title my-2 h5">{t("Skills")}</div>
                 <div className="form-group">
 
                     <Select isMulti
@@ -95,7 +98,7 @@ const ProjectsListFilter = () => {
                 </div>
             </div>
             <div className="fund">
-                <div className="fund-title my-2 h5">Fund Slider</div>
+                <div className="fund-title my-2 h5">{t("Fund Slider")}</div>
                 
                 <Slider
                     value={sliderValue}
@@ -105,7 +108,7 @@ const ProjectsListFilter = () => {
                     max={100}
                     step={20}
                 />
-                <p>Range: {sliderValue}</p>
+                <p>{t("Range")}: {sliderValue}</p>
 
             </div>
         </div>

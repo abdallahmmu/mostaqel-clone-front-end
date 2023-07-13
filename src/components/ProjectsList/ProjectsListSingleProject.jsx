@@ -7,19 +7,28 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const ProjectsListSingleProject = ({ project }) => {
-
-
   return (
     <Box component='div' className="project">
-      
       <Grid container spacing={2}>
         <Grid item sm={10}>
           <Box
             component="div"
             sx={{ marginTop: "10px" }}
+            style={{display: 'flex', justifyContent: 'space-between'}}
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
+            {/* <Typography
+            
+            style={{
+              color: '#fff',
+              padding: '5px 7px',
+              borderRadius: '7px',
+              backgroundColor: (project.status === 'close') ? '#d32f2f' : (project.status == 'complete')   ? '#2386C8': "green"}}
+            >
+              {project.status}
+             
+            </Typography> */}
           </Box>
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">
@@ -36,28 +45,30 @@ const ProjectsListSingleProject = ({ project }) => {
               <BorderColorIcon sx={{ fontSize: 15 }} />
             </Typography>
           </Box>
-          <Typography
-            variant="p"
+
+          <Box
+            component="p"
             sx={{ marginTop: "20px" }}
             className="project-excerpt"
           >
-            {project.description}
-            {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
-          </Typography>
-          <Typography
-          variant="div"
+            <Typography variant="p">{project.description}</Typography>
+          </Box>
+
+          <Box
+            component="div"
 
           >
-            {project.skillsIds.map(skill => (
-              <Typography 
-              key={skill}
-              variant="span"
-              fontSize={11}
-              className="bg-primary ms-2  text-white p-1 rounded">
+            {project.skillsIds.map((skill, index) => (
+              <Typography
+                key={index}
+                variant="div"
+                fontSize={11}
+                style={{ padding: '8px' }}
+                className="bg-primary me-2  text-white rounded">
                 {skill.name}
               </Typography>
             ))}
-          </Typography>
+          </Box>
         </Grid>
       </Grid>
       {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}

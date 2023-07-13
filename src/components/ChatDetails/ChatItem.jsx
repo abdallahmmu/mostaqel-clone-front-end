@@ -1,6 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 
 const ProjectInfo = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="project-desc bg-white p-4">
@@ -14,7 +18,7 @@ const ProjectInfo = () => {
 
             <div class="media-body">
               <h5 class="from mrg--an">
-                <bdi>Hemdan Khalifa</bdi>
+                <bdi>{t("Hemdan Khalifa")}</bdi>
               </h5>
               <div class="text-zeta text-muted">
                 <i class="fa fa-clock-o"></i>

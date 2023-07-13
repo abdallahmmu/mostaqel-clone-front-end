@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import {
   CssBaseline,
   Box,
@@ -24,15 +24,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
+import { useTranslation } from "react-i18next";
+import { langContext } from "./../../contextAPI/context.jsx";
 
 export default function NavigationMUI() {
   const [open, setOpen] = React.useState(false);
   const { isAuth, userData } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-
+  const { lang, changeLang } = useContext(langContext);
+  const { t } = useTranslation();
   const handleDrawerOpen = useCallback(() => {
     setOpen(true);
   }, []);
@@ -57,7 +60,7 @@ export default function NavigationMUI() {
               sx={{ flexGrow: 1 }}
               component="div"
             >
-              Mostaqel Clone
+              <Link to='/' className="text-white">{t("Mostaqel Clone")}</Link>
             </Typography>
             <Hidden mdDown>
               <Box
@@ -82,11 +85,11 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      Home
+                      {t("Home")}
                     </Typography>
                   </NavLink>
                 )}
-                {(isAuth && userData.role === 'client')   && (
+                {isAuth && userData.role === "client" && (
                   <NavLink to="/add-projects">
                     <Typography
                       sx={{
@@ -100,7 +103,7 @@ export default function NavigationMUI() {
                       }}
                     >
                       <AddIcon />
-                      Add Project
+                      {t("Add Project")}
                     </Typography>
                   </NavLink>
                 )}
@@ -117,7 +120,7 @@ export default function NavigationMUI() {
                     }}
                   >
                     {isAuth && <TroubleshootIcon />}
-                    Find Project
+                    {t("Find Project")}
                   </Typography>
                 </NavLink>
                 {isAuth && (
@@ -151,7 +154,7 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      Contact Us
+                      {t("Contact Us")}
                     </Typography>
                   </NavLink>
                 )}
@@ -168,7 +171,7 @@ export default function NavigationMUI() {
                         },
                       }}
                     >
-                      About
+                      {t("About")}
                     </Typography>
                   </NavLink>
                 )}
@@ -181,10 +184,13 @@ export default function NavigationMUI() {
                       border: "1px solid white",
                       borderRadius: "0px",
                       marginRight: "10px",
+                      marginLeft: "10px",
                       color: "#fff",
                     }}
                   >
-                    <Typography sx={{ padding: "0px 5px" }}>Login</Typography>
+                    <Typography sx={{ padding: "0px 5px" }}>
+                      {t("Login")}
+                    </Typography>
                     <LogoutIcon />
                   </IconButton>
                 </NavLink>
@@ -213,16 +219,25 @@ export default function NavigationMUI() {
           },
         }}
         variant="persistent"
-        anchor="right"
+        anchor={lang == "en" ? "right" : "left"}
         open={open}
       >
         <Box sx={{ display: "flex", alignItems: "center", padding: "10px" }}>
           <IconButton onClick={handleDrawerClose}>
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6">Mostaqel-clone</Typography>
+          <Typography variant="h6">{t("Mostaqel-clone")}</Typography>
         </Box>
-
+        <ListItem
+          disablePadding
+          onClick={() => {
+            changeLang();
+          }}
+        >
+          <ListItemButton>
+            <ListItemIcon>{t("Change Lang")}</ListItemIcon>
+          </ListItemButton>
+        </ListItem>
         <Divider />
 
         {!isAuth && (
@@ -230,31 +245,28 @@ export default function NavigationMUI() {
             <NavLink to="/" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Home"} />
+                 <ListItemIcon sx={{ color: "#000" }}>{t("Home")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={"Find Project"}
-                  />
+                <ListItemIcon sx={{ color: "#000" }}>{t("Find Project")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="contact" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Contact Us"} />
+                <ListItemIcon sx={{ color: "#000" }}>{t("Contact Us")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="about" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"About Us"} />
+                <ListItemIcon sx={{ color: "#000" }}>{t("About Us")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
@@ -265,11 +277,8 @@ export default function NavigationMUI() {
           <List>
             <NavLink to="add-projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={"Add Project"}
-                  />
+                <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Add Project")}</ListItemIcon>
                   <ListItemIcon>
                     <AddIcon />
                   </ListItemIcon>
@@ -278,11 +287,8 @@ export default function NavigationMUI() {
             </NavLink>
             <NavLink to="projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={"Find Project"}
-                  />
+                <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Find Project")}</ListItemIcon>
                   <ListItemIcon>
                     <SearchIcon />
                   </ListItemIcon>
@@ -294,8 +300,8 @@ export default function NavigationMUI() {
               onClick={handleDrawerClose}
             >
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={"Profile"} />
+                <ListItemButton  sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Profile")}</ListItemIcon>
                   <ListItemIcon>
                     <Person2Icon />
                   </ListItemIcon>
@@ -304,8 +310,8 @@ export default function NavigationMUI() {
             </NavLink>
 
             <ListItem disablePadding onClick={onLogoutHandler}>
-              <ListItemButton>
-                <ListItemText primary={"Logout"} />
+              <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+              <ListItemIcon sx={{ color: "#000" }}>{t("Logout")}</ListItemIcon>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

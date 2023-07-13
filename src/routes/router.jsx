@@ -2,7 +2,8 @@ import React from "react";
 import { Link, createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
-
+//Portfolio Page
+const PortfolioPage = React.lazy(() => import("../Pages/Portfolio"));
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -30,10 +31,13 @@ const ChatDetails = React.lazy(() =>
 );
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
+const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
 import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
+import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -92,7 +96,7 @@ export const router = createBrowserRouter([
             <ProfileStatistics />
           </React.Suspense>
         ),
-        loader: getUserByIdLoader,
+        loader: getUserStatisticsById,
       },
       {
         path: "profile/edit/:userId",
@@ -109,7 +113,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <AllProject />
           </React.Suspense>
-        ),
+        )
       },
       {
         path: "add-projects",
@@ -126,7 +130,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <ProjectDetails />
           </React.Suspense>
-        ),
+        )
       },
       {
         path: "myoffers",
@@ -153,10 +157,27 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/payment",
+        path: "/portfolio",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <PortfolioPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/payment/:userId",
         element: (
           <React.Suspense>
             <PaymentPage />
+          </React.Suspense>
+        ),
+        loader: getUserByIdLoader
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
           </React.Suspense>
         ),
       },
