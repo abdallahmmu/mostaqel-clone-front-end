@@ -23,7 +23,7 @@ export async function getUserStatisticsById({ params }) {
       }
     );
 
-    const latestProjects = await axios.get(`${import.meta.env.VITE_API_URL}/projects`)
+    const latestProjects = await axios.get(`${import.meta.env.VITE_API_URL}/clients/${userId}/projects`)
 
     return {
         freelancersOffers:freelancersOffers.data.results,
