@@ -18,7 +18,7 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
-            <Typography
+            {/* <Typography
             
             style={{
               color: '#fff',
@@ -28,7 +28,7 @@ const ProjectsListSingleProject = ({ project }) => {
             >
               {project.status}
              
-            </Typography>
+            </Typography> */}
           </Box>
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">

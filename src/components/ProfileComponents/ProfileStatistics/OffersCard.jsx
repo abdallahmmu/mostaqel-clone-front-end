@@ -1,38 +1,67 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useLoaderData } from 'react-router-dom'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useLoaderData } from "react-router-dom";
+import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
 function OffersCard() {
-  const {freelancersOffers} = useLoaderData()
-  const {userData} = useSelector((state)=>state.authSlice)
+  const { userData } = useSelector((state) => state.authSlice);
+  const [clientsProjects, setClientsProjects] = useState([]);
+  const [clientsProjectsLoading, setClientsProjectsIsLoading] = useState(false);
+  const { freelancersOffers } = useLoaderData();
+  useEffect(() => {
+    if (userData.role === "client") {
+      const getClientProjects = async () => {
+        setClientsProjectsIsLoading(true);
+        const clientsProjects = await axios.get(
+          `${import.meta.env.VITE_API_URL}/clients/${userData.id}/projects`
+        );
+        setClientsProjects(clientsProjects.data.project);
+        setClientsProjectsIsLoading(false);
+      };
+      getClientProjects();
+    }
+  }, []);
   return (
-<div className="col-sm-12 col-md-8">
-  <div className="card border-0 mt-3">
-    <div className="card-body">
-      <div className="row">
-        {/*Offers Intro*/}
-        <div className="col-12">
-          <Link to={userData.role === 'freelancer' ? '/myoffers': '/projects'} className="text-dark text-center">
-            <p className="fs-4">{userData.role === 'freelancer' ? 'My Offers' : 'My Projects'} <br /><span>{freelancersOffers.length || 'API CALL NEEDED'}</span></p>
-          </Link>
-        </div>
-        {/*BreakLine*/}
-        <hr />
-        <div className="col-6">
-          <div>
-            <p className="text-center text-dark">Avilable Offers : <span className="fw-bold text-p">15</span></p>
-          </div>
-        </div>
-        <div className="col-6">
-          <div>
-            <p className="text-center text-dark">Offers Left : <span className="fw-bold text-p">15</span></p>
+    <div className="col-sm-12 col-md-8">
+      <div className="card border-0 mt-3">
+        <div className="card-body">
+          <div className="row">
+            {/*Offers Intro*/}
+            <div className="col-12">
+              <Link
+                to={userData.role === "freelancer" ? "/myoffers" : "/projects"}
+                className="text-dark text-center"
+              >
+                {userData.role === "freelancer" && (
+                  <p className="fs-4">
+                    My Offers
+                    <br />
+                    <span>{freelancersOffers?.length}</span>
+                  </p>
+                )}
+                {userData.role === "client" && (
+                  <div>
+                    {clientsProjectsLoading && (
+                      <div className="d-flex justify-content-center">
+                        <LoadingIndecator />{" "}
+                      </div>
+                    )}
+                    {!clientsProjectsLoading && (
+                      <p className="fs-4">
+                        My Projects
+                        <br />
+                        <span>{clientsProjects.length}</span>
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-  )
+  );
 }
 
-export default OffersCard
+export default OffersCard;

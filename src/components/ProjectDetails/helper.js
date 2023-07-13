@@ -86,6 +86,7 @@ export const hireFreelancer = async (token, offerId) => {
       headers: { "Content-Type": "application/json", Authorization: token },
     }
   );
+window.location.reload();
 
  
 };
@@ -112,7 +113,7 @@ export const releaseMoney = async (freelancerId, clientId, offerId) => {
     
       Swal.fire({
         title: "the project has been completed successfully "
-      }).then(() => window.location.assign('/projects'))
+      }).then(() => window.location.reload())
     }
   })
 

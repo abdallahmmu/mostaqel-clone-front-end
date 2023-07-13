@@ -19,7 +19,7 @@ export const getAllProjects = createAsyncThunk(
                     range_gt,
                     categoryId,
                     skillsIds,
-                    status: 'open'
+                    // status: 'open'
                 }
             });
             

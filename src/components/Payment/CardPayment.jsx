@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 function CardPayment() {
+  const { t } = useTranslation();
+
 
   let { data } = useLoaderData();
 
@@ -18,7 +22,7 @@ function CardPayment() {
       >
         <Card sx={{ width:'100%', borderRadius: 1 }}>
           <CardContent sx={{ textAlign: "center" }}>
-            <Typography variant="h6">Toatal Payment Available</Typography>
+            <Typography variant="h6">{t("Toatal Payment Available")}</Typography>
             <Typography variant="body2">
               @{data.username || data.userName}
             </Typography>

@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
 import ImageGeneration from "../UI_Helpers/ImageGeneration";
+import { useTranslation } from "react-i18next";
+
 function AuthNavigation() {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch()
   const {userData} = useSelector((state)=>state.authSlice)
   const onLogoutHandler = useCallback(()=>{
@@ -24,7 +28,7 @@ function AuthNavigation() {
             className="offcanvas-title text-primary"
             id="offcanvasWithBothOptionsLabel"
           >
-            Mostaqel Clone
+            {t("Mostaqel Clone")}
           </h5>
           <button
             type="button"
@@ -53,7 +57,7 @@ function AuthNavigation() {
                       d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6h-2Z"
                     />
                   </svg>
-                  Add Project
+                  {t("Add Project")}
                 </Link>
               </li>
               <li className="nav-item w-100 px-1">
@@ -73,7 +77,7 @@ function AuthNavigation() {
                       d="M15.5 7a2.5 2.5 0 0 1 2.495 2.335l.006.164v6a2.5 2.5 0 0 1-2.336 2.495l-.164.005h-6a2.5 2.5 0 0 1-2.495-2.336l-.005-.164v-6a2.5 2.5 0 0 1 2.336-2.495L9.5 7h6Zm0 1H9.502a1.5 1.5 0 0 0-1.493 1.355l-.007.144v6a1.5 1.5 0 0 0 1.356 1.493l.144.007h6a1.5 1.5 0 0 0 1.493-1.356L17 15.5v-6a1.5 1.5 0 0 0-1.356-1.493L15.5 8Zm-2.999 1a.5.5 0 0 1 .492.41L13 9.5v2.498h2.501a.5.5 0 0 1 .09.992l-.09.008H13l.001 2.5a.5.5 0 0 1-.992.09l-.008-.09L12 13H9.501a.5.5 0 0 1-.09-.992l.09-.008H12l.001-2.5a.5.5 0 0 1 .5-.5Zm.162-5.306l.048.158l.575 2.147H12.25l-.505-1.889a1.5 1.5 0 0 0-1.696-1.091l-.141.03l-5.796 1.554a1.5 1.5 0 0 0-1.091 1.695l.03.142l1.554 5.795A1.5 1.5 0 0 0 6 13.346v1a2.502 2.502 0 0 1-2.31-1.682l-.052-.17l-1.553-5.795a2.5 2.5 0 0 1 1.61-3.015l.158-.047l5.795-1.553a2.5 2.5 0 0 1 2.957 1.458l.057.152Z"
                     />
                   </svg>
-                  Find Project
+                  {t("Find Project")}
                 </Link>
               </li>
               <li className="nav-item w-100 px-1">
@@ -94,7 +98,7 @@ function AuthNavigation() {
                     />
                     <circle cx="6.5" cy="6.5" r="1.5" fill="currentColor" />
                   </svg>
-                  My Offers
+                  {t("My Offers")}
                 </Link>
               </li>
               <li className="nav-item w-100 px-1">
@@ -114,7 +118,7 @@ function AuthNavigation() {
                       d="M6 22q-.825 0-1.413-.588T4 20V8q0-.825.588-1.413T6 6h2q0-1.65 1.175-2.825T12 2q1.65 0 2.825 1.175T16 6h2q.825 0 1.413.588T20 8v12q0 .825-.588 1.413T18 22H6Zm0-2h12V8h-2v2q0 .425-.288.713T15 11q-.425 0-.713-.288T14 10V8h-4v2q0 .425-.288.713T9 11q-.425 0-.713-.288T8 10V8H6v12Zm4-14h4q0-.825-.588-1.413T12 4q-.825 0-1.413.588T10 6ZM6 20V8v12Z"
                     />
                   </svg>
-                  Portfolio
+                  {t("Portfolio")}
                 </Link>
               </li>
               <li className="nav-item w-100 px-1">
@@ -134,7 +138,7 @@ function AuthNavigation() {
                       d="M9.775 12q-.9 0-1.5-.675T7.8 9.75l.325-2.45q.2-1.425 1.3-2.363T12 4q1.475 0 2.575.938t1.3 2.362l.325 2.45q.125.9-.475 1.575t-1.5.675h-4.45Zm0-2h4.45L13.9 7.6q-.1-.7-.637-1.15T12 6q-.725 0-1.263.45T10.1 7.6L9.775 10ZM12 10ZM4 20v-2.8q0-.85.438-1.563T5.6 14.55q1.55-.775 3.15-1.163T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20H4Zm2-2h12v-.8q0-.275-.138-.5t-.362-.35q-1.35-.675-2.725-1.012T12 15q-1.4 0-2.775.338T6.5 16.35q-.225.125-.363.35T6 17.2v.8Zm6 0Z"
                     />
                   </svg>
-                  Profile
+                  {t("Profile")}
                 </Link>
               </li>
               <li className="nav-item w-100 px-1">
@@ -154,7 +158,7 @@ function AuthNavigation() {
                       d="M5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h7v2H5v14h7v2H5Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5l-5 5Z"
                     />
                   </svg>
-                  Logout
+                  {t("Logout")}
                 </button>
               </li>
             </ul>
@@ -166,7 +170,7 @@ function AuthNavigation() {
       <nav className="navbar navbar-expand-lg bg-primary" id="nav">
         <div className="container">
           <Link className="navbar-brand text-white" to={`profile/statistics/${userData.id}`}>
-            Mostaqel
+            {t("Mostaqel")}
           </Link>
           {/*Desktop Navigation*/}
           <div className="navigation d-flex align-items-center">
@@ -189,7 +193,7 @@ function AuthNavigation() {
                         d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6h-2Z"
                       />
                     </svg>
-                    Add Project
+                    {t("Add Project")}
                   </Link>
                 </li>
                 <li className="nav-item px-1">
@@ -209,7 +213,7 @@ function AuthNavigation() {
                         d="M15.5 7a2.5 2.5 0 0 1 2.495 2.335l.006.164v6a2.5 2.5 0 0 1-2.336 2.495l-.164.005h-6a2.5 2.5 0 0 1-2.495-2.336l-.005-.164v-6a2.5 2.5 0 0 1 2.336-2.495L9.5 7h6Zm0 1H9.502a1.5 1.5 0 0 0-1.493 1.355l-.007.144v6a1.5 1.5 0 0 0 1.356 1.493l.144.007h6a1.5 1.5 0 0 0 1.493-1.356L17 15.5v-6a1.5 1.5 0 0 0-1.356-1.493L15.5 8Zm-2.999 1a.5.5 0 0 1 .492.41L13 9.5v2.498h2.501a.5.5 0 0 1 .09.992l-.09.008H13l.001 2.5a.5.5 0 0 1-.992.09l-.008-.09L12 13H9.501a.5.5 0 0 1-.09-.992l.09-.008H12l.001-2.5a.5.5 0 0 1 .5-.5Zm.162-5.306l.048.158l.575 2.147H12.25l-.505-1.889a1.5 1.5 0 0 0-1.696-1.091l-.141.03l-5.796 1.554a1.5 1.5 0 0 0-1.091 1.695l.03.142l1.554 5.795A1.5 1.5 0 0 0 6 13.346v1a2.502 2.502 0 0 1-2.31-1.682l-.052-.17l-1.553-5.795a2.5 2.5 0 0 1 1.61-3.015l.158-.047l5.795-1.553a2.5 2.5 0 0 1 2.957 1.458l.057.152Z"
                       />
                     </svg>
-                    Find Project
+                    {t("Find Project")}
                   </Link>
                 </li>
                 <li className="nav-item px-1">
@@ -230,7 +234,7 @@ function AuthNavigation() {
                       />
                       <circle cx="6.5" cy="6.5" r="1.5" fill="currentColor" />
                     </svg>
-                      Find Freelancers
+                      {t("Find Freelancers")}
                   </Link>
                 </li>
               </ul>

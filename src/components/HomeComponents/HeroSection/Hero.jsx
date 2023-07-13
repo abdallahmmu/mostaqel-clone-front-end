@@ -32,12 +32,12 @@ function Hero({ t }) {
             <form className="d-flex w-100">
               <input
                 className="form-control"
-                placeholder={t("Enter Your Project Here Name")}
+                placeholder={t("Enter Project Here Name")}
                 name="title"
               />
-              <button type="submit" className="btn bg-primary text-white fs-6">
-                {t("Start Your Project Now")}
-              </button>
+              <Link to='/projects' type="submit" className="btn bg-primary text-white fs-6">
+                {t("Find Your Project")}
+              </Link>
             </form>
           </div>
           {/* Botton Search For Job For Freelancers */}

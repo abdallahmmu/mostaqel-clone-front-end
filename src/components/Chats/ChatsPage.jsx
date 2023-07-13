@@ -4,8 +4,11 @@ import styles from "./ChatPage.module.css";
 import ChatItem from "./ChatItem.jsx";
 import ChatSearch from "./ChatSearch.jsx";
 import { fetchAllChats } from "./helpers.js";
+import { useTranslation } from "react-i18next";
 
 const ChatsPage = () => {
+  const { t } = useTranslation();
+
   const [chats, setChats] = useState([]);
   const token = useSelector((state) => state.authSlice.userData?.token);
   useEffect(() => {
@@ -15,7 +18,7 @@ const ChatsPage = () => {
     <div className={`pt-5 ${styles.chat_page}`}>
       <div className="container">
         <div className="page-title">
-          <div className="h3  mb-4">Your Chats</div>
+          <div className="h3  mb-4">{t("Your Chats")}</div>
         </div>
         <div className="row">
           <ChatSearch />

@@ -4,8 +4,11 @@ import axios from 'axios'
 import { useSelector } from 'react-redux';
 import {  useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import { useTranslation } from "react-i18next";
+
 
  const ThankYou = () => {
+  const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ import Swal from 'sweetalert2';
             },
           }
         );
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -44,8 +48,8 @@ import Swal from 'sweetalert2';
     sendData()
   }, [])
   const handleThank = () => {
-    sendData().then(() => navigate('/'))
-    navigate(`/payment/${userData.id}`)
+    sendData().then(() =>  navigate(`/payment/${userData.id}`))
+   
     localStorage.removeItem('sessionId');
     localStorage.removeItem('amount');
   }
@@ -57,11 +61,11 @@ import Swal from 'sweetalert2';
           sx={{ padding: "20px", textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }}>
 
           <Typography mb={5} component="h1" fontSize={30}>
-            Thank you for Depositing
+            {t("Thank you for Depositing")}
           </Typography>
           <Typography component="div">
 
-          <Button   sx={{width: '200px'}} variant='contained' onClick={handleThank}>thank you </Button>
+          <Button   sx={{width: '200px'}} variant='contained' onClick={handleThank}>{t("thank you")} </Button>
           </Typography>
 
         </Grid>

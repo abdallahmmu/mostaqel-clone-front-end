@@ -13,23 +13,24 @@ export async function getUserStatisticsById({ params }) {
       `${import.meta.env.VITE_API_URL}/${userType}/${userId}`
     );
     const skills = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
-    const freelancersOffers = await axios.get(
-      `${import.meta.env.VITE_API_URL}/freelancers/myoffers`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: userData.token,
-        },
-      }
-    );
 
-    const latestProjects = await axios.get(`${import.meta.env.VITE_API_URL}/clients/${userId}/projects`)
+      const freelancersOffers = await axios.get(
+        `${import.meta.env.VITE_API_URL}/freelancers/myoffers`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: userData.token,
+          },
+        }
+      );
+
+    const latestProjects = await axios.get(`${import.meta.env.VITE_API_URL}/projects`)
 
     return {
         freelancersOffers:freelancersOffers.data.results,
         skills:skills.data.results,
         data:userCollections.data.data || userCollections.data,
-        latestProjects:latestProjects.data.resultProjects
+        latestProjects:latestProjects.data.resultProjects,
     }
   } catch (error) {
    if(error.response.data.error === 'your token is not valid') {

@@ -10,7 +10,10 @@ import { getAllProjects } from "../store/ProjectsSlice/ProjectsSlice";
 import { useParams, useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 const ProjectsList = () => {
+    const { t } = useTranslation();
+
   const { projects, paginationData, isLoading } = useSelector(
     (state) => state.ProjectsSlice
   );
@@ -46,7 +49,7 @@ const ProjectsList = () => {
                   <Box fontSize={30} style={{ textAlign: 'center' }}>
                     <SentimentVeryDissatisfied  />
                     <Typography fontSize={30} style={{ textAlign: 'center' }}>
-                      no projects fit your requests
+                      {t("no projects fit your requests")}
                     </Typography>
                   </Box>
                 )
