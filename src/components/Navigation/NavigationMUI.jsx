@@ -24,7 +24,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthSlice/authSlice";
 import { useTranslation } from "react-i18next";
@@ -60,7 +60,7 @@ export default function NavigationMUI() {
               sx={{ flexGrow: 1 }}
               component="div"
             >
-              {t("Mostaqel Clone")}
+              <Link to='/' className="text-white">{t("Mostaqel Clone")}</Link>
             </Typography>
             <Hidden mdDown>
               <Box
@@ -245,37 +245,28 @@ export default function NavigationMUI() {
             <NavLink to="/" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={t("Home")} />
+                 <ListItemIcon sx={{ color: "#000" }}>{t("Home")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={t("Find Project")}
-                  />
+                <ListItemIcon sx={{ color: "#000" }}>{t("Find Project")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="contact" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={t("Contact Us")}
-                  />
+                <ListItemIcon sx={{ color: "#000" }}>{t("Contact Us")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
             <NavLink to="about" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={t("About Us")}
-                  />
+                <ListItemIcon sx={{ color: "#000" }}>{t("About Us")}</ListItemIcon>
                 </ListItemButton>
               </ListItem>
             </NavLink>
@@ -286,11 +277,8 @@ export default function NavigationMUI() {
           <List>
             <NavLink to="add-projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={t("Add Project")}
-                  />
+                <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Add Project")}</ListItemIcon>
                   <ListItemIcon>
                     <AddIcon />
                   </ListItemIcon>
@@ -299,11 +287,8 @@ export default function NavigationMUI() {
             </NavLink>
             <NavLink to="projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    sx={{ color: "#000" }}
-                    primary={t("Find Project")}
-                  />
+                <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Find Project")}</ListItemIcon>
                   <ListItemIcon>
                     <SearchIcon />
                   </ListItemIcon>
@@ -315,8 +300,8 @@ export default function NavigationMUI() {
               onClick={handleDrawerClose}
             >
               <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText sx={{ color: "#000" }} primary={t("Profile")} />
+                <ListItemButton  sx={{display:'flex',justifyContent:'space-between'}}>
+                <ListItemIcon sx={{ color: "#000" }}>{t("Profile")}</ListItemIcon>
                   <ListItemIcon>
                     <Person2Icon />
                   </ListItemIcon>
@@ -325,8 +310,8 @@ export default function NavigationMUI() {
             </NavLink>
 
             <ListItem disablePadding onClick={onLogoutHandler}>
-              <ListItemButton>
-                <ListItemText primary={t("Logout")} />
+              <ListItemButton sx={{display:'flex',justifyContent:'space-between'}}>
+              <ListItemIcon sx={{ color: "#000" }}>{t("Logout")}</ListItemIcon>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

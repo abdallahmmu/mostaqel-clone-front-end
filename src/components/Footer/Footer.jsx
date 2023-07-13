@@ -1,6 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer id="footer">
       <div className="container">
@@ -9,9 +13,9 @@ function Footer() {
             <div className="d-flex justify-content-between align-items-center">
               <div className="social d-flex flex-column">
                 <a className="navbar-brand fw-bold mb-1 fs-5" href="#nav">
-                  Mostaqel Clone
+                  {t("Mostaqel Clone")}
                 </a>
-                <p className="text-p ">All Right Reseved ITI.</p>
+                <p className="text-p ">{t("All Right Reseved ITI.")}</p>
               </div>
               <div className="social-links ">
                 <a href="#">

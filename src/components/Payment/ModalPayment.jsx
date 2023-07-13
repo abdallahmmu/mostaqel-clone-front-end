@@ -15,6 +15,8 @@ import { withdrawFreelancer } from "./withdrawFreelancer";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ElevatorSharp } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+
 
 const style = {
   position: "absolute",
@@ -28,6 +30,8 @@ const style = {
 };
 
 function ModalPayment({ open, closeModal, userData }) {
+  const { t } = useTranslation();
+
   const [amount, setAmount] = useState("");
   const [withdraw, setWithDraw] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -45,7 +49,7 @@ function ModalPayment({ open, closeModal, userData }) {
     const session = await depositeCredit(amount, "deposit", userData.id);
     if (session) {
       localStorage.setItem("sessionId", session.sessionId);
-      localStorage.setItem("amount", session.amount);
+      localStorage.setItem("amount", amount);
       window.location.assign(session.url);
     }
     setLoading(false);
@@ -97,7 +101,7 @@ function ModalPayment({ open, closeModal, userData }) {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Your Payment
+          {t("Your Payment")}
         </Typography>
 
         {userData.role === "client" && (
@@ -109,7 +113,7 @@ function ModalPayment({ open, closeModal, userData }) {
             >
               <FormControl fullWidth sx={{ m: 1 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">
-                  Amount
+                  {t("Amount")}
                 </InputLabel>
                 <FilledInput
                   id="filled-adornment-amount"
@@ -125,7 +129,7 @@ function ModalPayment({ open, closeModal, userData }) {
             <hr />
             <Box sx={{ my: 3 }}>
               <Typography variant="p" sx={{ fontWeight: "bold", fontSize: 14 }}>
-                Total Amount After Pay Will be (Amount * 2.5% tax)
+                {t("Total Amount After Pay Will be")} (Amount * 2.5% tax)
               </Typography>
               <Typography
                 sx={{
@@ -146,7 +150,7 @@ function ModalPayment({ open, closeModal, userData }) {
               variant="p"
               sx={{ fontWeight: "bold", fontSize: 14, color: "red" }}
             >
-              You Can Not Withdrow Your Money unless it be greater than $50
+              {t("You Can Not Withdrow Your Money unless it is greater than")} $50
             </Typography>
           </Box>
         )}
@@ -161,11 +165,11 @@ function ModalPayment({ open, closeModal, userData }) {
               {loading ? "Loading ..." : "Pay Now"}
             </Button>
           )}
-          {data.totalMoney > 50 && (
+          {data.totalMoney > 50 && userData.role === 'freelancer' && (
             <Box component="div">
               <FormControl fullWidth sx={{ m: 1 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">
-                  Amount
+                  {t("Amount")}
                 </InputLabel>
                 <FilledInput
                   id="filled-adornment-amount"

@@ -8,6 +8,8 @@ import { updateFreelanceSchema } from "../../../Schemas/updateFreelancer";
 import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
 import ImageGeneration from "../../UI_Helpers/ImageGeneration";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 
 const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -16,6 +18,8 @@ const options = [
 ];
 
 function EditForm() {
+  const { t } = useTranslation();
+
   const { data, skills } = useLoaderData();
   const [profilePic, setProfilePic] = useState(null);
   const [skill, setSkill] = useState([]);
@@ -84,8 +88,8 @@ function EditForm() {
       <div className="row">
         <div className="col-md-6 offset-md-3 py-4">
           <div className="bg-white border mt-4 p-4">
-            <h3>Personal Information</h3>
-            <p>If you have modified it, you will need to verify it again.</p>
+            <h3>{t("Personal Information")}</h3>
+            <p>{t("If you have modified it, you will need to verify it again.")}</p>
 
             {/* image */}
             <div
@@ -119,7 +123,7 @@ function EditForm() {
                 role="button"
                 onClick={() => setProfilePic(null)}
               >
-                remove
+                {t("remove")}
               </p>
             )}
 
@@ -135,7 +139,7 @@ function EditForm() {
                   <div className="row mt-4">
                     <div className="col-6">
                       <label htmlFor="firstName" className="form-label">
-                        First Name <span className="text-danger">*</span>
+                        {t("First Name")} <span className="text-danger">*</span>
                       </label>
                       <Field
                         type="text"
@@ -152,7 +156,7 @@ function EditForm() {
                     </div>
                     <div className="col-6">
                       <label htmlFor="lastName" className="form-label">
-                        Last Name <span className="text-danger">*</span>
+                        {t("Last Name")} <span className="text-danger">*</span>
                       </label>
                       <Field
                         type="text"
@@ -170,7 +174,7 @@ function EditForm() {
                     {userData.role === "freelancer" && (
                       <div className="col-12 mt-4">
                         <label htmlFor="jobTitle" className="form-label">
-                          Job Title <span className="text-danger">*</span>
+                          {t("Job Title")} <span className="text-danger">*</span>
                         </label>
                         <Field
                           type="text"
@@ -183,7 +187,7 @@ function EditForm() {
                     )}
                     <div className="col-12 mt-4">
                       <label htmlFor="description" className="form-label">
-                        Description <span className="text-danger">*</span>
+                        {t("Description")} <span className="text-danger">*</span>
                       </label>
                       <Field
                         as="textarea"
@@ -196,7 +200,7 @@ function EditForm() {
                     {userData.role === "freelancer" && skills && (
                       <div className="col-12 mt-4">
                         <label htmlFor="description" className="form-label">
-                          Skills <span className="text-danger">*</span>
+                          {t("Skills")} <span className="text-danger">*</span>
                         </label>
                         {skills && (
 
@@ -232,7 +236,7 @@ function EditForm() {
                         type="submit"
                       >
                         {isLoading && <LoadingIndecator />}
-                        {!isLoading && <span> Update</span>}
+                        {!isLoading && <span> {t("Update")}</span>}
                       </button>
                     </div>
                   </div>

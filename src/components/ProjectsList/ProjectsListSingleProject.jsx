@@ -14,9 +14,21 @@ const ProjectsListSingleProject = ({ project }) => {
           <Box
             component="div"
             sx={{ marginTop: "10px" }}
+            style={{display: 'flex', justifyContent: 'space-between'}}
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
+            {/* <Typography
+            
+            style={{
+              color: '#fff',
+              padding: '5px 7px',
+              borderRadius: '7px',
+              backgroundColor: (project.status === 'close') ? '#d32f2f' : (project.status == 'complete')   ? '#2386C8': "green"}}
+            >
+              {project.status}
+             
+            </Typography> */}
           </Box>
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">
@@ -40,19 +52,19 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-excerpt"
           >
             <Typography variant="p">{project.description}</Typography>
-            {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
           </Box>
 
           <Box
-          component="div"
+            component="div"
 
           >
-            {project.skillsIds.map(skill => (
-              <Typography 
-              key={skill}
-              variant="div"
-              fontSize={11}
-              className="bg-primary me-2  text-white p-1 rounded">
+            {project.skillsIds.map((skill, index) => (
+              <Typography
+                key={index}
+                variant="div"
+                fontSize={11}
+                style={{ padding: '8px' }}
+                className="bg-primary me-2  text-white rounded">
                 {skill.name}
               </Typography>
             ))}

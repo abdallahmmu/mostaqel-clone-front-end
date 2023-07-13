@@ -6,9 +6,11 @@ import Paper from "@mui/material/Paper";
 import FreelancerOffer from "./FreelancerOffer";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import { useTranslation } from "react-i18next";
+
 const ProjectOffers = (props) => {
   const [offers, setOffers] = useState([]);
-
+ const { t } = useTranslation();
   let { id, isOwner, status, winningOffer } = props;
   useEffect(() => {
     fetchOffers(setOffers);
@@ -16,7 +18,7 @@ const ProjectOffers = (props) => {
   return (
     <>
       <div className="bg-gray  mt-2">
-        <h4 className=" w-100 p-4">Applicant Offers</h4>
+        {offers.length>=1 && (<h4 className=" w-100 p-4">{t("Applicant Offers")}</h4>)}
 
         {offers.map((offer) => {
           return (
