@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
 import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
+import { useTranslation } from "react-i18next";
+
 function OffersCard() {
+  const { t } = useTranslation();
+
   const { userData } = useSelector((state) => state.authSlice);
   const [clientsProjects, setClientsProjects] = useState([]);
   const [clientsProjectsLoading, setClientsProjectsIsLoading] = useState(false);
@@ -34,7 +38,7 @@ function OffersCard() {
               >
                 {userData.role === "freelancer" && (
                   <p className="fs-4">
-                    My Offers
+                    {t("My Offers")}
                     <br />
                     <span>{freelancersOffers?.length}</span>
                   </p>
@@ -48,7 +52,7 @@ function OffersCard() {
                     )}
                     {!clientsProjectsLoading && (
                       <p className="fs-4">
-                        My Projects
+                        {t("My Projects")}
                         <br />
                         <span>{clientsProjects.length}</span>
                       </p>
