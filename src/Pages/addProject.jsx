@@ -6,6 +6,8 @@ import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CustomSelect from "../helpers/react-select";
+
+
 const addProject = () => {
   const { categories, skills } = useLoaderData();
 
@@ -24,14 +26,18 @@ const addProject = () => {
       categoryId: values.categoryId.id,
       skillsIds: sklsIds,
     };
-    dispatch(addingNewProject(newValues));
-    swal({
-      title: "Success",
-      text: "projects added successfully",
-      icon: "success",
-    });
+   fetch(`https://api.pawan.krd/gtranslate?from=eng&to=ar&text=${newValues.description}`).then((res)=>{
+    console.log(res);
+   })
+   console.log(newValues)
+    // dispatch(addingNewProject(newValues));
+    // swal({
+    //   title: "Success",
+    //   text: "projects added successfully",
+    //   icon: "success",
+    // });
 
-    navigate("/projects");
+    // navigate("/projects");
   };
 
   return (
