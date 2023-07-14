@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../UI_Helpers/LoadingSpinner";
 import { useTranslation } from "react-i18next";
-
+import { langContext } from "../../contextAPI/context.jsx";
 
 const ProjectDetails = () => {
   const { t } = useTranslation();
@@ -29,6 +29,7 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const token2 = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
 
+  const { lang } = useContext(langContext);
   const handleProjectDeactivating = () => {
     Swal.fire({
       title: "Are you sure to close this project?",
@@ -48,6 +49,10 @@ const ProjectDetails = () => {
   useEffect(() => {
     fetchData(projectId, setDetails, setLoading, navigate);
   }, [status]);
+
+  useEffect(() => {
+    fetchData(projectId, setDetails, setLoading, navigate);
+  }, [lang]);
 
   return (
     <>

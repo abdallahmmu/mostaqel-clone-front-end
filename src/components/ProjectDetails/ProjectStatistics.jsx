@@ -11,7 +11,7 @@ import { releaseMoney } from "./helper.js";
 import { useTranslation } from "react-i18next";
 
 const ProjectStatistics = ({ details, isOwner }) => {
-   const { t } = useTranslation();
+  const { t } = useTranslation();
   let rows = [
     {
       name: "Project Status",
@@ -34,7 +34,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell colSpan={6}>
+                <TableCell colSpan={6} className="text-center">
                   <h5>{t("Project Card")}</h5>
                 </TableCell>
               </TableRow>
@@ -100,7 +100,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                     </TableCell>
                   </TableRow>
 
-                  {isOwner &&  details.status == "pending"&& (
+                  {isOwner && details.status == "pending" && (
                     <TableRow
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
