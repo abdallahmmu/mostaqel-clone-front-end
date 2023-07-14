@@ -58,7 +58,7 @@ const ProjectsList = () => {
               (
                 <LoadingSpinner />
               )}
-            <ProjectsListPagination paginationData={paginationData} />
+            <ProjectsListPagination paginationData={paginationData} projects={projects}  />
           </div>
         </div>
       </div>

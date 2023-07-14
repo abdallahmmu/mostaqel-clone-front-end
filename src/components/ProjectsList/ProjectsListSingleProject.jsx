@@ -24,9 +24,9 @@ const ProjectsListSingleProject = ({ project }) => {
               color: '#fff',
               padding: '5px 7px',
               borderRadius: '7px',
-              backgroundColor: (project.status === 'close') ? '#d32f2f' : (project.status == 'complete')   ? '#2386C8': "green"}}
+              backgroundColor: '#2386C8'  }}
             >
-              {project.status}
+              {project.range}
              
             </Typography> */}
           </Box>
