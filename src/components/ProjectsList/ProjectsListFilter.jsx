@@ -3,18 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 import axios from 'axios';
-<<<<<<< HEAD
-import { Slider } from '@mui/material';
-import { useTranslation } from "react-i18next";
-const ProjectsListFilter = () => {
-    const { t } = useTranslation();
-    const fundMin = useRef();
-=======
 import { Button, Slider } from '@mui/material';
 import { setFilteringObj } from '../../store/ProjectsSlice/FilteringSlice';
 import { useTranslation } from 'react-i18next';
 const ProjectsListFilter = () => {
->>>>>>> 16b0232 (handle filtering last time)
     const dispatch = useDispatch()
     const [cats, setCats] = useState([])
     const [skills, setSkills] = useState([])
@@ -129,15 +121,10 @@ const ProjectsListFilter = () => {
                 </div>
             </div>
             <div className="fund">
-<<<<<<< HEAD
                 <div className="fund-title my-2 h5">{t("Fund Slider")}</div>
                 
-=======
-                <div className="fund-title my-2 h5">Fund Slider</div>
-
->>>>>>> 16b0232 (handle filtering last time)
                 <Slider
-                    value={filterdObj.range_lt}
+                    // value={filterdObj.range_lt}
                     onChange={handleSlider}
                     aria-label="slider"
                     min={0}

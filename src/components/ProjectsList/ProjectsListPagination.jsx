@@ -6,7 +6,6 @@ import { FormControl, InputLabel, MenuItem, Pagination, Select, Stack } from '@m
 import { useTranslation } from "react-i18next";
 
 import { setFilteringObj } from '../../store/ProjectsSlice/FilteringSlice';
-import { useTranslation } from 'react-i18next';
 
 const ProjectsListPagination = ({ paginationData , projects}) => {
 

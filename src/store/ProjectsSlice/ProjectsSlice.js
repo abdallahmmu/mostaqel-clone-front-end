@@ -18,13 +18,8 @@ export const getAllProjects = createAsyncThunk(
                     range_lt,
                     range_gt,
                     categoryId,
-<<<<<<< HEAD
-                    skillsIds,
-                    // status: 'open'
-=======
                     categoryIds,
                     skillsIds
->>>>>>> 16b0232 (handle filtering last time)
                 }
             });
             
