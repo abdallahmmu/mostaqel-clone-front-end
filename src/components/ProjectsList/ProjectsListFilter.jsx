@@ -12,13 +12,14 @@ const ProjectsListFilter = () => {
 =======
 import { Button, Slider } from '@mui/material';
 import { setFilteringObj } from '../../store/ProjectsSlice/FilteringSlice';
+import { useTranslation } from 'react-i18next';
 const ProjectsListFilter = () => {
 >>>>>>> 16b0232 (handle filtering last time)
     const dispatch = useDispatch()
     const [cats, setCats] = useState([])
     const [skills, setSkills] = useState([])
     const [catsIds, setCatsIds] = useState([]);
-
+    const { t } = useTranslation()
     const filterdObj = useSelector(state => state.FilterSlice);
 
     const handleProjectsSearch = (e) => {
