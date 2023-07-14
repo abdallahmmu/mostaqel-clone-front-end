@@ -8,8 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
 import { releaseMoney } from "./helper.js";
+import { useTranslation } from "react-i18next";
 
 const ProjectStatistics = ({ details, isOwner }) => {
+   const { t } = useTranslation();
   let rows = [
     {
       name: "Project Status",
@@ -33,7 +35,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
             <TableHead>
               <TableRow>
                 <TableCell colSpan={6}>
-                  <h5> Project Card</h5>
+                  <h5>{t("Project Card")}</h5>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -44,7 +46,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {t(row.name)}
                   </TableCell>
                   <TableCell align="right">{row.value}</TableCell>
                 </TableRow>
@@ -53,7 +55,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
           </Table>
         </TableContainer>
 
-        {isOwner && details.offerId && details.status == "pending" && (
+        {details.offerId && (
           <>
             <hr />
             <TableContainer component={Paper}>
@@ -61,7 +63,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell colSpan={6}>
-                      <h5>Winning Offer</h5>
+                      <h5>{t("Winning Offer")}</h5>
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -70,7 +72,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      Amount
+                      {t("Amount")}
                     </TableCell>
                     <TableCell align="right">
                       {details.offerId.amount}
@@ -80,7 +82,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      duration
+                      {t("duration")}
                     </TableCell>
                     <TableCell align="right">
                       {details.offerId.duration}
@@ -91,35 +93,35 @@ const ProjectStatistics = ({ details, isOwner }) => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      Freelancer Name
+                      {t("Freelancer Name")}
                     </TableCell>
                     <TableCell align="right">
                       {details.offerId.freelancerId.username}
                     </TableCell>
                   </TableRow>
 
-                  <TableRow
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell colSpan={6} className="text-center">
-                      <button
-                        className="btn btn-success"
-                        onClick={() => {
-                          releaseMoney(
-                            details.offerId.freelancerId?._id,
-                            details.clientId?._id,
-                            details.offerId?._id
-                          );
-                        }}
-                      >
-                        Release Money
-                      </button>
-                    </TableCell>
-                  </TableRow>
-
-
+                  {isOwner &&  details.status == "pending"&& (
+                    <TableRow
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell colSpan={6} className="text-center">
+                        <button
+                          className="btn btn-success"
+                          onClick={() => {
+                            releaseMoney(
+                              details.offerId.freelancerId?._id,
+                              details.clientId?._id,
+                              details.offerId?._id
+                            );
+                          }}
+                        >
+                          {t("Release Money")}
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>

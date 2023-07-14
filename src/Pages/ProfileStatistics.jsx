@@ -6,13 +6,16 @@ import OffersCard from "../components/ProfileComponents/ProfileStatistics/Offers
 import PortfolioCard from "../components/ProfileComponents/ProfileStatistics/PortfolioCard";
 import LatestProjectsCard from "../components/ProfileComponents/ProfileStatistics/LatestProjectsCard";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 function ProfileStatistics() {
+  const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
   return (
     <section id="control-pannel">
       <div className="container">
-        <span className="text-p mb-2">Main</span>
-        <h3>Control Pannel</h3>
+        <span className="text-p mb-2">{t("Main")}</span>
+        <h3>{t("Control Pannel")}</h3>
 
         {/* <!--Row 1 Pannel Information ImageCard And Payment Card--> */}
         <div className="row">

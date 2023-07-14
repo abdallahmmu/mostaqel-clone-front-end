@@ -1,8 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 
 function PaymentCard() {
+  const { t } = useTranslation();
+
   const {userData} = useSelector((state)=>state.authSlice)
   const {data} = useLoaderData()
   return (
@@ -14,7 +18,7 @@ function PaymentCard() {
               <Link to={`/payment/${userData.id}`}>
                 <p className="text-success fs-4">
                   {" "}
-                  All Payment <br />
+                  {t("All Payment")} <br />
                   <span className="fw-bold">${data?.totalMoney || "0"}</span>
                 </p>
               </Link>
@@ -24,7 +28,7 @@ function PaymentCard() {
 
           <div className="row justify-content-center text-center">
             <div className="col-4">
-              <p className="text-p fw-bold"> Availble ${data?.totalMoney || 0}</p>
+              <p className="text-p fw-bold"> {t("Availble")} ${data?.totalMoney || 0}</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { Box, Grid, Typography, Button, Modal } from "@mui/material";
 import ModalPayment from "./ModalPayment";
+import { useTranslation } from "react-i18next";
+
 
 
 
 function  UpperPaymenComponent({ userData }) {
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const handelClose = useCallback(()=>{
     setOpen(false)
@@ -20,7 +24,7 @@ function  UpperPaymenComponent({ userData }) {
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          Account Payments
+          {t("Account Payments")}
         </Typography>
         {userData.role === "freelancer" && (
           <Button
@@ -29,7 +33,7 @@ function  UpperPaymenComponent({ userData }) {
             variant="outlined"
             color="success"
           >
-            Withdraw
+            {t("Withdraw")}
           </Button>
         )}
         {userData.role === "client" && (
@@ -37,7 +41,7 @@ function  UpperPaymenComponent({ userData }) {
           onClick={() => setOpen(true)}
           variant="outlined"
           color="success">
-            Deposit
+            {t("Deposit")}
           </Button>
         )}
       </Box>

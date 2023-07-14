@@ -1,6 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 
 const OfferForm = ({ formik, EditOffer, handleClose }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <form onSubmit={formik.handleSubmit} className="row">
@@ -33,8 +37,8 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
               <span className="text-danger">{formik.errors[item]}</span>
               {item == "amount" && formik.values[item] >= 10 && (
                 <span className="text-secondary mt-2 p-3">
-                  Paid to you: ${formik.values[item]} - $
-                  {(formik.values[item] * 0.2).toFixed(2)} fees = $
+                  {t("Paid to you:")} ${formik.values[item]} - $
+                  {(formik.values[item] * 0.2).toFixed(2)} {t("fees")} = $
                   {(formik.values[item] * 0.8).toFixed(2)}
                 </span>
               )}
@@ -48,7 +52,7 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
             className="btn btn-primary me-5"
             disabled={formik.values == formik.initialValues}
           >
-            Submit
+            {t("Submit")}
           </button>
           {EditOffer && (
             <button
@@ -58,7 +62,7 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
                 handleClose();
               }}
             >
-              Cancel
+              {t("Cancel")}
             </button>
           )}
         </div>

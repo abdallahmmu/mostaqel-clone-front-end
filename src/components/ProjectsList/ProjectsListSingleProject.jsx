@@ -18,15 +18,17 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
-            <Typography
+            {/* <Typography
             
             style={{
               color: '#fff',
               padding: '5px 7px',
-              backgroundColor: (project.status == 'close') ? 'red':  'blue'}}
+              borderRadius: '7px',
+              backgroundColor: '#2386C8'  }}
             >
-              {project.status}
-            </Typography>
+              {project.range}
+             
+            </Typography> */}
           </Box>
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">
@@ -56,9 +58,9 @@ const ProjectsListSingleProject = ({ project }) => {
             component="div"
 
           >
-            {project.skillsIds.map(skill => (
+            {project.skillsIds.map((skill, index) => (
               <Typography
-                key={skill}
+                key={index}
                 variant="div"
                 fontSize={11}
                 style={{ padding: '8px' }}

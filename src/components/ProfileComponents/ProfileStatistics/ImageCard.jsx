@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import ImageGeneration from '../../UI_Helpers/ImageGeneration'
+import { useTranslation } from "react-i18next";
+
 
 function ImageCard() {
+  const { t } = useTranslation();
+
   const {data} = useLoaderData()
   return (
 <div className="col-sm-12 col-md-4">
@@ -14,7 +18,7 @@ function ImageCard() {
         {!data.avatar && <ImageGeneration firstName={data.firstName} LastName={data.LastName || data.lastName}/>}
         <p><Link to="/" className="text-dark">{data.firstName + ' ' +data.lastName || data.LastName}</Link></p>
         <hr />
-        <p><Link to={`/profile/edit/${data._id}`} className="text-dark">Edit Profile</Link></p>
+        <p><Link to={`/profile/edit/${data._id}`} className="text-dark">{t("Edit Profile")}</Link></p>
       </div>
     </div>
   </div>
