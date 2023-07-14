@@ -2,6 +2,7 @@ import React from "react";
 import { Link, createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
+import Error404 from "../Pages/Error404";
 //Portfolio Page
 const PortfolioPage = React.lazy(() => import("../Pages/Portfolio"));
 //LAZY
@@ -43,9 +44,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: (
-      <div>
-        Can not found this route <Link to="/">Go Home</Link>
-      </div>
+      <Error404/>
     ),
     children: [
       {

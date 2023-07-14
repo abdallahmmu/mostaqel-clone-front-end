@@ -5,15 +5,16 @@ import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 import { FormControl, InputLabel, MenuItem, Pagination, Select, Stack } from '@mui/material';
 import { useTranslation } from "react-i18next";
 
+import { setFilteringObj } from '../../store/ProjectsSlice/FilteringSlice';
 
-const ProjectsListPagination = ({ paginationData }) => {
+const ProjectsListPagination = ({ paginationData , projects}) => {
 
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage)
     const [limit, setLimt] = useState(5)
-    
+  
     const handleLimit = (e) => {
         dispatch(getAllProjects({ page, limit: e.target.value }))
         setLimt(e.target.value)
@@ -21,7 +22,14 @@ const ProjectsListPagination = ({ paginationData }) => {
 
     const retrievePagedProjcts = (ind) => {
 
-        dispatch(getAllProjects({ page:ind, limit }))
+        dispatch(setFilteringObj({
+            keyword: '',
+            range_lt: 0,
+            range_gt: 0,
+            categoryIds: [],
+            skillsIds: []
+        }))
+        dispatch(getAllProjects({ page: ind, limit }))
     }
 
 
@@ -29,10 +37,10 @@ const ProjectsListPagination = ({ paginationData }) => {
     return (
         <div className="pagination my-4 d-flex justify-content-between">
             <Stack spacing={2}>
-                <Pagination count={paginationData.numOfPages} 
-                color="primary" onChange={(e, page) => retrievePagedProjcts(page)} />
+                <Pagination count={projects.length} color="primary" onChange={(e, page) => retrievePagedProjcts(page)} />
 
             </Stack>
+            {/* <pre>{JSON.stringify(projects.length, null, 2)}</pre> */}
 
 
             <FormControl sx={{  minWidth: 120 }} size="small">

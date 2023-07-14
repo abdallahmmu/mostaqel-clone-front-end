@@ -1,49 +1,65 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getAllProjects } from '../../store/ProjectsSlice/ProjectsSlice';
 import axios from 'axios';
-import { Slider } from '@mui/material';
-import { useTranslation } from "react-i18next";
+import { Button, Slider } from '@mui/material';
+import { setFilteringObj } from '../../store/ProjectsSlice/FilteringSlice';
+import { useTranslation } from 'react-i18next';
 const ProjectsListFilter = () => {
-    const { t } = useTranslation();
-    const fundMin = useRef();
     const dispatch = useDispatch()
     const [cats, setCats] = useState([])
     const [skills, setSkills] = useState([])
+    const [catsIds, setCatsIds] = useState([]);
+    const { t } = useTranslation()
+    const filterdObj = useSelector(state => state.FilterSlice);
+
     const handleProjectsSearch = (e) => {
-
-        dispatch(getAllProjects({ keyword: e.target.value }))
+        dispatch(setFilteringObj({ keyword: e.target.value }))
+        dispatch(getAllProjects(setFilteringObj({ keyword: e.target.value }).payload))
     }
 
-    const handleFundSlider = (e) => {
-        fundMin.current.innerHTML = e.target.value
-        dispatch(getAllProjects({ range: e.target.value }))
-    }
     const handleCategory = (e) => {
-        if (e.target.checked) {
-            dispatch(getAllProjects({ categoryId: e.target.value }))
+        let val = e.target.value;
+        let isCheck = e.target.checked;
+
+        if (isCheck) {
+            setCatsIds(old => {
+                const unique = Array.from(new Set([...old, val]))
+                console.log(setFilteringObj({ categoryIds: unique }).payload)
+                dispatch(setFilteringObj({ categoryIds: unique }))
+                dispatch(getAllProjects(setFilteringObj({ categoryIds: unique }).payload))
+                return unique
+            })
+
         } else {
-            dispatch(getAllProjects({}))
+
+            setCatsIds(old => {
+                const filtered = old.filter(id => id !== val);
+                const unique = Array.from(new Set(filtered))
+                console.log(setFilteringObj({ categoryIds: unique }).payload)
+                dispatch(setFilteringObj({ categoryIds: unique }))
+                dispatch(getAllProjects(setFilteringObj({ categoryIds: unique }).payload))
+                return unique
+            })
 
         }
+
+
     }
     const handleSkills = (e) => {
-        let skillsIds = '';
-        if (e) {
 
-            e.map((skill, ind) => {
-                if (ind == 0) {
-                    skillsIds += skill.value;
-                } else {
-                    skillsIds += skill.value + ',';
-                }
+        let filterSkillsIds = e.reduce((acc, current) => {
+            acc.push(current.value);
+            return acc
+        }, [])
+        dispatch(setFilteringObj({ skillsIds: filterSkillsIds }))
+        dispatch(getAllProjects(setFilteringObj({ skillsIds: filterSkillsIds }).payload))
 
-                dispatch(getAllProjects({ skillsIds }))
-            })
-        }
-
+        console.log(filterdObj)
     }
+
+
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/category`).then(d => {
             setCats(d.data.categories)
@@ -53,13 +69,19 @@ const ProjectsListFilter = () => {
         })
 
     }, [])
-    const [sliderValue, setSliderValue] = useState(50); // initial value is 50
+    const [sliderValue, setSliderValue] = useState(0); // initial value is 50
 
     const handleSlider = (event, newSliderValue) => {
-      setSliderValue(newSliderValue);
-      dispatch(getAllProjects({ range_gt: 0, range_lt: newSliderValue }))
-    // console.log(sliderValue)
+        setSliderValue(() => {
+            dispatch(setFilteringObj({ range_lt: newSliderValue, range_gt: 0  }))
+            dispatch(getAllProjects(setFilteringObj({ range_lt: newSliderValue, range_gt: 0 }).payload))
+           
+            return newSliderValue
+        });
+
+        //   dispatch(getAllProjects({ range_gt: 0, range_lt: newSliderValue }))
     };
+
     return (
         <div className="filter-side">
             <div className="search">
@@ -76,7 +98,7 @@ const ProjectsListFilter = () => {
 
                         <li key={cat._id} className="cat">
                             <input type="checkbox" name="categoryId"
-                                onClick={handleCategory} id="cat" value={cat._id} /> {cat.title}
+                                onChange={handleCategory} id="cat" value={cat._id} /> {cat.title}
 
                         </li>
                     ))}
@@ -89,6 +111,7 @@ const ProjectsListFilter = () => {
 
                     <Select isMulti
                         onChange={handleSkills}
+                        closeMenuOnSelect={false}
                         options={
 
                             skills.map(skill => (
@@ -101,7 +124,7 @@ const ProjectsListFilter = () => {
                 <div className="fund-title my-2 h5">{t("Fund Slider")}</div>
                 
                 <Slider
-                    value={sliderValue}
+                    // value={filterdObj.range_lt}
                     onChange={handleSlider}
                     aria-label="slider"
                     min={0}
