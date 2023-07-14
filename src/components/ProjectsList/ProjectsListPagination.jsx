@@ -15,7 +15,7 @@ const ProjectsListPagination = ({ paginationData , projects}) => {
     const dispatch = useDispatch();
     const page = useSelector(state => state.ProjectsSlice.paginationData.currentPage)
     const [limit, setLimt] = useState(5)
-    const { t } = useTranslation()
+  
     const handleLimit = (e) => {
         dispatch(getAllProjects({ page, limit: e.target.value }))
         setLimt(e.target.value)
