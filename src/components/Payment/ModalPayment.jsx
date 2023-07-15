@@ -17,7 +17,6 @@ import Swal from "sweetalert2";
 import { ElevatorSharp } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -150,13 +149,15 @@ function ModalPayment({ open, closeModal, userData }) {
               variant="p"
               sx={{ fontWeight: "bold", fontSize: 14, color: "red" }}
             >
-              {t("You Can Not Withdrow Your Money unless it is greater than")} $50
+              {t("You Can Not Withdrow Your Money unless it is greater than")}{" "}
+              $50
             </Typography>
           </Box>
         )}
         <Box sx={{ my: 3, textAlign: "end" }}>
           {userData.role === "client" && (
             <Button
+              disabled={!data.isActive}
               variant="contained"
               sx={{ mx: 3 }}
               color="success"
@@ -165,7 +166,7 @@ function ModalPayment({ open, closeModal, userData }) {
               {loading ? "Loading ..." : "Pay Now"}
             </Button>
           )}
-          {data.totalMoney > 50 && userData.role === 'freelancer' && (
+          {data.totalMoney > 50 && userData.role === "freelancer" && (
             <Box component="div">
               <FormControl fullWidth sx={{ m: 1 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">
@@ -183,6 +184,7 @@ function ModalPayment({ open, closeModal, userData }) {
                 />
               </FormControl>
               <Button
+                disabled={!data.isActive}
                 onClick={onWithdrawMony}
                 variant="contained"
                 color="success"
@@ -190,6 +192,31 @@ function ModalPayment({ open, closeModal, userData }) {
                 {loading ? "Loading" : "Withdraw"}
               </Button>
             </Box>
+          )}
+          {!data.isActive && (
+            <>
+              <Typography
+                sx={{
+                  pt: 5,
+                  color: "red",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                  textAlign: "center",
+                }}
+              >
+                Your account is not Active to{" "}
+                {userData.role === "freelancer" ? "withdraw" : "deposit"}
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: 14,
+                  textAlign: "center",
+                }}
+              >
+                Feel Free To Contact us at : mostaql-clone@mostql.com
+              </Typography>
+            </>
           )}
         </Box>
       </Box>
