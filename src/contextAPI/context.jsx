@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+
 // 1) Create a new context
 const langContext = createContext();
 const UseContextProvider = ({ children }) => {

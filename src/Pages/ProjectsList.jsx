@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProjectsListTitle from "../components/ProjectsList/ProjectsListTitle";
 import ProjectsItemsList from "../components/ProjectsList/ProjectsItemsList";
 import ProjectsListPagination from "../components/ProjectsList/ProjectsListPagination";
@@ -11,8 +11,9 @@ import { useParams, useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { langContext } from "../contextAPI/context";
 const ProjectsList = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const { projects, paginationData, isLoading } = useSelector(
     (state) => state.ProjectsSlice
@@ -20,10 +21,10 @@ const ProjectsList = () => {
   const dispatch = useDispatch();
 
   const [params] = useSearchParams();
-
+  const { lang } = useContext(langContext);
   useEffect(() => {
     dispatch(getAllProjects({ page: params.get("page") }));
-  }, [dispatch]);
+  }, [dispatch, lang]);
 
   return (
     <div className="projects-list">
@@ -34,31 +35,26 @@ const ProjectsList = () => {
             <ProjectsListFilter />
           </div>
           <div className="col-md-9">
-            {!isLoading ?
-              (projects.length ?
-
+            {!isLoading ? (
+              projects.length ? (
                 projects.map((project, index) => (
-
-
                   <ProjectsItemsList key={index} project={project} />
-
-
                 ))
-                :
-                (
-                  <Box fontSize={30} style={{ textAlign: 'center' }}>
-                    <SentimentVeryDissatisfied  />
-                    <Typography fontSize={30} style={{ textAlign: 'center' }}>
-                      {t("no projects fit your requests")}
-                    </Typography>
-                  </Box>
-                )
+              ) : (
+                <Box fontSize={30} style={{ textAlign: "center" }}>
+                  <SentimentVeryDissatisfied />
+                  <Typography fontSize={30} style={{ textAlign: "center" }}>
+                    {t("no projects fit your requests")}
+                  </Typography>
+                </Box>
               )
-              :
-              (
-                <LoadingSpinner />
-              )}
-            <ProjectsListPagination paginationData={paginationData} projects={projects}  />
+            ) : (
+              <LoadingSpinner />
+            )}
+            <ProjectsListPagination
+              paginationData={paginationData}
+              projects={projects}
+            />
           </div>
         </div>
       </div>
