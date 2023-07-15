@@ -7,13 +7,16 @@ import PortfolioCard from "../components/ProfileComponents/ProfileStatistics/Por
 import LatestProjectsCard from "../components/ProfileComponents/ProfileStatistics/LatestProjectsCard";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useLoaderData } from "react-router-dom";
 
 function ProfileStatistics() {
   const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
+  const {data} = useLoaderData()
   return (
     <section id="control-pannel">
       <div className="container">
+        {!data.isActive && <p className="py-4 bg-white text-center text-danger fw-bold">Your Account Has Been Deactivated Feel Free to contact us: <br/> <span className="text-dark">mostaql-clone@mostaql.com</span></p>}
         <span className="text-p mb-2">{t("Main")}</span>
         <h3>{t("Control Pannel")}</h3>
 
