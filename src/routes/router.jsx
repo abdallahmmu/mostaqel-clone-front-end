@@ -4,7 +4,7 @@ import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
 import Error404 from "../Pages/Error404";
 //Portfolio Page
-const PortfolioPage = React.lazy(() => import("../Pages/Portfolio"));
+const DisplayFreelancersPage = React.lazy(() => import("../Pages/DisplayFreelancers"));
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -156,10 +156,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/portfolio",
+        path: "freelancers/:userId",           
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <PortfolioPage />
+            <DisplayFreelancersPage />
           </React.Suspense>
         ),
       },
