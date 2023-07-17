@@ -81,16 +81,30 @@ export const updateOffer = async (data, token, offerId) => {
 };
 
 export const hireFreelancer = async (token, offerId, navigate) => {
-  await axios.patch(
-    `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
-    {
-      offerId,
-    },
-    {
-      headers: { "Content-Type": "application/json", Authorization: token },
+  Swal.fire({
+    title: "Are you sure to Hire This Freelancer?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Confirm it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
+        {
+          offerId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      location.reload();
     }
-  );
-  navigate(`/projects/${projectId}`);
+  });
 };
 export const releaseMoney = async (
   freelancerId,
@@ -118,7 +132,7 @@ export const releaseMoney = async (
 
       Swal.fire({
         title: "the project has been completed successfully ",
-      }).then(() => navigate(`/projects/${projectId}`));
+      }).then(() => location.reload());
     }
   });
 };

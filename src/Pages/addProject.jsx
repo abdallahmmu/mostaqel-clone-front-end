@@ -7,6 +7,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CustomSelect from "../helpers/react-select";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const addProject = () => {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ const addProject = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [skillsIds, setSkillsIds] = useState([]);
+  const [arabic, setArbic] = useState("");
 
   const addNewProject = (values) => {
     let sklsIds = [];
@@ -28,7 +30,9 @@ const addProject = () => {
       categoryId: values.categoryId.id,
       skillsIds: sklsIds,
     };
-    console.log(newValues);
+
+    newValues.description_ar = arabic;
+
     dispatch(addingNewProject(newValues));
     swal({
       title: "Success",
@@ -38,7 +42,23 @@ const addProject = () => {
 
     navigate("/projects");
   };
-
+  const suggestArabic = async (eve) => {
+    console.log(eve.target.value);
+    made(eve.target.value);
+  };
+  async function made(text) {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/translate`,
+      {
+        params: {
+          text,
+        },
+      }
+    );
+    console.log(response);
+    const data = await response.data;
+    setArbic(data.translated);
+  }
   return (
     <div className="add-project mt-5">
       <div className="container">
@@ -48,7 +68,7 @@ const addProject = () => {
               initialValues={{
                 title: "",
                 description: "",
-                descriptionِAr: "",
+                description_ar: "",
                 range: 1,
                 categoryId: "",
                 skillsIds: [],
@@ -80,6 +100,9 @@ const addProject = () => {
                     </label>
                     <Field
                       as="textarea"
+                      onBlur={(eve) => {
+                        suggestArabic(eve);
+                      }}
                       name="description"
                       className="form-control"
                       id="description"
@@ -91,17 +114,21 @@ const addProject = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                      {t("Description")}
+                    <label htmlFor="description_ar" className="form-label">
+                      {t("Description In Arabic")}
                     </label>
                     <Field
                       as="textarea"
-                      name="description"
+                      name="description_ar"
                       className="form-control"
-                      id="description"
+                      id="description_ar"
+                      value={arabic}
+                      onChange={(e) => {
+                        setArbic(e.target.value);
+                      }}
                     />
                     <ErrorMessage
-                      name="description"
+                      name="description_ar"
                       className="text-danger"
                       component="div"
                     />

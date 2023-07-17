@@ -8,7 +8,7 @@ import SwipeRightIcon from "@mui/icons-material/SwipeRight";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
   const { _id, freelancerId, updatedAt, description, amount, duration } = offer;
   const navigate = useNavigate();
@@ -58,15 +58,18 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
           </Box>
           {/* Typo Box */}
           <Box>
-            <p
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                marginBottom: "0",
-              }}
-            >
-              {freelancerId.firstName} {freelancerId.lastName}
-            </p>
+            <Link to={`/profile/${freelancerId._id}`}>
+              {" "}
+              <p
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginBottom: "0",
+                }}
+              >
+                {freelancerId.firstName} {freelancerId.lastName}
+              </p>
+            </Link>
             <p className="  opacity-50 ">{freelancerId.jobTitle}</p>
 
             <Box
