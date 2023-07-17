@@ -4,7 +4,9 @@ import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
 import Error404 from "../Pages/Error404";
 //Portfolio Page
-const DisplayFreelancersPage = React.lazy(() => import("../Pages/DisplayFreelancers"));
+const DisplayFreelancersPage = React.lazy(() =>
+  import("../Pages/DisplayFreelancers")
+);
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -43,9 +45,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: (
-      <Error404/>
-    ),
+    errorElement: <Error404 />,
     children: [
       {
         index: true,
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <AllProject />
           </React.Suspense>
-        )
+        ),
       },
       {
         path: "add-projects",
@@ -129,7 +129,7 @@ export const router = createBrowserRouter([
           <React.Suspense fallback={<LoadingSpinner />}>
             <ProjectDetails />
           </React.Suspense>
-        )
+        ),
       },
       {
         path: "myoffers",
@@ -156,13 +156,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "profile/:userId",           
+        path: "profile/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <DisplayFreelancersPage />
           </React.Suspense>
         ),
-        loader:getUserByIdLoader
+        loader: getUserByIdLoader,
       },
       {
         path: "/payment/:userId",
@@ -171,7 +171,7 @@ export const router = createBrowserRouter([
             <PaymentPage />
           </React.Suspense>
         ),
-        loader: getUserByIdLoader
+        loader: getUserByIdLoader,
       },
       {
         path: "/payment/thankYou",
