@@ -114,7 +114,14 @@ const ProjectDetails = () => {
                   ) : (
                     <Box component={Paper} mt={2} className="p-5 text-center">
                       <h3>{t("Want To Apply")}</h3>
-                      <Link className="btn btn-primary me-5 " to="/login">
+                      <Link
+                        className="btn btn-primary "
+                        to="/login"
+                        style={{
+                          marginLeft: lang == "ar" ? "25px" : "",
+                          marginRight: lang == "en" ? "25px" : "",
+                        }}
+                      >
                         {t("Login")}
                       </Link>
                       <Link className="btn btn-secondary " to="/register">
