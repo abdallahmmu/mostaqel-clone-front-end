@@ -156,12 +156,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "freelancers/:userId",           
+        path: "profile/:userId",           
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <DisplayFreelancersPage />
           </React.Suspense>
         ),
+        loader:getUserByIdLoader
       },
       {
         path: "/payment/:userId",

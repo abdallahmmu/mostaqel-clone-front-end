@@ -16,7 +16,7 @@ function ImageCard() {
       <div className="image text-center">
        {data.avatar &&  <ImageGeneration avatar={data.avatar} />}
         {!data.avatar && <ImageGeneration firstName={data.firstName} LastName={data.LastName || data.lastName}/>}
-        <p><Link to="/" className="text-dark">{data.firstName + ' ' +data.lastName || data.LastName}</Link></p>
+        <p><Link to={`/profile/${data._id}`} className="text-dark">{data.firstName + ' ' +data.lastName || data.LastName}</Link></p>
         <hr />
         <p><Link to={`/profile/edit/${data._id}`} className="text-dark">{t("Edit Profile")}</Link></p>
       </div>

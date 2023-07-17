@@ -69,7 +69,7 @@ const ProjectsListSingleProject = ({ project }) => {
             {project.skillsIds.map((skill, index) => (
               <Typography
                 key={index}
-                variant="div"
+                variant="span"
                 fontSize={11}
                 style={{ padding: "8px" }}
                 className="bg-primary me-2  text-white rounded"
