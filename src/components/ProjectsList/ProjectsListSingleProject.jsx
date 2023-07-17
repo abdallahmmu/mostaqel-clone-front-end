@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Box, Grid, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { useTranslation } from "react-i18next";
+import { langContext } from "../../contextAPI/context";
 
 const ProjectsListSingleProject = ({ project }) => {
+  const { t } = useTranslation();
+  const { lang } = useContext(langContext);
+  const timeAgo = moment(project.createdAt)
+    .startOf("hour")
+    .fromNow()
+    .split(" ");
+
   return (
-    <Box component='div' className="project">
+    <Box component="div" className="project">
       <Grid container spacing={2}>
         <Grid item sm={10}>
           <Box
             component="div"
             sx={{ marginTop: "10px" }}
-            style={{display: 'flex', justifyContent: 'space-between'}}
+            style={{ display: "flex", justifyContent: "space-between" }}
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
@@ -36,7 +45,9 @@ const ProjectsListSingleProject = ({ project }) => {
             </Typography>
 
             <Typography variant="span" className="prject-date">
-              {moment(project.createdAt).startOf("hour").fromNow()}{" "}
+              {lang == "ar"
+                ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
+                : timeAgo.join(" ")}
               <AccessTimeIcon sx={{ fontSize: 15 }} />
             </Typography>
 
@@ -54,17 +65,15 @@ const ProjectsListSingleProject = ({ project }) => {
             <Typography variant="p">{project.description}</Typography>
           </Box>
 
-          <Box
-            component="div"
-
-          >
+          <Box component="div">
             {project.skillsIds.map((skill, index) => (
               <Typography
                 key={index}
                 variant="div"
                 fontSize={11}
-                style={{ padding: '8px' }}
-                className="bg-primary me-2  text-white rounded">
+                style={{ padding: "8px" }}
+                className="bg-primary me-2  text-white rounded"
+              >
                 {skill.name}
               </Typography>
             ))}

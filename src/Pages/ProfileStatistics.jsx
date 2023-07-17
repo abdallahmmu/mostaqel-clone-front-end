@@ -12,11 +12,16 @@ import { useLoaderData } from "react-router-dom";
 function ProfileStatistics() {
   const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
-  const {data} = useLoaderData()
+  const { data } = useLoaderData();
   return (
     <section id="control-pannel">
       <div className="container">
-        {!data.isActive && <p className="py-4 bg-white text-center text-danger fw-bold">Your Account Has Been Deactivated Feel Free to contact us: <br/> <span className="text-dark">mostaql-clone@mostaql.com</span></p>}
+        {!data.isActive && (
+          <p className="py-4 bg-white text-center text-danger fw-bold">
+            {t("Your Account Has Been Deactivated Feel Free to contact us:")}{" "}
+            <br /> <span className="text-dark">mostaql-clone@mostaql.com</span>
+          </p>
+        )}
         <span className="text-p mb-2">{t("Main")}</span>
         <h3>{t("Control Pannel")}</h3>
 
@@ -35,7 +40,7 @@ function ProfileStatistics() {
         {/* <!--Row 2 Pannel Information PortfolioCard And LatestProjects--> */}
 
         <div className="row">
-          {userData.role==='freelancer' &&  <PortfolioCard />}
+          {userData.role === "freelancer" && <PortfolioCard />}
           <LatestProjectsCard />
         </div>
       </div>

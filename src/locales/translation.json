@@ -129,8 +129,6 @@
 
   "Freelancers connect companies and owners of small and medium-sized projects with the best projects and professional events. Prepare for your project suitable for work in the field of work.": "يعمل المستقلون على ربط الشركات وأصحاب المشاريع الصغيرة والمتوسطة بأفضل المشاريع والفعاليات المهنية. استعد لمشروعك المناسب للعمل في مجال عملك",
 
-
-
   "Customer Support": "خدمة العملاء",
 
   "Visit Help Center": "قم بزيارة مركز المساعدة",
@@ -265,90 +263,113 @@
 
   "About Us": "من نحن",
 
-  "no projects fit your requests":"لا توجد مشاريع تناسب طلبك",
+  "no projects fit your requests": "لا توجد مشاريع تناسب طلبك",
 
-  "None":"لا يوجد",
+  "None": "لا يوجد",
 
-  "Personal Information":"معلومات شخصية",
+  "Personal Information": "معلومات شخصية",
 
+  "If you have modified it, you will need to verify it again.": "اذا قمت بتعديله فستحتاج للتأكيد مرة اخري",
 
-  "If you have modified it, you will need to verify it again.": 
-  "اذا قمت بتعديله فستحتاج للتأكيد مرة اخري",
+  "remove": "ازالة",
 
-  "remove":"ازالة",
+  "Transaction History": "تاريخ المعاملة",
 
-  "Transaction History":"تاريخ المعاملة",
+  "Job Title": "المسمي الوظيفي",
 
-  "Job Title":"المسمي الوظيفي",
+  "Update": "تحديث",
 
-  "Update":"تحديث",
+  "Thank you for Depositing": "شكرا للايداع",
 
-  "Thank you for Depositing":"شكرا للايداع",
+  "thank you": "شكرا",
 
-  "thank you":"شكرا",
+  "Chat Title": "عنوان المحادثة",
 
-  "Chat Title":"عنوان المحادثة",
+  "Project Card": "بطاقة المشروع",
 
-  "Project Card":"بطاقة المشروع",
+  "project status": "حالة المشروع",
 
-  "project status":"حالة المشروع",
+  "Active": "نشط",
 
-  "Active":"نشط",
+  "Publish Date": "تاريخ النشر",
 
-  "Publish Date":"تاريخ النشر",
+  "Budget": "الميزانية",
 
-  "Budget":"الميزانية",
+  "project Time": "وقت المشروع",
 
-  "project Time":"وقت المشروع",
+  "Offers Counter": "عداد العروض",
 
-  "Offers Counter":"عداد العروض",
+  "Hemdan Khalifa": "حمدان خليفة",
 
-  "Hemdan Khalifa":"حمدان خليفة",
+  "Your Chats": "محادثاتك",
 
-  "Your Chats":"محادثاتك",
+  "within": "في خلال",
 
-  "within":"في خلال",
+  "days": "أيام",
 
-  "days":"أيام",
+  "last update": "أخر تحديث",
 
-  "last update":"أخر تحديث",
+  "You Don't Have Any Offer Before": "ليس لديك عروض سابقة",
 
-  "You Don't Have Any Offer Before":"ليس لديك عروض سابقة",
-
-  "Go To Apply":"اذهب للتقديم",
-  "Toatal Payment Available":"كل المدفوعات المتاحة",
-  "Your Payment":"مدفوعاتك",
-  "Amount":"كمية",
-  "Total Amount After Pay Will be":"كل الكمية بعد الدفع ستكون",
-  "You Can Not Withdrow Your Money unless it is greater than": 
-  "لا يمكن سحب نقودك الا اذا كانت اكثر من",
-  "in":"في",
-  "Account Payments":"مدفوعات الحساب",
-  "My Projects":"مشاريعي",
-  "Availble":"متاح",
-  "Last updated":"آخر تحديث",
-  "Edit Your Offer":"تعديل عروضك",
-  "Your Offer":"عروضك",
-  "Paid to you:":"تم الدفع لك",
-  "fees":"الرسوم",
-  "Cancel":"الغاء",
-  "Project Description":"تفاصيل المشروع",
-  "Skill Required":"المهارات المطلوبة",
-  "Project Status":"حالة المشروع",
-  "Applicant Offers":"العروض المقدمة",
-  "Deactivate project":"غلق المشروع",
-  "Want To Publish":"هل تريد النشر؟",
-  "Publish Your Own Project":"انشر مشروعك",
-  "Want To Apply":"هل تريد التقديم",
-  "Regitser":"تسجيل",
+  "Go To Apply": "اذهب للتقديم",
+  "Toatal Payment Available": "كل المدفوعات المتاحة",
+  "Your Payment": "مدفوعاتك",
+  "Amount": "كمية",
+  "Total Amount After Pay Will be": "كل الكمية بعد الدفع ستكون",
+  "You Can Not Withdrow Your Money unless it is greater than": "لا يمكن سحب نقودك الا اذا كانت اكثر من",
+  "in": "في",
+  "Account Payments": "مدفوعات الحساب",
+  "My Projects": "مشاريعي",
+  "Availble": "متاح",
+  "Last updated": "آخر تحديث",
+  "Edit Your Offer": "تعديل العرض الخاص بك",
+  "Your Offer": "العرض الخاص بك",
+  "Paid to you:": "قيمة العرض",
+  "fees": "الرسوم",
+  "Cancel": "الغاء",
+  "Project Description": "تفاصيل المشروع",
+  "Skill Required": "المهارات المطلوبة",
+  "Project Status": "حالة المشروع",
+  "Applicant Offers": "العروض المقدمة",
+  "Deactivate project": "غلق المشروع",
+  "Want To Publish": "هل تريد النشر؟",
+  "Publish Your Own Project": "انشر مشروعك",
+  "Want To Apply": "هل تريد التقديم",
+  "Regitser": "تسجيل",
   "All Right Reseved ITI.": "جميع الحقوق محفوظة لمعهد تكنولوجيا المعلومات",
 
-  "Winning Offer":"العرض الفائز",
-  "duration":"المدة",
-  "Freelancer Name":"اسم المستقل",
-  "Release Money":"صرف النقود",
-  "Add your offer":"اضف العرض الخاص بك",
-  "personalProfile":"الملف الشخصي"
-  
-  
+  "Winning Offer": "العرض الفائز",
+  "duration": "المدة",
+  "Freelancer Name": "اسم المستقل",
+  "Release Money": "صرف النقود",
+  "Add your offer": "اضف العرض الخاص بك",
+  "personalProfile": "الملف الشخصي",
+  "description": "وصف العرض",
+  "amount": "قيمة العرض",
+  "open": "مفتوح",
+  "complete": "مكتمل",
+  "pending": "قيد التنفيذ",
+  "close": "مغلق",
+  "ago": "منذ",
+  "hours": "ساعات",
+  "day": "يوم",
+  "minutes": "دقائق",
+  "a": " ",
+  "category": "الفئة",
+  "Start completing your project": "ابدأ بإنجاز مشروعك",
+
+  "You can complete your project the way you want through Mostaqel, Enter the project details, budget and the expected duration to be reviewed and published for free, after that, it will appear to the freelancers on the project page so they can submit their offers on it and you can choose the most suitable offer for you, and the freelancer starts implementing the project": "تستطيع إنجاز مشروعك بالشكل الذي تريده من خلال مستقل، أدخل تفاصيل المشروع والميزانية والمدة المتوقعة ليتم مراجعته ونشره مجاناً، بعد ذلك سيظهر للمستقلين في صفحة المشاريع ويقدموا عروضهم عليه لتختار العرض الأنسب لك ويبدأ المستقل بتنفيذ المشروع",
+
+  "Mostaqel website guarantees your rights": "موقع مستقل يضمن حقوقك",
+
+  "Mostaqel acts as an intermediary between you and the freelancer you hire to implement Your project, only after the freelancer completes the whole project, the money will be transfered to his account": "يقوم موقع مستقل بدور الوسيط بينك وبين المستقل الذي توظفه لتنفيذ مشروعك، فقط بعد انتهاء المستقل من تنفيذ المشروع كاملاً يتم تحويل المبلغ إلى حسابه",
+
+  "Tips for a successful business": "نصائح للحصول على عمل ناجح",
+
+  "Clarify all the details and tasks to be accomplished": "وضح جميع التفاصيل والمهام المطلوب إنجازها",
+
+  "Fill in all fields and provide examples of what you want to excute": "املأ جميع الحقول ووفّر أمثلة لما تريد تنفيذه",
+
+  "Break large projects and tasks into several small phases": "جزّء المشروع والمهام الكبيرة على عدّة مراحل صغيرة",
+  "Your Account Has Been Deactivated Feel Free to contact us:": "مرحباً عزيزي، يؤسفنا إعلامك أنه تم إلغاء تنشيط حسابك ، لا تتردد في التواصل معنا لحل المشكلة"
 }
