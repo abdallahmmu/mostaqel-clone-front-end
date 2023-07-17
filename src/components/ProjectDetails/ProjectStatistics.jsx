@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,9 +9,17 @@ import Paper from "@mui/material/Paper";
 import moment from "moment";
 import { releaseMoney } from "./helper.js";
 import { useTranslation } from "react-i18next";
+import { langContext } from "../../contextAPI/context.jsx";
 
+import { useNavigate } from "react-router-dom";
 const ProjectStatistics = ({ details, isOwner }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const timeAgo = moment(details.createdAt)
+    .startOf("hour")
+    .fromNow()
+    .split(" ");
+  const { lang } = useContext(langContext);
   let rows = [
     {
       name: "Project Status",
@@ -19,13 +27,16 @@ const ProjectStatistics = ({ details, isOwner }) => {
     },
     {
       name: "Publish Date",
-      value: moment(new Date(details.createdAt)).fromNow(),
     },
     {
       name: "Budget",
       value: `${details.range} $`,
     },
   ];
+  rows[1].value =
+    lang == "ar"
+      ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
+      : timeAgo.join(" ");
 
   return (
     <>
@@ -48,7 +59,14 @@ const ProjectStatistics = ({ details, isOwner }) => {
                   <TableCell component="th" scope="row">
                     {t(row.name)}
                   </TableCell>
-                  <TableCell align="right">{row.value}</TableCell>
+                  <TableCell
+                    align="right"
+                    style={{
+                      direction: row.name == "Publish Date" ? "ltr" : "",
+                    }}
+                  >
+                    {t(row.value)}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -113,7 +131,8 @@ const ProjectStatistics = ({ details, isOwner }) => {
                             releaseMoney(
                               details.offerId.freelancerId?._id,
                               details.clientId?._id,
-                              details.offerId?._id
+                              details.offerId?._id,
+                              navigate
                             );
                           }}
                         >

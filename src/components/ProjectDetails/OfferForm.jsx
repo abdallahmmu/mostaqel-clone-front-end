@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-
 const OfferForm = ({ formik, EditOffer, handleClose }) => {
   const { t } = useTranslation();
 
@@ -11,7 +10,7 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
         {Object.keys(formik.initialValues).map((item) => {
           return item == "description" ? (
             <div className="form-group mb-3 col-12" key={item}>
-              <label htmlFor={item}>{item}</label>
+              <label htmlFor={item}>{t(item)}</label>
               <textarea
                 className="form-control "
                 id={item}
@@ -25,7 +24,7 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
             </div>
           ) : (
             <div className="form-group mb-3 col-6" key={item}>
-              <label htmlFor={item}>{item}</label>
+              <label htmlFor={item}>{t(item)}</label>
               <input
                 className="form-control  col-6 mb-2"
                 id={item}

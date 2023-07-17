@@ -80,7 +80,7 @@ export const updateOffer = async (data, token, offerId) => {
   alertFire("Successfully Updated The Offer", "info");
 };
 
-export const hireFreelancer = async (token, offerId) => {
+export const hireFreelancer = async (token, offerId, navigate) => {
   await axios.patch(
     `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
     {
@@ -90,9 +90,14 @@ export const hireFreelancer = async (token, offerId) => {
       headers: { "Content-Type": "application/json", Authorization: token },
     }
   );
-  window.location.reload();
+  navigate(`/projects/${projectId}`);
 };
-export const releaseMoney = async (freelancerId, clientId, offerId) => {
+export const releaseMoney = async (
+  freelancerId,
+  clientId,
+  offerId,
+  navigate
+) => {
   Swal.fire({
     title: "Are you sure to complete this project?",
     icon: "warning",
@@ -113,7 +118,7 @@ export const releaseMoney = async (freelancerId, clientId, offerId) => {
 
       Swal.fire({
         title: "the project has been completed successfully ",
-      }).then(() => window.location.reload());
+      }).then(() => navigate(`/projects/${projectId}`));
     }
   });
 };

@@ -14,17 +14,16 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
 
-
   const [hired, setHired] = useState(false);
 
   useEffect(() => {
-    console.log("hired")
-  }, [hired])
+    console.log("hired");
+  }, [hired]);
 
   const handleHired = () => {
-    setHired(true)
-  }
-   return (
+    setHired(true);
+  };
+  return (
     <Grid
       sx={{
         backgroundColor: "white",
@@ -98,8 +97,8 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
                   style={{ display: status == "open" ? "" : "none" }}
                   className="btn"
                   onClick={() => {
-                    hireFreelancer(token, _id);
-                    handleHired()
+                    hireFreelancer(token, _id, navigate);
+                    handleHired();
                   }}
                 >
                   <PaymentsIcon />
