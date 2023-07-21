@@ -2,11 +2,12 @@ import React from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import ImageGeneration from '../../UI_Helpers/ImageGeneration'
 import { useTranslation } from "react-i18next";
+import { useSelector } from 'react-redux';
 
 
 function ImageCard() {
   const { t } = useTranslation();
-
+  const {userData} = useSelector((state)=> state.authSlice)
   const {data} = useLoaderData()
   return (
 <div className="col-sm-12 col-md-4">
@@ -16,7 +17,7 @@ function ImageCard() {
       <div className="image text-center">
        {data.avatar &&  <ImageGeneration avatar={data.avatar} />}
         {!data.avatar && <ImageGeneration firstName={data.firstName} LastName={data.LastName || data.lastName}/>}
-        <p><Link to={`/profile/${data._id}`} className="text-dark">{data.firstName + ' ' +data.lastName || data.LastName}</Link></p>
+        <p><Link to={`/${userData.role}/${data._id}`} className="text-dark">{data.firstName + ' ' +data.lastName || data.LastName}</Link></p>
         <hr />
         <p><Link to={`/profile/edit/${data._id}`} className="text-dark">{t("Edit Profile")}</Link></p>
       </div>

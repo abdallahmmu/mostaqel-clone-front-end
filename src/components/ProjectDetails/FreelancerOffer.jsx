@@ -58,7 +58,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
           </Box>
           {/* Typo Box */}
           <Box>
-            <Link to={`/profile/${freelancerId._id}`}>
+            <Link to={`/freelancer/${freelancerId._id}`}>
               {" "}
               <p
                 style={{

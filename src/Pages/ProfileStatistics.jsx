@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import Swal from "sweetalert2";
+import React, { useCallback, useEffect, useState } from "react";
 import ImageCard from "../components/ProfileComponents/ProfileStatistics/ImageCard";
 import PaymentCard from "../components/ProfileComponents/ProfileStatistics/PaymentCard";
 import MessagesCard from "../components/ProfileComponents/ProfileStatistics/MessagesCard";
@@ -12,15 +13,58 @@ import { useLoaderData } from "react-router-dom";
 function ProfileStatistics() {
   const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
+  const [isVerify, setIsVerify] = useState(false);
   const { data } = useLoaderData();
+
+  const verifyAccount = useCallback(() => {
+    Swal.fire({
+      title: `${t('Want To Verify Your Account')}`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText:`${t('No')}`,
+      confirmButtonText: `${t('Yes, I Want')}`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          titleText: `${t('Please Check Your Email Account')}`,
+          icon: "success",
+          iconColor: "#3085d6",
+        });
+      }
+    });
+  }, []);
   return (
     <section id="control-pannel">
       <div className="container">
         {!data.isActive && (
-          <p className="py-4 bg-white text-center text-danger fw-bold">
+          <div className="py-4 bg-white mb-3">
+          <p className="text-center text-danger fw-bold">
             {t("Your Account Has Been Deactivated Feel Free to contact us:")}{" "}
-            <br /> <span className="text-dark">mostaql-clone@mostaql.com</span>
+            <br/>
           </p>
+            <p className="text-dark text-center fw-bold">mostaqel@clone.com</p>
+          </div>
+        )}
+        {!data.isVerify&&userData.role === 'freelancer' && (
+          <div className="mb-3 py-4 bg-white r fw-bold">
+            <p className="text-center text-danger">
+              {t("To Verify Your Account")}{" "}
+              <button
+                onClick={verifyAccount}
+                className="btn btn-outline-danger mx-2"
+              >
+                {t("Click Here")}
+              </button>
+              <br />{" "}
+              {isVerify && (
+                <span className="text-dark">
+                  {t("Please Check Your Email Account")}
+                </span>
+              )}
+            </p>
+          </div>
         )}
         <span className="text-p mb-2">{t("Main")}</span>
         <h3>{t("Control Pannel")}</h3>
