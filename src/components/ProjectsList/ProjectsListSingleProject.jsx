@@ -12,7 +12,7 @@ const ProjectsListSingleProject = ({ project }) => {
   const { t } = useTranslation();
   const { lang } = useContext(langContext);
   const timeAgo = moment(project.createdAt)
-    .startOf("hour")
+    .startOf("second")
     .fromNow()
     .split(" ");
 
@@ -27,18 +27,12 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
-            {/* <Typography
-            
-            style={{
-              color: '#fff',
-              padding: '5px 7px',
-              borderRadius: '7px',
-              backgroundColor: '#2386C8'  }}
-            >
-              {project.range}
-             
-            </Typography> */}
+          
           </Box>
+          <Box>
+            <img src={project.file} />
+          </Box>
+
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">
               {project.clientId.firstName} <PersonIcon sx={{ fontSize: 15 }} />
