@@ -35,6 +35,7 @@ const ChatDetails = React.lazy(() =>
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
 const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+const VerifyCodePage = React.lazy(()=>import('../Pages/VerifyCode'))
 
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
@@ -193,6 +194,14 @@ export const router = createBrowserRouter([
           </React.Suspense>
         ),
       },
+      {
+        path:'/verify-account/:freelancerId',
+        element:(
+          <React.Suspense fallback={<LoadingSpinner/>}>
+            <VerifyCodePage/>
+          </React.Suspense>
+        )
+      }
     ],
   },
 ]);

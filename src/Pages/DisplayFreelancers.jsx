@@ -31,6 +31,7 @@ function DisplayFreelancers() {
           {data.firstName} {data.lastName || data.LastName}
         </div>
         <div className="col-md-12 text-center">{data.jobTitle}</div>
+        {data.isVerify && <span className='mb-2 text-center'>Trusted<img src="https://api.iconify.design/fa6-regular:circle-check.svg?color=%23009dff" alt="verified" className='mx-2' /></span>}
       </div>
 
       <div className="d-flex justify-content-between">

@@ -9,6 +9,9 @@ import LatestProjectsCard from "../components/ProfileComponents/ProfileStatistic
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoaderData } from "react-router-dom";
+import { sendOTPCodeVerification } from "../helpers/verifyAccount";
+
+
 
 function ProfileStatistics() {
   const { t } = useTranslation();
@@ -16,8 +19,8 @@ function ProfileStatistics() {
   const [isVerify, setIsVerify] = useState(false);
   const { data } = useLoaderData();
 
-  const verifyAccount = useCallback(() => {
-    Swal.fire({
+  const verifyAccount = useCallback(async () => {
+    const confirm = await Swal.fire({
       title: `${t('Want To Verify Your Account')}`,
       icon: "question",
       showCancelButton: true,
@@ -25,15 +28,17 @@ function ProfileStatistics() {
       cancelButtonColor: "#d33",
       cancelButtonText:`${t('No')}`,
       confirmButtonText: `${t('Yes, I Want')}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          titleText: `${t('Please Check Your Email Account')}`,
-          icon: "success",
-          iconColor: "#3085d6",
-        });
-      }
-    });
+    })
+    if (confirm.isConfirmed) {
+        const confirmationCode = await sendOTPCodeVerification(userData.id)
+        if(confirmationCode.message){
+          Swal.fire({
+            titleText: `${t('Please Check Your Email Account')}`,
+            icon: "success",
+            iconColor: "#3085d6",
+          });
+        }
+    }
   }, []);
   return (
     <section id="control-pannel">
