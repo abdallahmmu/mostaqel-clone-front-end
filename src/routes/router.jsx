@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
 import Error404 from "../Pages/Error404";
 //Portfolio Page
-const DisplayFreelancersPage = React.lazy(() =>
+const DisplayProfileDetails = React.lazy(() =>
   import("../Pages/DisplayFreelancers")
 );
 //LAZY
@@ -36,6 +36,7 @@ const ChatDetails = React.lazy(() =>
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
 const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
 const Notifications = React.lazy(() => import("../Pages/Notifications.jsx"));
+const VerifyCodePage = React.lazy(() => import("../Pages/VerifyCode"));
 
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
@@ -43,6 +44,8 @@ import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/g
 import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
 import { getNotifications } from "../ReactRouterHelpers/getNotifications.js";
 import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
+import { getFreelancerProfilePage } from "../ReactRouterHelpers/getFreelancerDetails";
+import { getClientsProfileDetails } from "../ReactRouterHelpers/getClientsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -168,13 +171,22 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "profile/:userId",
+        path: "freelancer/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <DisplayFreelancersPage />
+            <DisplayProfileDetails />
           </React.Suspense>
         ),
-        loader: getUserByIdLoader,
+        loader: getFreelancerProfilePage,
+      },
+      {
+        path: "client/:userId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <DisplayProfileDetails />
+          </React.Suspense>
+        ),
+        loader: getClientsProfileDetails,
       },
       {
         path: "/payment/:userId",
@@ -190,6 +202,14 @@ export const router = createBrowserRouter([
         element: (
           <React.Suspense>
             <ThankYou />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/verify-account/:freelancerId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <VerifyCodePage />
           </React.Suspense>
         ),
       },

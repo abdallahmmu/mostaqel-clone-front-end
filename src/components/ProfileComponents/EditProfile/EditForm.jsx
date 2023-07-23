@@ -86,7 +86,7 @@ function EditForm() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6 offset-md-3 py-4">
+        <div className="col-md-6 offset-md-3 mx-auto py-4">
           <div className="bg-white border mt-4 p-4">
             <h3>{t("Personal Information")}</h3>
             <p>{t("If you have modified it, you will need to verify it again.")}</p>

@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AddProjectSchema } from "../Schemas/AddProjectSchema";
 import { useDispatch } from "react-redux";
 import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
@@ -8,6 +8,7 @@ import Select from "react-select";
 import CustomSelect from "../helpers/react-select";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const addProject = () => {
   const { t } = useTranslation();
@@ -18,6 +19,7 @@ const addProject = () => {
   const navigate = useNavigate();
   const [skillsIds, setSkillsIds] = useState([]);
   const [arabic, setArbic] = useState("");
+  const [file, setFile] = useState({});
 
   const addNewProject = (values) => {
     let sklsIds = [];
@@ -25,22 +27,27 @@ const addProject = () => {
       sklsIds.push(skill.id);
     });
 
+
     let newValues = {
       ...values,
       categoryId: values.categoryId.id,
-      skillsIds: sklsIds,
+      skillsIds: sklsIds
     };
+
+
+    console.log(newValues)
+    dispatch(addingNewProject(newValues));
+
 
     newValues.description_ar = arabic;
 
-    dispatch(addingNewProject(newValues));
-    swal({
-      title: "Success",
-      text: "projects added successfully",
-      icon: "success",
-    });
+    // swal({
+    //   title: "Success",
+    //   text: "projects added successfully",
+    //   icon: "success",
+    // });
 
-    navigate("/projects");
+    // navigate("/projects");
   };
   const suggestArabic = async (eve) => {
     console.log(eve.target.value);
@@ -59,6 +66,13 @@ const addProject = () => {
     const data = await response.data;
     setArbic(data.translated);
   }
+
+  const fileRef = useRef(null);
+  const filesRef = useRef(null);
+
+
+
+
   return (
     <div className="add-project mt-5">
       <div className="container">
@@ -66,18 +80,20 @@ const addProject = () => {
           <div className="col-lg-8 col-md-12">
             <Formik
               initialValues={{
-                title: "",
-                description: "",
-                description_ar: "",
-                range: 1,
+                title: "title one",
+                description: "description English",
+                description_ar: "description arabic",
+                range: 10000,
+                duration: 10,
                 categoryId: "",
                 skillsIds: [],
+                file: null
               }}
               onSubmit={addNewProject}
-              validationSchema={AddProjectSchema}
+
             >
-              {() => (
-                <Form>
+              {({ values, setFieldValue, handleChange, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       {t("Title")}
@@ -135,6 +151,67 @@ const addProject = () => {
                   </div>
 
                   <div className="mb-3">
+                    <label htmlFor="file" className="form-label">
+                      files (optional)
+                    </label>
+                    <input
+                      style={{ display: 'none', }}
+                      ref={fileRef}
+                      hidded='true'
+                      name="file"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const fl = e.currentTarget.files[0];
+                        handleChange({ target: { name: "file", value: fl } });
+                      }
+                      }
+                    />
+                    {(Object.keys(file) > 0) && <span>images {JSON.stringify(file, null, 2)}</span>}
+                    <Button
+                      style={{ display: 'block' }}
+                      variant="contained"
+                      onClick={(e) => { e.preventDefault(); fileRef.current.click() }}>
+                      file upload</Button>
+                    <ErrorMessage
+                      name="file"
+                      className="text-danger"
+                      component="div" />
+
+                  </div>
+
+                  {/* <div className="mb-3">
+                    <label htmlFor="files" className="form-label">
+                      files (optional)
+                    </label>
+                    <input
+                      style={{ display: 'none' }}
+                      ref={filesRef}
+                      hidded='true'
+                      multiple
+                      name="files"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const fl = e.currentTarget.files;
+                        handleChange({ target: { name: "files", value: [...fl] } });
+                      }
+                      }
+                    />
+                  
+                    <Button
+                      style={{ display: 'block' }}
+                      variant="contained"
+                      onClick={(e) => { e.preventDefault(); filesRef.current.click() }}>
+                      file upload</Button>
+                    <ErrorMessage
+                      name="files"
+                      className="text-danger"
+                      component="div" />
+
+                  </div> */}
+
+                  <div className="mb-3">
                     <label htmlFor="range" className="form-label">
                       {t("Range")}
                     </label>
@@ -143,6 +220,24 @@ const addProject = () => {
                       name="range"
                       className="form-control"
                       id="range"
+                      min={1}
+                    />
+                    <ErrorMessage
+                      name="range"
+                      className="text-danger"
+                      component="div"
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="range" className="form-label">
+                      Duration in  Days
+                    </label>
+                    <Field
+                      type="number"
+                      name="duration"
+                      className="form-control"
+                      id="duration"
                       min={1}
                     />
                   </div>
