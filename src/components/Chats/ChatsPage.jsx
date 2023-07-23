@@ -10,9 +10,9 @@ const ChatsPage = () => {
   const { t } = useTranslation();
 
   const [chats, setChats] = useState([]);
-  const token = useSelector((state) => state.authSlice.userData?.token);
+  const { token, role, id } = useSelector((state) => state.authSlice?.userData);
   useEffect(() => {
-    fetchAllChats(token, setChats);
+    fetchAllChats(token, setChats, role);
   }, []);
   return (
     <div className={`pt-5 ${styles.chat_page}`}>
@@ -24,7 +24,7 @@ const ChatsPage = () => {
           <ChatSearch />
           <div className="col-md-9">
             {chats.map((chat) => {
-              return <ChatItem key={Math.random()} chat={chat} />;
+              return <ChatItem key={Math.random()} chat={chat} role={role} />;
             })}
           </div>
         </div>

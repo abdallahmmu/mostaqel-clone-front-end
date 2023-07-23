@@ -35,12 +35,15 @@ const ChatDetails = React.lazy(() =>
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
 const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+const Notifications = React.lazy(() => import("../Pages/Notifications.jsx"));
 
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
 import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
+import { getNotifications } from "../ReactRouterHelpers/getNotifications.js";
 import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -146,6 +149,15 @@ export const router = createBrowserRouter([
             <ChatsPage />
           </React.Suspense>
         ),
+      },
+      {
+        path: "notifications",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <Notifications />
+          </React.Suspense>
+        ),
+        loader: getNotifications,
       },
       {
         path: "chats/:chatId",
