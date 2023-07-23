@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
+import { Button } from "@mui/material";
 const OfferForm = ({ formik, EditOffer, handleClose }) => {
   const { t } = useTranslation();
 
@@ -15,7 +15,7 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
                 className="form-control "
                 id={item}
                 name={item}
-                type="number"
+                type="text"
                 onChange={formik.handleChange}
                 value={formik.values[item]}
                 rows="3"
@@ -29,9 +29,10 @@ const OfferForm = ({ formik, EditOffer, handleClose }) => {
                 className="form-control  col-6 mb-2"
                 id={item}
                 name={item}
-                type="number"
+                type={item == "attachments" ? "file" : "number"}
                 value={formik.values[item]}
                 onChange={formik.handleChange}
+                multiple
               />
               <span className="text-danger">{formik.errors[item]}</span>
               {item == "amount" && formik.values[item] >= 10 && (

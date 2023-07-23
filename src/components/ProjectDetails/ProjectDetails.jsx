@@ -102,19 +102,21 @@ const ProjectDetails = () => {
                             </h3>
                           </Box>
                         ) : (
-                          <Box
-                            component={Paper}
-                            mt={2}
-                            className="p-5 text-center"
-                          >
-                            <h3>{t("Want To Publish")} </h3>
-                            <Link
-                              className="btn btn-secondary "
-                              to="/add-projects"
+                          role == "client" && (
+                            <Box
+                              component={Paper}
+                              mt={2}
+                              className="p-5 text-center"
                             >
-                              {t("Publish Your Own Project")}
-                            </Link>
-                          </Box>
+                              <h3>{t("Want To Publish")} </h3>
+                              <Link
+                                className="btn btn-secondary "
+                                to="/add-projects"
+                              >
+                                {t("Publish Your Own Project")}
+                              </Link>
+                            </Box>
+                          )
                         )
                       ) : (
                         <Box
