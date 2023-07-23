@@ -29,9 +29,7 @@ const ProjectsListSingleProject = ({ project }) => {
             <Link to={project._id}>{project.title}</Link>
           
           </Box>
-          <Box>
-            <img src={project.file} />
-          </Box>
+         
 
           <Box component="div" className="project-info ">
             <Typography variant="span" className="client-name">
@@ -58,6 +56,8 @@ const ProjectsListSingleProject = ({ project }) => {
           >
             <Typography variant="p">{project.description}</Typography>
           </Box>
+
+  
 
           <Box component="div">
             {project.skillsIds.map((skill, index) => (

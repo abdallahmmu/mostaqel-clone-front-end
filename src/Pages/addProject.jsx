@@ -19,7 +19,7 @@ const addProject = () => {
   const navigate = useNavigate();
   const [skillsIds, setSkillsIds] = useState([]);
   const [arabic, setArbic] = useState("");
-  const [file, setFile] = useState({});
+  const [files, setFiles] = useState([]);
 
   const addNewProject = (values) => {
     let sklsIds = [];
@@ -34,20 +34,34 @@ const addProject = () => {
       skillsIds: sklsIds
     };
 
+    
+    const fd = new FormData()
 
-    console.log(newValues)
-    dispatch(addingNewProject(newValues));
+    let files = newValues.files;
+
+    for(let file of files){
+      fd.append('files', file)
+    }
+
+    ['files'].map(i => delete newValues[i]);
+
+    for ( let item in newValues){
+        fd.append(item, newValues[item]);
+    }
+
+
+    dispatch(addingNewProject({fd}));
 
 
     newValues.description_ar = arabic;
 
-    // swal({
-    //   title: "Success",
-    //   text: "projects added successfully",
-    //   icon: "success",
-    // });
+    swal({
+      title: "Success",
+      text: "projects added successfully",
+      icon: "success",
+    });
 
-    // navigate("/projects");
+    navigate("/projects");
   };
   const suggestArabic = async (eve) => {
     console.log(eve.target.value);
@@ -67,10 +81,18 @@ const addProject = () => {
     setArbic(data.translated);
   }
 
-  const fileRef = useRef(null);
   const filesRef = useRef(null);
 
+const handleSelecedFiles = (e) => {
+  let arr = [];
+  let files  = [...e.target.files];
 
+  files.map(file => {
+    arr.push(file.name);
+  })
+
+  setFiles(arr);
+}
 
 
   return (
@@ -90,7 +112,6 @@ const addProject = () => {
                 file: null
               }}
               onSubmit={addNewProject}
-
             >
               {({ values, setFieldValue, handleChange, handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
@@ -151,36 +172,6 @@ const addProject = () => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="file" className="form-label">
-                      files (optional)
-                    </label>
-                    <input
-                      style={{ display: 'none', }}
-                      ref={fileRef}
-                      hidded='true'
-                      name="file"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const fl = e.currentTarget.files[0];
-                        handleChange({ target: { name: "file", value: fl } });
-                      }
-                      }
-                    />
-                    {(Object.keys(file) > 0) && <span>images {JSON.stringify(file, null, 2)}</span>}
-                    <Button
-                      style={{ display: 'block' }}
-                      variant="contained"
-                      onClick={(e) => { e.preventDefault(); fileRef.current.click() }}>
-                      file upload</Button>
-                    <ErrorMessage
-                      name="file"
-                      className="text-danger"
-                      component="div" />
-
-                  </div>
-
-                  {/* <div className="mb-3">
                     <label htmlFor="files" className="form-label">
                       files (optional)
                     </label>
@@ -191,25 +182,35 @@ const addProject = () => {
                       multiple
                       name="files"
                       type="file"
-                      accept="image/*"
+                      accept="image/* , application/*"
                       onChange={(e) => {
                         const fl = e.currentTarget.files;
                         handleChange({ target: { name: "files", value: [...fl] } });
+                        handleSelecedFiles(e)
                       }
                       }
                     />
-                  
+
+
+                  {(files.length > 0) && files.map((file, ind) => (
+                    <p key={ind}>{file}</p>
+                  ))}
+
                     <Button
                       style={{ display: 'block' }}
                       variant="contained"
-                      onClick={(e) => { e.preventDefault(); filesRef.current.click() }}>
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        filesRef.current.click();
+                        }}
+                        >
                       file upload</Button>
                     <ErrorMessage
                       name="files"
                       className="text-danger"
                       component="div" />
 
-                  </div> */}
+                  </div>
 
                   <div className="mb-3">
                     <label htmlFor="range" className="form-label">

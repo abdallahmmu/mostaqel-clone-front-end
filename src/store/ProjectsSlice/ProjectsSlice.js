@@ -45,15 +45,16 @@ export const getAllProjects = createAsyncThunk(
 
 export const addingNewProject = createAsyncThunk(
   "projectFullData/addProject",
-  async (Data) => {
+  async ({ fd }) => {
     try {
-      console.log(Data);
       let { authSlice } = store.getState();
 
+      fd.append('clientId', authSlice.userData.id)
+    
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/projects`,
-        { ...Data, clientId: authSlice.userData.id },
+        fd,
         {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("isAuth")).token,
