@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AddProjectSchema } from "../Schemas/AddProjectSchema";
 import { useDispatch } from "react-redux";
 import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CustomSelect from "../helpers/react-select";
 import { useTranslation } from "react-i18next";
@@ -17,10 +17,9 @@ const addProject = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [skillsIds, setSkillsIds] = useState([]);
   const [arabic, setArbic] = useState("");
   const [files, setFiles] = useState([]);
-
+  const filesRef = useRef(null);
   const addNewProject = (values) => {
     let sklsIds = [];
     values.skillsIds.map((skill) => {
@@ -34,23 +33,27 @@ const addProject = () => {
       skillsIds: sklsIds
     };
 
-    
+
     const fd = new FormData()
 
     let files = newValues.files;
 
-    for(let file of files){
-      fd.append('files', file)
+    if (files) {
+
+      for (let file of files) {
+        fd.append('files', file)
+      }
+
+      ['files'].map(i => delete newValues[i]);
+
     }
 
-    ['files'].map(i => delete newValues[i]);
-
-    for ( let item in newValues){
-        fd.append(item, newValues[item]);
+    for (let item in newValues) {
+      fd.append(item, newValues[item]);
     }
 
 
-    dispatch(addingNewProject({fd}));
+    dispatch(addingNewProject({ fd }));
 
 
     newValues.description_ar = arabic;
@@ -81,18 +84,24 @@ const addProject = () => {
     setArbic(data.translated);
   }
 
-  const filesRef = useRef(null);
+ 
 
-const handleSelecedFiles = (e) => {
-  let arr = [];
-  let files  = [...e.target.files];
+  const handleSelecedFiles = (e) => {
+    let files = [...e.target.files];
 
-  files.map(file => {
-    arr.push(file.name);
-  })
+    let arr = [];
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      
+      if (file.type.startsWith('image')) {
+        arr.push({ path: URL.createObjectURL(file), type: 'image', name: file.name })
+      } else {
+        arr.push({ path: URL.createObjectURL(file), type: 'application', name: file.name })
+      }
+    }
+    setFiles(arr)
 
-  setFiles(arr);
-}
+  }
 
 
   return (
@@ -172,9 +181,12 @@ const handleSelecedFiles = (e) => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="files" className="form-label">
-                      files (optional)
-                    </label>
+                    {!files.length && (
+
+                      <label htmlFor="files" className="form-label">
+                        files (optional)
+                      </label>
+                    )}
                     <input
                       style={{ display: 'none' }}
                       ref={filesRef}
@@ -191,19 +203,28 @@ const handleSelecedFiles = (e) => {
                       }
                     />
 
+        
 
-                  {(files.length > 0) && files.map((file, ind) => (
-                    <p key={ind}>{file}</p>
-                  ))}
+                    {(files.length > 3) ? <p>files more than 3</p> : 
+                    
+                    (files.map((file, index) => (
+                      (file.type === 'image') ? 
+                      <img className="mb-2" width="200" height="100" key={index} src={file.path} />
+                      :
+                      <p key={index}>{file.name}</p>
+                    )))}
+
+
+
 
                     <Button
                       style={{ display: 'block' }}
                       variant="contained"
-                      onClick={(e) => { 
-                        e.preventDefault(); 
+                      onClick={(e) => {
+                        e.preventDefault();
                         filesRef.current.click();
-                        }}
-                        >
+                      }}
+                    >
                       file upload</Button>
                     <ErrorMessage
                       name="files"
