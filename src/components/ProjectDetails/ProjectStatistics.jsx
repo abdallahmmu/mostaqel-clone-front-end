@@ -16,7 +16,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const timeAgo = moment(details.createdAt)
-    .startOf("hour")
+    .startOf("second")
     .fromNow()
     .split(" ");
   const { lang } = useContext(langContext);

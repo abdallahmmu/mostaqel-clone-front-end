@@ -34,6 +34,15 @@ const ProjectInfo = ({ isSender, message }) => {
               fontSize={"15px"}
             >
               <div>{message.content}</div>
+              {message.attachments.length
+                ? message.attachments.map((file, index) => {
+                    return (
+                      <a href={file} key={index}>
+                        File {index + 1}
+                      </a>
+                    );
+                  })
+                : ""}
               <Typography variant="span" fontSize={"9px"}>
                 {moment(new Date(message.updatedAt)).fromNow()}
                 <AccessTimeIcon fontSize={"9px"} />

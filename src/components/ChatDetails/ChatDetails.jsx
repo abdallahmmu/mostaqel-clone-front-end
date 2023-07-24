@@ -14,6 +14,7 @@ const ChatDetails = () => {
   const [messageList, setMessageList] = useState([]);
   const message = useRef();
   const chatRef = useRef();
+  const fileUpload = useRef();
 
   const socket = useRef(null);
   useEffect(() => {
@@ -57,14 +58,37 @@ const ChatDetails = () => {
   // };
 
   const sendMessage = async () => {
-    const newMessage = {
-      content: message.current.value,
-      chatId,
-      sender: role,
-    };
-    socket.current.emit("newMessage", newMessage);
+    const formData = new FormData();
+    formData.append("sender", role);
+    formData.append("content", message.current.value);
+    formData.append("chatId", chatId);
+    if (fileUpload.current.files.length) {
+      const fileList = fileUpload.current.files;
+      for (let i = 0; i < fileList.length; i++) {
+        formData.append("attachments", fileList[i]);
+      }
+    }
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/chats/${chatId}/messages`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    // const newMessage = {
+    //   content: ,
+    //   chatId,
+    //   : role,
+    // };
+    // socket.current.emit("newMessage", newMessage);
+
     // setMessageList([...messageList, newMessage]);
     message.current.value = "";
+    fileUpload.current.value = "";
   };
   return (
     <div className={`pt-5 ${styles.chat_page}`}>
@@ -90,15 +114,34 @@ const ChatDetails = () => {
                 );
               })}
             </div>
-            <div className="d-flex justify-content-between m-2 ">
-              <input
-                className="form-control  w-33"
-                placeholder="Send Your Message"
-                ref={message}
-              />
-              <button className="mx-2 btn btn-primary" onClick={sendMessage}>
-                Send
-              </button>
+
+            <div className="row">
+              <div className="form-group mb-3 col-6">
+                <input
+                  className="form-control  col-6 mb-2"
+                  placeholder="Send Your Message"
+                  ref={message}
+                  type="text"
+                />
+              </div>
+              <div className="form-group mb-3 col-4">
+                <input
+                  className="form-control  col-6 mb-2"
+                  ref={fileUpload}
+                  type="file"
+                  multiple
+                />
+              </div>
+
+              <div className="form-group mb-3 text-center col-2">
+                <button
+                  type="submit"
+                  className="btn btn-primary me-5"
+                  onClick={sendMessage}
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>
