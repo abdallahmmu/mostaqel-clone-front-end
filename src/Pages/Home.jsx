@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Hero from "../components/HomeComponents/HeroSection/Hero";
 import Trusted from "../components/HomeComponents/TrustedSection/Trusted";
 import Help from "../components/HomeComponents/HelpSection/Help";
@@ -7,20 +7,24 @@ import Freelancers from "../components/HomeComponents/FreelancersSection/Freelan
 import Ready from "../components/HomeComponents/ReadySection/Ready";
 import Ask from "../components/HomeComponents/AskSection/Ask";
 
+import { useTranslation } from "react-i18next";
 function Home() {
+  const { t } = useTranslation();
+
   useEffect(() => {
     document.title = "Mostaqel-Clone | Home";
     AOS.init();
   }, []);
+
   return (
     <>
-      <Hero />
-      <Trusted />
-      <Help/>
-      <MostaqelHelp/>
-      <Freelancers/>
-      <Ready/>
-      <Ask/>
+      <Hero t={t} />
+      <Trusted t={t} />
+      <Help t={t} />
+      <MostaqelHelp t={t} />
+      <Freelancers t={t} />
+      <Ready t={t} />
+      <Ask t={t} />
     </>
   );
 }

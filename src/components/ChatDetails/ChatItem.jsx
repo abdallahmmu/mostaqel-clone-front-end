@@ -1,39 +1,58 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { Box, Grid, Typography } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import moment from "moment";
+const ProjectInfo = ({ isSender, message }) => {
+  const { t } = useTranslation();
 
-const ProjectInfo = () => {
   return (
     <>
-      <div className="project-desc bg-white p-4">
-        <div
-          class="msg pdn--am brd--t"
-          data-reply="6664899"
-          id="message6664899"
+      <Box component="div">
+        <Grid
+          container
+          spacing={2}
+          style={{
+            display: "flex",
+            justifyContent: isSender ? "end" : "",
+          }}
         >
-          <div class="msg__meta media mrg--bs">
-            <a href="https://mostaql.com/u/Hemdan213" class="pull-right"></a>
-
-            <div class="media-body">
-              <h5 class="from mrg--an">
-                <bdi>Hemdan Khalifa</bdi>
-              </h5>
-              <div class="text-zeta text-muted">
-                <i class="fa fa-clock-o"></i>
-                <time
-                  class="timeago"
-                  datetime="2023-05-16 19:23:34"
-                  title="2023-05-16 19:23:34"
-                >
-                  منذ 28 يوما و 21 ساعة
-                </time>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-wrapper-div msg__body copy wb ">
-            <p>السلام عليكم</p>
-          </div>
-        </div>
-      </div>
+          <Grid item sm={10}>
+            <Box
+              component="div"
+              sx={{ marginTop: "10px" }}
+              style={{
+                background: isSender ? "azure" : "#fff",
+                display: "flex",
+                flexDirection: "column",
+                float: isSender ? "right" : "left",
+                padding: "5px",
+                borderRadius: "5px",
+              }}
+              className="project-title"
+              fontSize={"15px"}
+            >
+              <div>{message.content}</div>
+              {message.attachments.length
+                ? message.attachments.map((file, index) => {
+                    return (
+                      <a href={file} key={index}>
+                        File {index + 1}
+                      </a>
+                    );
+                  })
+                : ""}
+              <Typography variant="span" fontSize={"9px"}>
+                {moment(new Date(message.updatedAt)).fromNow()}
+                <AccessTimeIcon fontSize={"9px"} />
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+        {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
+      </Box>
+      <br />
     </>
   );
 };

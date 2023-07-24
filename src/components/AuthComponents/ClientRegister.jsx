@@ -6,7 +6,10 @@ import { clientSchemaValidation } from "../../Schemas/ClientRegisterationSchema"
 import { LoadingIndecator } from "../UI_Helpers/LoadingIndecator";
 
 import { useSelector, useDispatch } from "react-redux";
-import { authActions, registerNewUserClient } from "../../store/AuthSlice/authSlice";
+import {
+  authActions,
+  registerNewUserClient,
+} from "../../store/AuthSlice/authSlice";
 
 const fields = {
   firstName: "",
@@ -17,10 +20,9 @@ const fields = {
   phone: "",
   password: "",
   confirmPassword: "",
- 
 };
 
-function ClientRegister() {
+function ClientRegister({ t }) {
   const { isLoading, errors } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
   //   const categories = useLoaderData();
@@ -29,7 +31,6 @@ function ClientRegister() {
     const newUser = {
       ...values,
     };
-    console.log(newUser)
     dispatch(registerNewUserClient(newUser));
   };
 
@@ -48,7 +49,9 @@ function ClientRegister() {
         className="container bg-white"
         style={{ borderRadius: 40, boxShadow: "0px 0px 5px 0px #2386" }}
       >
-        <h3 className="text-center pt-4 fw-semibold">Register As A Client</h3>
+        <h3 className="text-center pt-4 fw-semibold">
+          {t("Register As A Client")}
+        </h3>
         <div className="row p-5">
           <div className="col-lg-6 col-md-12 d-none d-sm-block">
             <div className="d-flex h-100 w-100 align-items-start justify-content-center">
@@ -65,7 +68,7 @@ function ClientRegister() {
               <Form className="row g-3 col-lg-6 col-md-12">
                 <div className=" col-md-6">
                   <label htmlFor="firstName" className="form-label">
-                    First Name <span className="text-danger">*</span>
+                    {t("First Name")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -82,7 +85,7 @@ function ClientRegister() {
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="lastName" className="form-label">
-                    Last Name <span className="text-danger">*</span>
+                    {t("Last Name")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -99,7 +102,7 @@ function ClientRegister() {
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="userName" className="form-label">
-                    username <span className="text-danger">*</span>
+                    {t("username")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -116,7 +119,7 @@ function ClientRegister() {
                 </div>
                 <div className=" col-md-6">
                   <label htmlFor="address" className="form-label">
-                    address <span className="text-danger">*</span>
+                    {t("address")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -133,7 +136,7 @@ function ClientRegister() {
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="inputEmail4" className="form-label">
-                    Email <span className="text-danger">*</span>
+                    {t("Email")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="email"
@@ -150,7 +153,7 @@ function ClientRegister() {
                 </div>
                 <div className=" col-md-12">
                   <label htmlFor="phone" className="form-label">
-                    Phone Number <span className="text-danger">*</span>
+                    {t("Phone Number")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="text"
@@ -167,7 +170,7 @@ function ClientRegister() {
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword4" className="form-label">
-                    Password <span className="text-danger">*</span>
+                    {t("Password")} <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="password"
@@ -184,7 +187,8 @@ function ClientRegister() {
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputPassword5" className="form-label">
-                    Confirm Password <span className="text-danger">*</span>
+                    {t("Confirm Password")}{" "}
+                    <span className="text-danger">*</span>
                   </label>
                   <Field
                     type="password"
@@ -206,7 +210,7 @@ function ClientRegister() {
                   </button>
                 </div>
                 <span>
-                  Have you account <Link to="/login">Log In</Link>
+                  {t("Have you account")} <Link to="/login">{t("Log In")}</Link>
                 </span>
               </Form>
             )}

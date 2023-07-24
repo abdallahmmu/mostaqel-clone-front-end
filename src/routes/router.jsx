@@ -1,8 +1,12 @@
 import React from "react";
-import { Link, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
-
+import Error404 from "../Pages/Error404";
+//Portfolio Page
+const DisplayProfileDetails = React.lazy(() =>
+  import("../Pages/DisplayFreelancers")
+);
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -28,18 +32,26 @@ const ChatsPage = React.lazy(() => import("../components/Chats/ChatsPage.jsx"));
 const ChatDetails = React.lazy(() =>
   import("../components/ChatDetails/ChatDetails.jsx")
 );
+
+const PaymentPage = React.lazy(() => import("../Pages/Payment"));
+const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
+const Notifications = React.lazy(() => import("../Pages/Notifications.jsx"));
+const VerifyCodePage = React.lazy(() => import("../Pages/VerifyCode"));
+
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
+import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
+import { getNotifications } from "../ReactRouterHelpers/getNotifications.js";
+import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
+import { getFreelancerProfilePage } from "../ReactRouterHelpers/getFreelancerDetails";
+import { getClientsProfileDetails } from "../ReactRouterHelpers/getClientsDetails";
+
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: (
-      <div>
-        Can not found this route <Link to="/">Go Home</Link>
-      </div>
-    ),
+    errorElement: <Error404 />,
     children: [
       {
         index: true,
@@ -89,7 +101,7 @@ export const router = createBrowserRouter([
             <ProfileStatistics />
           </React.Suspense>
         ),
-        loader: getUserByIdLoader,
+        loader: getUserStatisticsById,
       },
       {
         path: "profile/edit/:userId",
@@ -115,6 +127,7 @@ export const router = createBrowserRouter([
             <AddProject />
           </React.Suspense>
         ),
+        loader: addProjectLoader,
       },
       {
         path: "projects/:projectId",
@@ -141,10 +154,62 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "notifications",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <Notifications />
+          </React.Suspense>
+        ),
+        loader: getNotifications,
+      },
+      {
         path: "chats/:chatId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
             <ChatDetails />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "freelancer/:userId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <DisplayProfileDetails />
+          </React.Suspense>
+        ),
+        loader: getFreelancerProfilePage,
+      },
+      {
+        path: "client/:userId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <DisplayProfileDetails />
+          </React.Suspense>
+        ),
+        loader: getClientsProfileDetails,
+      },
+      {
+        path: "/payment/:userId",
+        element: (
+          <React.Suspense>
+            <PaymentPage />
+          </React.Suspense>
+        ),
+        loader: getUserByIdLoader,
+      },
+      {
+        path: "/payment/thankYou",
+        element: (
+          <React.Suspense>
+            <ThankYou />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/verify-account/:freelancerId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <VerifyCodePage />
           </React.Suspense>
         ),
       },

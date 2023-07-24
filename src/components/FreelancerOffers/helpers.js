@@ -1,5 +1,5 @@
 import axios from "axios";
-export const fetchMyOffers = async (setOffers, token, navigate) => {
+export const fetchMyOffers = async (setOffers, token, navigate, setLoading) => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/freelancers/myoffers`,
@@ -7,9 +7,9 @@ export const fetchMyOffers = async (setOffers, token, navigate) => {
         headers: { "Content-Type": "application/json", Authorization: token },
       }
     );
-    console.log(response.data);
-    setOffers(response.data.results);
+    setOffers(response.data.results.reverse());
     document.title = "My Offers";
+    setLoading(false);
   } catch (e) {
     console.log(e);
   }
