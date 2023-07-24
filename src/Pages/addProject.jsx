@@ -27,31 +27,27 @@ const addProject = () => {
       sklsIds.push(skill.id);
     });
 
-
     let newValues = {
       ...values,
       categoryId: values.categoryId.id,
-      skillsIds: sklsIds
+      skillsIds: sklsIds,
     };
 
-    
-    const fd = new FormData()
+    const fd = new FormData();
 
     let files = newValues.files;
 
-    for(let file of files){
-      fd.append('files', file)
+    for (let file of files) {
+      fd.append("files", file);
     }
 
-    ['files'].map(i => delete newValues[i]);
+    ["files"].map((i) => delete newValues[i]);
 
-    for ( let item in newValues){
-        fd.append(item, newValues[item]);
+    for (let item in newValues) {
+      fd.append(item, newValues[item]);
     }
 
-
-    dispatch(addingNewProject({fd}));
-
+    dispatch(addingNewProject({ fd }));
 
     newValues.description_ar = arabic;
 
@@ -83,17 +79,16 @@ const addProject = () => {
 
   const filesRef = useRef(null);
 
-const handleSelecedFiles = (e) => {
-  let arr = [];
-  let files  = [...e.target.files];
+  const handleSelecedFiles = (e) => {
+    let arr = [];
+    let files = [...e.target.files];
 
-  files.map(file => {
-    arr.push(file.name);
-  })
+    files.map((file) => {
+      arr.push(file.name);
+    });
 
-  setFiles(arr);
-}
-
+    setFiles(arr);
+  };
 
   return (
     <div className="add-project mt-5">
@@ -109,7 +104,7 @@ const handleSelecedFiles = (e) => {
                 duration: 10,
                 categoryId: "",
                 skillsIds: [],
-                file: null
+                file: null,
               }}
               onSubmit={addNewProject}
             >
@@ -176,40 +171,40 @@ const handleSelecedFiles = (e) => {
                       files (optional)
                     </label>
                     <input
-                      style={{ display: 'none' }}
+                      style={{ display: "none" }}
                       ref={filesRef}
-                      hidded='true'
+                      hidded="true"
                       multiple
                       name="files"
                       type="file"
                       accept="image/* , application/*"
                       onChange={(e) => {
                         const fl = e.currentTarget.files;
-                        handleChange({ target: { name: "files", value: [...fl] } });
-                        handleSelecedFiles(e)
-                      }
-                      }
+                        handleChange({
+                          target: { name: "files", value: [...fl] },
+                        });
+                        handleSelecedFiles(e);
+                      }}
                     />
 
-
-                  {(files.length > 0) && files.map((file, ind) => (
-                    <p key={ind}>{file}</p>
-                  ))}
+                    {files.length > 0 &&
+                      files.map((file, ind) => <p key={ind}>{file}</p>)}
 
                     <Button
-                      style={{ display: 'block' }}
+                      style={{ display: "block" }}
                       variant="contained"
-                      onClick={(e) => { 
-                        e.preventDefault(); 
+                      onClick={(e) => {
+                        e.preventDefault();
                         filesRef.current.click();
-                        }}
-                        >
-                      file upload</Button>
+                      }}
+                    >
+                      file upload
+                    </Button>
                     <ErrorMessage
                       name="files"
                       className="text-danger"
-                      component="div" />
-
+                      component="div"
+                    />
                   </div>
 
                   <div className="mb-3">
@@ -232,7 +227,7 @@ const handleSelecedFiles = (e) => {
 
                   <div className="mb-3">
                     <label htmlFor="range" className="form-label">
-                      Duration in  Days
+                      Duration in Days
                     </label>
                     <Field
                       type="number"
