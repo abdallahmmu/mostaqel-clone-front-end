@@ -1,14 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { AddProjectSchema } from "../Schemas/AddProjectSchema";
 import { useDispatch } from "react-redux";
 import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import Select from "react-select";
-import CustomSelect from "../helpers/react-select";
+import {  useLoaderData, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { Button } from "@mui/material";
+import CatsSelect from "../helpers/CatSelect";
+import SkillsSelect from "../helpers/SkillsSelect";
 
 const addProject = () => {
   const { t } = useTranslation();
@@ -29,8 +29,7 @@ const addProject = () => {
 
     let newValues = {
       ...values,
-      categoryId: values.categoryId.id,
-      skillsIds: sklsIds
+      categoryId: values.categoryId,
     };
 
 
@@ -53,18 +52,22 @@ const addProject = () => {
     }
 
 
+    // for (let [ket, vl] of fd.entries()){
+    //   console.log(ket)
+    //   console.log(vl)
+    // }
     dispatch(addingNewProject({ fd }));
 
 
     newValues.description_ar = arabic;
 
-    swal({
-      title: "Success",
-      text: "projects added successfully",
-      icon: "success",
-    });
+    // swal({
+    //   title: "Success",
+    //   text: "projects added successfully",
+    //   icon: "success",
+    // });
 
-    navigate("/projects");
+    // navigate("/projects");
   };
   const suggestArabic = async (eve) => {
     console.log(eve.target.value);
@@ -84,7 +87,7 @@ const addProject = () => {
     setArbic(data.translated);
   }
 
- 
+
 
   const handleSelecedFiles = (e) => {
     let files = [...e.target.files];
@@ -92,7 +95,7 @@ const addProject = () => {
     let arr = [];
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
-      
+
       if (file.type.startsWith('image')) {
         arr.push({ path: URL.createObjectURL(file), type: 'image', name: file.name })
       } else {
@@ -118,12 +121,13 @@ const addProject = () => {
                 duration: 10,
                 categoryId: "",
                 skillsIds: [],
-                file: null
+                files: null
               }}
+              validationSchema={AddProjectSchema}
               onSubmit={addNewProject}
             >
-              {({ values, setFieldValue, handleChange, handleSubmit }) => (
-                <Form onSubmit={handleSubmit}>
+              {({  handleChange, handleSubmit }) => (
+                <Form >
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       {t("Title")}
@@ -203,16 +207,16 @@ const addProject = () => {
                       }
                     />
 
-        
 
-                    {(files.length > 3) ? <p>files more than 3</p> : 
-                    
-                    (files.map((file, index) => (
-                      (file.type === 'image') ? 
-                      <img className="mb-2" width="200" height="100" key={index} src={file.path} />
-                      :
-                      <p key={index}>{file.name}</p>
-                    )))}
+
+                    {(files.length > 3) ? <p>files more than 3</p> :
+
+                      (files.map((file, index) => (
+                        (file.type === 'image') ?
+                          <img className="mb-2" width="200" height="100" key={index} src={file.path} />
+                          :
+                          <p key={index}>{file.name}</p>
+                      )))}
 
 
 
@@ -262,19 +266,33 @@ const addProject = () => {
                       id="duration"
                       min={1}
                     />
+                    <ErrorMessage
+                      name="duration"
+                      className="text-danger"
+                      component="div"
+                    />
                   </div>
+
+
+
                   <div className="mb-3">
                     <label htmlFor="categories" className="form-label">
                       {t("category")}
                     </label>
 
-                    <CustomSelect
+                    {/* <CustomSelect
                       name="categoryId"
                       options={categories}
                       getOptionLabel={(option) => option.label}
                       getOptionValue={(option) => option.value}
                       isMulti={false}
                       value="ahmed"
+                    /> */}
+                    <Field
+                      name="categoryId"
+                      as={CatsSelect}
+                      label="Category"
+                      options={categories}
                     />
                   </div>
                   <div className="mb-3">
@@ -282,12 +300,18 @@ const addProject = () => {
                       {t("Skills")}
                     </label>
 
-                    <CustomSelect
+                    {/* <CustomSelect
                       name="skillsIds"
                       options={skills}
                       getOptionLabel={(option) => option.label}
                       getOptionValue={(option) => option.value}
                       closeMenuOnSelect={false}
+                    /> */}
+                     <Field
+                      name="skillsIds"
+                      as={SkillsSelect}
+                      label="Category"
+                      options={skills}
                     />
                   </div>
 
