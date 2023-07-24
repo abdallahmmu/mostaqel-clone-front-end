@@ -57,11 +57,7 @@ const ProjectsListSingleProject = ({ project }) => {
             <Typography variant="p">{project.description}</Typography>
           </Box>
 
-          <Box>
-            {project.files && project.files.map((file, index) => (
-              <Link to={file} key={index}> {file}</Link>
-            ))}
-          </Box>
+         
 
           <Box component="div">
             {project.skillsIds.map((skill, index) => (
