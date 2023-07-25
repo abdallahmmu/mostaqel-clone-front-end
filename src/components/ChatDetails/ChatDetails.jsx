@@ -6,12 +6,15 @@ import ChatInfo from "./ChatInfo.jsx";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LoadingSpinner from "../UI_Helpers/LoadingSpinner";
 import axios from "axios";
 const ChatDetails = () => {
   const { t } = useTranslation();
   const { chatId } = useParams();
+  const [loading, setLoading] = useState(true);
   const { role } = useSelector((state) => state.authSlice?.userData);
   const [messageList, setMessageList] = useState([]);
+  const [chatInfo, setChatInfo] = useState([]);
   const message = useRef();
   const chatRef = useRef();
   const fileUpload = useRef();
@@ -22,6 +25,8 @@ const ChatDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setMessageList(data.data);
+        setChatInfo(data.details);
+        setLoading(false);
         const newSocket = io("http://localhost:3300/");
         socket.current = newSocket;
 
@@ -49,8 +54,10 @@ const ChatDetails = () => {
     }
   });
   useEffect(() => {
-    chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    chatRef.current?.lastChild?.scrollIntoView({ behavior: "smooth" });
+    if (!loading) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      chatRef.current?.lastChild?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messageList]);
   // const connectToRoom = () => {
   //   setLoggedIn(true);
@@ -91,62 +98,68 @@ const ChatDetails = () => {
     fileUpload.current.value = "";
   };
   return (
-    <div className={`pt-5 ${styles.chat_page}`}>
-      <div className="container">
-        <div className="page-title">
-          <div className="h3  mb-4">{t("Chat Title")}</div>
-        </div>
-        <div className="row">
-          <ChatInfo />
-          <div className="col-md-9 d-flex flex-column">
-            <div
-              ref={chatRef}
-              className="bg-white p-2 mb-2"
-              style={{ height: "90vh", overflow: "auto" }}
-            >
-              {messageList.map((message) => {
-                return (
-                  <ChatItem
-                    key={Math.random() * 1000}
-                    isSender={role == message.sender}
-                    message={message}
-                  />
-                );
-              })}
+    <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className={`pt-5 ${styles.chat_page}`}>
+          <div className="container">
+            <div className="page-title">
+              <div className="h3  mb-4">{t("Chat Title")}</div>
             </div>
-
             <div className="row">
-              <div className="form-group mb-3 col-6">
-                <input
-                  className="form-control  col-6 mb-2"
-                  placeholder="Send Your Message"
-                  ref={message}
-                  type="text"
-                />
-              </div>
-              <div className="form-group mb-3 col-4">
-                <input
-                  className="form-control  col-6 mb-2"
-                  ref={fileUpload}
-                  type="file"
-                  multiple
-                />
-              </div>
-
-              <div className="form-group mb-3 text-center col-2">
-                <button
-                  type="submit"
-                  className="btn btn-primary me-5"
-                  onClick={sendMessage}
+              <ChatInfo chatInfo={chatInfo} role={role} />
+              <div className="col-md-9 d-flex flex-column">
+                <div
+                  ref={chatRef}
+                  className="bg-white p-2 mb-2"
+                  style={{ height: "90vh", overflow: "auto" }}
                 >
-                  Send
-                </button>
+                  {messageList.map((message) => {
+                    return (
+                      <ChatItem
+                        key={Math.random() * 1000}
+                        isSender={role == message.sender}
+                        message={message}
+                      />
+                    );
+                  })}
+                </div>
+
+                <div className="row">
+                  <div className="form-group mb-3 col-6">
+                    <input
+                      className="form-control  col-6 mb-2"
+                      placeholder="Send Your Message"
+                      ref={message}
+                      type="text"
+                    />
+                  </div>
+                  <div className="form-group mb-3 col-4">
+                    <input
+                      className="form-control  col-6 mb-2"
+                      ref={fileUpload}
+                      type="file"
+                      multiple
+                    />
+                  </div>
+
+                  <div className="form-group mb-3 text-center col-2">
+                    <button
+                      type="submit"
+                      className="btn btn-primary me-5"
+                      onClick={sendMessage}
+                    >
+                      Send
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

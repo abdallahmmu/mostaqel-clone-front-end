@@ -31,9 +31,9 @@ const FreelancerOffers = () => {
         <LoadingSpinner />
       ) : (
         <div className="container">
-          <Grid container spacing={2} sx={{minHeight:"90vh"}}>
+          <Grid container spacing={2} sx={{ minHeight: "90vh" }}>
             <Grid item md={12}>
-              <Typography variant="h6" sx={{ py:4, fontWeight: "bold" }}>
+              <Typography variant="h6" sx={{ py: 4, fontWeight: "bold" }}>
                 Freelancers Offers
               </Typography>
               <Box component="div" sx={{ p: 3 }}>
@@ -43,12 +43,18 @@ const FreelancerOffers = () => {
                       ({ amount, duration, projectId, updatedAt }, index) => {
                         return (
                           <Card
-                          elevation={1}
+                            elevation={1}
                             sx={{ backgroundColor: "white", p: 1, mb: 3 }}
                             key={index}
                           >
                             <CardContent>
-                              <Box sx={{display:'flex',justifyContent:'space-between'}} component="div">
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                                component="div"
+                              >
                                 <Typography variant="p">
                                   <Link to={`/projects/${projectId._id}`}>
                                     {projectId.title.toUpperCase()}
@@ -56,8 +62,11 @@ const FreelancerOffers = () => {
                                 </Typography>
                               </Box>
                               <Typography>
-                              $ {amount} {t("within")} {duration} {t("days")} {" "}
-                                <Typography  variant='span' sx={{opacity:'.5'}}>
+                                $ {amount} {t("within")} {duration} {t("days")}{" "}
+                                <Typography
+                                  variant="span"
+                                  sx={{ opacity: ".5" }}
+                                >
                                   last update{" "}
                                   {moment(new Date(updatedAt)).fromNow()}
                                 </Typography>

@@ -99,6 +99,26 @@ const MyOffer = ({ offer, setMyOffer }) => {
                   <TableCell align="right">{offer[value]}</TableCell>
                 </TableRow>
               ))}
+              {offer?.attachments.length ? (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <span>{t("Attachments")}</span>
+                  </TableCell>
+                  <TableCell align="right">
+                    {offer?.attachments.map((file, index) => {
+                      return (
+                        <a href={file} key={file} target="_blank">
+                          {t("File")} {index + 1}{" "}
+                        </a>
+                      );
+                    })}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                ""
+              )}
             </TableBody>
           </Table>
 
