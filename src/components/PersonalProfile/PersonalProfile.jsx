@@ -10,12 +10,12 @@ function PersonalProfile(props) {
           <h5 className="m-3 pt-2 fw-bold">{t("Description")}</h5>
           <p className="mt-1 p-3">
             {!props.data.description
-              ? "no discription available"
+              ? t("no discription available")
               : props.data.description}
           </p>
         </div>
         <div className="col-md-12 ">
-          {props.data.skill && (
+          {props.data.skill.length > 0 && (
             <p className="mt-1 p-3">
               <span className="m-3 pt-2 fw-bold text-danger">{t("Skills")} : </span>
 

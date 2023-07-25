@@ -13,7 +13,7 @@ function VerifyCode() {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("isAuth"));
     if (!freelancerId || !queryCode || !userData) {
-      navigate("/");
+      console.log('not')
     } else {
       verifyOTPCode(freelancerId, queryCode).then((data) => {
         setLoading(true);
