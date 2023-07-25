@@ -38,7 +38,7 @@ a {
     border-radius: 0;
   }
   .projects-list .project .project-info, .project-details-page .project .project-info {
-    opacity: 0.7;
+  
     display: flex;
     align-items: center;
     gap: 10px;
