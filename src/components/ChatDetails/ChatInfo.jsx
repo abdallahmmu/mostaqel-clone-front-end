@@ -1,8 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const ChatInfo = () => {
+const ChatInfo = ({ chatInfo, role }) => {
   const { t } = useTranslation();
+  console.log(chatInfo, role);
 
   return (
     <>

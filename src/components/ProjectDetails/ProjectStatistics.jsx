@@ -32,12 +32,23 @@ const ProjectStatistics = ({ details, isOwner }) => {
       name: "Budget",
       value: `${details.range} $`,
     },
+    {
+      name: "Expected Duration",
+      value: `${details.duration} ${t("days")}`,
+    },
+    {
+      name: "Offers",
+      value: `${details.numOffers}`,
+    },
+    {
+      name: "Average Offers",
+      value: `${details.avgPrice} $`,
+    },
   ];
   rows[1].value =
     lang == "ar"
       ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
       : timeAgo.join(" ");
-
 
   return (
     <>
@@ -66,10 +77,39 @@ const ProjectStatistics = ({ details, isOwner }) => {
                       direction: row.name == "Publish Date" ? "ltr" : "",
                     }}
                   >
-                   <span className={row.value === 'open' || row.value === 'completed' ? 'bg-success p-1 text-white':''}> {t(row.value)}</span>
+                    <span
+                      className={
+                        row.value === "open" || row.value === "completed"
+                          ? "bg-success p-1 text-white"
+                          : ""
+                      }
+                    >
+                      {" "}
+                      {t(row.value)}
+                    </span>
                   </TableCell>
                 </TableRow>
               ))}
+              {details?.files.length ? (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <span>{t("Attachments")}</span>
+                  </TableCell>
+                  <TableCell align="right">
+                    {details?.files.map((file, index) => {
+                      return (
+                        <a href={file} key={file} target="_blank">
+                          {t("File")} {index + 1}{" "}
+                        </a>
+                      );
+                    })}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                ""
+              )}
             </TableBody>
           </Table>
         </TableContainer>

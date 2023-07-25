@@ -59,30 +59,42 @@ const ProjectDetails = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className={`pt-5 ${styles.project_details_page}`} style={{minHeight:"90vh"}}>
-          <div className="container">
+        <div
+          className={`pt-5 ${styles.project_details_page}`}
+          style={{ minHeight: "90vh" }}
+        >
+          <div>
             <Box>
               <Container>
                 <Grid
                   mb={4}
-                  style={{ display: "flex", justifyContent: "space-between",alignItems:'center' }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
                 >
                   <Typography fontSize={30}>
-                  <span style={{fontSize:"14px"}} className="text-p mb-2">{t("Project Details")}</span><br />
+                    <span style={{ fontSize: "14px" }} className="text-p mb-2">
+                      {t("Project Details")}
+                    </span>
+                    <br />
                     {details.title}
-                    </Typography>
-                  {isOwner && (
-                    <Button
-                      onClick={handleProjectDeactivating}
-                      color="error"
-                      disabled={details.status == "close"}
-                      size="small"
-                      variant="contained"
-                    >
-                      {" "}
-                      {t("Deactivate project")}
-                    </Button>
-                  )}
+                  </Typography>
+                  {isOwner &&
+                    details.status ==
+                      "open"(
+                        <Button
+                          onClick={handleProjectDeactivating}
+                          color="error"
+                          disabled={details.status == "close"}
+                          size="small"
+                          variant="contained"
+                        >
+                          {" "}
+                          {t("Deactivate project")}
+                        </Button>
+                      )}
                 </Grid>
                 <div className="row">
                   <div className="col-lg-9 col-md-12">
@@ -101,7 +113,11 @@ const ProjectDetails = () => {
                             <h3>
                               {details.status == "open"
                                 ? "Choise Your Freelancer"
-                                : "Verify Work And Release Money"}
+                                : details.status == "pending"
+                                ? "Verify Work And Release Money"
+                                : details.status == "complete"
+                                ? "Great Work Send Feedback To Freelancer"
+                                : "This Is Project Is Closed"}
                             </h3>
                           </Box>
                         ) : (
@@ -149,6 +165,7 @@ const ProjectDetails = () => {
                       <ProjectOffers
                         id={projectId}
                         status={details.status}
+                        numOffers={details.numOffers}
                         isOwner={details?.clientId?._id == id}
                         winningOffer={details.offerId?._id}
                       />

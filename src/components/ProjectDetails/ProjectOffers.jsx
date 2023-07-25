@@ -12,16 +12,15 @@ const ProjectOffers = (props) => {
   const [offers, setOffers] = useState([]);
 
   const { t } = useTranslation();
-  let { id, isOwner, status, winningOffer } = props;
+  let { id, isOwner, status, winningOffer, numOffers } = props;
   useEffect(() => {
     fetchOffers(setOffers);
   }, []);
   return (
     <>
       <div className="bg-gray  mt-2">
-
-          <h5 className="fw-bold mt-4" >{t("Offers Details")}</h5>
-          {offers.length === 0 && <p className="mt-4">No Offers Yet!</p>}
+        <h5 className="fw-bold mt-4">{t("Offers Details")}</h5>
+        {!numOffers && <p className="mt-4">No Offers Yet!</p>}
 
         {offers.map((offer) => {
           return (

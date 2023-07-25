@@ -20,14 +20,18 @@ const ChatsPage = () => {
         <div className="page-title">
           <div className="h3  mb-4">{t("Your Chats")}</div>
         </div>
-        <div className="row">
-          <ChatSearch />
-          <div className="col-md-9">
-            {chats.map((chat) => {
-              return <ChatItem key={Math.random()} chat={chat} role={role} />;
-            })}
+        {chats.length ? (
+          <div className="row">
+            <ChatSearch />
+            <div className="col-md-9">
+              {chats.map((chat) => {
+                return <ChatItem key={Math.random()} chat={chat} role={role} />;
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>{t("You Don't Have Any Messages Yet")}</div>
+        )}
       </div>
     </div>
   );
