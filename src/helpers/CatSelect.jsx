@@ -8,8 +8,7 @@ const CatsSelect = ({ options, ...props }) => {
 
     const value = options.find((option) => option.value === field.value);
     const handleChange = (selectedOption) => {
-        console.log(selectedOption.id)
-        console.log(value)
+        
         helpers.setValue(selectedOption.id);
     };
 

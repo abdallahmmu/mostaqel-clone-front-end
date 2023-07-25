@@ -81,20 +81,18 @@ const ProjectDetails = () => {
                     <br />
                     {details.title}
                   </Typography>
-                  {isOwner &&
-                    details.status ==
-                      "open"(
-                        <Button
-                          onClick={handleProjectDeactivating}
-                          color="error"
-                          disabled={details.status == "close"}
-                          size="small"
-                          variant="contained"
-                        >
-                          {" "}
-                          {t("Deactivate project")}
-                        </Button>
-                      )}
+                  {isOwner && details.status == "open" && (
+                    <Button
+                      onClick={handleProjectDeactivating}
+                      color="error"
+                      disabled={details.status == "close"}
+                      size="small"
+                      variant="contained"
+                    >
+                      {" "}
+                      {t("Deactivate project")}
+                    </Button>
+                  )}
                 </Grid>
                 <div className="row">
                   <div className="col-lg-9 col-md-12">
@@ -112,12 +110,12 @@ const ProjectDetails = () => {
                           >
                             <h3>
                               {details.status == "open"
-                                ? "Choise Your Freelancer"
+                                ? t("Choose Your Freelancer")
                                 : details.status == "pending"
-                                ? "Verify Work And Release Money"
+                                ? t("Verify Work And Release Money")
                                 : details.status == "complete"
-                                ? "Great Work Send Feedback To Freelancer"
-                                : "This Is Project Is Closed"}
+                                ? t("Great Work Send Feedback To Freelancer")
+                                : t("This Project Was Closed")}
                             </h3>
                           </Box>
                         ) : (

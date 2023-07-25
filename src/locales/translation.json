@@ -354,6 +354,7 @@
   "hours": "ساعات",
   "day": "يوم",
   "minutes": "دقائق",
+  "minute": "دقيقة",
   "a": " ",
   "category": "الفئة",
   "Start completing your project": "ابدأ بإنجاز مشروعك",
@@ -385,5 +386,10 @@
   "Average Offers": "متوسط العروض",
   "Offers": "العروض",
   "Your Notifications": "الإشعارات",
-  "You Don't Have Any Notifications Yet": "ليس لديك أي إشعارات "
+  "You Don't Have Any Notifications Yet": "ليس لديك أي إشعارات ",
+  "No Offers Yet!": " ليس هناك عروض !",
+  "Choose Your Freelancer": "اختر العرض المناسب لك",
+  "Verify Work And Release Money": "تحقق من العمل وتحرير الأموال",
+  "Great Work Send Feedback To Freelancer": "عمل رائع أرسل تقييمك إلى المستقل",
+  "This Project Was Closed": "هذا المشروع تم إغلاقه"
 }

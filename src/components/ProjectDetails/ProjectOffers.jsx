@@ -20,7 +20,7 @@ const ProjectOffers = (props) => {
     <>
       <div className="bg-gray  mt-2">
         <h5 className="fw-bold mt-4">{t("Offers Details")}</h5>
-        {!numOffers && <p className="mt-4">No Offers Yet!</p>}
+        {!numOffers && <p className="mt-4">{t("No Offers Yet!")}</p>}
 
         {offers.map((offer) => {
           return (

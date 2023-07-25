@@ -49,27 +49,28 @@ const addProject = () => {
 
       ["skillsIds"].map((i) => delete newValues[i]);
     }
+    if (skillsIds) {
+      for (let sk of skillsIds) {
+        fd.append("skillsIds[]", sk);
+      }
 
+      ["skillsIds"].map((i) => delete newValues[i]);
+    }
+
+    newValues.description_ar = arabic;
     for (let item in newValues) {
       fd.append(item, newValues[item]);
     }
 
-    // for( let [key, value] of fd.entries()){
-    //   console.log(key)
-    //   console.log(typeof value)
-    // }
-
     dispatch(addingNewProject({ fd }));
 
-    newValues.description_ar = arabic;
+    swal({
+      title: "Success",
+      text: "projects added successfully",
+      icon: "success",
+    });
 
-    // swal({
-    //   title: "Success",
-    //   text: "projects added successfully",
-    //   icon: "success",
-    // });
-
-    // navigate("/projects");
+    navigate("/projects");
   };
   const suggestArabic = async (eve) => {
     console.log(eve.target.value);
