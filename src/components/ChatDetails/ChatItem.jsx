@@ -23,7 +23,7 @@ const ProjectInfo = ({ isSender, message }) => {
               component="div"
               sx={{ marginTop: "10px" }}
               style={{
-                background: isSender ? "azure" : "#fff",
+                background: isSender ? "azure" : "#eee",
                 display: "flex",
                 flexDirection: "column",
                 float: isSender ? "right" : "left",
@@ -37,7 +37,7 @@ const ProjectInfo = ({ isSender, message }) => {
               {message.attachments.length
                 ? message.attachments.map((file, index) => {
                     return (
-                      <a href={file} key={index}>
+                      <a href={file} target="_blank" key={index}>
                         File {index + 1}
                       </a>
                     );

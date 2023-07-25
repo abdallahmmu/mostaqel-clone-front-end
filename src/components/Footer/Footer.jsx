@@ -17,8 +17,8 @@ function Footer() {
                 </a>
                 <p className="text-p ">{t("All Right Reseved ITI.")}</p>
               </div>
-              <div className="social-links ">
-                <a href="#">
+              <div className="social-links">
+                <a href="#" className="mx-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={20}

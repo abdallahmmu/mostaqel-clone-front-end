@@ -46,6 +46,9 @@ import { useTranslation } from "react-i18next";
 import { langContext } from "./../../contextAPI/context.jsx";
 import axios from "axios";
 
+
+
+
 export default function NavigationMUI() {
   const [open, setOpen] = React.useState(false);
 
@@ -61,13 +64,14 @@ export default function NavigationMUI() {
     general: null,
   });
   const show = [Boolean(anchorEl.messages), Boolean(anchorEl.general)];
-  const handleClick = (event) => {
+
+  const handleClick = useCallback((event) => {
     anchorEl[event.currentTarget.name] = event.currentTarget;
     setAnchorEl({ ...anchorEl });
-  };
-  const handleClose = () => {
+  },[event]);
+  const handleClose = useCallback(() => {
     setAnchorEl({ messages: null, general: null });
-  };
+  },[]);
 
   const handleDrawerOpen = useCallback(() => {
     setOpen(true);
@@ -103,7 +107,6 @@ export default function NavigationMUI() {
     if (socket.current) {
       // Listen for incoming messages
       socket.current.on("newNotification", (newNotification) => {
-        console.log("New notification received", newNotification);
         setNotification([newNotification, ...notification]);
         Swal.mixin({
           toast: true,
@@ -128,14 +131,13 @@ export default function NavigationMUI() {
         (n) => n.status == false && n.relatedTo !== "messages"
       ).length,
     ]);
-    console.log(notification);
   }, [notification]);
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar position="sticky" open={open}>
-        <Container maxWidth="lg">
+    <Box>
+      <AppBar position="relative" open={open}>
+        <div className="container">
           <CssBaseline />
-          <Toolbar>
+          <Toolbar  sx={{p:"0px !important"}}>
             <Typography
               variant="h6"
               noWrap
@@ -258,12 +260,7 @@ export default function NavigationMUI() {
                             <p
                               key={index}
                               onClick={handleClose}
-                              style={{
-                                fontSize: "14px",
-                                width: "400px",
-                                padding: "5px 0px 0px 10px",
-                                borderBottom: "1px solid #eee",
-                              }}
+                            className="px-4 py-2 d-flex justify-content-between align-items-center w-100"
                             >
                               {item.content}
                               <span style={{ fontSize: "10px", opacity: ".5" }}>
@@ -284,12 +281,12 @@ export default function NavigationMUI() {
                             setNotRead([0, notRead[1]]);
                           }}
                         >
-                          <MarkEmailReadIcon></MarkEmailReadIcon> Mark As Read
+                          <MarkEmailReadIcon fontSize="small" sx={{mx:1}}/> Mark As Read
                         </Button>
                         <Button>
                           {" "}
                           <Link to="/chats/">
-                            <NotificationsActiveIcon /> See All Notifications
+                            <NotificationsActiveIcon fontSize="small" sx={{mx:1}}/> See All Notifications
                           </Link>
                         </Button>
                       </div>
@@ -318,7 +315,7 @@ export default function NavigationMUI() {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      <Table component={Paper}>
+                      <Table>
                         {notification
                           .filter((n) => n.relatedTo !== "messages")
 
@@ -326,24 +323,20 @@ export default function NavigationMUI() {
                           .map((item, index) => {
                             return (
                               <TableRow
-                                sx={{
-                                  "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                  },
-                                }}
+                              key={index}
                               >
                                 <TableCell component="th" scope="row">
-                                  {item.content}
+                                  <span className="text-drak fs-6">  {item.content}</span>
                                 </TableCell>
                                 <TableCell align="right">
                                   {" "}
-                                  {moment(new Date(item.createdAt)).fromNow()}
+                                  <span>{moment(new Date(item.createdAt)).fromNow()}</span>
                                 </TableCell>
                               </TableRow>
                             );
                           })}
                         <TableRow>
-                          <TableCell component="th" scope="row">
+                          <TableCell sx={{borderBottom:'0px'}} component="th" scope="row">
                             {" "}
                             <Button
                               onClick={async () => {
@@ -355,16 +348,16 @@ export default function NavigationMUI() {
                                 setNotRead([notRead[0], 0]);
                               }}
                             >
-                              <MarkEmailReadIcon></MarkEmailReadIcon> Mark As
+                              <MarkEmailReadIcon fontSize="small" sx={{mx:1}} /> Mark As
                               Read
                             </Button>
                           </TableCell>
-                          <TableCell align="right">
+                          <TableCell sx={{borderBottom:'0px'}} align="right">
                             {" "}
                             <Button>
                               {" "}
                               <Link to="/notifications/">
-                                <NotificationsActiveIcon /> See All
+                                <NotificationsActiveIcon fontSize="small" sx={{mx:1}} /> See All
                                 Notifications
                               </Link>
                             </Button>
@@ -441,7 +434,7 @@ export default function NavigationMUI() {
               <MenuIcon />
             </IconButton>
           </Toolbar>
-        </Container>
+        </div>
       </AppBar>
       <Drawer
         sx={{

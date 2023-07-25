@@ -27,8 +27,8 @@ const ProjectsList = () => {
   }, [dispatch, lang]);
 
   return (
-    <div className="projects-list">
-      <div className="container">
+    <div className="container">
+      <div className="projects-list">
         <ProjectsListTitle />
         <div className="row">
           <div className="col-md-3">

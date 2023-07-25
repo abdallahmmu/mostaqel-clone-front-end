@@ -16,10 +16,12 @@ const ProjectsListTitle = () => {
   const getLatestProjects = (sortBy) => {
     setSort(sortBy)
     dispatch(getAllProjects({ sort:sortBy }))
+    setIsOpen(false)
   }
   return (
     <div className="page-title">
       <Typography variant="h5" sx={{ margin: "4rem 0px" }}>
+      <span style={{fontSize:"14px"}} className="text-p mb-2">{t("Main")}</span><br />
         {t("Open Projects")}
       </Typography>
       <Box component='div' className="projects-filter">
