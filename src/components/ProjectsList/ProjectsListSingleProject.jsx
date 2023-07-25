@@ -7,13 +7,13 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { useTranslation } from "react-i18next";
 import { langContext } from "../../contextAPI/context";
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AccessTimeFilledOutlinedIcon from '@mui/icons-material/AccessTimeFilledOutlined';
-import TimerRoundedIcon from '@mui/icons-material/TimerRounded';
-import PauseCircleFilledRoundedIcon from '@mui/icons-material/PauseCircleFilledRounded';
-import ClassRoundedIcon from '@mui/icons-material/ClassRounded';
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AccessTimeFilledOutlinedIcon from "@mui/icons-material/AccessTimeFilledOutlined";
+import TimerRoundedIcon from "@mui/icons-material/TimerRounded";
+import PauseCircleFilledRoundedIcon from "@mui/icons-material/PauseCircleFilledRounded";
+import ClassRoundedIcon from "@mui/icons-material/ClassRounded";
 import { generateNames } from "../../helpers/generateNames";
 const ProjectsListSingleProject = ({ project }) => {
   const { t } = useTranslation();
@@ -33,9 +33,7 @@ const ProjectsListSingleProject = ({ project }) => {
             className="project-title"
           >
             <Link to={project._id}>{project.title}</Link>
-
           </Box>
-
 
           <Box
             component="p"
@@ -45,38 +43,52 @@ const ProjectsListSingleProject = ({ project }) => {
             <Typography variant="p">{project.description}</Typography>
           </Box>
 
-
-
-
-
-
-
-
-
           <Box component="div" mt={5} className="project-info ">
-
             <Grid item sm={1}>
-
-              {(project.clientId.avatar) ? (
-                <Link to={`/profile/statistics/${project.clientId._id}`} target="_blank">
-                <img src={project.clientId.avatar} alt="avatar"
-                  style={{ borderRadius: '50%', width: '50px', height: '50px' }} />
-                  </Link>
-
+              {project.clientId.avatar ? (
+                <Link
+                  to={`/profile/statistics/${project.clientId._id}`}
+                  target="_blank"
+                >
+                  <img
+                    src={project.clientId.avatar}
+                    alt="avatar"
+                    style={{
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                    }}
+                  />
+                </Link>
               ) : (
-                <Link to={`/profile/statistics/${project.clientId._id}`} target="_blank">
-                  <Typography variant="span" style={{fontSize: '15px', padding: '15px', borderRadius: '50%',  backgroundColor: '#eee'}}>
-                    {generateNames(project.clientId.firstName, project.clientId.lastName)}
+                <Link
+                  to={`/profile/statistics/${project.clientId._id}`}
+                  target="_blank"
+                >
+                  <Typography
+                    variant="span"
+                    style={{
+                      fontSize: "15px",
+                      padding: "15px",
+                      borderRadius: "50%",
+                      backgroundColor: "#eee",
+                    }}
+                  >
+                    {generateNames(
+                      project.clientId.firstName,
+                      project.clientId.lastName
+                    )}
                   </Typography>
                 </Link>
               )}
             </Grid>
-            <Grid item sm={2} style={{ color: '#736e7a' }} >
+            <Grid item sm={2} style={{ color: "#736e7a" }}>
               <Typography fontSize={12}>
                 {project.clientId.firstName + " " + project.clientId.lastName}
               </Typography>
               <Typography fontSize={12}>
-                <BusinessCenterIcon style={{ fontSize: '15px' }} /> {project.clientId.userName}
+                <BusinessCenterIcon style={{ fontSize: "15px" }} />{" "}
+                {project.clientId.userName}
               </Typography>
             </Grid>
             <Grid item sm={9}>
@@ -86,7 +98,7 @@ const ProjectsListSingleProject = ({ project }) => {
                     key={index}
                     variant="span"
                     fontSize={10}
-                    style={{ padding: "4px 9px" , borderRadius: '5px'}}
+                    style={{ padding: "4px 9px", borderRadius: "5px" }}
                     className="bg-primary me-2  text-white"
                   >
                     {skill.name}
@@ -94,57 +106,62 @@ const ProjectsListSingleProject = ({ project }) => {
                 ))}
               </Box>
             </Grid>
-
-           
-
           </Box>
-
         </Grid>
-        <Grid item sm={2} 
-        style={{
-        fontSize: '13px', 
-        display: 'flex',
-        alignItems: 'baseline',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: '8px'
-        }}>
+        <Grid
+          item
+          sm={2}
+          style={{
+            fontSize: "13px",
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: "8px",
+          }}
+        >
           <Typography>
-
-            <TimerRoundedIcon style={{ fontSize: '18px' , margin: '2px'}} />
-            <Typography variant="span" style={{ fontSize: '13px'}} >
-
-              {project.duration} days
-            </Typography>
-
-          </Typography>
-
-          <Typography>
-            <AccessTimeFilledOutlinedIcon style={{ fontSize: '18px', margin: '2px' }} />
-            <Typography variant="span" style={{ fontSize: '13px'}} >
-
-              {timeAgo.join(" ") }
+            <TimerRoundedIcon style={{ fontSize: "18px", margin: "2px" }} />
+            <Typography variant="span" style={{ fontSize: "13px" }}>
+              {project.duration} {t("days")}
             </Typography>
           </Typography>
-          
-          <Typography style={{ display: 'flex', alignItems: 'center' }}>
-            <MonetizationOnIcon style={{ fontSize: '18px', margin: '2px' }} />
 
-            <Typography variant="span" style={{ fontSize: '13px'}}>{project.range}</Typography>
-            <AttachMoneyIcon style={{ fontSize: '18px' }} />
+          <Typography>
+            <AccessTimeFilledOutlinedIcon
+              style={{ fontSize: "18px", margin: "2px" }}
+            />
+            <Typography variant="span" style={{ fontSize: "13px" }}>
+              {lang == "ar"
+                ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
+                : timeAgo.join(" ")}
+            </Typography>
           </Typography>
 
-          <Typography style={{ display: 'flex', alignItems: 'center' }}>
-            <PauseCircleFilledRoundedIcon style={{ fontSize: '18px', margin: '2px' }} />
+          <Typography style={{ display: "flex", alignItems: "center" }}>
+            <MonetizationOnIcon style={{ fontSize: "18px", margin: "2px" }} />
 
-            <Typography variant="span" style={{ fontSize: '13px'}}>{project.status}</Typography>
-          
+            <Typography variant="span" style={{ fontSize: "13px" }}>
+              {project.range}
+            </Typography>
+            <AttachMoneyIcon style={{ fontSize: "18px" }} />
           </Typography>
-          <Typography style={{ display: 'flex', alignItems: 'center' , }}>
-            <ClassRoundedIcon style={{ fontSize: '18px', margin: '2px' }} />
 
-            <Typography variant="span" style={{ fontSize: '13px'}}>{project.categoryId.title}</Typography>
-          
+          <Typography style={{ display: "flex", alignItems: "center" }}>
+            <PauseCircleFilledRoundedIcon
+              style={{ fontSize: "18px", margin: "2px" }}
+            />
+
+            <Typography variant="span" style={{ fontSize: "13px" }}>
+              {t(project.status)}
+            </Typography>
+          </Typography>
+          <Typography style={{ display: "flex", alignItems: "center" }}>
+            <ClassRoundedIcon style={{ fontSize: "18px", margin: "2px" }} />
+
+            <Typography variant="span" style={{ fontSize: "13px" }}>
+              {project.categoryId.title}
+            </Typography>
           </Typography>
         </Grid>
       </Grid>
