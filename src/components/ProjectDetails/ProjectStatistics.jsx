@@ -38,10 +38,11 @@ const ProjectStatistics = ({ details, isOwner }) => {
       ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
       : timeAgo.join(" ");
 
+
   return (
     <>
       <div className="col-lg-3 d-lg-block d-md-none">
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} elevation={0}>
           <Table>
             <TableHead>
               <TableRow>
@@ -57,7 +58,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {t(row.name)}
+                    <span>{t(row.name)}</span>
                   </TableCell>
                   <TableCell
                     align="right"
@@ -65,7 +66,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                       direction: row.name == "Publish Date" ? "ltr" : "",
                     }}
                   >
-                    {t(row.value)}
+                   <span className={row.value === 'open' || row.value === 'completed' ? 'bg-success p-1 text-white':''}> {t(row.value)}</span>
                   </TableCell>
                 </TableRow>
               ))}
@@ -76,7 +77,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
         {details.offerId && (
           <>
             <hr />
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} elevation={0}>
               <Table>
                 <TableHead>
                   <TableRow>

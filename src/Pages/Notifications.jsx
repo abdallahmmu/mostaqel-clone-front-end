@@ -21,8 +21,8 @@ const Notifications = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
+      <div className="container">
+        <Grid container spacing={2} sx={{minHeight:'90vh'}}>
           <Grid item md={12}>
             <Typography variant="h6" sx={{ p: 3, fontWeight: "bold" }}>
               Freelancers Offers
@@ -65,7 +65,7 @@ const Notifications = () => {
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </div>
     </>
   );
 };

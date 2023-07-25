@@ -30,10 +30,10 @@ const FreelancerOffers = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Container maxWidth="lg">
-          <Grid container spacing={2}>
+        <div className="container">
+          <Grid container spacing={2} sx={{minHeight:"90vh"}}>
             <Grid item md={12}>
-              <Typography variant="h6" sx={{ p: 3, fontWeight: "bold" }}>
+              <Typography variant="h6" sx={{ py:4, fontWeight: "bold" }}>
                 Freelancers Offers
               </Typography>
               <Box component="div" sx={{ p: 3 }}>
@@ -77,7 +77,7 @@ const FreelancerOffers = () => {
               </Box>
             </Grid>
           </Grid>
-        </Container>
+        </div>
       )}
     </>
   );

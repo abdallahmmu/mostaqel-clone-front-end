@@ -183,7 +183,7 @@
 
   "Edit Profile": "تعديل الملف الشخصي",
 
-  "New Messages": "رسائل جديدة",
+  "Unread Messages": "رسائل غير مقرؤة",
 
   "Received": "استلم",
 
@@ -330,7 +330,7 @@
   "Project Description": "تفاصيل المشروع",
   "Skill Required": "المهارات المطلوبة",
   "Project Status": "حالة المشروع",
-  "Applicant Offers": "العروض المقدمة",
+  "Offers Details": "العروض المقدمة",
   "Deactivate project": "غلق المشروع",
   "Want To Publish": "هل تريد النشر؟",
   "Publish Your Own Project": "انشر مشروعك",
@@ -377,5 +377,6 @@
   "Please Check Your Email Account":" تم ارسال رساله الي البريد الالكتروني الخاص بك",
   "Yes, I Want":"نعم اريد",
   "No":"لا اريد",
-  "Want To Verify Your Account" : "هل تريد تأكيد هوية حسابك"
+  "Want To Verify Your Account" : "هل تريد تأكيد هوية حسابك",
+  "Project Details":"تفاصيل المشروع"
 }

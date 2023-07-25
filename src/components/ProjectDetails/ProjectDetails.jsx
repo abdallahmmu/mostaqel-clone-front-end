@@ -59,22 +59,24 @@ const ProjectDetails = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className={`pt-5 ${styles.project_details_page}`}>
+        <div className={`pt-5 ${styles.project_details_page}`} style={{minHeight:"90vh"}}>
           <div className="container">
             <Box>
               <Container>
                 <Grid
                   mb={4}
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{ display: "flex", justifyContent: "space-between",alignItems:'center' }}
                 >
-                  <Typography fontSize={30}>{details.title}</Typography>
+                  <Typography fontSize={30}>
+                  <span style={{fontSize:"14px"}} className="text-p mb-2">{t("Project Details")}</span><br />
+                    {details.title}
+                    </Typography>
                   {isOwner && (
                     <Button
                       onClick={handleProjectDeactivating}
                       color="error"
                       disabled={details.status == "close"}
                       size="small"
-                      style={{ padding: "0 20px" }}
                       variant="contained"
                     >
                       {" "}
@@ -92,6 +94,7 @@ const ProjectDetails = () => {
                         ) : isOwner ? (
                           <Box
                             component={Paper}
+                            elevation={0}
                             mt={2}
                             className="p-5 text-center"
                           >
@@ -105,6 +108,7 @@ const ProjectDetails = () => {
                           role == "client" && (
                             <Box
                               component={Paper}
+                              elevation={0}
                               mt={2}
                               className="p-5 text-center"
                             >
@@ -122,6 +126,7 @@ const ProjectDetails = () => {
                         <Box
                           component={Paper}
                           mt={2}
+                          elevation={0}
                           className="p-5 text-center"
                         >
                           <h3>{t("Want To Apply")}</h3>

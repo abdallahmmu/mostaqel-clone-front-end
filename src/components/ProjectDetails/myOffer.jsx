@@ -73,7 +73,7 @@ const MyOffer = ({ offer, setMyOffer }) => {
   return (
     <>
       <div className="mt-3">
-        <TableContainer component={Paper} className="p-5">
+        <TableContainer elevation={0} component={Paper} className="p-5">
           <Table>
             <TableHead>
               <TableRow>

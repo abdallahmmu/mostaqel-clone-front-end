@@ -115,7 +115,7 @@ const ProjectsListFilter = () => {
       </div>
       <div className="category">
         <div className="category-title my-2 h5">{t("Category")}</div>
-        <ul className="list-unstyled">
+        <ul className="list-unstyled px-0">
           {cats &&
             cats.map((cat) => (
               <li key={cat._id} className="cat">

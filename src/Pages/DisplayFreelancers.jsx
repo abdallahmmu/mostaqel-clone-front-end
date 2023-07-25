@@ -17,7 +17,7 @@ function DisplayFreelancers() {
         className="row col-md-12 justify-content-center"
         style={{ margin: "100px 0px" }}
       >
-        <div className="col-md-12 text-center">
+        <div className="col-md-12 text-center mt-4">
           {!data.avatar && (
             <ImageGeneration
               firstName={data.firstName}

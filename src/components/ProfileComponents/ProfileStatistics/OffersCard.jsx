@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
 import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
 import { useTranslation } from "react-i18next";
+import OffersProgressCard from "./OffersProgressCard";
 
 function OffersCard() {
   const { t } = useTranslation();
@@ -31,17 +32,22 @@ function OffersCard() {
         <div className="card-body">
           <div className="row">
             {/*Offers Intro*/}
-            <div className="col-12">
               <Link
                 to={userData.role === "freelancer" ? "/myoffers" : "/projects"}
                 className="text-dark text-center"
               >
                 {userData.role === "freelancer" && (
+                  <>
                   <p className="fs-4">
                     {t("My Offers")}
                     <br />
                     <span>{freelancersOffers?.length}</span>
                   </p>
+                  <div className="row">
+
+                  <OffersProgressCard freelancersOffers={freelancersOffers}/>
+                  </div>
+                  </>
                 )}
                 {userData.role === "client" && (
                   <div>
@@ -60,7 +66,6 @@ function OffersCard() {
                   </div>
                 )}
               </Link>
-            </div>
           </div>
         </div>
       </div>
