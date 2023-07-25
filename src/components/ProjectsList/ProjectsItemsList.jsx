@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 const ProjectsItemsList = ({ project }) => {
   return (
-    <Box className="projects-list-side">
+    <Box className="projects-list-side mb-3">
       <ProjectsListSingleProject project={project} />
     </Box>
   );
