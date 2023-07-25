@@ -10,7 +10,15 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
-  const { _id, freelancerId, updatedAt, description, amount, duration } = offer;
+  const {
+    _id,
+    freelancerId,
+    updatedAt,
+    description,
+    amount,
+    duration,
+    attachments,
+  } = offer;
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
 
@@ -81,6 +89,24 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
               }}
             >
               {description}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "start",
+                padding: "0 30px ",
+              }}
+            >
+              {isOwner &&
+                attachments.length &&
+                attachments.map((file, index) => {
+                  return (
+                    <a href={file} key={index}>
+                      File {index + 1}
+                    </a>
+                  );
+                })}
             </Box>
           </Box>
         </Box>

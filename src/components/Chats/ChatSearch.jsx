@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-
 const ChatSearch = () => {
   const { t } = useTranslation();
 
@@ -15,7 +14,7 @@ const ChatSearch = () => {
               className="form-control"
               id="keyword__title"
               data-filter="keyword"
-              maxlength="50"
+              maxLength="50"
               name="keyword"
               type="text"
             />

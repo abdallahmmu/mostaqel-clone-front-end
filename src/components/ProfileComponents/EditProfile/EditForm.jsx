@@ -10,7 +10,6 @@ import ImageGeneration from "../../UI_Helpers/ImageGeneration";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
@@ -56,10 +55,10 @@ function EditForm() {
       photoData.append("avatar", profilePic.avatar);
     }
     let newValues;
-    if(skill.length > 0){
+    if (skill.length > 0) {
       newValues = { ...values, skill };
-    }else{
-      newValues = {...values}
+    } else {
+      newValues = { ...values };
     }
     if (!profilePic) {
       setIsLoading(true);
@@ -89,7 +88,9 @@ function EditForm() {
         <div className="col-md-6 offset-md-3 mx-auto py-4">
           <div className="bg-white border mt-4 p-4">
             <h3>{t("Personal Information")}</h3>
-            <p>{t("If you have modified it, you will need to verify it again.")}</p>
+            <p>
+              {t("If you have modified it, you will need to verify it again.")}
+            </p>
 
             {/* image */}
             <div
@@ -174,7 +175,8 @@ function EditForm() {
                     {userData.role === "freelancer" && (
                       <div className="col-12 mt-4">
                         <label htmlFor="jobTitle" className="form-label">
-                          {t("Job Title")} <span className="text-danger">*</span>
+                          {t("Job Title")}{" "}
+                          <span className="text-danger">*</span>
                         </label>
                         <Field
                           type="text"
@@ -187,7 +189,8 @@ function EditForm() {
                     )}
                     <div className="col-12 mt-4">
                       <label htmlFor="description" className="form-label">
-                        {t("Description")} <span className="text-danger">*</span>
+                        {t("Description")}{" "}
+                        <span className="text-danger">*</span>
                       </label>
                       <Field
                         as="textarea"
@@ -203,16 +206,15 @@ function EditForm() {
                           {t("Skills")} <span className="text-danger">*</span>
                         </label>
                         {skills && (
-
                           <Select
-                          getOptionLabel={(opntion) => opntion.lable}
-                          getOptionValue={(option) => option.value}
-                          options={skills}
-                          closeMenuOnSelect={false}
-                          isMulti
-                          onChange={getValues}
+                            getOptionLabel={(opntion) => opntion.lable}
+                            getOptionValue={(option) => option.value}
+                            options={skills}
+                            closeMenuOnSelect={false}
+                            isMulti
+                            onChange={getValues}
                           />
-                          )}
+                        )}
                       </div>
                     )}
 

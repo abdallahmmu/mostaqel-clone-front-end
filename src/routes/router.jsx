@@ -35,12 +35,14 @@ const ChatDetails = React.lazy(() =>
 
 const PaymentPage = React.lazy(() => import("../Pages/Payment"));
 const ThankYou = React.lazy(() => import("../Pages/ThankYou"));
-const VerifyCodePage = React.lazy(()=>import('../Pages/VerifyCode'))
+const Notifications = React.lazy(() => import("../Pages/Notifications.jsx"));
+const VerifyCodePage = React.lazy(() => import("../Pages/VerifyCode"));
 
 //LOADERS
 import { httpRegisterFreelancerLoader } from "../ReactRouterHelpers/httpRegisterFreelancerLoader";
 import { getUserByIdLoader } from "../components/ProfileComponents/EditProfile/getUserByIdLoader";
 import { addProjectLoader } from "../ReactRouterHelpers/addProjectLoader";
+import { getNotifications } from "../ReactRouterHelpers/getNotifications.js";
 import { getUserStatisticsById } from "../components/ProfileComponents/ProfileStatistics/getProfileStatistics";
 import { getFreelancerProfilePage } from "../ReactRouterHelpers/getFreelancerDetails";
 import { getClientsProfileDetails } from "../ReactRouterHelpers/getClientsDetails";
@@ -152,6 +154,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "notifications",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <Notifications />
+          </React.Suspense>
+        ),
+        loader: getNotifications,
+      },
+      {
         path: "chats/:chatId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
@@ -195,13 +206,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path:'/verify-account/:freelancerId',
-        element:(
-          <React.Suspense fallback={<LoadingSpinner/>}>
-            <VerifyCodePage/>
+        path: "/verify-account/:freelancerId",
+        element: (
+          <React.Suspense fallback={<LoadingSpinner />}>
+            <VerifyCodePage />
           </React.Suspense>
-        )
-      }
+        ),
+      },
     ],
   },
 ]);

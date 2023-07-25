@@ -64,7 +64,7 @@ const ProjectDetails = () => {
             <Box>
               <Container>
                 <Grid
-                  mb={10}
+                  mb={4}
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Typography fontSize={30}>{details.title}</Typography>
@@ -82,63 +82,80 @@ const ProjectDetails = () => {
                     </Button>
                   )}
                 </Grid>
+                <div className="row">
+                  <div className="col-lg-9 col-md-12">
+                    <ProjectInfo details={details} />
+                    {!loading &&
+                      (token ? (
+                        role == "freelancer" && details.status == "open" ? (
+                          <SendOffer />
+                        ) : isOwner ? (
+                          <Box
+                            component={Paper}
+                            mt={2}
+                            className="p-5 text-center"
+                          >
+                            <h3>
+                              {details.status == "open"
+                                ? "Choise Your Freelancer"
+                                : "Verify Work And Release Money"}
+                            </h3>
+                          </Box>
+                        ) : (
+                          role == "client" && (
+                            <Box
+                              component={Paper}
+                              mt={2}
+                              className="p-5 text-center"
+                            >
+                              <h3>{t("Want To Publish")} </h3>
+                              <Link
+                                className="btn btn-secondary "
+                                to="/add-projects"
+                              >
+                                {t("Publish Your Own Project")}
+                              </Link>
+                            </Box>
+                          )
+                        )
+                      ) : (
+                        <Box
+                          component={Paper}
+                          mt={2}
+                          className="p-5 text-center"
+                        >
+                          <h3>{t("Want To Apply")}</h3>
+                          <Link
+                            className="btn btn-primary "
+                            to="/login"
+                            style={{
+                              marginLeft: lang == "ar" ? "25px" : "",
+                              marginRight: lang == "en" ? "25px" : "",
+                            }}
+                          >
+                            {t("Login")}
+                          </Link>
+                          <Link className="btn btn-secondary " to="/register">
+                            {t("Regitser")}
+                          </Link>
+                        </Box>
+                      ))}
+                    {!loading && (
+                      <ProjectOffers
+                        id={projectId}
+                        status={details.status}
+                        isOwner={details?.clientId?._id == id}
+                        winningOffer={details.offerId?._id}
+                      />
+                    )}
+                  </div>
+                  <ProjectStatistics
+                    details={details}
+                    isOwner={details.clientId?._id == id}
+                  />
+                </div>
               </Container>
             </Box>
-            <div className="row">
-              <ProjectStatistics
-                details={details}
-                isOwner={details.clientId?._id == id}
-              />
-              <div className="col-lg-9 col-md-12">
-                <ProjectInfo details={details} />
-                {!loading &&
-                  (token ? (
-                    role == "freelancer" && details.status == "open" ? (
-                      <SendOffer />
-                    ) : isOwner ? (
-                      <Box component={Paper} mt={2} className="p-5 text-center">
-                        <h3>
-                          {details.status == "open"
-                            ? "Choise Your Freelancer"
-                            : "Verify Work And Release Money"}
-                        </h3>
-                      </Box>
-                    ) : (
-                      <Box component={Paper} mt={2} className="p-5 text-center">
-                        <h3>{t("Want To Publish")} </h3>
-                        <Link className="btn btn-secondary " to="/add-projects">
-                          {t("Publish Your Own Project")}
-                        </Link>
-                      </Box>
-                    )
-                  ) : (
-                    <Box component={Paper} mt={2} className="p-5 text-center">
-                      <h3>{t("Want To Apply")}</h3>
-                      <Link
-                        className="btn btn-primary "
-                        to="/login"
-                        style={{
-                          marginLeft: lang == "ar" ? "25px" : "",
-                          marginRight: lang == "en" ? "25px" : "",
-                        }}
-                      >
-                        {t("Login")}
-                      </Link>
-                      <Link className="btn btn-secondary " to="/register">
-                        {t("Regitser")}
-                      </Link>
-                    </Box>
-                  ))}
-                {!loading && (
-                  <ProjectOffers
-                    id={projectId}
-                    status={details.status}
-                    isOwner={details?.clientId?._id == id}
-                    winningOffer={details.offerId?._id}
-                  />
-                )}
-              </div>
-            </div>
           </div>
         </div>
       )}

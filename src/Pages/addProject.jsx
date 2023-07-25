@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { AddProjectSchema } from "../Schemas/AddProjectSchema";
 import { useDispatch } from "react-redux";
 import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
-import {  useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { Button } from "@mui/material";
@@ -26,24 +26,36 @@ const addProject = () => {
       sklsIds.push(skill.id);
     });
 
-
     let newValues = {
       ...values,
       categoryId: values.categoryId,
     };
 
-
-    const fd = new FormData()
+    const fd = new FormData();
 
     let files = newValues.files;
-
+    let skillsIds = newValues.skillsIds;
     if (files) {
-
       for (let file of files) {
-        fd.append('files', file)
+        fd.append("files", file);
       }
 
-      ['files'].map(i => delete newValues[i]);
+      ["files"].map((i) => delete newValues[i]);
+    }
+    if (skillsIds) {
+      for (let sk of skillsIds) {
+        fd.append("skillsIds[]", sk);
+      }
+
+      ["skillsIds"].map((i) => delete newValues[i]);
+    }
+    if (skillsIds) {
+
+      for (let sk of skillsIds) {
+        fd.append('skillsIds[]', sk)
+      }
+
+      ['skillsIds'].map(i => delete newValues[i]);
 
     }
 
@@ -51,13 +63,13 @@ const addProject = () => {
       fd.append(item, newValues[item]);
     }
 
-
-    // for (let [ket, vl] of fd.entries()){
-    //   console.log(ket)
-    //   console.log(vl)
+    // for( let [key, value] of fd.entries()){
+    //   console.log(key)
+    //   console.log(typeof value)
     // }
-    dispatch(addingNewProject({ fd }));
 
+
+    dispatch(addingNewProject({ fd }));
 
     newValues.description_ar = arabic;
 
@@ -87,8 +99,6 @@ const addProject = () => {
     setArbic(data.translated);
   }
 
-
-
   const handleSelecedFiles = (e) => {
     let files = [...e.target.files];
 
@@ -96,16 +106,22 @@ const addProject = () => {
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
 
-      if (file.type.startsWith('image')) {
-        arr.push({ path: URL.createObjectURL(file), type: 'image', name: file.name })
+      if (file.type.startsWith("image")) {
+        arr.push({
+          path: URL.createObjectURL(file),
+          type: "image",
+          name: file.name,
+        });
       } else {
-        arr.push({ path: URL.createObjectURL(file), type: 'application', name: file.name })
+        arr.push({
+          path: URL.createObjectURL(file),
+          type: "application",
+          name: file.name,
+        });
       }
     }
-    setFiles(arr)
-
-  }
-
+    setFiles(arr);
+  };
 
   return (
     <div className="add-project mt-5">
@@ -121,13 +137,13 @@ const addProject = () => {
                 duration: 10,
                 categoryId: "",
                 skillsIds: [],
-                files: null
+                files: null,
               }}
               validationSchema={AddProjectSchema}
               onSubmit={addNewProject}
             >
-              {({  handleChange, handleSubmit }) => (
-                <Form >
+              {({ handleChange, handleSubmit }) => (
+                <Form>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       {t("Title")}
@@ -186,55 +202,60 @@ const addProject = () => {
 
                   <div className="mb-3">
                     {!files.length && (
-
                       <label htmlFor="files" className="form-label">
                         files (optional)
                       </label>
                     )}
                     <input
-                      style={{ display: 'none' }}
+                      style={{ display: "none" }}
                       ref={filesRef}
-                      hidded='true'
+                      hidded="true"
                       multiple
                       name="files"
                       type="file"
                       accept="image/* , application/*"
                       onChange={(e) => {
                         const fl = e.currentTarget.files;
-                        handleChange({ target: { name: "files", value: [...fl] } });
-                        handleSelecedFiles(e)
-                      }
-                      }
+                        handleChange({
+                          target: { name: "files", value: [...fl] },
+                        });
+                        handleSelecedFiles(e);
+                      }}
                     />
 
-
-
-                    {(files.length > 3) ? <p>files more than 3</p> :
-
-                      (files.map((file, index) => (
-                        (file.type === 'image') ?
-                          <img className="mb-2" width="200" height="100" key={index} src={file.path} />
-                          :
+                    {files.length > 3 ? (
+                      <p>files more than 3</p>
+                    ) : (
+                      files.map((file, index) =>
+                        file.type === "image" ? (
+                          <img
+                            className="mb-2"
+                            width="200"
+                            height="100"
+                            key={index}
+                            src={file.path}
+                          />
+                        ) : (
                           <p key={index}>{file.name}</p>
-                      )))}
-
-
-
+                        )
+                      )
+                    )}
 
                     <Button
-                      style={{ display: 'block' }}
+                      style={{ display: "block" }}
                       variant="contained"
                       onClick={(e) => {
                         e.preventDefault();
                         filesRef.current.click();
                       }}
                     >
-                      file upload</Button>
+                      file upload
+                    </Button>
                     <ErrorMessage
                       name="files"
                       className="text-danger"
-                      component="div" />
-
+                      component="div"
+                    />
                   </div>
 
                   <div className="mb-3">
@@ -257,7 +278,7 @@ const addProject = () => {
 
                   <div className="mb-3">
                     <label htmlFor="range" className="form-label">
-                      Duration in  Days
+                      Duration in Days
                     </label>
                     <Field
                       type="number"
@@ -272,8 +293,6 @@ const addProject = () => {
                       component="div"
                     />
                   </div>
-
-
 
                   <div className="mb-3">
                     <label htmlFor="categories" className="form-label">
@@ -307,7 +326,7 @@ const addProject = () => {
                       getOptionValue={(option) => option.value}
                       closeMenuOnSelect={false}
                     /> */}
-                     <Field
+                    <Field
                       name="skillsIds"
                       as={SkillsSelect}
                       label="Category"

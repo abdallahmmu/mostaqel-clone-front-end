@@ -2,7 +2,7 @@ import axios from "axios";
 import { redirect } from "react-router-dom";
 
 export async function getUserStatisticsById({ params }) {
-  const {userId} = params;
+  const { userId } = params;
   const userData = JSON.parse(localStorage.getItem("isAuth"));
   if (!userData) return redirect("/");
   if (!userId) return redirect("/");
@@ -13,8 +13,9 @@ export async function getUserStatisticsById({ params }) {
       `${import.meta.env.VITE_API_URL}/${userType}/${userId}`
     );
     const skills = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
-
-      const freelancersOffers = await axios.get(
+    let freelancersOffers = [];
+    if (userType == "freelancers") {
+      freelancersOffers = await axios.get(
         `${import.meta.env.VITE_API_URL}/freelancers/myoffers`,
         {
           headers: {
@@ -23,19 +24,22 @@ export async function getUserStatisticsById({ params }) {
           },
         }
       );
+    }
 
-    const latestProjects = await axios.get(`${import.meta.env.VITE_API_URL}/projects`)
+    const latestProjects = await axios.get(
+      `${import.meta.env.VITE_API_URL}/projects`
+    );
 
     return {
-        freelancersOffers:freelancersOffers.data.results,
-        skills:skills.data.results,
-        data:userCollections.data.data || userCollections.data,
-        latestProjects:latestProjects.data.resultProjects,
-    }
+      freelancersOffers: freelancersOffers?.data?.results,
+      skills: skills.data.results,
+      data: userCollections.data.data || userCollections.data,
+      latestProjects: latestProjects.data.resultProjects,
+    };
   } catch (error) {
-   if(error.response.data.error === 'your token is not valid') {
-    localStorage.removeItem('isAuth')
-    return redirect('/login')
-   }
+    if (error.response.data.error === "your token is not valid") {
+      localStorage.removeItem("isAuth");
+      return redirect("/login");
+    }
   }
 }

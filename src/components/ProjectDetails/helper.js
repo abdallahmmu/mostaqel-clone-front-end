@@ -62,14 +62,30 @@ export const fetchOffers = async (setOffers) => {
 };
 
 export const sendMyOffer = async (data, token, setMyOffer) => {
+  delete data["attachments"];
+
+  const formData = new FormData();
+  for (let i in data) {
+    console.log(i);
+    formData.append(i, data[i]);
+  }
+
+  if (document.querySelector("#attachments").files.length) {
+    const fileList = document.querySelector("#attachments").files;
+    for (let i = 0; i < fileList.length; i++) {
+      formData.append("attachments", fileList[i]);
+    }
+  }
   const response = await axios.post(
     `${import.meta.env.VITE_API_URL}/projects/${projectId}/offers`,
-    data,
+    formData,
     {
-      headers: { "Content-Type": "application/json", Authorization: token },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: token,
+      },
     }
   );
-
   alertFire("Successfully Added The Offer", "success");
   setMyOffer(response.data.results);
 };

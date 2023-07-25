@@ -21,7 +21,9 @@ function App() {
     <div dir={lang == "en" ? "ltr" : "rtl"}>
       <RootLayout>
         <NavigationMUI />
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
         <Footer />
       </RootLayout>
     </div>

@@ -24,6 +24,7 @@ const SendOffer = () => {
       amount: undefined,
       duration: undefined,
       description: undefined,
+      attachments: undefined,
     },
     validate,
     onSubmit: (values) => {
