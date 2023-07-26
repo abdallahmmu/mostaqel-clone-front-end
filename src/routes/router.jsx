@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, Route, createBrowserRouter } from "react-router-dom";
 import LoadingSpinner from "../components/UI_Helpers/LoadingSpinner";
 import App from "../App";
 import Error404 from "../Pages/Error404";
@@ -7,6 +7,9 @@ import Error404 from "../Pages/Error404";
 const DisplayProfileDetails = React.lazy(() =>
   import("../Pages/DisplayFreelancers")
 );
+
+import {isAuth , isNotAuth} from './PrivateRoute';
+
 //LAZY
 const HomePage = React.lazy(() => import("../Pages/Home"));
 const LoginPage = React.lazy(() => import("../Pages/Login"));
@@ -47,6 +50,7 @@ import { getUserStatisticsById } from "../components/ProfileComponents/ProfileSt
 import { getFreelancerProfilePage } from "../ReactRouterHelpers/getFreelancerDetails";
 import { getClientsProfileDetails } from "../ReactRouterHelpers/getClientsDetails";
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -81,7 +85,8 @@ export const router = createBrowserRouter([
         path: "login",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <LoginPage />
+            {(isNotAuth()) ? <LoginPage /> : <Navigate to="/" />}
+            
           </React.Suspense>
         ),
       },
@@ -89,7 +94,7 @@ export const router = createBrowserRouter([
         path: "register",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <RegisterPage />
+            {(isNotAuth()) ? <RegisterPage /> :  <Navigate to="/" />}
           </React.Suspense>
         ),
         loader: httpRegisterFreelancerLoader,
@@ -98,7 +103,7 @@ export const router = createBrowserRouter([
         path: "profile/statistics/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <ProfileStatistics />
+            {(isAuth()) ? <ProfileStatistics /> : <Navigate to="login" /> }
           </React.Suspense>
         ),
         loader: getUserStatisticsById,
@@ -107,7 +112,7 @@ export const router = createBrowserRouter([
         path: "profile/edit/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <EditPage />
+             {(isAuth()) ?  <EditPage /> : <Navigate to="/login" /> }
           </React.Suspense>
         ),
         loader: getUserByIdLoader,
@@ -124,7 +129,7 @@ export const router = createBrowserRouter([
         path: "add-projects",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <AddProject />
+            {(isAuth()) ?  <AddProject /> : <Navigate to="/login"/>}
           </React.Suspense>
         ),
         loader: addProjectLoader,
@@ -141,7 +146,8 @@ export const router = createBrowserRouter([
         path: "myoffers",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <FreelancerOffers />
+             {(isAuth()) ?  <FreelancerOffers /> : <Navigate to="/login" /> }
+            
           </React.Suspense>
         ),
       },
@@ -149,7 +155,8 @@ export const router = createBrowserRouter([
         path: "chats",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <ChatsPage />
+            {(isAuth()) ?  <ChatsPage /> : <Navigate to="/login" /> }
+            
           </React.Suspense>
         ),
       },
@@ -157,7 +164,8 @@ export const router = createBrowserRouter([
         path: "notifications",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <Notifications />
+             {(isAuth()) ?   <Notifications /> : <Navigate to="/login" /> }
+           
           </React.Suspense>
         ),
         loader: getNotifications,
@@ -166,7 +174,8 @@ export const router = createBrowserRouter([
         path: "chats/:chatId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <ChatDetails />
+             {(isAuth()) ?   <ChatDetails /> : <Navigate to="/login" /> }
+            
           </React.Suspense>
         ),
       },
@@ -174,7 +183,8 @@ export const router = createBrowserRouter([
         path: "freelancer/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <DisplayProfileDetails />
+             {(isAuth()) ?  <DisplayProfileDetails /> : <Navigate to="/login" /> }
+            
           </React.Suspense>
         ),
         loader: getFreelancerProfilePage,
@@ -183,7 +193,8 @@ export const router = createBrowserRouter([
         path: "client/:userId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <DisplayProfileDetails />
+            {(isAuth()) ?  <DisplayProfileDetails /> : <Navigate to="/login" /> }
+            
           </React.Suspense>
         ),
         loader: getClientsProfileDetails,
@@ -192,7 +203,8 @@ export const router = createBrowserRouter([
         path: "/payment/:userId",
         element: (
           <React.Suspense>
-            <PaymentPage />
+            {(isAuth()) ?  <PaymentPage />  : <Navigate to="/login" /> }
+           
           </React.Suspense>
         ),
         loader: getUserByIdLoader,
@@ -201,7 +213,8 @@ export const router = createBrowserRouter([
         path: "/payment/thankYou",
         element: (
           <React.Suspense>
-            <ThankYou />
+            {(isAuth()) ?    <ThankYou /> : <Navigate to="/login" /> }
+           
           </React.Suspense>
         ),
       },
@@ -209,7 +222,8 @@ export const router = createBrowserRouter([
         path: "/verify-account/:freelancerId",
         element: (
           <React.Suspense fallback={<LoadingSpinner />}>
-            <VerifyCodePage />
+             {(isAuth()) ?     <VerifyCodePage /> : <Navigate to="/login" /> }
+           
           </React.Suspense>
         ),
       },
