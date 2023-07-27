@@ -47,7 +47,9 @@ import { useTranslation } from "react-i18next";
 import { langContext } from "./../../contextAPI/context.jsx";
 import axios from "axios";
 
+
 export default function NavigationMUI() {
+
   const [open, setOpen] = React.useState(false);
 
   const socket = useRef(null);
@@ -286,7 +288,7 @@ export default function NavigationMUI() {
                           }}
                         >
                           <MarkEmailReadIcon fontSize="small" sx={{ mx: 1 }} />{" "}
-                          Mark As Read
+                          {t("Mark As Read")}
                         </Button>
                         <Button style={{ textTransform: "none" }}>
                           <Link to="/chats/">
@@ -294,7 +296,7 @@ export default function NavigationMUI() {
                               fontSize="small"
                               sx={{ mx: 1 }}
                             />
-                            See All Chats
+                            {t("See All Chats")}
                           </Link>
                         </Button>
                       </div>
@@ -378,7 +380,7 @@ export default function NavigationMUI() {
                                   fontSize="small"
                                   sx={{ mx: 1 }}
                                 />{" "}
-                                Mark As Read
+                                {t("Mark As Read")}
                               </Button>
                             </TableCell>
                             <TableCell
@@ -393,7 +395,7 @@ export default function NavigationMUI() {
                                     fontSize="small"
                                     sx={{ mx: 1 }}
                                   />{" "}
-                                  See All Notifications
+                                  {t("See All Notifications")}
                                 </Link>
                               </Button>
                             </TableCell>

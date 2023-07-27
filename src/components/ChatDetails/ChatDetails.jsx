@@ -175,7 +175,7 @@ const ChatDetails = () => {
                       onClick={sendMessage}
                       disabled={Diabled}
                     >
-                      Send
+                      {t("Send")}
                     </button>
                   </div>
                 </div>

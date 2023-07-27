@@ -1,7 +1,11 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 
 function OffersProgressCard({ freelancersOffers, numOffers }) {
+  const { t } = useTranslation();
+
   const rejected = useCallback(() => {
     return freelancersOffers.filter((offer) => offer.stage === "Good Luck");
   }, []);
@@ -17,7 +21,7 @@ function OffersProgressCard({ freelancersOffers, numOffers }) {
         <div className="progress__bars">
           <div className="bids-progress fs-p1">
             <div className="clearfix">
-              <div className="pull-left">in-progress</div>
+              <div className="pull-left">{t("in-progress")}</div>
               <div className=" pull-right">{Winning().length}</div>
             </div>
             <div className="progress progress--slim">
@@ -40,7 +44,7 @@ function OffersProgressCard({ freelancersOffers, numOffers }) {
           </div>
           <div className="bids-progress fs-p1">
             <div className="clearfix">
-              <div className="pull-left">Waiting</div>
+              <div className="pull-left">{t("Waiting")}</div>
               <div className=" pull-right">{waiting().length}</div>
             </div>
             <div className="progress progress--slim">
@@ -65,7 +69,7 @@ function OffersProgressCard({ freelancersOffers, numOffers }) {
         <div className="progress__bars">
           <div className="bids-progress fs-p1">
             <div className="clearfix">
-              <div className="pull-left">Rejected</div>
+              <div className="pull-left">{t("Rejected")}</div>
               <div className=" pull-right">{rejected().length}</div>
             </div>
             <div className="progress progress--slim">
@@ -92,7 +96,7 @@ function OffersProgressCard({ freelancersOffers, numOffers }) {
       <hr className="mt-2" />
       <div className="col-12">
         <p className="text-center text-dark">
-          Total Avilable Offers :{" "}
+          {t("Total Avilable Offers")} :{" "}
           <span className="fw-bold text-p">{numOffers}</span>
         </p>
       </div>

@@ -11,6 +11,7 @@ import {
   registerNewUserClient,
 } from "../../store/AuthSlice/authSlice";
 
+
 const fields = {
   firstName: "",
   lastName: "",
@@ -74,7 +75,7 @@ function ClientRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="firstName"
-                    placeholder="firstName"
+                    placeholder={t("firstName")}
                     name="firstName"
                   />
                   <ErrorMessage
@@ -91,7 +92,7 @@ function ClientRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="lastName"
-                    placeholder="lastName"
+                    placeholder={t("lastName")}
                     name="lastName"
                   />
                   <ErrorMessage
@@ -108,7 +109,7 @@ function ClientRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="userName"
-                    placeholder="userName"
+                    placeholder={t("userName")}
                     name="userName"
                   />
                   <ErrorMessage
@@ -142,7 +143,7 @@ function ClientRegister({ t }) {
                     type="email"
                     className="form-control"
                     id="inputEmail4"
-                    placeholder="Email"
+                    placeholder={t("Email")}
                     name="email"
                   />
                   <ErrorMessage
@@ -159,7 +160,7 @@ function ClientRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="phone"
-                    placeholder="phone"
+                    placeholder={t("phone")}
                     name="phone"
                   />
                   <ErrorMessage
@@ -176,7 +177,7 @@ function ClientRegister({ t }) {
                     type="password"
                     className="form-control"
                     id="inputPassword4"
-                    placeholder="password"
+                    placeholder={t("password")}
                     name="password"
                   />
                   <ErrorMessage
@@ -194,19 +195,19 @@ function ClientRegister({ t }) {
                     type="password"
                     className="form-control"
                     id="inputPassword5"
-                    placeholder="confirmPassword"
+                    placeholder={t("confirmPassword")}
                     name="confirmPassword"
                   />
                   {values.password !== values.confirmPassword &&
                     touched.confirmPassword && (
-                      <p className="text-danger mt-2">Not Matched Password</p>
+                      <p className="text-danger mt-2">{t("Not Matched Password")}</p>
                     )}
                 </div>
 
                 <div className="col-12  mx-auto">
                   <button type="submit" className="btn btn-primary">
                     {isLoading && <LoadingIndecator />}
-                    {!isLoading && <span>Submit</span>}
+                    {!isLoading && <span>{t("Submit")}</span>}
                   </button>
                 </div>
                 <span>
