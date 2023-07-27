@@ -96,7 +96,7 @@ export const updateOffer = async (data, token, offerId) => {
   alertFire("Successfully Updated The Offer", "info");
 };
 
-export const hireFreelancer = async (token, offerId, navigate) => {
+export const hireFreelancer = async (token, offerId, title, navigate) => {
   Swal.fire({
     title: "Are you sure to Hire This Freelancer?",
     icon: "warning",
@@ -110,6 +110,7 @@ export const hireFreelancer = async (token, offerId, navigate) => {
         `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
         {
           offerId,
+          title,
         },
         {
           headers: {
@@ -153,12 +154,13 @@ export const releaseMoney = async (
   });
 };
 
-export const sendMessage = async (token, freelancerId, navigate) => {
+export const sendMessage = async (token, freelancerId, title, navigate) => {
   const response = await axios.post(
     `${import.meta.env.VITE_API_URL}/chats`,
     {
       freelancerId,
       projectId,
+      title,
     },
     {
       headers: { "Content-Type": "application/json", Authorization: token },

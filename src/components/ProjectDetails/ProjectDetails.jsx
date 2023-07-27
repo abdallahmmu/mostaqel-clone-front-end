@@ -23,6 +23,7 @@ const ProjectDetails = () => {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(details.status);
+  const [freelancerInfo, setFreelancerInfo] = useState();
   const { token, role, id } = useSelector((state) => state.authSlice?.userData);
   const isOwner = details.clientId?._id == id ? true : false;
   const { projectId } = useParams();
@@ -47,6 +48,16 @@ const ProjectDetails = () => {
   };
 
   useEffect(() => {
+    const getFreelancerInfo = async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/freelancers/${id}`
+      );
+
+      setFreelancerInfo(res.data.data);
+    };
+    if (role == "freelancer") {
+      getFreelancerInfo();
+    }
     fetchData(projectId, setDetails, setLoading, navigate);
   }, [status]);
 
@@ -61,7 +72,7 @@ const ProjectDetails = () => {
       ) : (
         <div
           className={`pt-5 ${styles.project_details_page}`}
-          style={{ minHeight: "90vh" }}
+          style={{ minHeight: "90vh", paddingBottom: "10px" }}
         >
           <div>
             <Box>
@@ -99,7 +110,23 @@ const ProjectDetails = () => {
                     <ProjectInfo details={details} />
                     {!loading &&
                       (token ? (
-                        role == "freelancer" && details.status == "open" ? (
+                        role == "freelancer" && !freelancerInfo?.isActive ? (
+                          <Box
+                            component={Paper}
+                            mt={2}
+                            elevation={0}
+                            className="p-5 text-center"
+                          >
+                            <h3 className="text-danger">
+                              {t(
+                                "Your Account Has Been Deactivated Feel Free to contact us:"
+                              )}
+                            </h3>
+                            <p class="text-dark text-center fw-bold">
+                              mostaqel@clone.com
+                            </p>
+                          </Box>
+                        ) : role == "freelancer" && details.status == "open" ? (
                           <SendOffer />
                         ) : isOwner ? (
                           <Box
@@ -166,6 +193,7 @@ const ProjectDetails = () => {
                         numOffers={details.numOffers}
                         isOwner={details?.clientId?._id == id}
                         winningOffer={details.offerId?._id}
+                        title={details.title}
                       />
                     )}
                   </div>

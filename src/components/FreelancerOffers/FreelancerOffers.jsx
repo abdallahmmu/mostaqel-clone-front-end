@@ -38,45 +38,64 @@ const FreelancerOffers = () => {
               </Typography>
               <Box component="div" sx={{ p: 3 }}>
                 {offers.length ? (
-                  <ul className="list-group">
-                    {offers.map(
-                      ({ amount, duration, projectId, updatedAt }, index) => {
-                        return (
-                          <Card
-                            elevation={1}
-                            sx={{ backgroundColor: "white", p: 1, mb: 3 }}
-                            key={index}
-                          >
-                            <CardContent>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                                component="div"
-                              >
-                                <Typography variant="p">
-                                  <Link to={`/projects/${projectId._id}`}>
-                                    {projectId.title.toUpperCase()}
+                  <div className="card-body table-responsive p-0">
+                    <table className="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Project Title</th>
+                          <th>Your Offer</th>
+                          <th>Stage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {offers.map(
+                          (
+                            { amount, duration, projectId, updatedAt, stage },
+                            index
+                          ) => {
+                            return (
+                              <tr key={projectId._id}>
+                                <td>
+                                  {" "}
+                                  <Link
+                                    to={`/projects/${projectId._id}`}
+                                    style={{ color: "#1976D2" }}
+                                  >
+                                    {projectId.title.slice(0, 30)}
                                   </Link>
-                                </Typography>
-                              </Box>
-                              <Typography>
-                                $ {amount} {t("within")} {duration} {t("days")}{" "}
-                                <Typography
-                                  variant="span"
-                                  sx={{ opacity: ".5" }}
-                                >
-                                  last update{" "}
-                                  {moment(new Date(updatedAt)).fromNow()}
-                                </Typography>
-                              </Typography>
-                            </CardContent>
-                          </Card>
-                        );
-                      }
-                    )}
-                  </ul>
+                                </td>
+                                <td>
+                                  {" "}
+                                  $ {amount} {t("within")} {duration}{" "}
+                                  {t("days")}{" "}
+                                  <Typography
+                                    variant="span"
+                                    sx={{ opacity: ".5" }}
+                                  >
+                                    last update{" "}
+                                    {moment(new Date(updatedAt)).fromNow()}
+                                  </Typography>
+                                </td>
+                                <td>
+                                  <span
+                                    claaName={
+                                      stage == "Winning"
+                                        ? "text-white bg bg-success"
+                                        : stage == "Waiting"
+                                        ? "text-white bg bg-info"
+                                        : "text-white bg bg-secondary"
+                                    }
+                                  >
+                                    {stage}
+                                  </span>
+                                </td>
+                              </tr>
+                            );
+                          }
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 ) : (
                   <Card sx={{ backgroundColor: "white" }}>
                     {t("You Don't Have Any Offer Before")}
