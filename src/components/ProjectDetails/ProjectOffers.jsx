@@ -12,7 +12,8 @@ const ProjectOffers = (props) => {
   const [offers, setOffers] = useState([]);
 
   const { t } = useTranslation();
-  let { id, isOwner, status, winningOffer, numOffers } = props;
+  let { id, isOwner, status, winningOffer, numOffers, title, setStatus } =
+    props;
   useEffect(() => {
     fetchOffers(setOffers);
   }, []);
@@ -30,6 +31,7 @@ const ProjectOffers = (props) => {
               isOwner={isOwner}
               status={status}
               winningOffer={winningOffer}
+              title={title}
             />
           );
         })}

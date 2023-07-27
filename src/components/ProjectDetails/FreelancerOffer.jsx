@@ -9,7 +9,7 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
+function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
   const {
     _id,
     freelancerId,
@@ -38,6 +38,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
         marginTop: "16px",
         marginBottom: "16px",
         padding: "20px",
+        direction: "ltr",
       }}
       style={{ backgroundColor: _id == winningOffer ? "antiquewhite" : "" }}
     >
@@ -102,7 +103,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
                 attachments.length &&
                 attachments.map((file, index) => {
                   return (
-                    <a href={file} key={index}>
+                    <a href={file} key={index} target="_blank">
                       File {index + 1}
                     </a>
                   );
@@ -117,7 +118,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
                 <button
                   className="btn"
                   onClick={() => {
-                    sendMessage(token, freelancerId._id, navigate);
+                    sendMessage(token, freelancerId._id, title, navigate);
                   }}
                 >
                   <MessageIcon />
@@ -126,7 +127,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer }) {
                   style={{ display: status == "open" ? "" : "none" }}
                   className="btn"
                   onClick={() => {
-                    hireFreelancer(token, _id, navigate);
+                    hireFreelancer(token, _id, title, navigate);
                     handleHired();
                   }}
                 >

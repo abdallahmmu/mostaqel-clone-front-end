@@ -9,49 +9,38 @@ const ProjectInfo = ({ isSender, message }) => {
 
   return (
     <>
-      <Box component="div">
-        <Grid
-          container
-          spacing={2}
+      <div style={{ marginBottom: "5px", padding: "5px" }}>
+        <div
           style={{
-            display: "flex",
-            justifyContent: isSender ? "end" : "",
+            borderRadius: "5px",
+            padding: "5px",
+            backgroundColor: isSender ? "#F0FFFF" : "#eee",
+            float: isSender ? "right" : "left",
+            wordWrap: "break-word",
           }}
         >
-          <Grid item sm={10}>
-            <Box
-              component="div"
-              sx={{ marginTop: "10px" }}
-              style={{
-                background: isSender ? "azure" : "#eee",
-                display: "flex",
-                flexDirection: "column",
-                float: isSender ? "right" : "left",
-                padding: "5px",
-                borderRadius: "5px",
-              }}
-              className="project-title"
-              fontSize={"15px"}
-            >
-              <div>{message.content}</div>
-              {message.attachments.length
-                ? message.attachments.map((file, index) => {
-                    return (
-                      <a href={file} target="_blank" key={index}>
-                        File {index + 1}
-                      </a>
-                    );
-                  })
-                : ""}
-              <Typography variant="span" fontSize={"9px"}>
-                {moment(new Date(message.updatedAt)).fromNow()}
-                <AccessTimeIcon fontSize={"9px"} />
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-        {/* <pre>{JSON.stringify(project, null, 2)}</pre> */}
-      </Box>
+          <p className="mb-0">
+            {message.content}
+
+            {message.attachments.length ? (
+              <>
+                <br />
+                {message.attachments.map((file, index) => (
+                  <a href={file} target="_blank" key={index}>
+                    File {index + 1}
+                  </a>
+                ))}
+              </>
+            ) : null}
+          </p>
+
+          <time style={{ fontSize: "9px" }}>
+            {moment(new Date(message.updatedAt)).fromNow()}
+            <AccessTimeIcon fontSize={"9px"} />
+          </time>
+        </div>
+      </div>
+      <div style={{ clear: "both" }}></div>
       <br />
     </>
   );

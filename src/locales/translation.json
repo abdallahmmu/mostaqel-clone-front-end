@@ -392,6 +392,14 @@
   "Verify Work And Release Money": "تحقق من العمل وتحرير الأموال",
   "Great Work Send Feedback To Freelancer": "عمل رائع أرسل تقييمك إلى المستقل",
   "This Project Was Closed": "هذا المشروع تم إغلاقه",
-  "Trusted":"موثق",
-  "no discription available":"لا يوجد تعريف"
+  "Trusted": "موثق",
+  "no discription available": "لا يوجد تعريف",
+  "Project Name": "اسم المشروع",
+  "Client Name": "اسم العميل",
+  "Chat Date": "تاريخ التواصل",
+  "attchments": "المرفقات",
+  "Chat Card": "بطاقة المحادثة",
+  "Chats": "المحادثات",
+  "Send Your Message": "أرسل رسالتك",
+  "Send": "إرسال"
 }

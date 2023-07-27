@@ -121,7 +121,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell colSpan={6}>
+                    <TableCell colSpan={6} className="text-center">
                       <h5>{t("Winning Offer")}</h5>
                     </TableCell>
                   </TableRow>

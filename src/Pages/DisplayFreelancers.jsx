@@ -31,7 +31,16 @@ function DisplayFreelancers() {
           {data.firstName} {data.lastName || data.LastName}
         </span>
         <span className="col-md-12 text-center">{data.jobTitle}</span>
-        {data.isVerify && <span className='mb-2 text-center'>{t('Trusted')}<img src="https://api.iconify.design/fa6-regular:circle-check.svg?color=%23009dff" alt="verified" className='mx-2' /></span>}
+        {data.isVerify && (
+          <span className="mb-2 text-center">
+            {t("Trusted")}
+            <img
+              src="https://api.iconify.design/fa6-regular:circle-check.svg?color=%23009dff"
+              alt="verified"
+              className="mx-2"
+            />
+          </span>
+        )}
       </div>
 
       <div className="d-flex justify-content-between">

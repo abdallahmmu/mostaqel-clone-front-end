@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Swal from "sweetalert2";
+import TableBody from "@mui/material/TableBody";
 import {
   CssBaseline,
   Box,
@@ -46,9 +47,6 @@ import { useTranslation } from "react-i18next";
 import { langContext } from "./../../contextAPI/context.jsx";
 import axios from "axios";
 
-
-
-
 export default function NavigationMUI() {
   const [open, setOpen] = React.useState(false);
 
@@ -65,13 +63,16 @@ export default function NavigationMUI() {
   });
   const show = [Boolean(anchorEl.messages), Boolean(anchorEl.general)];
 
-  const handleClick = useCallback((event) => {
-    anchorEl[event.currentTarget.name] = event.currentTarget;
-    setAnchorEl({ ...anchorEl });
-  },[event]);
+  const handleClick = useCallback(
+    (event) => {
+      anchorEl[event.currentTarget.name] = event.currentTarget;
+      setAnchorEl({ ...anchorEl });
+    },
+    [event]
+  );
   const handleClose = useCallback(() => {
     setAnchorEl({ messages: null, general: null });
-  },[]);
+  }, []);
 
   const handleDrawerOpen = useCallback(() => {
     setOpen(true);
@@ -113,7 +114,7 @@ export default function NavigationMUI() {
           animation: true,
           position: "bottom-end",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 3000,
           timerProgressBar: true,
         }).fire({
           title: newNotification.content,
@@ -137,7 +138,7 @@ export default function NavigationMUI() {
       <AppBar position="relative" open={open}>
         <div className="container">
           <CssBaseline />
-          <Toolbar  sx={{p:"0px !important"}}>
+          <Toolbar sx={{ p: "0px !important" }}>
             <Typography
               variant="h6"
               noWrap
@@ -253,16 +254,18 @@ export default function NavigationMUI() {
                     >
                       {notification
                         .filter((n) => n.relatedTo === "messages")
-
                         .slice(0, 5)
                         .map((item, index) => {
                           return (
                             <p
                               key={index}
                               onClick={handleClose}
-                            className="px-4 py-2 d-flex justify-content-between align-items-center w-100"
+                              className="px-4 py-2 d-flex justify-content-between align-items-center w-100"
                             >
-                              {item.content}
+                              <Link to={`/chats/${item.attachedId}`}>
+                                {item.content}
+                              </Link>
+
                               <span style={{ fontSize: "10px", opacity: ".5" }}>
                                 {" "}
                                 {moment(new Date(item.createdAt)).fromNow()}
@@ -272,6 +275,7 @@ export default function NavigationMUI() {
                         })}
                       <div className="d-flex justify-content-between px-2 py-1">
                         <Button
+                          style={{ textTransform: "none" }}
                           onClick={async () => {
                             await axios.patch(
                               `${import.meta.env.VITE_API_URL}/notifications/${
@@ -281,12 +285,16 @@ export default function NavigationMUI() {
                             setNotRead([0, notRead[1]]);
                           }}
                         >
-                          <MarkEmailReadIcon fontSize="small" sx={{mx:1}}/> Mark As Read
+                          <MarkEmailReadIcon fontSize="small" sx={{ mx: 1 }} />{" "}
+                          Mark As Read
                         </Button>
-                        <Button>
-                          {" "}
+                        <Button style={{ textTransform: "none" }}>
                           <Link to="/chats/">
-                            <NotificationsActiveIcon fontSize="small" sx={{mx:1}}/> See All Notifications
+                            <NotificationsActiveIcon
+                              fontSize="small"
+                              sx={{ mx: 1 }}
+                            />
+                            See All Chats
                           </Link>
                         </Button>
                       </div>
@@ -316,53 +324,81 @@ export default function NavigationMUI() {
                       }}
                     >
                       <Table>
-                        {notification
-                          .filter((n) => n.relatedTo !== "messages")
+                        <TableBody>
+                          {notification
+                            .filter((n) => n.relatedTo !== "messages")
 
-                          .slice(0, 5)
-                          .map((item, index) => {
-                            return (
-                              <TableRow
-                              key={index}
-                              >
-                                <TableCell component="th" scope="row">
-                                  <span className="text-drak fs-6">  {item.content}</span>
-                                </TableCell>
-                                <TableCell align="right">
-                                  {" "}
-                                  <span>{moment(new Date(item.createdAt)).fromNow()}</span>
-                                </TableCell>
-                              </TableRow>
-                            );
-                          })}
-                        <TableRow>
-                          <TableCell sx={{borderBottom:'0px'}} component="th" scope="row">
-                            {" "}
-                            <Button
-                              onClick={async () => {
-                                await axios.patch(
-                                  `${
-                                    import.meta.env.VITE_API_URL
-                                  }/notifications/${userData.id}`
-                                );
-                                setNotRead([notRead[0], 0]);
-                              }}
+                            .slice(0, 5)
+                            .map((item, index) => {
+                              return (
+                                <TableRow key={index}>
+                                  <TableCell component="th" scope="row">
+                                    <span className="text-drak fs-6">
+                                      {item.relatedTo == "projects" ? (
+                                        <Link
+                                          to={`/projects/${item.attachedId}`}
+                                        >
+                                          {item.content}
+                                        </Link>
+                                      ) : (
+                                        item.content
+                                      )}
+                                    </span>
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {" "}
+                                    <span>
+                                      {moment(
+                                        new Date(item.createdAt)
+                                      ).fromNow()}
+                                    </span>
+                                  </TableCell>
+                                </TableRow>
+                              );
+                            })}
+                          <TableRow>
+                            <TableCell
+                              sx={{ borderBottom: "0px" }}
+                              component="th"
+                              scope="row"
                             >
-                              <MarkEmailReadIcon fontSize="small" sx={{mx:1}} /> Mark As
-                              Read
-                            </Button>
-                          </TableCell>
-                          <TableCell sx={{borderBottom:'0px'}} align="right">
-                            {" "}
-                            <Button>
                               {" "}
-                              <Link to="/notifications/">
-                                <NotificationsActiveIcon fontSize="small" sx={{mx:1}} /> See All
-                                Notifications
-                              </Link>
-                            </Button>
-                          </TableCell>
-                        </TableRow>
+                              <Button
+                                style={{ textTransform: "none" }}
+                                onClick={async () => {
+                                  await axios.patch(
+                                    `${
+                                      import.meta.env.VITE_API_URL
+                                    }/notifications/${userData.id}`
+                                  );
+                                  setNotRead([notRead[0], 0]);
+                                }}
+                              >
+                                <MarkEmailReadIcon
+                                  fontSize="small"
+                                  sx={{ mx: 1 }}
+                                />{" "}
+                                Mark As Read
+                              </Button>
+                            </TableCell>
+                            <TableCell
+                              sx={{ borderBottom: "0px" }}
+                              align="right"
+                            >
+                              {" "}
+                              <Button style={{ textTransform: "none" }}>
+                                {" "}
+                                <Link to="/notifications/">
+                                  <NotificationsActiveIcon
+                                    fontSize="small"
+                                    sx={{ mx: 1 }}
+                                  />{" "}
+                                  See All Notifications
+                                </Link>
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
                       </Table>
                     </Menu>
                   </>
@@ -509,20 +545,22 @@ export default function NavigationMUI() {
 
         {isAuth && (
           <List>
-            <NavLink to="add-projects" onClick={handleDrawerClose}>
-              <ListItem disablePadding>
-                <ListItemButton
-                  sx={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <ListItemIcon sx={{ color: "#000" }}>
-                    {t("Add Project")}
-                  </ListItemIcon>
-                  <ListItemIcon>
-                    <AddIcon />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-            </NavLink>
+            {userData.role === "client" && (
+              <NavLink to="add-projects" onClick={handleDrawerClose}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <ListItemIcon sx={{ color: "#000" }}>
+                      {t("Add Project")}
+                    </ListItemIcon>
+                    <ListItemIcon>
+                      <AddIcon />
+                    </ListItemIcon>
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
+            )}
             <NavLink to="projects" onClick={handleDrawerClose}>
               <ListItem disablePadding>
                 <ListItemButton
@@ -554,7 +592,6 @@ export default function NavigationMUI() {
                 </ListItemButton>
               </ListItem>
             </NavLink>
-
             <ListItem disablePadding onClick={onLogoutHandler}>
               <ListItemButton
                 sx={{ display: "flex", justifyContent: "space-between" }}
