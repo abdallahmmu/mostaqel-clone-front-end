@@ -160,7 +160,7 @@ const ProjectsListSingleProject = ({ project }) => {
             <ClassRoundedIcon style={{ fontSize: "18px", margin: "2px" }} />
 
             <Typography variant="span" style={{ fontSize: "13px" }}>
-              {project.categoryId.title}
+              {project?.categoryId?.title}
             </Typography>
           </Typography>
         </Grid>

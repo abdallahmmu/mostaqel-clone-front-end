@@ -78,7 +78,7 @@ const FreelancerOffers = () => {
                                 </td>
                                 <td>
                                   <span
-                                    claaName={
+                                    className={
                                       stage == "Winning"
                                         ? "text-white bg bg-success"
                                         : stage == "Waiting"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Box, Grid, Typography, Avatar, Rating } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
 import { hireFreelancer, sendMessage } from "./helper.js";
@@ -10,10 +10,12 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import { useSelector } from "react-redux";
+import { langContext } from "../../contextAPI/context.jsx";
 function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
   const { t } = useTranslation();
-
+  const { lang } = useContext(langContext);
+  const { role, id } = useSelector((state) => state.authSlice?.userData);
   const {
     _id,
     freelancerId,
@@ -23,6 +25,11 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
     duration,
     attachments,
   } = offer;
+  const timeAgo = moment(updatedAt).startOf("second").fromNow().split(" ");
+  let showTime =
+    lang == "ar"
+      ? `${t(timeAgo[2])} ${t(timeAgo[0])} ${t(timeAgo[1])} `
+      : timeAgo.join(" ");
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("isAuth"))?.["token"];
 
@@ -103,15 +110,16 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
                 padding: "0 30px ",
               }}
             >
-              {isOwner &&
-                attachments.length &&
-                attachments.map((file, index) => {
-                  return (
-                    <a href={file} key={index} target="_blank">
-                      File {index + 1}
-                    </a>
-                  );
-                })}
+              {(isOwner && attachments.length) ||
+              (freelancerId._id == id && attachments.length)
+                ? attachments.map((file, index) => {
+                    return (
+                      <a href={file} key={index} target="_blank">
+                        File {index + 1}
+                      </a>
+                    );
+                  })
+                : ""}
             </Box>
           </Box>
         </Box>
@@ -131,7 +139,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
                   style={{ display: status == "open" ? "" : "none" }}
                   className="btn"
                   onClick={() => {
-                    hireFreelancer(token, _id, title, navigate);
+                    hireFreelancer(token, _id, title, navigate, t);
                     handleHired();
                   }}
                 >
@@ -145,9 +153,14 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
               </h4>
             </>
           )}
-
-          <p className="  opacity-50 ">
-            {t("Last updated")} {moment(new Date(updatedAt)).fromNow()}
+          {freelancerId._id == id && (
+            <h4 className="text-center mb-2">
+              {amount}
+              <AttachMoneyIcon /> {t("Within")} {duration} {t("days")}
+            </h4>
+          )}
+          <p className="  opacity-50 text-center">
+            {t("Last updated")} {showTime}
           </p>
         </Box>
       </div>

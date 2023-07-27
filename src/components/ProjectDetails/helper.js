@@ -96,14 +96,14 @@ export const updateOffer = async (data, token, offerId) => {
   alertFire("Successfully Updated The Offer", "info");
 };
 
-export const hireFreelancer = async (token, offerId, title, navigate) => {
+export const hireFreelancer = async (token, offerId, title, navigate, t) => {
   Swal.fire({
-    title: "Are you sure to Hire This Freelancer?",
+    title: t("Are you sure to Hire This Freelancer?"),
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Confirm it!",
+    confirmButtonText: t("Yes, Confirm it!"),
   }).then(async (result) => {
     if (result.isConfirmed) {
       await axios.patch(

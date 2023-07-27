@@ -33,16 +33,16 @@ const ProjectDetails = () => {
   const { lang } = useContext(langContext);
   const handleProjectDeactivating = () => {
     Swal.fire({
-      title: "Are you sure to close this project?",
+      title: t("Are you sure to close this project?"),
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: t("Yes, delete it!"),
     }).then((result) => {
       if (result.isConfirmed) {
         setStatus(ProjectDeactivating(details._id, token2));
-        Swal.fire("closed!");
+        Swal.fire(t("closed!"));
       }
     });
   };
