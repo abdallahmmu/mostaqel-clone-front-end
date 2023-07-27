@@ -34,7 +34,7 @@ const FreelancerOffers = () => {
           <Grid container spacing={2} sx={{ minHeight: "90vh" }}>
             <Grid item md={12}>
               <Typography variant="h6" sx={{ py: 4, fontWeight: "bold" }}>
-                Freelancers Offers
+                {t("Freelancers Offers")}
               </Typography>
               <Box component="div" sx={{ p: 3 }}>
                 {offers.length ? (
@@ -42,9 +42,9 @@ const FreelancerOffers = () => {
                     <table className="table table-hover text-nowrap">
                       <thead>
                         <tr>
-                          <th>Project Title</th>
-                          <th>Your Offer</th>
-                          <th>Stage</th>
+                          <th>{t("Project Title")}</th>
+                          <th>{t("Your Offer")}</th>
+                          <th>{t("Stage")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -99,7 +99,7 @@ const FreelancerOffers = () => {
                 ) : (
                   <Card sx={{ backgroundColor: "white" }}>
                     {t("You Don't Have Any Offer Before")}
-                    <Link to="/projects"> {"Go To Apply"}</Link>
+                    <Link to="/projects"> {t("Go To Apply")}</Link>
                   </Card>
                 )}
               </Box>

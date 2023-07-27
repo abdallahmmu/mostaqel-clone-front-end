@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export const validate = (values) => {
+  const { t } = useTranslation();
+
   const errors = {};
   if (!values.amount) {
     errors.amount = "Required";

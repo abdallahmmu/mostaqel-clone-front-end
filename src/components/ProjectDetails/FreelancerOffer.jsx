@@ -9,7 +9,11 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
+  const { t } = useTranslation();
+
   const {
     _id,
     freelancerId,
@@ -137,13 +141,13 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
 
               <h4 className="text-center mb-2">
                 {amount}
-                <AttachMoneyIcon /> Within {duration} days
+                <AttachMoneyIcon /> {t("Within")} {duration} {t("days")}
               </h4>
             </>
           )}
 
           <p className="  opacity-50 ">
-            Last updated {moment(new Date(updatedAt)).fromNow()}
+            {t("Last updated")} {moment(new Date(updatedAt)).fromNow()}
           </p>
         </Box>
       </div>

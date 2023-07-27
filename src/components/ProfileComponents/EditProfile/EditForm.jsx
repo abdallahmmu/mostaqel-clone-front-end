@@ -146,7 +146,7 @@ function EditForm() {
                         type="text"
                         className="form-control"
                         id="firstName"
-                        placeholder="firstName"
+                        placeholder={t("firstName")}
                         name="firstName"
                       />
                       <ErrorMessage
@@ -163,7 +163,7 @@ function EditForm() {
                         type="text"
                         className="form-control"
                         id="lastName"
-                        placeholder="lastName"
+                        placeholder={t("lastName")}
                         name="lastName"
                       />
                       <ErrorMessage
@@ -196,7 +196,7 @@ function EditForm() {
                         as="textarea"
                         className="form-control"
                         id="description"
-                        placeholder="description"
+                        placeholder={t("description")}
                         name="description"
                       />
                     </div>

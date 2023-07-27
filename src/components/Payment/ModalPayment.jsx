@@ -204,7 +204,7 @@ function ModalPayment({ open, closeModal, userData }) {
                   textAlign: "center",
                 }}
               >
-                Your account is not Active to{" "}
+                {t("Your account is not Active to")}{" "}
                 {userData.role === "freelancer" ? "withdraw" : "deposit"}
               </Typography>
               <Typography
@@ -214,7 +214,7 @@ function ModalPayment({ open, closeModal, userData }) {
                   textAlign: "center",
                 }}
               >
-                Feel Free To Contact us at : mostaql-clone@mostql.com
+                {t("Feel Free To Contact us at")} : mostaql-clone@mostql.com
               </Typography>
             </>
           )}
