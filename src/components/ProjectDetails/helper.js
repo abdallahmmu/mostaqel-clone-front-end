@@ -136,6 +136,7 @@ export const releaseMoney = async (
   freelancerId,
   clientId,
   offerId,
+  t,
   navigate
 ) => {
   Swal.fire({

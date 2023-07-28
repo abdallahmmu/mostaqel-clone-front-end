@@ -3,7 +3,6 @@ import Swal from "sweetalert2"
 import { useTranslation } from "react-i18next";
 
 export async function depositeCredit(amount,mode,userId){
-    const { t } = useTranslation();
 
     console.log(Math.round(amount))
     const data= {
