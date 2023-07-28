@@ -36,11 +36,11 @@ const ProjectsListSingleProject = ({ project }) => {
           </Box>
 
           <Box
-            component="p"
-            sx={{ marginTop: "20px" }}
+            component="div"
+            sx={{ marginTop: "20px",inlineSize:'95%' }}
             className="project-excerpt"
           >
-            <Typography variant="p">{project.description}</Typography>
+            <Typography sx={{color:"#343a40",opacity:'.7'}} variant="p">{project.description.slice(0,180) + '...'}</Typography>
           </Box>
 
           <Box component="div" mt={5} className="project-info ">
@@ -92,7 +92,7 @@ const ProjectsListSingleProject = ({ project }) => {
               </Typography>
             </Grid>
             <Grid item sm={9}>
-              <Box component="div">
+              <Box component="div" className="d-flex flex-wrap gap-2">
                 {project.skillsIds.map((skill, index) => (
                   <Typography
                     key={index}
@@ -114,10 +114,11 @@ const ProjectsListSingleProject = ({ project }) => {
           style={{
             fontSize: "13px",
             display: "flex",
-            alignItems: "baseline",
+            alignItems: "revert",
             justifyContent: "center",
             flexDirection: "column",
             gap: "8px",
+            
           }}
         >
           <Typography>
