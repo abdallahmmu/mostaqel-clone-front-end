@@ -21,11 +21,6 @@ const addProject = () => {
   const [files, setFiles] = useState([]);
   const filesRef = useRef(null);
   const addNewProject = (values) => {
-    let sklsIds = [];
-    values.skillsIds.map((skill) => {
-      sklsIds.push(skill.id);
-    });
-
     let newValues = {
       ...values,
       categoryId: values.categoryId,
@@ -54,7 +49,6 @@ const addProject = () => {
     for (let item in newValues) {
       fd.append(item, newValues[item]);
     }
-
     dispatch(addingNewProject({ fd }));
 
     swal({
@@ -66,7 +60,6 @@ const addProject = () => {
     navigate("/projects");
   };
   const suggestArabic = async (eve) => {
-    console.log(eve.target.value);
     made(eve.target.value);
   };
   async function made(text) {
@@ -78,7 +71,7 @@ const addProject = () => {
         },
       }
     );
-    console.log(response);
+
     const data = await response.data;
     setArbic(data.translated);
   }

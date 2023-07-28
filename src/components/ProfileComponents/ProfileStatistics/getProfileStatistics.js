@@ -4,7 +4,7 @@ import { redirect } from "react-router-dom";
 export async function getUserStatisticsById({ params }) {
   const { userId } = params;
   const userData = JSON.parse(localStorage.getItem("isAuth"));
-  if (!userData) return redirect("/");
+  if (!userData || userData.id !== userId) return redirect("/projects");
   if (!userId) return redirect("/");
 
   const userType = userData.role === "freelancer" ? "freelancers" : "clients";
