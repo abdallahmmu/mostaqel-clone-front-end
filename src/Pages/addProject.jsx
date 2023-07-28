@@ -21,10 +21,6 @@ const addProject = () => {
   const [files, setFiles] = useState([]);
   const filesRef = useRef(null);
   const addNewProject = (values) => {
-    let sklsIds = [];
-    values.skillsIds.map((skill) => {
-      sklsIds.push(skill.id);
-    });
 
     let newValues = {
       ...values,
@@ -32,23 +28,18 @@ const addProject = () => {
     };
 
     const fd = new FormData();
-
+    
     let files = newValues.files;
     let skillsIds = newValues.skillsIds;
     if (files) {
       for (let file of files) {
         fd.append("files", file);
       }
-
+      
       ["files"].map((i) => delete newValues[i]);
     }
-    if (skillsIds) {
-      for (let sk of skillsIds) {
-        fd.append("skillsIds[]", sk);
-      }
+    
 
-      ["skillsIds"].map((i) => delete newValues[i]);
-    }
     if (skillsIds) {
       for (let sk of skillsIds) {
         fd.append("skillsIds[]", sk);
@@ -61,7 +52,6 @@ const addProject = () => {
     for (let item in newValues) {
       fd.append(item, newValues[item]);
     }
-
     dispatch(addingNewProject({ fd }));
 
     swal({
@@ -73,7 +63,6 @@ const addProject = () => {
     navigate("/projects");
   };
   const suggestArabic = async (eve) => {
-    console.log(eve.target.value);
     made(eve.target.value);
   };
   async function made(text) {
@@ -85,7 +74,7 @@ const addProject = () => {
         },
       }
     );
-    console.log(response);
+   
     const data = await response.data;
     setArbic(data.translated);
   }
