@@ -98,7 +98,6 @@ const ProjectsListFilter = () => {
       return newSliderValue;
     });
 
-    //   dispatch(getAllProjects({ range_gt: 0, range_lt: newSliderValue }))
   };
 
   return (
@@ -115,7 +114,7 @@ const ProjectsListFilter = () => {
       </div>
       <div className="category">
         <div className="category-title my-2 h5">{t("Category")}</div>
-        <ul className="list-unstyled">
+        <ul className="list-unstyled px-0">
           {cats &&
             cats.map((cat) => (
               <li key={cat._id} className="cat">
@@ -153,8 +152,8 @@ const ProjectsListFilter = () => {
           onChange={handleSlider}
           aria-label="slider"
           min={0}
-          max={100}
-          step={20}
+          max={1000000}
+          step={1000}
         />
         <p>
           {t("Range")}: {sliderValue}

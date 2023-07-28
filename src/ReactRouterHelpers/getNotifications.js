@@ -7,7 +7,7 @@ export const getNotifications = async () => {
         JSON.parse(localStorage.getItem("isAuth")).id
       }`
     );
-    const allNotifications = fetchData.data.results;
+    const allNotifications = fetchData.data.results.reverse();
 
     return {
       allNotifications,

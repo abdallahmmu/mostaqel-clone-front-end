@@ -17,7 +17,7 @@ function DisplayFreelancers() {
         className="row col-md-12 justify-content-center"
         style={{ margin: "100px 0px" }}
       >
-        <div className="col-md-12 text-center">
+        <div className="col-md-12 text-center mt-4">
           {!data.avatar && (
             <ImageGeneration
               firstName={data.firstName}
@@ -26,12 +26,21 @@ function DisplayFreelancers() {
           )}
           {data.avatar && <ImageGeneration avatar={data.avatar} />}
         </div>
-        <div className="col-md-12 text-center">
+        <span className="col-md-12 text-center">
           {" "}
           {data.firstName} {data.lastName || data.LastName}
-        </div>
-        <div className="col-md-12 text-center">{data.jobTitle}</div>
-        {data.isVerify && <span className='mb-2 text-center'>Trusted<img src="https://api.iconify.design/fa6-regular:circle-check.svg?color=%23009dff" alt="verified" className='mx-2' /></span>}
+        </span>
+        <span className="col-md-12 text-center">{data.jobTitle}</span>
+        {data.isVerify && (
+          <span className="mb-2 text-center">
+            {t("Trusted")}
+            <img
+              src="https://api.iconify.design/fa6-regular:circle-check.svg?color=%23009dff"
+              alt="verified"
+              className="mx-2"
+            />
+          </span>
+        )}
       </div>
 
       <div className="d-flex justify-content-between">

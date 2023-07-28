@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { langContext } from "../../contextAPI/context.jsx";
 import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +19,7 @@ import { useTranslation } from "react-i18next";
 
 function EditOffer({ offer, open, onClose, onSubmit }) {
   const { t } = useTranslation();
-
+  const { lang } = useContext(langContext);
   const token = useSelector((state) => state.authSlice.userData.token);
 
   const formik = useFormik({
@@ -47,15 +48,23 @@ function EditOffer({ offer, open, onClose, onSubmit }) {
         },
       }}
     >
-      <DialogTitle>{t("Edit Your Offer")}</DialogTitle>
+      <DialogTitle style={{ textAlign: lang == "ar" ? "end" : "start" }}>
+        {t("Edit Your Offer")}
+      </DialogTitle>
       <div className="bg-white p-5 mt-2 ">
-        <OfferForm formik={formik} handleClose={handleClose} EditOffer={true} />
+        <OfferForm
+          formik={formik}
+          handleClose={handleClose}
+          EditOffer={true}
+          lang={lang}
+        />
       </div>
     </Dialog>
   );
 }
 
 const MyOffer = ({ offer, setMyOffer }) => {
+  const { lang } = useContext(langContext);
   const [open, setOpen] = React.useState(false);
   let values = ["amount", "duration", "description"];
   const { t } = useTranslation();
@@ -73,7 +82,7 @@ const MyOffer = ({ offer, setMyOffer }) => {
   return (
     <>
       <div className="mt-3">
-        <TableContainer component={Paper} className="p-5">
+        <TableContainer elevation={0} component={Paper} className="p-5">
           <Table>
             <TableHead>
               <TableRow>
@@ -96,9 +105,34 @@ const MyOffer = ({ offer, setMyOffer }) => {
                   <TableCell component="th" scope="row">
                     {t(value)}
                   </TableCell>
-                  <TableCell align="right">{offer[value]}</TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ textAlign: lang == "ar" ? "end" : "start" }}
+                  >
+                    {offer[value]}
+                  </TableCell>
                 </TableRow>
               ))}
+              {offer?.attachments.length ? (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <span>{t("Attachments")}</span>
+                  </TableCell>
+                  <TableCell align="right">
+                    {offer?.attachments.map((file, index) => {
+                      return (
+                        <a href={file} key={file} target="_blank">
+                          {t("File")} {index + 1}{" "}
+                        </a>
+                      );
+                    })}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                ""
+              )}
             </TableBody>
           </Table>
 

@@ -11,8 +11,6 @@ import { useTranslation } from "react-i18next";
 import { useLoaderData } from "react-router-dom";
 import { sendOTPCodeVerification } from "../helpers/verifyAccount";
 
-
-
 function ProfileStatistics() {
   const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
@@ -21,23 +19,23 @@ function ProfileStatistics() {
 
   const verifyAccount = useCallback(async () => {
     const confirm = await Swal.fire({
-      title: `${t('Want To Verify Your Account')}`,
+      title: `${t("Want To Verify Your Account")}`,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      cancelButtonText:`${t('No')}`,
-      confirmButtonText: `${t('Yes, I Want')}`,
-    })
+      cancelButtonText: `${t("No")}`,
+      confirmButtonText: `${t("Yes, I Want")}`,
+    });
     if (confirm.isConfirmed) {
-        const confirmationCode = await sendOTPCodeVerification(userData.id)
-        if(confirmationCode.message){
-          Swal.fire({
-            titleText: `${t('Please Check Your Email Account')}`,
-            icon: "success",
-            iconColor: "#3085d6",
-          });
-        }
+      const confirmationCode = await sendOTPCodeVerification(userData.id);
+      if (confirmationCode.message) {
+        Swal.fire({
+          titleText: `${t("Please Check Your Email Account")}`,
+          icon: "success",
+          iconColor: "#3085d6",
+        });
+      }
     }
   }, []);
   return (
@@ -45,14 +43,14 @@ function ProfileStatistics() {
       <div className="container">
         {!data.isActive && (
           <div className="py-4 bg-white mb-3">
-          <p className="text-center text-danger fw-bold">
-            {t("Your Account Has Been Deactivated Feel Free to contact us:")}{" "}
-            <br/>
-          </p>
+            <p className="text-center text-danger fw-bold">
+              {t("Your Account Has Been Deactivated Feel Free to contact us:")}{" "}
+              <br />
+            </p>
             <p className="text-dark text-center fw-bold">mostaqel@clone.com</p>
           </div>
         )}
-        {!data.isVerify&&userData.role === 'freelancer' && (
+        {!data.isVerify && userData.role === "freelancer" && (
           <div className="mb-3 py-4 bg-white r fw-bold">
             <p className="text-center text-danger">
               {t("To Verify Your Account")}{" "}
@@ -83,7 +81,10 @@ function ProfileStatistics() {
         {/* <!--Row 2 Pannel Information MessagesCard And OffersCard--> */}
         <div className="row">
           <MessagesCard />
-          <OffersCard />
+          <OffersCard
+            numOffers={data?.availableOffers}
+            nextCharge={data?.nextCharge}
+          />
         </div>
 
         {/* <!--Row 2 Pannel Information PortfolioCard And LatestProjects--> */}

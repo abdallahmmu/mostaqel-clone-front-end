@@ -2,6 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 let projectId = 0;
 let freelancerId = 0;
+let projectStatus = 0;
 let allOffers = [];
 
 const alertFire = (title, icon) => {
@@ -28,7 +29,7 @@ const fetchDetails = async (id, setDetails) => {
     }
   );
   setDetails(response.data);
-  document.title = response.data.title;
+  document.title = `Mostaql Clone | ${response.data.title}`;
 };
 
 const fetchOffer = async (id) => {
@@ -36,6 +37,7 @@ const fetchOffer = async (id) => {
     `${import.meta.env.VITE_API_URL}/projects/${id}/offers`
   );
   allOffers = response.data.results;
+  projectStatus = response.data.results.status;
 };
 
 export const fetchData = async (id, setDetails, setLoading, navigate) => {
@@ -54,10 +56,17 @@ export const fetchMyOffer = async (id, setMyOffer) => {
   }
 };
 export const fetchOffers = async (setOffers) => {
-  if (allOffers) {
-    setOffers(
-      allOffers.filter((offer) => offer.freelancerId._id != freelancerId)
-    );
+  console.log(projectStatus);
+  if (projectStatus !== "open") {
+    if (allOffers) {
+      setOffers(
+        allOffers.filter((offer) => offer.freelancerId._id != freelancerId)
+      );
+    }
+  } else {
+    if (allOffers) {
+      setOffers(allOffers);
+    }
   }
 };
 
@@ -96,20 +105,21 @@ export const updateOffer = async (data, token, offerId) => {
   alertFire("Successfully Updated The Offer", "info");
 };
 
-export const hireFreelancer = async (token, offerId, navigate) => {
+export const hireFreelancer = async (token, offerId, title, navigate, t) => {
   Swal.fire({
-    title: "Are you sure to Hire This Freelancer?",
+    title: t("Are you sure to Hire This Freelancer?"),
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Confirm it!",
+    confirmButtonText: t("Yes, Confirm it!"),
   }).then(async (result) => {
     if (result.isConfirmed) {
       await axios.patch(
         `${import.meta.env.VITE_API_URL}/projects/${projectId}/accept`,
         {
           offerId,
+          title,
         },
         {
           headers: {
@@ -126,15 +136,16 @@ export const releaseMoney = async (
   freelancerId,
   clientId,
   offerId,
+  t,
   navigate
 ) => {
   Swal.fire({
-    title: "Are you sure to complete this project?",
+    title: t("Are you sure to complete this project?"),
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, complete it!",
+    confirmButtonText: t("Yes, complete it!"),
   }).then(async (result) => {
     if (result.isConfirmed) {
       await axios.patch(
@@ -153,12 +164,13 @@ export const releaseMoney = async (
   });
 };
 
-export const sendMessage = async (token, freelancerId, navigate) => {
+export const sendMessage = async (token, freelancerId, title, navigate) => {
   const response = await axios.post(
     `${import.meta.env.VITE_API_URL}/chats`,
     {
       freelancerId,
       projectId,
+      title,
     },
     {
       headers: { "Content-Type": "application/json", Authorization: token },

@@ -73,7 +73,7 @@ function FreelancerRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="firstName"
-                    placeholder="firstName"
+                    placeholder={t("firstName")}
                     name="firstName"
                   />
                   <ErrorMessage
@@ -93,7 +93,7 @@ function FreelancerRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="lastName"
-                    placeholder="lastName"
+                    placeholder={t("lastName")}
                     name="lastName"
                   />
                   <ErrorMessage
@@ -113,7 +113,7 @@ function FreelancerRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="username"
-                    placeholder="username"
+                    placeholder={t("username")}
                     name="username"
                   />
                   <ErrorMessage
@@ -133,7 +133,7 @@ function FreelancerRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="jobTitle"
-                    placeholder="ex - Web Developer"
+                    placeholder={t("ex - Web Developer")}
                     name="jobTitle"
                   />
                   <ErrorMessage
@@ -170,7 +170,7 @@ function FreelancerRegister({ t }) {
                     type="text"
                     className="form-control"
                     id="phoneNumber"
-                    placeholder="PhoneNumber"
+                    placeholder={t("PhoneNumber")}
                     name="phoneNumber"
                   />
                   <ErrorMessage
@@ -190,7 +190,7 @@ function FreelancerRegister({ t }) {
                     type="password"
                     className="form-control"
                     id="inputPassword4"
-                    placeholder="password"
+                    placeholder={t("password")}
                     name="password"
                   />
                   <ErrorMessage
@@ -208,12 +208,12 @@ function FreelancerRegister({ t }) {
                     type="password"
                     className="form-control"
                     id="inputPassword5"
-                    placeholder="confirmPassword"
+                    placeholder={t("confirmPassword")}
                     name="confirmPassword"
                   />
                   {values.password !== values.confirmPassword &&
                     touched.confirmPassword && (
-                      <p className="text-danger mt-2">Not Matched Password</p>
+                      <p className="text-danger mt-2">{t("Not Matched Password")}</p>
                     )}
                 </div>
                 <div className=" col-md-12">
@@ -226,7 +226,7 @@ function FreelancerRegister({ t }) {
                     name="categoryId"
                     as="select"
                   >
-                    <option>Choose</option>
+                    <option>{t("Choose")}</option>
                     {categories.map((category) => (
                       <option key={category._id} value={category._id}>
                         {category.title}
@@ -245,7 +245,7 @@ function FreelancerRegister({ t }) {
                 <div className="col-12  mx-auto">
                   <button type="submit" className="btn btn-primary">
                     {isLoading && <LoadingIndecator />}
-                    {!isLoading && <span>Submit</span>}
+                    {!isLoading && <span>{t("Submit")}</span>}
                   </button>
                 </div>
                 <span>

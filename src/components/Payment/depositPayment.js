@@ -1,6 +1,9 @@
 import axios from "axios"
 import Swal from "sweetalert2"
+import { useTranslation } from "react-i18next";
+
 export async function depositeCredit(amount,mode,userId){
+
     console.log(Math.round(amount))
     const data= {
         userId:userId,

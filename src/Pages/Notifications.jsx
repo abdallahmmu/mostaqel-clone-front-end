@@ -21,11 +21,11 @@ const Notifications = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
+      <div className="container">
+        <Grid container spacing={2} sx={{ minHeight: "90vh" }}>
           <Grid item md={12}>
             <Typography variant="h6" sx={{ p: 3, fontWeight: "bold" }}>
-              Freelancers Offers
+              {t("Your Notifications")}
             </Typography>
             <Box component="div" sx={{ p: 3 }}>
               {allNotifications.length ? (
@@ -57,15 +57,12 @@ const Notifications = () => {
                   })}
                 </ul>
               ) : (
-                <Card sx={{ backgroundColor: "white" }}>
-                  {t("You Don't Have Any Offer Before")}
-                  <Link to="/projects"> {"Go To Apply"}</Link>
-                </Card>
+                <div>{t("You Don't Have Any Notifications Yet")}</div>
               )}
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </div>
     </>
   );
 };

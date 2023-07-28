@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AddProjectSchema } from "../Schemas/AddProjectSchema";
 import { useDispatch } from "react-redux";
 import { addingNewProject } from "../store/ProjectsSlice/ProjectsSlice";
@@ -21,11 +21,6 @@ const addProject = () => {
   const [files, setFiles] = useState([]);
   const filesRef = useRef(null);
   const addNewProject = (values) => {
-    let sklsIds = [];
-    values.skillsIds.map((skill) => {
-      sklsIds.push(skill.id);
-    });
-
     let newValues = {
       ...values,
       categoryId: values.categoryId,
@@ -50,29 +45,21 @@ const addProject = () => {
       ["skillsIds"].map((i) => delete newValues[i]);
     }
 
+    newValues.description_ar = arabic;
     for (let item in newValues) {
       fd.append(item, newValues[item]);
     }
-
-    // for( let [key, value] of fd.entries()){
-    //   console.log(key)
-    //   console.log(typeof value)
-    // }
-
     dispatch(addingNewProject({ fd }));
 
-    newValues.description_ar = arabic;
+    swal({
+      title: "Success",
+      text: "projects added successfully",
+      icon: "success",
+    });
 
-    // swal({
-    //   title: "Success",
-    //   text: "projects added successfully",
-    //   icon: "success",
-    // });
-
-    // navigate("/projects");
+    navigate("/projects");
   };
   const suggestArabic = async (eve) => {
-    console.log(eve.target.value);
     made(eve.target.value);
   };
   async function made(text) {
@@ -84,7 +71,7 @@ const addProject = () => {
         },
       }
     );
-    console.log(response);
+
     const data = await response.data;
     setArbic(data.translated);
   }
@@ -120,11 +107,11 @@ const addProject = () => {
           <div className="col-lg-8 col-md-12">
             <Formik
               initialValues={{
-                title: "title one",
-                description: "description English",
-                description_ar: "description arabic",
-                range: 10000,
-                duration: 10,
+                title: "",
+                description: "",
+                description_ar: "",
+                range: null,
+                duration: null,
                 categoryId: "",
                 skillsIds: [],
                 files: null,

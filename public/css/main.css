@@ -32,6 +32,7 @@ body {
   margin: 0;
   box-sizing: border-box !important;
   font-family: "Tajawal", sans-serif;
+  background-color: #eee !important;
 }
 
 /****END BASIC*****/
@@ -44,7 +45,7 @@ h4,
 h5,
 h6,
 span {
-  font-family: "Tajawal", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1.font,

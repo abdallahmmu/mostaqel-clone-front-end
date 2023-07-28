@@ -1,5 +1,9 @@
 import axios from "axios";
 export const addProjectLoader = async () => {
+  const auth = JSON.parse(localStorage.getItem('isAuth'))
+  if(!auth || auth.role !== 'client'){
+    window.location.replace('/projects')
+  }
   try {
     const [getAllCategories, getAllSkills] = await Promise.all([
       axios.get(`${import.meta.env.VITE_API_URL}/category`, {

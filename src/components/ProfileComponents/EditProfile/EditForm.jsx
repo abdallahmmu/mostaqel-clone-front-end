@@ -146,7 +146,7 @@ function EditForm() {
                         type="text"
                         className="form-control"
                         id="firstName"
-                        placeholder="firstName"
+                        placeholder={t("firstName")}
                         name="firstName"
                       />
                       <ErrorMessage
@@ -163,7 +163,7 @@ function EditForm() {
                         type="text"
                         className="form-control"
                         id="lastName"
-                        placeholder="lastName"
+                        placeholder={t("lastName")}
                         name="lastName"
                       />
                       <ErrorMessage
@@ -196,7 +196,7 @@ function EditForm() {
                         as="textarea"
                         className="form-control"
                         id="description"
-                        placeholder="description"
+                        placeholder={t("description")}
                         name="description"
                       />
                     </div>
@@ -220,16 +220,19 @@ function EditForm() {
 
                     {data.skill && data.skill.length > 0 && (
                       <div className="col-12 mt-4">
+                        <div className="d-flex flex-wrap gap-2">
                         {data.skill.map((s) => {
                           return (
                             <span
-                              className="p-3 bg-dark rounded text-white mx-2"
+                              className="p-2 bg-dark rounded text-white"
                               key={s}
                             >
                               {s}
                             </span>
                           );
                         })}
+                        </div>
+
                       </div>
                     )}
                     <div className="d-flex align-items-center justify-content-end mt-4">
