@@ -80,10 +80,10 @@ const FreelancerOffers = () => {
                                   <span
                                     className={
                                       stage == "Winning"
-                                        ? "text-white bg bg-success"
+                                        ? "text-white p-1 px-2 bg bg-success"
                                         : stage == "Waiting"
-                                        ? "text-white bg bg-info"
-                                        : "text-white bg bg-secondary"
+                                        ? "text-white p-1 px-2 bg bg-info"
+                                        : "text-white p-1 px-2 bg bg-secondary"
                                     }
                                   >
                                     {stage}
