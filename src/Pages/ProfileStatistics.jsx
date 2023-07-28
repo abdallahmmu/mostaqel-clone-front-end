@@ -81,7 +81,10 @@ function ProfileStatistics() {
         {/* <!--Row 2 Pannel Information MessagesCard And OffersCard--> */}
         <div className="row">
           <MessagesCard />
-          <OffersCard numOffers={data?.availableOffers} />
+          <OffersCard
+            numOffers={data?.availableOffers}
+            nextCharge={data?.nextCharge}
+          />
         </div>
 
         {/* <!--Row 2 Pannel Information PortfolioCard And LatestProjects--> */}

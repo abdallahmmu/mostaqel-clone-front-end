@@ -42,7 +42,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
     },
     {
       name: "Average Offers",
-      value: `${details.avgPrice} $`,
+      value: `${parseInt(details.avgPrice)} $`,
     },
   ];
   rows[1].value =

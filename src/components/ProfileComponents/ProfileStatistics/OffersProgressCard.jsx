@@ -1,9 +1,8 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-
-function OffersProgressCard({ freelancersOffers, numOffers }) {
+import moment from "moment";
+function OffersProgressCard({ freelancersOffers, numOffers, nextCharge }) {
   const { t } = useTranslation();
 
   const rejected = useCallback(() => {
@@ -97,7 +96,13 @@ function OffersProgressCard({ freelancersOffers, numOffers }) {
       <div className="col-12">
         <p className="text-center text-dark">
           {t("Total Avilable Offers")} :{" "}
-          <span className="fw-bold text-p">{numOffers}</span>
+          <span className="fw-bold text-p">
+            {numOffers} {t("Offers Next Charge After ")}
+            {Math.floor(
+              moment(nextCharge).diff(moment()) / (24 * 60 * 60 * 1000)
+            )}{" "}
+            {t("Days")}
+          </span>
         </p>
       </div>
     </>

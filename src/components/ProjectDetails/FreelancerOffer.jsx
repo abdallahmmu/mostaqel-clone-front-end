@@ -53,10 +53,15 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
       }}
       style={{ backgroundColor: _id == winningOffer ? "antiquewhite" : "" }}
     >
-      <div className="d-flex flex-lg-row flex-md-column justify-content-lg-between ">
+      <div className="d-flex flex-lg-row flex-md-column justify-content-lg-between align-items-center ">
         <Box
           component="div"
-          sx={{ display: "flex", justifyContent: "space-between", gap: "10px" }}
+          sx={{
+            width: "70%",
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "10px",
+          }}
         >
           {/* image Box */}
           <Box>
@@ -123,7 +128,7 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
             </Box>
           </Box>
         </Box>
-        <Box>
+        <Box sx={{ width: "30%" }}>
           {isOwner && (
             <>
               <div className="text-center mb-2">
@@ -133,7 +138,22 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
                     sendMessage(token, freelancerId._id, title, navigate);
                   }}
                 >
-                  <MessageIcon />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="#1976d2"
+                      d="M17 9H7a1 1 0 0 1 0-2h10a1 1 0 0 1 0 2zm0 4H7a1 1 0 0 1 0-2h10a1 1 0 0 1 0 2z"
+                    />
+                    <path
+                      fill="#1976d2"
+                      d="M19 2H5a3.003 3.003 0 0 0-3 3v10a3.003 3.003 0 0 0 3 3h11.586l3.707 3.707A1 1 0 0 0 22 21V5a3.003 3.003 0 0 0-3-3Zm-2 11H7a1 1 0 0 1 0-2h10a1 1 0 0 1 0 2Zm0-4H7a1 1 0 0 1 0-2h10a1 1 0 0 1 0 2Z"
+                      opacity=".5"
+                    />
+                  </svg>
                 </button>
                 <button
                   style={{ display: status == "open" ? "" : "none" }}
@@ -143,21 +163,37 @@ function FreelancerOffer({ offer, isOwner, status, winningOffer, title }) {
                     handleHired();
                   }}
                 >
-                  <PaymentsIcon />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="#028f00"
+                      d="M9.84 17.08a.997.997 0 0 1-.707-.293l-3.84-3.84a1 1 0 1 1 1.414-1.414l3.133 3.133l7.453-7.453a1 1 0 0 1 1.414 1.414l-8.16 8.16a.997.997 0 0 1-.707.293Z"
+                    />
+                  </svg>
                 </button>
               </div>
 
-              <h4 className="text-center mb-2">
+              <h5
+                className="text-center mb-2"
+                style={{ direction: lang == "ar" ? "rtl" : "ltr" }}
+              >
                 {amount}
                 <AttachMoneyIcon /> {t("Within")} {duration} {t("days")}
-              </h4>
+              </h5>
             </>
           )}
           {freelancerId._id == id && (
-            <h4 className="text-center mb-2">
+            <h5
+              className="text-center mb-2"
+              style={{ direction: lang == "ar" ? "rtl" : "ltr" }}
+            >
               {amount}
               <AttachMoneyIcon /> {t("Within")} {duration} {t("days")}
-            </h4>
+            </h5>
           )}
           <p className="  opacity-50 text-center">
             {t("Last updated")} {showTime}
