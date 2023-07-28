@@ -1,12 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
-const OfferForm = ({ formik, EditOffer, handleClose }) => {
+const OfferForm = ({ formik, EditOffer, lang, handleClose }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} className="row">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="row"
+        style={{ textAlign: EditOffer && lang == "ar" ? "end" : "start" }}
+      >
         {Object.keys(formik.initialValues).map((item) => {
           return item == "description" ? (
             <div className="form-group mb-3 col-12" key={item}>

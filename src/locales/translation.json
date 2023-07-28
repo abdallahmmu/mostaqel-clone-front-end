@@ -317,7 +317,7 @@
   "Amount": "كمية",
   "Total Amount After Pay Will be": "كل الكمية بعد الدفع ستكون",
   "You Can Not Withdrow Your Money unless it is greater than": "لا يمكن سحب نقودك الا اذا كانت اكثر من",
-  "in": "في",
+  "in": "خلال",
   "Account Payments": "مدفوعات الحساب",
   "My Projects": "مشاريعي",
   "Availble": "متاح",
@@ -462,5 +462,9 @@
   "Offers Next Charge After ": " عروض الشحنة القادمة بعد",
   "Days": "أيام",
   "You Don't Have Any Available Offers": "ليس لديك  أي عروض متاحة",
-  "Please Waint Until Your Next Charge After ": "انتظر حتي الشحنة القادمة بعد "
+  "Please Waint Until Your Next Charge After ": "انتظر حتي الشحنة القادمة بعد ",
+  "attachments": "المرفقات",
+  "You Don't Have Any Messages Yet": "ليس لديك أي رسائل بعد",
+  "seconds": "ثواني",
+  "few": "بضع"
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 let projectId = 0;
 let freelancerId = 0;
+let projectStatus = 0;
 let allOffers = [];
 
 const alertFire = (title, icon) => {
@@ -36,6 +37,7 @@ const fetchOffer = async (id) => {
     `${import.meta.env.VITE_API_URL}/projects/${id}/offers`
   );
   allOffers = response.data.results;
+  projectStatus = response.data.results.status;
 };
 
 export const fetchData = async (id, setDetails, setLoading, navigate) => {
@@ -54,10 +56,17 @@ export const fetchMyOffer = async (id, setMyOffer) => {
   }
 };
 export const fetchOffers = async (setOffers) => {
-  if (allOffers) {
-    setOffers(
-      allOffers.filter((offer) => offer.freelancerId._id != freelancerId)
-    );
+  console.log(projectStatus);
+  if (projectStatus !== "open") {
+    if (allOffers) {
+      setOffers(
+        allOffers.filter((offer) => offer.freelancerId._id != freelancerId)
+      );
+    }
+  } else {
+    if (allOffers) {
+      setOffers(allOffers);
+    }
   }
 };
 
