@@ -173,6 +173,7 @@ const ProjectStatistics = ({ details, isOwner }) => {
                               details.offerId.freelancerId?._id,
                               details.clientId?._id,
                               details.offerId?._id,
+                              t,
                               navigate
                             );
                           }}
