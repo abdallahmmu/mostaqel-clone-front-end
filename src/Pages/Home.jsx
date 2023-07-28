@@ -12,7 +12,7 @@ function Home() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = "Mostaqel-Clone | Home";
+    document.title = "Mostaql Clone | Home";
     AOS.init();
   }, []);
 

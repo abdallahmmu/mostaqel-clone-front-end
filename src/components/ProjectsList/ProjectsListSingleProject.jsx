@@ -37,49 +37,41 @@ const ProjectsListSingleProject = ({ project }) => {
 
           <Box
             component="div"
-            sx={{ marginTop: "20px",inlineSize:'95%' }}
+            sx={{ marginTop: "20px", inlineSize: "95%" }}
             className="project-excerpt"
           >
-            <Typography sx={{color:"#343a40",opacity:'.7'}} variant="p">{project.description.slice(0,180) + '...'}</Typography>
+            <Typography sx={{ color: "#343a40", opacity: ".7" }} variant="p">
+              {project.description.slice(0, 180) + "..."}
+            </Typography>
           </Box>
 
           <Box component="div" mt={5} className="project-info ">
             <Grid item sm={1}>
               {project.clientId.avatar ? (
-                <Link
-                  to={`/profile/statistics/${project.clientId._id}`}
-                  target="_blank"
-                >
-                  <img
-                    src={project.clientId.avatar}
-                    alt="avatar"
-                    style={{
-                      borderRadius: "50%",
-                      width: "50px",
-                      height: "50px",
-                    }}
-                  />
-                </Link>
+                <img
+                  src={project.clientId.avatar}
+                  alt="avatar"
+                  style={{
+                    borderRadius: "50%",
+                    width: "50px",
+                    height: "50px",
+                  }}
+                />
               ) : (
-                <Link
-                  to={`/profile/statistics/${project.clientId._id}`}
-                  target="_blank"
+                <Typography
+                  variant="span"
+                  style={{
+                    fontSize: "15px",
+                    padding: "15px",
+                    borderRadius: "50%",
+                    backgroundColor: "#eee",
+                  }}
                 >
-                  <Typography
-                    variant="span"
-                    style={{
-                      fontSize: "15px",
-                      padding: "15px",
-                      borderRadius: "50%",
-                      backgroundColor: "#eee",
-                    }}
-                  >
-                    {generateNames(
-                      project.clientId.firstName,
-                      project.clientId.lastName
-                    )}
-                  </Typography>
-                </Link>
+                  {generateNames(
+                    project.clientId.firstName,
+                    project.clientId.lastName
+                  )}
+                </Typography>
               )}
             </Grid>
             <Grid item sm={2} style={{ color: "#736e7a" }}>
@@ -118,7 +110,6 @@ const ProjectsListSingleProject = ({ project }) => {
             justifyContent: "center",
             flexDirection: "column",
             gap: "8px",
-            
           }}
         >
           <Typography>

@@ -107,11 +107,11 @@ const addProject = () => {
           <div className="col-lg-8 col-md-12">
             <Formik
               initialValues={{
-                title: "title one",
-                description: "description English",
-                description_ar: "description arabic",
-                range: 10000,
-                duration: 10,
+                title: "",
+                description: "",
+                description_ar: "",
+                range: null,
+                duration: null,
                 categoryId: "",
                 skillsIds: [],
                 files: null,

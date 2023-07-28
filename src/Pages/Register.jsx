@@ -9,7 +9,7 @@ function Register() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = "Mostaqel-Clone | Register";
+    document.title = "Mostaql Clone | Register";
   }, []);
   return (
     <>
