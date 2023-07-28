@@ -1,13 +1,4 @@
-const isNotAuth = () => {
-    const token = localStorage.getItem('isAuth');
-    if(!token){
-      
-        return true;
-    }else{
-        return false;
-    }
-}
-const   isAuth = () => {
+const isAuthGuard = () => {
     const token = localStorage.getItem('isAuth');
     if(token){
       
@@ -18,6 +9,5 @@ const   isAuth = () => {
 }
 
 export  {
-    isAuth,
-    isNotAuth
+    isAuthGuard,
 };
