@@ -40,14 +40,6 @@ const addProject = () => {
     }
     
 
-    if (skillsIds) {
-      for (let sk of skillsIds) {
-        fd.append("skillsIds[]", sk);
-      }
-
-      ["skillsIds"].map((i) => delete newValues[i]);
-    }
-
     newValues.description_ar = arabic;
     for (let item in newValues) {
       fd.append(item, newValues[item]);

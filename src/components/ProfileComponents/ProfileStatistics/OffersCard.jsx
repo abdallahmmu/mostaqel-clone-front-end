@@ -16,12 +16,19 @@ function OffersCard({ numOffers }) {
   useEffect(() => {
     if (userData.role === "client") {
       const getClientProjects = async () => {
+
         setClientsProjectsIsLoading(true);
-        const clientsProjects = await axios.get(
-          `${import.meta.env.VITE_API_URL}/clients/${userData.id}/projects`
-        );
-        setClientsProjects(clientsProjects.data.project);
-        setClientsProjectsIsLoading(false);
+        try {
+          const clientsProjects = await axios.get(
+            `${import.meta.env.VITE_API_URL}/clients/${userData.id}/projects`
+          );
+          setClientsProjects(clientsProjects.data.project);
+          setClientsProjectsIsLoading(false);
+        } catch (error) {
+          setClientsProjectsIsLoading(false)
+          setClientsProjects([])
+        }
+
       };
       getClientProjects();
     }
