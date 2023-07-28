@@ -6,7 +6,7 @@ import { LoadingIndecator } from "../../UI_Helpers/LoadingIndecator";
 import { useTranslation } from "react-i18next";
 import OffersProgressCard from "./OffersProgressCard";
 
-function OffersCard({ numOffers }) {
+function OffersCard({ numOffers, nextCharge }) {
   const { t } = useTranslation();
 
   const { userData } = useSelector((state) => state.authSlice);
@@ -16,7 +16,6 @@ function OffersCard({ numOffers }) {
   useEffect(() => {
     if (userData.role === "client") {
       const getClientProjects = async () => {
-
         setClientsProjectsIsLoading(true);
         try {
           const clientsProjects = await axios.get(
@@ -25,10 +24,9 @@ function OffersCard({ numOffers }) {
           setClientsProjects(clientsProjects.data.project);
           setClientsProjectsIsLoading(false);
         } catch (error) {
-          setClientsProjectsIsLoading(false)
-          setClientsProjects([])
+          setClientsProjectsIsLoading(false);
+          setClientsProjects([]);
         }
-
       };
       getClientProjects();
     }
@@ -54,6 +52,7 @@ function OffersCard({ numOffers }) {
                     <OffersProgressCard
                       freelancersOffers={freelancersOffers}
                       numOffers={numOffers}
+                      nextCharge={nextCharge}
                     />
                   </div>
                 </>

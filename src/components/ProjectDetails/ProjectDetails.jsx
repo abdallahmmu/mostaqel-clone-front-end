@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import LoadingSpinner from "../UI_Helpers/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { langContext } from "../../contextAPI/context.jsx";
-
+import moment from "moment";
 const ProjectDetails = () => {
   const { t } = useTranslation();
 
@@ -117,14 +117,36 @@ const ProjectDetails = () => {
                             elevation={0}
                             className="p-5 text-center"
                           >
-                            <h3 className="text-danger">
+                            <h4 className="text-danger">
                               {t(
                                 "Your Account Has Been Deactivated Feel Free to contact us:"
                               )}
-                            </h3>
+                            </h4>
                             <p class="text-dark text-center fw-bold">
                               mostaqel@clone.com
                             </p>
+                          </Box>
+                        ) : role == "freelancer" &&
+                          freelancerInfo?.availableOffers == 0 ? (
+                          <Box
+                            component={Paper}
+                            mt={2}
+                            elevation={0}
+                            className="p-5 text-center"
+                          >
+                            <h4 className="text-danger">
+                              {t("You Don't Have Any Available Offers")}
+                            </h4>
+                            <h6 class="text-dark text-center fw-bold mt-3">
+                              {t("Please Waint Until Your Next Charge After ")}
+                              {Math.floor(
+                                moment(freelancerInfo?.nextCharge).diff(
+                                  moment()
+                                ) /
+                                  (24 * 60 * 60 * 1000)
+                              )}{" "}
+                              {t("Days")}
+                            </h6>
                           </Box>
                         ) : role == "freelancer" && details.status == "open" ? (
                           <SendOffer />
