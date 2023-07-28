@@ -7,13 +7,14 @@ const UseContextProvider = ({ children }) => {
   const initialLang = localStorage.getItem("lang")
     ? localStorage.getItem("lang")
     : "en";
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [lang, setLang] = useState(initialLang);
 
   //-update data in context
   useEffect(() => {
     i18n.changeLanguage(initialLang);
+    document.title = t(document.title);
   }, []);
   const changeLang = () => {
     const newValue = localStorage.getItem("lang") == "en" ? "ar" : "en";
@@ -21,6 +22,7 @@ const UseContextProvider = ({ children }) => {
     localStorage.setItem("lang", newValue);
 
     i18n.changeLanguage(newValue);
+    document.title = t(document.title);
   };
   //2-create provider
   return (

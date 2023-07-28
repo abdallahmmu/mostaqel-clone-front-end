@@ -21,24 +21,29 @@ const addProject = () => {
   const [files, setFiles] = useState([]);
   const filesRef = useRef(null);
   const addNewProject = (values) => {
-
     let newValues = {
       ...values,
       categoryId: values.categoryId,
     };
 
     const fd = new FormData();
-    
+
     let files = newValues.files;
     let skillsIds = newValues.skillsIds;
     if (files) {
       for (let file of files) {
         fd.append("files", file);
       }
-      
+
       ["files"].map((i) => delete newValues[i]);
     }
-    
+    if (skillsIds) {
+      for (let sk of skillsIds) {
+        fd.append("skillsIds[]", sk);
+      }
+
+      ["skillsIds"].map((i) => delete newValues[i]);
+    }
 
     newValues.description_ar = arabic;
     for (let item in newValues) {
@@ -66,7 +71,7 @@ const addProject = () => {
         },
       }
     );
-   
+
     const data = await response.data;
     setArbic(data.translated);
   }
@@ -102,11 +107,11 @@ const addProject = () => {
           <div className="col-lg-8 col-md-12">
             <Formik
               initialValues={{
-                title: "title one",
-                description: "description English",
-                description_ar: "description arabic",
-                range: 10000,
-                duration: 10,
+                title: "",
+                description: "",
+                description_ar: "",
+                range: null,
+                duration: null,
                 categoryId: "",
                 skillsIds: [],
                 files: null,

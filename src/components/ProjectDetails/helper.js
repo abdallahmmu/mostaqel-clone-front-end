@@ -28,7 +28,7 @@ const fetchDetails = async (id, setDetails) => {
     }
   );
   setDetails(response.data);
-  document.title = response.data.title;
+  document.title = `Mostaql Clone | ${response.data.title}`;
 };
 
 const fetchOffer = async (id) => {
@@ -130,12 +130,12 @@ export const releaseMoney = async (
   navigate
 ) => {
   Swal.fire({
-    title: "Are you sure to complete this project?",
+    title: t("Are you sure to complete this project?"),
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, complete it!",
+    confirmButtonText: t("Yes, complete it!"),
   }).then(async (result) => {
     if (result.isConfirmed) {
       await axios.patch(
