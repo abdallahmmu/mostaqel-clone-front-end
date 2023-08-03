@@ -2,9 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Box, Grid, Typography } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { useTranslation } from "react-i18next";
 import { langContext } from "../../contextAPI/context";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
@@ -25,6 +22,10 @@ const ProjectsListSingleProject = ({ project }) => {
 
   return (
     <Box component="div" className="project">
+      {/* <pre>
+        {JSON.stringify(project, null , 2)}
+      </pre> */}
+
       <Grid container spacing={2}>
         <Grid item sm={10}>
           <Box
@@ -47,7 +48,7 @@ const ProjectsListSingleProject = ({ project }) => {
 
           <Box component="div" mt={5} className="project-info ">
             <Grid item sm={1}>
-              {project.clientId.avatar ? (
+              {project.clientId?.avatar ? (
                 <img
                   src={project.clientId.avatar}
                   alt="avatar"
@@ -68,19 +69,19 @@ const ProjectsListSingleProject = ({ project }) => {
                   }}
                 >
                   {generateNames(
-                    project.clientId.firstName,
-                    project.clientId.lastName
+                    project.clientId?.firstName,
+                    project.clientId?.lastName
                   )}
                 </Typography>
               )}
             </Grid>
             <Grid item sm={2} style={{ color: "#736e7a" }}>
               <Typography fontSize={12}>
-                {project.clientId.firstName + " " + project.clientId.lastName}
+                {project.clientId?.firstName + " " + project.clientId?.lastName}
               </Typography>
               <Typography fontSize={12}>
                 <BusinessCenterIcon style={{ fontSize: "15px" }} />{" "}
-                {project.clientId.userName}
+                {project.clientId?.userName}
               </Typography>
             </Grid>
             <Grid item sm={9}>

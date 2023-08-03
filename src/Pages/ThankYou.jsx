@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import axios from 'axios'
 import { useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
   const { userData } = useSelector((state) => state.authSlice);
   const navigate = useNavigate();
 
-  const sendData = async () => {
+  const sendData = useCallback( async () => {
     let amount = localStorage.getItem("amount");
     let sessionId = localStorage.getItem("sessionId");
 
@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
             },
           }
         );
-        console.log(data);
+       
       } catch (error) {
         console.log(error);
       }
@@ -42,11 +42,12 @@ import { useTranslation } from "react-i18next";
       });
       // navigate('/')
     }
-  };
-
-  useEffect(() => {
-    sendData()
   }, [])
+
+  // useEffect(() => {
+  //   sendData()
+  // }, [])
+
   const handleThank = () => {
     sendData().then(() =>  navigate(`/payment/${userData.id}`))
    
